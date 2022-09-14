@@ -1,0 +1,100 @@
+@import "components/variables";
+
+.header {
+  background: white;
+  .ribbon {
+    max-width: $max-width;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    padding: 0.25rem 0.5rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+    .northSection,
+    .southSection {
+      display: flex;
+      grid-gap: 0.5rem;
+      align-items: center;
+    }
+    .northSection {
+      font-size: 14px;
+      color: $text-gray;
+    }
+    .southSection {
+      font-weight: 500;
+      grid-gap: 1rem;
+      .btn {
+        background: rgba(0, 0, 0, 0.15);
+        padding: 0.5rem 1rem;
+        border-radius: 2rem;
+      }
+    }
+  }
+  .content {
+    padding: 0.5rem;
+    max-width: $max-width;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    .northSection,
+    .southSection {
+      display: flex;
+      grid-gap: 0.7rem;
+      align-items: center;
+      .devider {
+        width: 2px;
+        height: 1.75rem;
+        background: rgba(0, 0, 0, 0.16);
+      }
+      a {
+        color: rgba(0, 0, 0, 0.6);
+        font-weight: 400;
+        position: relative;
+        display: inline-block;
+        padding: 0.8rem 0;
+        &::after {
+          content: "";
+          height: 0;
+          width: 1.5rem;
+          background: $text-black;
+          border-radius: 1rem;
+          position: absolute;
+          bottom: 0;
+          left: 0;
+        }
+        &.onPage {
+          color: $text-black;
+          &::after {
+            height: 2px;
+          }
+        }
+      }
+    }
+    .northSection {
+      .logo {
+        margin-right: 0.5rem;
+      }
+    }
+  }
+  position: sticky;
+  top: -46px;
+  z-index: 100;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+}
+
+@media only screen and (max-width: 1200px) {
+  header {
+    .ribbon {
+      padding: 0.8rem 0.5rem;
+      .southSection {
+        display: none;
+      }
+    }
+    .content {
+      .northSection {
+        .searchbox {
+          display: none;
+        }
+      }
+    }
+  }
+}

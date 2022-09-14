@@ -1,0 +1,130 @@
+@import "components/variables";
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html,
+body {
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+}
+
+button {
+  &.clear {
+    border: none;
+    outline: none;
+    background: none;
+  }
+  &.btn {
+    padding: 0.5rem 1rem;
+    font-size: 0.95rem;
+    font-weight: 600;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+    &.primary {
+      background: $gold;
+      &:active {
+        background: #b9a267;
+      }
+    }
+  }
+}
+
+.heroGlobal {
+  .react-multi-carousel-track {
+    align-items: center;
+  }
+  .react-multi-carousel-list {
+    overflow: visible !important;
+  }
+  .dot {
+    transform: translateY(2.5rem);
+    align-items: center;
+    li {
+      height: min-content !important;
+    }
+    button {
+      border: none;
+      border-radius: 0;
+      width: 1.5rem;
+      background-color: rgba(255, 255, 255, 0.22) !important;
+      margin-right: 1rem;
+      height: 2px;
+    }
+    .react-multi-carousel-dot--active {
+      button {
+        height: 3px;
+        width: 3rem;
+        background-color: rgba(255, 255, 255, 0.6) !important;
+      }
+    }
+  }
+  .react-multiple-carousel__arrow {
+    z-index: 10;
+    border-radius: 0;
+    height: 100%;
+    width: 4rem;
+    opacity: 0;
+    background: radial-gradient(
+      circle,
+      rgba(0, 0, 0, 0.5) 0%,
+      rgba(0, 0, 0, 0) 100%
+    );
+    &:hover {
+      opacity: 1;
+    }
+  }
+
+  .react-multiple-carousel__arrow--right {
+    right: 0;
+  }
+  .react-multiple-carousel__arrow--left {
+    left: 0;
+  }
+}
+
+#portal {
+  z-index: 100;
+  top: 0;
+  left: 0;
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  display: grid;
+  grid-template-areas: "main";
+  place-items: center;
+  pointer-events: none;
+  * {
+    pointer-events: all;
+  }
+  .modalBackdrop {
+    height: 100%;
+    width: 100%;
+    grid-area: main;
+    background: rgba(0, 0, 0, 0.4);
+  }
+  .modal {
+    z-index: 10;
+    grid-area: main;
+    position: relative;
+    & ~ .modalBackdrop {
+      z-index: 10;
+      & ~ .modal {
+        z-index: 10;
+      }
+    }
+  }
+}
