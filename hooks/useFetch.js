@@ -117,7 +117,7 @@ export const useFetch = (
 
   const post = (payload, options) => onSubmit(payload, "POST", options);
 
-  const get = (payload, options) => onSubmit(payload, "GET", options);
+  const get = (options) => onSubmit(null, "GET", options);
 
   const remove = (payload, options) => onSubmit(payload, "DELETE", options);
 

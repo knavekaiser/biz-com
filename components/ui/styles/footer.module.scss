@@ -2,8 +2,9 @@
 
 .footer {
   margin-top: 4rem;
-  background: $gold;
-  position: relative;
+  background: $primary-color;
+  position: sticky;
+  top: 100%;
   z-index: 1;
   width: 100%;
   padding: 2rem;

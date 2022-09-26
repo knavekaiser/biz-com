@@ -10,17 +10,6 @@
     display: grid;
     border-radius: 0.5rem 0.5rem 0 0;
   }
-  .animated {
-    position: absolute;
-    display: grid;
-    top: 10px;
-    left: 10px;
-    background: #00000080;
-    padding: 2px 10px;
-    border-radius: 2rem;
-    color: white;
-    font-size: 1.15rem;
-  }
   .productDetail {
     box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.25);
     display: grid;
@@ -61,51 +50,13 @@
       font-weight: 500;
       grid-gap: 5px;
       align-items: center;
+      font-size: 1.2rem;
     }
-    .bidDetail {
-      display: flex;
-      justify-content: space-between;
-      .label {
-        display: block;
-        margin-bottom: 4px;
+    .rating {
+      color: $grey2;
+      .lit {
+        color: $yellow;
       }
-      .countdown {
-        display: flex;
-        grid-gap: 2px;
-        text-align: center;
-        span {
-          min-width: 26px;
-          background: $text-black;
-          color: white;
-          font-weight: 500;
-          padding: 2px 5px;
-          border-radius: 4px;
-        }
-      }
-    }
-  }
-  &.multiple {
-    &::after,
-    &::before {
-      position: absolute;
-      left: 50%;
-      content: "";
-      display: block;
-      height: 100%;
-      top: 0;
-      background: #f7f7f7;
-      box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.25);
-      border-radius: 0.5rem;
-    }
-    &::before {
-      width: 90%;
-      z-index: -3;
-      transform: translate(-50%, 1.5%);
-    }
-    &::after {
-      width: 80%;
-      transform: translate(-50%, 2.5%);
-      z-index: -5;
     }
   }
 }

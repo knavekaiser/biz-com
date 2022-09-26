@@ -1,0 +1,30 @@
+@import "components/variables";
+
+#nprogress {
+  pointer-events: none;
+  animation: barOpacity 500ms linear !important;
+  .bar {
+    background: $primary-color;
+    position: fixed;
+    z-index: 1031;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+  }
+}
+.nprogress-custom-parent {
+  overflow: hidden;
+  // position: relative;
+}
+.nprogress-custom-parent #nprogress .bar {
+  position: absolute;
+}
+@keyframes barOpacity {
+  0% {
+    opacity: 0 !important;
+  }
+  100% {
+    opacity: 1 !important;
+  }
+}

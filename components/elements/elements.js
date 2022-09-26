@@ -22,41 +22,70 @@ import { Table, TableActions } from "./Table";
 
 import { Combobox } from "./combobox";
 
-export const Input = forwardRef(
-  ({ className, label, icon, error, type, required, ...rest }, ref) => {
-    const _id = useRef(Math.random().toString(32).substr(-8));
-    return (
-      <section
-        className={`${s.input} ${className || ""} ${error ? s.err : ""}`}
-      >
-        {label && (
-          <label>
-            {label} {required && "*"}
-          </label>
-        )}
-        <div className={s.wrapper}>
-          <span className={s.field}>
-            <input
-              ref={ref}
-              type={type || "text"}
-              id={rest.id || _id.current}
-              {...rest}
-              placeholder={rest.placeholder || "Enter"}
-            />
-            {["date", "datetime-local"].includes(type) && (
-              <label
-                htmlFor={rest.id || _id.current}
-                className={s.calenderIcon}
-              >
-                <GoCalendar />
+export const Input = ({
+  control,
+  name,
+  formOptions,
+  className,
+  startAdornment,
+  endAdornment,
+  type,
+  label,
+  ...rest
+}) => {
+  const _id = useRef(Math.random().toString(32).substr(-8));
+  return (
+    <Controller
+      control={control}
+      name={name}
+      rules={formOptions}
+      render={({
+        field: { onChange, onBlur, value, name, ref },
+        fieldState: { invalid, isTouched, isDirty, error },
+      }) => {
+        return (
+          <section
+            className={`${s.input} ${className || ""} ${error ? s.err : ""}`}
+          >
+            {label && (
+              <label>
+                {label} {formOptions.required && "*"}
               </label>
             )}
-            {icon && icon}
-          </span>
-          {error && <span className={s.errMsg}>{error.message}</span>}
-        </div>
-      </section>
-    );
+            <div className={s.wrapper}>
+              <span className={s.field}>
+                <span className={s.startAdornment}>{startAdornment}</span>
+                <input
+                  ref={ref}
+                  type={type || "text"}
+                  id={rest.id || _id.current}
+                  {...rest}
+                  placeholder={rest.placeholder || "Enter"}
+                />
+                <span className={s.endAdornment}>
+                  {["date", "datetime-local"].includes(type) && (
+                    <label
+                      htmlFor={rest.id || _id.current}
+                      className={s.calenderIcon}
+                    >
+                      <GoCalendar />
+                    </label>
+                  )}
+                  {endAdornment}
+                </span>
+              </span>
+              {error && <span className={s.errMsg}>{error.message}</span>}
+            </div>
+          </section>
+        );
+      }}
+    />
+  );
+};
+
+forwardRef(
+  ({ className, label, icon, error, type, required, ...rest }, ref) => {
+    const _id = useRef(Math.random().toString(32).substr(-8));
   }
 );
 export const SearchField = ({
@@ -412,35 +441,46 @@ export const uploadFiles = async ({ files, uploadFiles }) => {
   return { links, error };
 };
 
-export const Textarea = forwardRef(
-  ({ className, label, error, required, ...rest }, ref) => {
-    return (
-      <section
-        className={`${s.input} ${s.textarea} ${className || ""} ${
-          error ? s.err : ""
-        }`}
-      >
-        {label && (
-          <label>
-            {label} {required && "*"}
-          </label>
-        )}
-        <span className={s.field}>
-          <textarea ref={ref} {...rest} />
-          {error && (
-            <span
-              className={s.errIcon}
-              style={!label ? { transform: "translateY(-6px)" } : {}}
-            >
-              <BsFillExclamationTriangleFill />
+export const Textarea = ({ control, name, formOptions, ...rest }) => {
+  return (
+    <Controller
+      control={control}
+      name={name}
+      rules={formOptions}
+      render={({
+        field: { onChange, onBlur, value, name, ref },
+        fieldState: { invalid, isTouched, isDirty, error },
+      }) => {
+        return (
+          <section
+            className={`${s.input} ${s.textarea} ${className || ""} ${
+              error ? s.err : ""
+            }`}
+          >
+            {label && (
+              <label>
+                {label} {formOptions.required && "*"}
+              </label>
+            )}
+            <span className={s.field}>
+              <textarea ref={ref} {...rest} />
+              {error && (
+                <span
+                  className={s.errIcon}
+                  style={!label ? { transform: "translateY(-6px)" } : {}}
+                >
+                  <BsFillExclamationTriangleFill />
+                </span>
+              )}
+              {error && <span className={s.errMsg}>{error.message}</span>}
             </span>
-          )}
-          {error && <span className={s.errMsg}>{error.message}</span>}
-        </span>
-      </section>
-    );
-  }
-);
+          </section>
+        );
+      }}
+    />
+  );
+};
+
 export const Radio = ({
   register = () => {},
   formOptions,
@@ -477,80 +517,74 @@ export const Radio = ({
   );
 };
 export const CustomRadio = ({
-  register = () => {},
+  control,
   name,
-  watch,
+  formOptions,
   label,
   options,
-  setValue,
   multiple,
-  onChange,
-  formOptions,
   className,
   selectedClassName,
-}) => {
-  const selected = watch?.(name);
-  return (
-    <section
-      className={`${s.customRadio} ${className || ""}`}
-      data-testid="customRadioInput"
-    >
-      {label && (
-        <label>
-          {label} {formOptions?.required && "*"}
-        </label>
-      )}
-      <div className={s.options}>
-        {options.map(({ label, value: v, disabled }, i) => (
-          <label
-            htmlFor={name + v}
-            key={i}
-            className={`${s.option} ${
-              selected?.includes && selected?.includes(v)
-                ? s.selected + " " + (selectedClassName || "")
-                : ""
-            } ${disabled ? s.disabled : ""}`}
-          >
-            <input
-              {...register(name)}
-              type="checkbox"
-              name={name}
-              id={name + v}
-              value={v}
-              checked={
-                selected === v ||
-                (selected?.includes && selected?.includes(v)) ||
-                ""
-              }
-              onChange={(e) => {
-                if (
-                  e.target.value === selected ||
-                  (selected?.includes && selected?.includes(e.target.value))
-                ) {
-                  if (multiple) {
-                    setValue(
-                      name,
-                      (selected || []).filter(
-                        (value) => value !== e.target.value
-                      )
-                    );
-                  }
-                } else {
-                  if (multiple) {
-                    setValue(name, [...selected, e.target.value]);
-                  } else {
-                    setValue(name, e.target.value);
-                  }
-                }
-              }}
-            />
-            {label}
+}) => (
+  <Controller
+    control={control}
+    name={name}
+    rules={formOptions}
+    render={({
+      field: { onChange, onBlur, value = multiple ? [] : "", name, ref },
+      fieldState: { invalid, isTouched, isDirty, error },
+    }) => (
+      <section
+        className={`${s.customRadio} ${className || ""}`}
+        data-testid="customRadioInput"
+      >
+        {label && (
+          <label>
+            {label} {formOptions?.required && "*"}
           </label>
-        ))}
-      </div>
-    </section>
-  );
-};
+        )}
+        <div className={s.options}>
+          {options.map(({ label, value: v, disabled }, i) => (
+            <label
+              htmlFor={name + v}
+              key={i}
+              className={`${s.option} ${
+                value.includes(v)
+                  ? s.selected + " " + (selectedClassName || "")
+                  : ""
+              } ${disabled ? s.disabled : ""}`}
+            >
+              <input
+                type="checkbox"
+                name={name}
+                id={name + v}
+                value={v}
+                checked={value === v || value.includes(v) || ""}
+                ref={ref}
+                onChange={(e) => {
+                  const _v = e.target.value;
+                  if (_v === value || value.includes(_v)) {
+                    if (multiple) {
+                      onChange(value.filter((v) => v !== _v));
+                    }
+                  } else {
+                    if (multiple) {
+                      onChange([...value, _v]);
+                    } else {
+                      onChange(_v);
+                    }
+                  }
+                }}
+              />
+              {label}
+            </label>
+          ))}
+        </div>
+      </section>
+    )}
+  />
+);
+
 export const SwitchInput = ({
   register = () => {},
   name,

@@ -1,22 +1,17 @@
-const baseApiUrl = "";
+const baseApiUrl = process.env.BIZ_APP_BASE_URL;
+const baseApiUrlPublic = process.env.NEXT_PUBLIC_BIZ_APP_BASE_URL;
 
 const endpoints = {
-  baseApiUrl,
-  signUp: `${baseApiUrl}/api/users/signup`,
-  signIn: `${baseApiUrl}/api/users/signin`,
-  profile: `${baseApiUrl}/api/users/profile`,
+  //------------Backend------------
+  server: {
+    baseApiUrl,
+    siteConfig: `${baseApiUrl}/api/site-config`,
+    browse: `${baseApiUrl}/api/browse`,
+  },
 
-  invoices: `${baseApiUrl}/api/invoices`,
-  purchases: `${baseApiUrl}/api/purchases`,
-  receipts: `${baseApiUrl}/api/receipts`,
-  payments: `${baseApiUrl}/api/payments`,
-
-  forgotPassword: `${baseApiUrl}/api/users/forgot-password`,
-  resetPassword: `${baseApiUrl}/api/users/reset-password`,
-  logout: `${baseApiUrl}/api/users/logout`,
-  userConfig: `${baseApiUrl}/api/user-config`,
-  collections: `${baseApiUrl}/api/collections`,
-  dynamic: `${baseApiUrl}/api/dynamic`,
+  //------------Frontend-----------
+  baseApiUrlPublic,
+  browse: `${baseApiUrlPublic}/api/browse`,
 };
 
 export default endpoints;

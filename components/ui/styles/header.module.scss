@@ -2,33 +2,6 @@
 
 .header {
   background: white;
-  .ribbon {
-    max-width: $max-width;
-    margin: auto;
-    display: flex;
-    justify-content: space-between;
-    padding: 0.25rem 0.5rem;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.15);
-    .northSection,
-    .southSection {
-      display: flex;
-      grid-gap: 0.5rem;
-      align-items: center;
-    }
-    .northSection {
-      font-size: 14px;
-      color: $text-gray;
-    }
-    .southSection {
-      font-weight: 500;
-      grid-gap: 1rem;
-      .btn {
-        background: rgba(0, 0, 0, 0.15);
-        padding: 0.5rem 1rem;
-        border-radius: 2rem;
-      }
-    }
-  }
   .content {
     padding: 0.5rem;
     max-width: $max-width;
@@ -40,6 +13,16 @@
       display: flex;
       grid-gap: 0.7rem;
       align-items: center;
+      .logo {
+        display: flex;
+        align-items: center;
+        grid-gap: 0.5rem;
+        img {
+          height: 3rem;
+          width: 3rem;
+          object-fit: contain;
+        }
+      }
       .devider {
         width: 2px;
         height: 1.75rem;
@@ -76,7 +59,7 @@
     }
   }
   position: sticky;
-  top: -46px;
+  top: 0;
   z-index: 100;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
 }

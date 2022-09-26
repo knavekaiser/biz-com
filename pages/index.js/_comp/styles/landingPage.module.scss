@@ -82,7 +82,7 @@
             }
             .usdc {
               font-size: 12px;
-              color: $text_gray;
+              color: $text_grey;
             }
           }
         }
@@ -114,5 +114,19 @@
         }
       }
     }
+  }
+}
+
+.countdown {
+  display: flex;
+  grid-gap: 2px;
+  text-align: center;
+  span {
+    min-width: 26px;
+    background: $text-black;
+    color: white;
+    font-weight: 500;
+    padding: 2px 5px;
+    border-radius: 4px;
   }
 }

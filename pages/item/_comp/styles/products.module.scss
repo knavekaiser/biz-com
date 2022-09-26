@@ -1,0 +1,115 @@
+@import "components/variables";
+
+.container {
+  max-width: $max-width;
+  margin: auto;
+  display: grid;
+  grid-template-columns: 1fr 25rem;
+  padding: 2rem 0.5rem;
+  grid-gap: 1.5rem;
+  .sidebar {
+    padding: 1.5rem;
+    display: grid;
+    grid-gap: 1rem;
+    grid-auto-rows: min-content;
+    border-radius: 0.5rem;
+    box-shadow: $shadow1;
+    .rating {
+      color: $grey2;
+      .lit {
+        color: $yellow;
+      }
+    }
+    .seller {
+      display: flex;
+      align-items: center;
+      grid-gap: 0.5rem;
+      img {
+        height: 2rem;
+        width: 2rem;
+        border-radius: 50%;
+        object-fit: cover;
+      }
+    }
+    .price {
+      display: flex;
+      align-items: center;
+      grid-gap: 0.5rem;
+      margin: 1rem 0;
+      svg {
+        transform: translateY(2px) scale(1.5);
+      }
+      h2 {
+        font-size: 2rem;
+        font-weight: 500;
+      }
+    }
+    .actions {
+      display: flex;
+      grid-gap: 0.5rem;
+    }
+  }
+  .images {
+    display: grid;
+    grid-template-columns: min-content 1fr;
+    grid-gap: 0.5rem;
+    .thumbnails {
+      display: grid;
+      grid-auto-rows: min-content;
+      grid-gap: 0.5rem;
+      img {
+        cursor: pointer;
+        border-radius: 0.5rem;
+        object-fit: cover;
+        height: 5rem;
+        width: 5rem;
+      }
+    }
+    .mainImg {
+      display: flex;
+      img {
+        margin: auto;
+        max-width: 100%;
+        max-height: 40rem;
+      }
+    }
+  }
+  .content {
+    display: grid;
+    grid-gap: 1rem;
+    .ribbon {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      grid-gap: 10px;
+    }
+    .products {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      grid-gap: 1.25rem;
+    }
+  }
+  .description {
+    box-shadow: $shadow1;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    grid-column: 1 / 3;
+    .descriptionContent {
+      padding: 1.5rem;
+    }
+  }
+  .relatedProducts {
+    grid-column: 1 / 3;
+    .head {
+      display: flex;
+      align-items: center;
+      grid-gap: 0.5rem;
+      margin: 1rem 0;
+    }
+    .products {
+      display: grid;
+      grid-gap: 1.25rem;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    }
+  }
+}

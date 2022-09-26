@@ -16,99 +16,24 @@ import { Controller } from "react-hook-form";
 import ReactSelect, { components } from "react-select";
 
 export const Combobox = ({
-  register = () => {},
+  control,
   formOptions,
   label,
   name,
-  watch,
-  setValue = () => {},
   placeholder,
   options,
   multiple,
   className,
-  onChange = () => {},
-  error,
-  clearErrors,
+  onChange: compOnChange,
   item,
   renderValue,
-  required,
-  value,
 }) => {
-  const id = useRef(Math.random().toString(36).substr(-8));
   const container = useRef();
-  const selected = watch ? watch(name) : value;
   const [open, setOpen] = useState(false);
   const [style, setStyle] = useState({});
-  const [hover, setHover] = useState(
-    options?.findIndex(({ label, value }) => {
-      return (
-        value === selected ||
-        (selected?.some && selected.some((s) => s === value))
-      );
-    })
-  );
+  const [hover, setHover] = useState();
   const clickHandlerAdded = useState(false);
-  const select = useCallback(
-    ({ label, value, ...rest }) => {
-      const _selectedItem = selected?.find?.((item) => item === value);
-      if (_selectedItem) {
-        setValue(
-          name,
-          selected.filter((item) => item !== value)
-        );
-      } else {
-        if (multiple) {
-          setValue(name, [
-            ...(selected.filter?.((item) => item !== value) || []),
-            value,
-          ]);
-        } else {
-          setValue(name, value);
-        }
-      }
-
-      if (!multiple) {
-        setOpen(false);
-      }
-      clearErrors?.(name);
-      onChange({ label, value, ...rest });
-    },
-    [selected]
-  );
-  const keyDownHandler = useCallback(
-    (e) => {
-      if (!options) return;
-      if (!open && e.keyCode === 32) {
-        setOpen(true);
-      }
-      if (e.keyCode === 9) {
-      }
-      if (e.keyCode === 27) {
-        setOpen(false);
-        return;
-      }
-      if (e.keyCode === 32 && options[hover]) {
-        select(options[hover]);
-        return;
-      }
-      if (e.keyCode === 38 || e.keyCode === 40) {
-        const index = options?.findIndex(({ label, value }) => {
-          return (
-            value === selected ||
-            (selected?.some && selected.some((s) => s === value))
-          );
-        });
-        const _hover = hover !== undefined ? hover : index;
-        if (e.keyCode === 38) {
-          setHover(Math.max(_hover - 1, 0));
-        } else if (e.keyCode === 40) {
-          setHover(Math.min(_hover + 1, options.length - 1));
-        }
-      }
-    },
-    [hover, selected]
-  );
-  useLayoutEffect(() => {
+  useEffect(() => {
     const { width, height, x, y } = container.current.getBoundingClientRect();
     const top = window.innerHeight - y;
     setStyle({
@@ -118,7 +43,6 @@ export const Combobox = ({
         Math.min(
           y + height,
           window.innerHeight - Math.min(35 * (options?.length || 0) + 8, 320)
-          // window.innerHeight - (35 * (options?.length || 0) + 8)
         ),
         8
       ),
@@ -141,127 +65,168 @@ export const Combobox = ({
     }
   }, [open]);
   return (
-    <section
-      data-testid="combobox-container"
-      className={`${s.combobox} ${className || ""} ${open ? s.open : ""} ${
-        !(Array.isArray(options) && options.length) ? s.noOptions : ""
-      } ${error ? s.err : ""}`}
-    >
-      {label && (
-        <label data-testid="combobox-label">
-          {label} {required && "*"}
-        </label>
-      )}
-      <div
-        className={s.field}
-        onClick={() => {
-          if (Array.isArray(options) && options.length) {
-            setOpen(true);
-          }
-        }}
-        ref={container}
-        tabIndex={0}
-        onKeyDown={(e) => {
-          if ([32, 38, 40].includes(e.keyCode)) {
-            e.preventDefault();
-            e.stopPropagation();
-            if (e.keyCode === 27) {
-              // escape key
-              setOpen(false);
-              return;
-            }
-            if (!open && e.keyCode === 32) {
-              setOpen(true);
-              return;
-            }
-            if (e.keyCode === 32 && options[hover]) {
-              select(options[hover]);
-            }
-            if (e.keyCode === 38 || e.keyCode === 40) {
-              const index = options?.findIndex(({ label, value }) => {
-                return (
-                  value === selected ||
-                  (selected?.some && selected.some((s) => s === value))
-                );
-              });
-              const _hover = hover !== undefined ? hover : index;
-              if (e.keyCode === 38) {
-                setHover(Math.max(_hover - 1, 0));
-              } else if (e.keyCode === 40) {
-                setHover(Math.min(_hover + 1, options.length - 1));
-              }
+    <Controller
+      control={control}
+      name={name}
+      rules={formOptions}
+      render={({
+        field: { onChange, onBlur, value, name, ref },
+        fieldState: { invalid, isTouched, isDirty, error },
+      }) => {
+        const selected = value ? value : multiple ? [] : "";
+        const select = ({ label, value, ...rest }) => {
+          const _selectedItem = selected?.find?.((item) => item === value);
+          if (_selectedItem) {
+            onChange(selected.filter((item) => item !== value));
+          } else {
+            if (multiple) {
+              onChange([
+                ...(selected.filter?.((item) => item !== value) || []),
+                value,
+              ]);
+            } else {
+              onChange({ target: { value } });
             }
           }
-        }}
-      >
-        <p className={`${s.displayValue} ${!selected ? s.placeholder : ""}`}>
-          {renderValue ? (
-            renderValue(selected)
-          ) : (
-            <>
-              {!(Array.isArray(options) && options.length) &&
-                "No options provided"}
-              {selected &&
-                ["string", "number"].includes(typeof selected) &&
-                options?.find(
-                  ({ value }) => value.toString() === selected.toString()
-                )?.label}
-              {Array.isArray(selected) &&
-                (selected.length > 3
-                  ? `${selected.length} items selected`
-                  : selected.reduce(
-                      (p, a, i, arr) =>
-                        `${p} ${
-                          options?.find(
-                            ({ value }) => value.toString() === a.toString()
-                          )?.label
-                        }${i < arr.length - 1 ? ", " : ""}`,
-                      ""
-                    ))}
-              {options?.length > 0 && (
-                <>{!selected?.toString().length && (placeholder || "Select")}</>
-              )}
-            </>
-          )}
-        </p>
-        <input
-          id={id.current}
-          data-testid="combobox-input"
-          {...register(name, { ...formOptions })}
-          readOnly={true}
-          tabIndex={1}
-        />
-        <span data-testid="combobox-btn" className={s.btn}>
-          <FaSortDown />
-        </span>
-      </div>
-      {error && <span className={s.errMsg}>{error.message}</span>}
-      <Modal
-        open={open}
-        className={s.comboboxModal}
-        backdropClass={s.comboboxBackdrop}
-        open={open}
-        setOpen={setOpen}
-        onBackdropClick={() => setOpen(false)}
-        clickThroughBackdrop={true}
-        style={style}
-      >
-        <ComboboxList
-          hover={hover}
-          setHover={setHover}
-          options={options}
-          setValue={setValue}
-          select={select}
-          selected={selected}
-          multiple={multiple}
-          name={name}
-          open={open}
-          setOpen={setOpen}
-          clearErrors={clearErrors}
-          item={item}
-        />
-      </Modal>
-    </section>
+
+          if (!multiple) {
+            setOpen(false);
+          }
+          // clearErrors?.(name);
+          compOnChange && compOnChange({ label, value, ...rest });
+        };
+        return (
+          <section
+            data-testid="combobox-container"
+            className={`${s.combobox} ${className || ""} ${
+              open ? s.open : ""
+            } ${
+              !(Array.isArray(options) && options.length) ? s.noOptions : ""
+            } ${error ? s.err : ""}`}
+          >
+            {label && (
+              <label data-testid="combobox-label">
+                {label} {formOptions?.required && "*"}
+              </label>
+            )}
+            <div
+              className={s.field}
+              onClick={() => {
+                if (Array.isArray(options) && options.length) {
+                  setOpen(true);
+                }
+              }}
+              ref={container}
+              tabIndex={0}
+              onKeyDown={(e) => {
+                if ([32, 38, 40].includes(e.keyCode)) {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  if (e.keyCode === 27) {
+                    // escape key
+                    setOpen(false);
+                    return;
+                  }
+                  if (!open && e.keyCode === 32) {
+                    setOpen(true);
+                    return;
+                  }
+                  if (e.keyCode === 32 && options[hover]) {
+                    select(options[hover]);
+                  }
+                  if (e.keyCode === 38 || e.keyCode === 40) {
+                    const index = options?.findIndex(({ label, value }) => {
+                      return (
+                        value === selected ||
+                        (selected?.some && selected.some((s) => s === value))
+                      );
+                    });
+                    const _hover = hover !== undefined ? hover : index;
+                    if (e.keyCode === 38) {
+                      setHover(Math.max(_hover - 1, 0));
+                    } else if (e.keyCode === 40) {
+                      setHover(Math.min(_hover + 1, options.length - 1));
+                    }
+                  }
+                }
+              }}
+            >
+              <p
+                className={`${s.displayValue} ${
+                  !selected ? s.placeholder : ""
+                }`}
+              >
+                {renderValue ? (
+                  renderValue(selected)
+                ) : (
+                  <>
+                    {!(Array.isArray(options) && options.length) &&
+                      "No options provided"}
+                    {selected &&
+                      ["string", "number"].includes(typeof selected) &&
+                      options?.find(
+                        ({ value }) => value.toString() === selected.toString()
+                      )?.label}
+                    {Array.isArray(selected) &&
+                      (selected.length > 3
+                        ? `${selected.length} items selected`
+                        : selected.reduce(
+                            (p, a, i, arr) =>
+                              `${p} ${
+                                options?.find(
+                                  ({ value }) =>
+                                    value.toString() === a.toString()
+                                )?.label
+                              }${i < arr.length - 1 ? ", " : ""}`,
+                            ""
+                          ))}
+                    {options?.length > 0 && (
+                      <>
+                        {!selected?.toString().length &&
+                          (placeholder || "Select")}
+                      </>
+                    )}
+                  </>
+                )}
+              </p>
+              <input
+                data-testid="combobox-input"
+                ref={ref}
+                readOnly={true}
+                tabIndex={1}
+              />
+              <span data-testid="combobox-btn" className={s.btn}>
+                <FaSortDown />
+              </span>
+            </div>
+            {error && <span className={s.errMsg}>{error.message}</span>}
+            <Modal
+              open={open}
+              className={s.comboboxModal}
+              backdropClass={s.comboboxBackdrop}
+              open={open}
+              setOpen={setOpen}
+              onBackdropClick={() => setOpen(false)}
+              clickThroughBackdrop={true}
+              style={style}
+            >
+              <ComboboxList
+                hover={hover}
+                setHover={setHover}
+                options={options}
+                select={select}
+                selected={selected}
+                multiple={multiple}
+                name={name}
+                open={open}
+                setOpen={setOpen}
+                item={item}
+              />
+            </Modal>
+          </section>
+        );
+      }}
+    />
   );
 };
 
@@ -273,12 +238,10 @@ const ComboboxList = forwardRef(
       setHover,
       select,
       selected,
-      setValue,
       multiple,
       name,
       open,
       setOpen,
-      clearErrors,
       item,
     },
     ref

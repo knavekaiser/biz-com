@@ -13,6 +13,10 @@
     position: relative;
     .field {
       position: relative;
+      display: flex;
+      input {
+        flex-basis: 100%;
+      }
       & > svg {
         position: absolute;
         top: 50%;
@@ -788,7 +792,7 @@
   a {
     text-transform: uppercase;
     background: $primary-color;
-    padding: 6px 15px;
+    padding: 0.75rem 1.75rem;
     font-size: 14px;
     &:hover {
       background: $primary-color-dark1;
@@ -801,32 +805,26 @@
     cursor: pointer;
   }
   &.secondary {
-    // border: 1px solid #c7ccd1;
-    border-bottom: 2px solid #c7ccd1;
-    // background: rgb(228, 225, 225);
+    border-bottom: 1px solid $grey1;
+    grid-gap: 0;
     .fill,
     a {
-      background: #f5f5f5;
+      background: white;
+      color: $grey2;
+      &:not(:last-child) {
+        border-right: 1px solid $grey1;
+      }
     }
     a {
-      color: black;
+      font-size: 1.2rem;
       position: relative;
       &:hover {
-        background: rgb(223, 219, 219);
+        background: $light-grey;
       }
       &.active {
-        color: $blue;
+        color: $primary-color-dark1;
+        font-weight: 600;
         background: white;
-        &::after {
-          display: block;
-          content: "";
-          position: absolute;
-          width: 100%;
-          height: 2px;
-          bottom: 0;
-          background: $blue;
-          left: 0;
-        }
       }
     }
   }
@@ -874,20 +872,6 @@
 }
 
 $branch-angle: 35deg;
-
-.countdown {
-  display: flex;
-  grid-gap: 2px;
-  text-align: center;
-  span {
-    min-width: 26px;
-    background: $text-black;
-    color: white;
-    font-weight: 500;
-    padding: 2px 5px;
-    border-radius: 4px;
-  }
-}
 
 @keyframes spin {
   0% {

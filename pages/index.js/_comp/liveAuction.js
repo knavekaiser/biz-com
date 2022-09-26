@@ -2,7 +2,8 @@ import React from "react";
 import { RankBadge } from "components/svg";
 import Link from "next/link";
 import { Select } from "components/elements";
-import { ProductThumb } from "./product";
+// import { ProductThumb } from "./product";
+import { ProductThumb } from "components/ui/productThumbnail";
 import s from "./styles/landingPage.module.scss";
 
 const products = [
@@ -178,7 +179,7 @@ export default function LiveAuction() {
           <h2>Live Auction</h2>
         </span>
         <div className={s.more}>
-          <Link href="/">
+          <Link href="/browse">
             <a>
               See more{" "}
               <svg
@@ -205,7 +206,11 @@ export default function LiveAuction() {
       </div>
       <div className={`${s.content} ${s.products}`}>
         {products.map((product, i) => (
-          <ProductThumb key={i} product={product} />
+          <Link href="/item" key={i}>
+            <a>
+              <ProductThumb product={product} />
+            </a>
+          </Link>
         ))}
       </div>
     </div>

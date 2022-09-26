@@ -1,0 +1,56 @@
+@import "components/variables";
+
+.container {
+  // max-width: $max-width;
+  margin: auto;
+  display: grid;
+  grid-template-columns: min-content 1fr;
+  padding: 2rem 1rem;
+  grid-gap: 1.5rem;
+  .sidebar {
+    position: sticky;
+    top: 0;
+    display: grid;
+    grid-gap: 1rem;
+    grid-auto-rows: min-content;
+    border-radius: 0.5rem;
+    .section {
+      width: 15rem;
+      border-radius: 0.5rem;
+      .head {
+        cursor: pointer;
+        border-radius: 0.5rem 0.5rem 0 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.75rem;
+        border: 1px solid $grey1;
+        font-weight: 600;
+        svg {
+          font-size: 1.5rem;
+        }
+      }
+      .sectionContent {
+        display: grid;
+        grid-gap: 1rem;
+        padding: 0.75rem;
+        background: $light-grey;
+      }
+    }
+  }
+  .content {
+    display: grid;
+    grid-gap: 1rem;
+    .ribbon {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      grid-gap: 10px;
+    }
+    .products {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 350px));
+      grid-gap: 1.25rem;
+    }
+  }
+}

@@ -53,7 +53,7 @@ export const Moment = ({ format, children, ...rest }) => {
   );
 };
 
-export const Countdown = ({ time, onEnd, format }) => {
+export const Countdown = ({ time, onEnd, className, format }) => {
   const time_ref = useRef(new Date(time).getTime() - new Date().getTime());
   const [t, setT] = useState({ day: 0, hour: 0, minute: 0, second: 0 });
   useEffect(() => {
@@ -84,7 +84,7 @@ export const Countdown = ({ time, onEnd, format }) => {
   }
 
   return (
-    <time className="countdown">
+    <time className={className}>
       <span>{t.day.pad(2)}</span>
       <span>{t.hour.pad(2)}</span>
       <span>{t.minute.pad(2)}</span>

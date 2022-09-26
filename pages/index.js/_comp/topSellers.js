@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { RankBadge } from "components/svg";
 import Link from "next/link";
-import { Select } from "components/elements";
+import { Combobox } from "components/elements";
 import { useForm } from "react-hook-form";
 import s from "./styles/landingPage.module.scss";
 
@@ -99,7 +99,13 @@ const sellers = [
 ];
 
 export default function TopSellers() {
-  const { control } = useForm();
+  const { control, reset } = useForm();
+  useEffect(() => {
+    reset({
+      currency: "usdc",
+      dateRange: "1",
+    });
+  }, []);
   return (
     <div className={`${s.shelf} ${s.topSeller}`}>
       <div className={s.shelfHead}>
@@ -163,7 +169,7 @@ export default function TopSellers() {
           <h2>Top Sellers</h2>
         </span>
         <div className={s.more}>
-          <Select
+          <Combobox
             control={control}
             name="currency"
             options={[
@@ -180,9 +186,8 @@ export default function TopSellers() {
                 label: "BTC",
               },
             ]}
-            defaultValue="usdc"
           />
-          <Select
+          <Combobox
             control={control}
             name="dateRange"
             options={[
@@ -199,13 +204,16 @@ export default function TopSellers() {
                 label: "Last 30 day",
               },
             ]}
-            defaultValue="1"
           />
         </div>
       </div>
       <div className={`${s.content} ${s.sellers}`}>
         {sellers.map((seller, i) => (
-          <Seller key={i} seller={seller} />
+          <Link href="/browse" key={i}>
+            <a>
+              <Seller seller={seller} />
+            </a>
+          </Link>
         ))}
       </div>
     </div>
@@ -221,9 +229,7 @@ const Seller = ({ seller }) => {
           <RankBadge rank={seller.rank} />
         </div>
         <div className={s.detail}>
-          <Link href="/">
-            <a>{seller.name}</a>
-          </Link>
+          {seller.name}
           <span className={s.usdc}>{seller.usdc} USDC</span>
         </div>
       </div>
