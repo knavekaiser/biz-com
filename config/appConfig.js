@@ -77,6 +77,12 @@ Number.prototype.toWords = function () {
   return str;
 };
 
+Array.prototype.findUniqueObj = function () {
+  return [...new Set(this.map((obj) => JSON.stringify(obj)))].map((obj) =>
+    JSON.parse(obj)
+  );
+};
+
 export default {
   //
 };

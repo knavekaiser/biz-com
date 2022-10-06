@@ -12,6 +12,8 @@ const endpoints = {
   //------------Frontend-----------
   baseApiUrlPublic,
   browse: `${baseApiUrlPublic}/api/browse`,
+  relatedItems: `${baseApiUrlPublic}/api/browse/related`,
+  elements: `${baseApiUrlPublic}/api/elements`,
 };
 
 export default endpoints;

@@ -8,6 +8,7 @@
   z-index: 1;
   width: 100%;
   padding: 2rem;
+  overflow: hidden;
   .wrapper {
     padding: 0 0.5rem;
     margin: auto;
@@ -16,10 +17,17 @@
     justify-content: space-between;
     flex-wrap: wrap;
     .branding {
-      svg {
-        width: 269px;
-        height: 74px;
+      display: flex;
+      align-items: center;
+      grid-gap: 0.5rem;
+      img {
+        height: 5rem;
+        width: 5rem;
       }
+      //   width: 269px;
+      //   height: 74px;
+      // svg {
+      // }
     }
     .links {
       h4 {
@@ -36,6 +44,8 @@
   }
   .social {
     .social_icons {
+      color: $grey4;
+      font-size: 1.4rem;
       display: grid;
       grid-template-columns: 1fr 1fr 1fr 1fr;
       grid-gap: 1rem;
@@ -45,7 +55,12 @@
     z-index: -1;
     display: grid;
     position: absolute;
-    bottom: 0;
-    left: 0;
+    img {
+      height: 14rem;
+      width: 14rem;
+    }
+    bottom: -2rem;
+    left: -2rem;
+    opacity: 0.2;
   }
 }

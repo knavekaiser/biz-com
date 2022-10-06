@@ -3,76 +3,26 @@ import { RankBadge } from "components/svg";
 import { Combobox } from "components/elements";
 import { ProductThumb } from "components/ui/productThumbnail";
 import Link from "next/link";
+import { useRouter } from "next/router";
+import { useFetch } from "hooks";
+import { endpoints, paths } from "config";
 import s from "./styles/products.module.scss";
 
-const products = [
-  {
-    animated: true,
-    favorite: 50,
-    img:
-      "https://images.unsplash.com/photo-1555443805-658637491dd4?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NzJ8fGNyeXB0byUyMGFydHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60",
-    name: "Official Cryptomon PepeHoeH",
-    price: 0.0669,
-    currency: "WETH",
-    seller: {
-      name: "Official Cryptomon",
-      profileImg:
-        "https://images.unsplash.com/photo-1612487528505-d2338264c821?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bW9kZXJuJTIwYXJ0fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60",
-    },
-    benner:
-      "https://images.unsplash.com/photo-1604782206219-3b9576575203?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8bW9kZXJuJTIwYXJ0fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60",
-  },
-  {
-    multiple: true,
-    favorite: 50,
-    img:
-      "https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8bW9kZXJuJTIwY3J5cHRvJTIwYXJ0fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60",
-    name: "Official Cryptomon PepeHoeH",
-    price: 0.0669,
-    currency: "WETH",
-    seller: {
-      name: "Official Cryptomon",
-      profileImg:
-        "https://images.unsplash.com/photo-1612487528505-d2338264c821?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bW9kZXJuJTIwYXJ0fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60",
-    },
-    benner:
-      "https://images.unsplash.com/photo-1604782206219-3b9576575203?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8bW9kZXJuJTIwYXJ0fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60",
-  },
-  {
-    animated: true,
-    favorite: 50,
-    img:
-      "https://images.unsplash.com/photo-1482160549825-59d1b23cb208?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Nnx8bW9kZXJuJTIwY3J5cHRvJTIwYXJ0fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60",
-    name: "Official Cryptomon PepeHoeH",
-    price: 0.0669,
-    currency: "WETH",
-    seller: {
-      name: "Official Cryptomon",
-      profileImg:
-        "https://images.unsplash.com/photo-1612487528505-d2338264c821?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bW9kZXJuJTIwYXJ0fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60",
-    },
-    benner:
-      "https://images.unsplash.com/photo-1604782206219-3b9576575203?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8bW9kZXJuJTIwYXJ0fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60",
-  },
-  {
-    multiple: true,
-    favorite: 50,
-    img:
-      "https://images.unsplash.com/photo-1581343109297-b0723710832b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Nzd8fG1vZGVybiUyMGNyeXB0byUyMGFydHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60",
-    name: "Official Cryptomon PepeHoeH",
-    price: 0.0669,
-    currency: "WETH",
-    seller: {
-      name: "Official Cryptomon",
-      profileImg:
-        "https://images.unsplash.com/photo-1612487528505-d2338264c821?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bW9kZXJuJTIwYXJ0fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60",
-    },
-    benner:
-      "https://images.unsplash.com/photo-1604782206219-3b9576575203?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8bW9kZXJuJTIwYXJ0fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60",
-  },
-];
-
 export default function Explore() {
+  const [products, setProducts] = useState([]);
+  const router = useRouter();
+  const { get: getProducts } = useFetch(
+    endpoints.relatedItems + `/${router.query.id}`
+  );
+  useEffect(() => {
+    getProducts()
+      .then(({ data }) => {
+        if (data?.success) {
+          setProducts(data.data);
+        }
+      })
+      .catch((err) => console.log(err));
+  }, [router.query.id]);
   return (
     <div className={s.relatedProducts}>
       <div className={s.head}>
@@ -128,7 +78,7 @@ export default function Explore() {
       </div>
       <div className={s.products}>
         {products.map((product, i) => (
-          <Link href="/item" key={i}>
+          <Link href={paths.itemView.replace(":id", product._id)} key={i}>
             <a>
               <ProductThumb product={product} />
             </a>

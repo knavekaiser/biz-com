@@ -15,7 +15,7 @@
     grid-auto-rows: min-content;
     border-radius: 0.5rem;
     .section {
-      width: 15rem;
+      width: 17rem;
       border-radius: 0.5rem;
       .head {
         cursor: pointer;
@@ -35,12 +35,28 @@
         grid-gap: 1rem;
         padding: 0.75rem;
         background: $light-grey;
+        .filterList {
+          label,
+          input {
+            cursor: pointer;
+          }
+        }
+        ul {
+          display: grid;
+          grid-gap: 0.5rem;
+          li {
+            display: flex;
+            align-items: center;
+            grid-gap: 0.5rem;
+          }
+        }
       }
     }
   }
   .content {
     display: grid;
     grid-gap: 1rem;
+    grid-template-rows: min-content 1fr;
     .ribbon {
       display: flex;
       align-items: center;
@@ -51,6 +67,11 @@
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(250px, 350px));
       grid-gap: 1.25rem;
+      grid-auto-rows: min-content;
+      .placeholder {
+        margin: 3rem auto;
+        grid-column: 1/-1;
+      }
     }
   }
 }

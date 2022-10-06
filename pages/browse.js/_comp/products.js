@@ -7,6 +7,7 @@ import { ProductThumb } from "components/ui/productThumbnail";
 import { useForm } from "react-hook-form";
 import { endpoints, paths } from "config";
 import { useFetch } from "hooks";
+import { useRouter } from "next/router";
 import s from "./styles/products.module.scss";
 
 export default function Products() {
@@ -21,34 +22,43 @@ export default function Products() {
   const { control } = useForm({
     defaultValues: { sort: "price-asc", type: "buyNow" },
   });
+  const router = useRouter();
   useEffect(() => {
-    getProducts({ query: filters })
+    router.push(
+      {
+        pathname: router.pathname,
+        query: {
+          ...Object.entries({ ...router.query, ...filters })
+            .filter(([key, value], i) => value)
+            .reduce((p, c) => {
+              p[c[0]] = c[1];
+              return p;
+            }, {}),
+        },
+      },
+      undefined,
+      { shallow: true }
+    );
+  }, [filters]);
+  useEffect(() => {
+    getProducts({ query: router.query })
       .then(({ data }) => {
-        if (data.success) {
-          setProducts(data.data);
-          setMetadata(data.metadata);
-        } else {
-          Prompt({ type: "error", message: data.message });
+        if (!data?.success) {
+          if (data?.message) {
+            Prompt({ type: "error", message: data.message });
+          }
+          return;
         }
+        setProducts(data.data);
+        setMetadata(data.metadata);
       })
       .catch((err) => Prompt({ type: "error", message: err.message }));
-  }, [filters]);
+  }, [router.query]);
   return (
     <div className={`${s.container}`}>
       <Sidebar open={sidebarOpen} filters={filters} setFilters={setFilters} />
       <div className={`${s.content} ${s.products}`}>
         <div className={s.ribbon}>
-          {
-            //  <Combobox
-            //   control={control}
-            //   name="type"
-            //   options={[
-            //     { label: "Buy Now", value: "buyNow" },
-            //     { label: "Ongoing Auction", value: "ongoingAuction" },
-            //     { label: "Has Offers", value: "hasOffers" },
-            //   ]}
-            // />
-          }
           <Combobox
             control={control}
             name="sort"
@@ -61,13 +71,19 @@ export default function Products() {
           />
         </div>
         <div className={s.products}>
-          {products.map((product, i) => (
-            <Link href={paths.itemView.replace(":id", product._id)} key={i}>
-              <a>
-                <ProductThumb product={product} />
-              </a>
-            </Link>
-          ))}
+          {products.length > 0 ? (
+            products.map((product, i) => (
+              <Link href={paths.itemView.replace(":id", product._id)} key={i}>
+                <a>
+                  <ProductThumb product={product} />
+                </a>
+              </Link>
+            ))
+          ) : (
+            <div className={s.placeholder}>
+              {loading ? "Loading..." : "No Product found"}
+            </div>
+          )}
         </div>
       </div>
     </div>

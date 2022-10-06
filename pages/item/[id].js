@@ -1,5 +1,6 @@
 import { useEffect, useContext } from "react";
 import { SiteContext } from "SiteContext";
+import Head from "next/head";
 import Header from "components/ui/Header";
 import Product from "./_comp/product";
 import Footer from "components/ui/Footer";
@@ -14,8 +15,6 @@ export async function getServerSideProps(ctx) {
 
   // Get Site detail
   // Title, Logo, favicon, theme, color-scheme,
-
-  // console.log(ctx.req.headers.host);
 
   const siteData = await fetch(endpoints.server.siteConfig, {
     // headers: { origin: ctx.req.headers.host },
@@ -46,8 +45,22 @@ const Item = ({ product, siteData }) => {
   }, [siteData]);
   return (
     <main className={s.landingPage}>
+      <Head>
+        <meta charSet="utf-8" />
+        <title>{`${product.title} | ${siteData.siteTitle}`}</title>
+        <meta name="description" content={product.description} />
+        <meta
+          property="og:title"
+          content={`${product.title} | ${siteData.siteTitle}`}
+        />
+        <meta property="og:description" content={product.description} />
+      </Head>
       <Header />
-      <Product product={product} />
+      {product ? (
+        <Product product={product} />
+      ) : (
+        <div>Sorry, Product can not be found</div>
+      )}
       <Footer />
     </main>
   );

@@ -18,6 +18,7 @@ export default function Images({ product }) {
           <img
             key={i}
             src={src}
+            className={viewImage === i ? s.inView : ""}
             onClick={() => {
               setViewImage(i);
             }}

@@ -12,6 +12,7 @@ import { GoCalendar } from "react-icons/go";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useForm, Controller } from "react-hook-form";
+import { DateRangePicker } from "react-date-range";
 import { Modal } from "../modal";
 
 import s from "./elements.module.scss";
@@ -31,6 +32,7 @@ export const Input = ({
   endAdornment,
   type,
   label,
+  onChange: customOnChange,
   ...rest
 }) => {
   const _id = useRef(Math.random().toString(32).substr(-8));
@@ -49,7 +51,7 @@ export const Input = ({
           >
             {label && (
               <label>
-                {label} {formOptions.required && "*"}
+                {label} {formOptions?.required && "*"}
               </label>
             )}
             <div className={s.wrapper}>
@@ -59,6 +61,12 @@ export const Input = ({
                   ref={ref}
                   type={type || "text"}
                   id={rest.id || _id.current}
+                  {...(customOnChange && {
+                    onChange: (e) => {
+                      onChange(e.target.value);
+                      customOnChange(e);
+                    },
+                  })}
                   {...rest}
                   placeholder={rest.placeholder || "Enter"}
                 />
@@ -459,7 +467,7 @@ export const Textarea = ({ control, name, formOptions, ...rest }) => {
           >
             {label && (
               <label>
-                {label} {formOptions.required && "*"}
+                {label} {formOptions?.required && "*"}
               </label>
             )}
             <span className={s.field}>
@@ -931,4 +939,15 @@ export const Chip = ({ label, remove }) => {
       </button>
     </span>
   );
+};
+
+export const DatePicker = ({ control, name, formOptions }) => {
+  <Controller
+    control={control}
+    name={name}
+    rules={formOptions}
+    render={({ field: { onChange, onBlur, value, name, ref } }) => (
+      <DateRangePicker onChange={onChange} />
+    )}
+  />;
 };

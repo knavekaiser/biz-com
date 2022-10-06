@@ -21,6 +21,11 @@ const LandingPage = ({ siteData }) => {
   }, [siteData]);
   return (
     <main className={s.landingPage}>
+      <Head>
+        <meta charSet="utf-8" />
+        <title>{siteData.siteTitle}</title>
+        <meta property="og:title" content={siteData.siteTitle} />
+      </Head>
       <Header />
       <Hero />
       <TopSellers />

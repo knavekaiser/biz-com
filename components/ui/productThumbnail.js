@@ -15,29 +15,38 @@ export const ProductThumb = ({ product }) => {
       />
       <div className={s.productDetail}>
         <h4>{product.title}</h4>
-        {siteConfig?.siteConfig?.productCard &&
-          siteConfig.siteConfig.productCard.map((item) => {
+        <div className={s.details}>
+          {siteConfig?.siteConfig?.productCard?.map((item) => {
+            if (["string", "number"].includes(typeof product[item])) {
+              if (item === "price") {
+                return (
+                  <span className={s.price} key={item}>
+                    <span className={s.currentPrice}>
+                      {siteConfig?.siteConfig?.currency}{" "}
+                      {product.price.toLocaleString()}
+                    </span>
+
+                    {product.originalPrice > product.price && (
+                      <span className={s.originalPrice}>
+                        {siteConfig?.siteConfig?.currency}{" "}
+                        {product.originalPrice.toLocaleString()}
+                      </span>
+                    )}
+                  </span>
+                );
+              }
+              return (
+                <span className={s.description} key={item}>
+                  {product[item]}
+                </span>
+              );
+            }
             if (item === "seller" && product.seller) {
               return (
                 <div className={s.productSeller} key={item}>
                   <img src={product.seller.logo || product.seller.profileImg} />
                   <span className={s.productSeller}>{product.seller.name}</span>
                 </div>
-              );
-            }
-            if (item === "price") {
-              return (
-                <span className={s.price} key={item}>
-                  {siteConfig?.siteConfig?.currency}{" "}
-                  {product.price.toLocaleString()}
-                </span>
-              );
-            }
-            if (item === "description") {
-              return (
-                <span className={s.description} key={item}>
-                  {product.description}
-                </span>
               );
             }
             if (item === "rating") {
@@ -53,6 +62,7 @@ export const ProductThumb = ({ product }) => {
             }
             return <Fragment key={item} />;
           })}
+        </div>
 
         {
           // <span className={s.devider} />

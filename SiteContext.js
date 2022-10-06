@@ -15,6 +15,9 @@ export const Provider = ({ children }) => {
     const portal = document.createElement("div");
     portal.id = "portal";
     document.querySelector("body").appendChild(portal);
+    const prompt = document.createElement("div");
+    prompt.id = "prompt";
+    document.querySelector("body").appendChild(prompt);
   }, []);
   return (
     <SiteContext.Provider

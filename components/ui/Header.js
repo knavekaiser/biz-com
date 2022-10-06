@@ -51,32 +51,36 @@ const Header = () => {
           }
         </div>
         <div className={s.southSection}>
-          <Link href="/" className={s.onPage}>
-            Explore
-          </Link>
-          <Link href="/">Launchpad</Link>
-          <span className={s.devider} />
+          {
+            //   <Link href="/" className={s.onPage}>
+            //   Explore
+            // </Link>
+            // <Link href="/">Launchpad</Link>
+            // <span className={s.devider} />
+          }
           <Link href="/">About us</Link>
-          <Combobox
-            className={"secondary"}
-            control={control}
-            name="language"
-            options={[
-              {
-                label: "English",
-                value: "english",
-              },
-              {
-                label: "Arabic",
-                value: "arabic",
-              },
-              {
-                label: "German",
-                value: "german",
-              },
-            ]}
-          />
-          <button className={`btn primary`}>Connect wallet</button>
+          {
+            //   <Combobox
+            //   className={"secondary"}
+            //   control={control}
+            //   name="language"
+            //   options={[
+            //     {
+            //       label: "English",
+            //       value: "english",
+            //     },
+            //     {
+            //       label: "Arabic",
+            //       value: "arabic",
+            //     },
+            //     {
+            //       label: "German",
+            //       value: "german",
+            //     },
+            //   ]}
+            // />
+          }
+          <button className={`btn primary`}>Account</button>
         </div>
       </div>
     </header>

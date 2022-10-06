@@ -9,9 +9,10 @@ import {
 import s from "./elements.module.scss";
 
 import { FaSortDown, FaSearch } from "react-icons/fa";
-import { Modal } from "../modal";
+import { Modal, Prompt } from "../modal";
 import { Input, Chip } from "./elements";
 import { Controller } from "react-hook-form";
+import { useFetch } from "hooks";
 
 import ReactSelect, { components } from "react-select";
 
@@ -300,19 +301,77 @@ export const Select = ({
   control,
   formOptions,
   name,
-  options,
+  options: defaultOptions,
+  url,
+  getQuery,
+  handleData,
   multiple,
   label,
   className,
   placeholder,
   renderOption,
   setValue,
-  readOnly,
+  disabled,
   onChange: _onChange,
 }) => {
-  const [browser, setBrowser] = useState(false);
+  const firstRender = useRef(true);
+  const [inputValue, setInputValue] = useState("");
+  const [selectedOptions, setSelectedOptions] = useState([]);
+  const [options, setOptions] = useState(defaultOptions);
+
+  const { get: fetchData, loading } = useFetch(url);
+
+  const getOptions = useCallback(
+    (inputValue, selected) => {
+      fetchData({
+        query: {
+          ...getQuery(inputValue, selected),
+          pageSize: 10 + (selectedOptions.length || 0),
+        },
+      })
+        .then(({ data }) => {
+          if (!data?.success) {
+            return Prompt({
+              type: "error",
+              message: data?.message || "Could not load data",
+            });
+          }
+          const _data = data.data.map(handleData);
+          if (multiple) {
+            let _selectedOptions;
+            if (firstRender.current) {
+              _selectedOptions = _data.filter((item) =>
+                (control._formValues[name] || []).includes(item.value)
+              );
+              setSelectedOptions(_selectedOptions);
+            }
+            setOptions(
+              [
+                ..._data,
+                ...(_selectedOptions || selectedOptions),
+              ].findUniqueObj()
+            );
+          } else {
+            setOptions(_data);
+          }
+          firstRender.current = false;
+        })
+        .catch((err) => Prompt({ type: "error", message: err.message }));
+    },
+    [control._formValues[name], selectedOptions]
+  );
+
   useEffect(() => {
-    setBrowser(true);
+    if (inputValue) {
+      getOptions(inputValue);
+    }
+  }, [inputValue]);
+
+  useEffect(() => {
+    const _value = control._formValues[name];
+    if (_value && !options) {
+      getOptions(null, _value);
+    }
   }, []);
   return (
     <Controller
@@ -324,11 +383,17 @@ export const Select = ({
         fieldState: { invalid, isTouched, isDirty, error },
       }) => (
         <section className={`${s.select} ${className || ""}`}>
-          {label && <label>{label}</label>}
+          {label && (
+            <label>
+              {label} {formOptions.required && "*"}
+            </label>
+          )}
           <div className={s.field}>
             <ReactSelect
               placeholder={
-                !options || !options?.length
+                url
+                  ? "Search..."
+                  : !options || !options?.length
                   ? "No options provided"
                   : placeholder || "Enter"
               }
@@ -337,14 +402,12 @@ export const Select = ({
                 ...(renderOption && { Option: renderOption }),
               }}
               className={`reactSelect ${s.reactSelect} ${
-                readOnly ? "readOnly" : ""
+                disabled ? "readOnly" : ""
               } ${error ? "err" : ""} ${className || ""}`}
               classNamePrefix="reactSelect"
-              isDisabled={!options || !options?.length}
+              isDisabled={url ? false : !options || !options?.length}
               inputRef={ref}
-              menuPortalTarget={
-                browser ? document.querySelector("#portal") : null
-              }
+              // menuPortalTarget={document.querySelector("#portal")}
               menuPlacement="auto"
               options={options || []}
               value={
@@ -354,9 +417,15 @@ export const Select = ({
                 ) ||
                 ""
               }
+              onInputChange={(value) => {
+                if (url) {
+                  setInputValue(value);
+                }
+              }}
               onChange={(val) => {
                 if (multiple) {
                   onChange(val.map((item) => item.value));
+                  setSelectedOptions(val);
                 } else {
                   onChange(val.value);
                 }
