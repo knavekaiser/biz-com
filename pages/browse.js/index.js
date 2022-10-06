@@ -3,6 +3,7 @@ import { SiteContext } from "SiteContext";
 import Header from "components/ui/Header";
 import Products from "./_comp/products";
 import Footer from "components/ui/Footer";
+import DomainFallback from "components/ui/domainFallback";
 import Head from "next/head";
 import s from "./_comp/styles/products.module.scss";
 
@@ -15,6 +16,9 @@ const Browse = ({ siteData }) => {
       setSiteConfig(siteData);
     }
   }, [siteData]);
+  if (!siteData) {
+    return <DomainFallback />;
+  }
   return (
     <main className={s.landingPage}>
       <Head>

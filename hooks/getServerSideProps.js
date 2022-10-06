@@ -9,8 +9,7 @@ export default async function getServerSideProps(ctx) {
   // console.log(ctx.req.headers.host);
 
   const siteData = await fetch(endpoints.server.siteConfig, {
-    // headers: { origin: ctx.req.headers.host },
-    headers: { origin: "infinai.loca.lt" },
+    headers: { origin: ctx.req.headers.host },
   }).then((res) => res.json());
 
   if (siteData?.success) {

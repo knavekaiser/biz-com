@@ -6,6 +6,7 @@ import TopSellers from "./_comp/topSellers";
 import LiveAuction from "./_comp/liveAuction";
 import Explore from "./_comp/explore";
 import Footer from "components/ui/Footer";
+import DomainFallback from "components/ui/domainFallback";
 import { RankBadge } from "components/svg";
 import Head from "next/head";
 import s from "./_comp/styles/landingPage.module.scss";
@@ -19,6 +20,9 @@ const LandingPage = ({ siteData }) => {
       setSiteConfig(siteData);
     }
   }, [siteData]);
+  if (!siteData) {
+    return <DomainFallback />;
+  }
   return (
     <main className={s.landingPage}>
       <Head>

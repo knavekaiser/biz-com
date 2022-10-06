@@ -1,0 +1,26 @@
+.fallback {
+  height: calc((var(--vh) * 100));
+  width: 100%;
+  position: relative;
+  background: black;
+  display: grid;
+  .content {
+    margin: auto;
+    color: white;
+    z-index: 10;
+    h1 {
+      font-size: 20vw;
+      transform: translateY(-5%);
+      background: linear-gradient(150deg, rgb(173, 255, 82), rgb(3, 113, 61));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+  }
+  .background {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    max-width: 60vw;
+    transform: translate(-50%, -50%);
+  }
+}

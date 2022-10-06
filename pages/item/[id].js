@@ -4,6 +4,7 @@ import Head from "next/head";
 import Header from "components/ui/Header";
 import Product from "./_comp/product";
 import Footer from "components/ui/Footer";
+import DomainFallback from "components/ui/domainFallback";
 import { useRouter } from "next/router";
 import s from "./_comp/styles/products.module.scss";
 
@@ -17,8 +18,7 @@ export async function getServerSideProps(ctx) {
   // Title, Logo, favicon, theme, color-scheme,
 
   const siteData = await fetch(endpoints.server.siteConfig, {
-    // headers: { origin: ctx.req.headers.host },
-    headers: { origin: "infinai.loca.lt" },
+    headers: { origin: ctx.req.headers.host },
   }).then((res) => res.json());
 
   if (siteData?.success) {
@@ -43,6 +43,9 @@ const Item = ({ product, siteData }) => {
       setSiteConfig(siteData);
     }
   }, [siteData]);
+  if (!siteData) {
+    return <DomainFallback />;
+  }
   return (
     <main className={s.landingPage}>
       <Head>
