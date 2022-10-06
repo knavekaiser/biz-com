@@ -91,11 +91,6 @@ export const Input = ({
   );
 };
 
-forwardRef(
-  ({ className, label, icon, error, type, required, ...rest }, ref) => {
-    const _id = useRef(Math.random().toString(32).substr(-8));
-  }
-);
 export const SearchField = ({
   url,
   data: defaultData,
@@ -381,7 +376,11 @@ export const FileInput = ({
                 {files.map((file, i) => (
                   <tr key={i}>
                     <td>
-                      <a target="_blank" href={file.uploadFilePath}>
+                      <a
+                        target="_blank"
+                        rel="noreferrer"
+                        href={file.uploadFilePath}
+                      >
                         {file.name || file.fileName || file.uploadFilePath}
                       </a>
                     </td>
@@ -847,7 +846,7 @@ export const MobileNumberInput = ({
     </section>
   );
 };
-export const Checkbox = forwardRef(({ label, readOnly, ...rest }, ref) => {
+const CheckboxComp = ({ label, readOnly, ...rest }, ref) => {
   const id = useRef(Math.random().toString(36).substr(-8));
   return (
     <section
@@ -859,7 +858,8 @@ export const Checkbox = forwardRef(({ label, readOnly, ...rest }, ref) => {
       {label && <label htmlFor={id.current}>{label}</label>}
     </section>
   );
-});
+};
+export const Checkbox = forwardRef(CheckboxComp);
 
 export const Tabs = ({
   tabs,

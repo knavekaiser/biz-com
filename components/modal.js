@@ -4,62 +4,61 @@ import { IoClose } from "react-icons/io5";
 import ReactDOM, { createPortal } from "react-dom";
 import * as ReactDOMClient from "react-dom/client";
 
-export const Modal = forwardRef(
-  (
-    {
-      open,
-      setOpen,
-      children,
-      className,
-      onBackdropClick,
-      clickThroughBackdrop,
-      backdropClass,
-      style,
-      head,
-      label,
-    },
-    ref
-  ) => {
-    const backdropRef = useRef();
-    if (open) {
-      return createPortal(
-        <>
-          <div
-            data-testid="modal"
-            className={`modalBackdrop ${backdropClass || ""}`}
-            onClick={(e) => {
-              e.stopPropagation();
-              onBackdropClick?.();
-            }}
-            style={clickThroughBackdrop ? { pointerEvents: "none" } : {}}
-            ref={backdropRef}
-          />
-          <div
-            style={{ ...style }}
-            ref={ref}
-            className={`modal ${className || ""} ${head ? "withHead" : ""}`}
-          >
-            {head && (
-              <div className="head">
-                {label}{" "}
-                <button
-                  className="btn clear"
-                  type="button"
-                  onClick={() => setOpen(false)}
-                >
-                  <IoClose />
-                </button>
-              </div>
-            )}
-            {children}
-          </div>
-        </>,
-        document.querySelector("#portal") || document.body
-      );
-    }
-    return null;
+const ModalComp = (
+  {
+    open,
+    setOpen,
+    children,
+    className,
+    onBackdropClick,
+    clickThroughBackdrop,
+    backdropClass,
+    style,
+    head,
+    label,
+  },
+  ref
+) => {
+  const backdropRef = useRef();
+  if (open) {
+    return createPortal(
+      <>
+        <div
+          data-testid="modal"
+          className={`modalBackdrop ${backdropClass || ""}`}
+          onClick={(e) => {
+            e.stopPropagation();
+            onBackdropClick?.();
+          }}
+          style={clickThroughBackdrop ? { pointerEvents: "none" } : {}}
+          ref={backdropRef}
+        />
+        <div
+          style={{ ...style }}
+          ref={ref}
+          className={`modal ${className || ""} ${head ? "withHead" : ""}`}
+        >
+          {head && (
+            <div className="head">
+              {label}{" "}
+              <button
+                className="btn clear"
+                type="button"
+                onClick={() => setOpen(false)}
+              >
+                <IoClose />
+              </button>
+            </div>
+          )}
+          {children}
+        </div>
+      </>,
+      document.querySelector("#portal") || document.body
+    );
   }
-);
+  return null;
+};
+export const Modal = forwardRef(ModalComp);
 
 export const Prompt = ({ className, type, message, btns, callback }) => {
   const container = document.querySelector("#prompt");

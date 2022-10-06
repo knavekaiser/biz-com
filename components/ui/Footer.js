@@ -70,21 +70,21 @@ const Footer = () => {
             <h4>Contact</h4>
           </li>
           <li className={s.social_icons}>
-            <a href="/">
+            <Link href="/">
               <IoLogoYoutube />
-            </a>
-            <a href="/">
+            </Link>
+            <Link href="/">
               <IoLogoFacebook />
-            </a>
-            <a href="/">
+            </Link>
+            <Link href="/">
               <IoLogoWhatsapp />
-            </a>
-            <a href="/">
+            </Link>
+            <Link href="/">
               <IoLogoLinkedin />
-            </a>
-            <a href="/">
+            </Link>
+            <Link href="/">
               <IoLogoInstagram />
-            </a>
+            </Link>
           </li>
         </ul>
       </div>

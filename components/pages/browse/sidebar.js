@@ -17,10 +17,6 @@ const Sidebar = ({ open, filters, setFilters }) => {
   const router = useRouter();
   const { control, reset, watch, getValues } = useForm();
 
-  if (!open) {
-    return null;
-  }
-
   useEffect(() => {
     if (
       siteConfig?.browsePage?.sidebarFilters?.length &&
@@ -45,6 +41,10 @@ const Sidebar = ({ open, filters, setFilters }) => {
       queryLoaded.current = true;
     }
   }, [siteConfig?.browsePage?.sidebarFilters]);
+
+  if (!open) {
+    return null;
+  }
 
   return (
     <form className={s.sidebar}>

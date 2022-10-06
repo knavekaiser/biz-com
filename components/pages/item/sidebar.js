@@ -1,4 +1,4 @@
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useState, useContext, Fragment } from "react";
 import { SiteContext } from "SiteContext";
 import { Checkbox, Input } from "components/elements";
 import { HiChevronUp, HiChevronDown, HiStar } from "react-icons/hi";
@@ -73,6 +73,7 @@ const Sidebar = ({ product }) => {
             //   app_absent: 0,
             // }).toString()}`
           }
+          rel="noreferrer"
           target="_blank"
         >
           <button className="btn whatsapp">

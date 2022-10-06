@@ -205,7 +205,6 @@ export const Combobox = ({
               open={open}
               className={s.comboboxModal}
               backdropClass={s.comboboxBackdrop}
-              open={open}
               setOpen={setOpen}
               onBackdropClick={() => setOpen(false)}
               clickThroughBackdrop={true}
@@ -231,61 +230,56 @@ export const Combobox = ({
   );
 };
 
-const ComboboxList = forwardRef(
-  (
-    {
-      options,
-      hover,
-      setHover,
-      select,
-      selected,
-      multiple,
-      name,
-      open,
-      setOpen,
-      item,
-    },
-    ref
-  ) => {
-    return (
-      <ul
-        ref={ref}
-        className={s.options}
-        data-testid="combobox-options"
-        onMouseMove={() => setHover(null)}
-      >
-        {options?.map(({ label, value, ...rest }, i) => (
-          <li
-            key={i}
-            onClick={(e) => {
-              e.stopPropagation();
-              select({ label, value, ...rest });
-            }}
-            className={`${
-              (selected?.find && selected.find((item) => item === value)) ||
-              value === selected
-                ? s.selected
-                : ""
-            } ${hover === i && s.hover}`}
-            data-testid={`combobox-${label}`}
-          >
-            {multiple && (
-              <input
-                type="checkbox"
-                checked={
-                  (selected?.find && selected.find((item) => item === value)) ||
-                  false
-                }
-                readOnly={true}
-              />
-            )}
-            {item ? item({ label, value, ...rest }) : label}
-          </li>
-        ))}
-      </ul>
-    );
-  }
-);
+const ComboboxList = ({
+  options,
+  hover,
+  setHover,
+  select,
+  selected,
+  multiple,
+  name,
+  open,
+  setOpen,
+  item,
+}) => {
+  return (
+    <ul
+      ref={ref}
+      className={s.options}
+      data-testid="combobox-options"
+      onMouseMove={() => setHover(null)}
+    >
+      {options?.map(({ label, value, ...rest }, i) => (
+        <li
+          key={i}
+          onClick={(e) => {
+            e.stopPropagation();
+            select({ label, value, ...rest });
+          }}
+          className={`${
+            (selected?.find && selected.find((item) => item === value)) ||
+            value === selected
+              ? s.selected
+              : ""
+          } ${hover === i && s.hover}`}
+          data-testid={`combobox-${label}`}
+        >
+          {multiple && (
+            <input
+              type="checkbox"
+              checked={
+                (selected?.find && selected.find((item) => item === value)) ||
+                false
+              }
+              readOnly={true}
+            />
+          )}
+          {item ? item({ label, value, ...rest }) : label}
+        </li>
+      ))}
+    </ul>
+  );
+};
 
 const DropdownIndicator = (props) => {
   return (

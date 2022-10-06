@@ -1,12 +1,14 @@
 import { useEffect, useContext } from "react";
 import { SiteContext } from "SiteContext";
+import { useRouter } from "next/router";
 import Head from "next/head";
+
 import Header from "components/ui/Header";
-import Product from "./_comp/product";
 import Footer from "components/ui/Footer";
 import DomainFallback from "components/ui/domainFallback";
-import { useRouter } from "next/router";
-import s from "./_comp/styles/products.module.scss";
+
+import Product from "components/pages/item/product";
+import s from "components/pages/item/styles/products.module.scss";
 
 import { endpoints } from "config";
 
@@ -25,7 +27,9 @@ export async function getServerSideProps(ctx) {
     props.siteData = siteData.data;
   }
 
-  await fetch(endpoints.server.browse + `/${productId}`)
+  await fetch(endpoints.server.browse + `/${productId}`, {
+    headers: { origin: ctx.req.headers.host },
+  })
     .then((res) => res.json())
     .then((data) => {
       if (data.success) {
@@ -46,6 +50,20 @@ const Item = ({ product, siteData }) => {
   if (!siteData) {
     return <DomainFallback />;
   }
+  if (!product) {
+    return (
+      <main className={s.landingPage}>
+        <Head>
+          <meta charSet="utf-8" />
+          <title>{siteData.siteTitle}</title>
+          <meta property="og:title" content={siteData.siteTitle} />
+        </Head>
+        <Header />
+        <div>Sorry, Product can not be found</div>
+        <Footer />
+      </main>
+    );
+  }
   return (
     <main className={s.landingPage}>
       <Head>
@@ -59,11 +77,7 @@ const Item = ({ product, siteData }) => {
         <meta property="og:description" content={product.description} />
       </Head>
       <Header />
-      {product ? (
-        <Product product={product} />
-      ) : (
-        <div>Sorry, Product can not be found</div>
-      )}
+      <Product product={product} />
       <Footer />
     </main>
   );
