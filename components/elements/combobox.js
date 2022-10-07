@@ -244,7 +244,7 @@ const ComboboxList = ({
 }) => {
   return (
     <ul
-      ref={ref}
+      // ref={ref}
       className={s.options}
       data-testid="combobox-options"
       onMouseMove={() => setHover(null)}
