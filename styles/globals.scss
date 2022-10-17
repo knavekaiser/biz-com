@@ -72,25 +72,23 @@ button {
   .react-multi-carousel-list {
     overflow: visible !important;
   }
-  .dot {
-    transform: translateY(2.5rem);
+  .react-multi-carousel-dot {
     align-items: center;
+    transform: translateY(-1rem);
     li {
       height: min-content !important;
     }
     button {
       border: none;
-      border-radius: 0;
-      width: 1.5rem;
-      background-color: rgba(255, 255, 255, 0.22) !important;
       margin-right: 1rem;
-      height: 2px;
+      height: 0.75rem;
+      width: 0.75rem;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.2);
     }
-    .react-multi-carousel-dot--active {
+    &.react-multi-carousel-dot--active {
       button {
-        height: 3px;
-        width: 3rem;
-        background-color: rgba(255, 255, 255, 0.6) !important;
+        background: rgba(255, 255, 255, 0.7);
       }
     }
   }
@@ -115,6 +113,66 @@ button {
   }
   .react-multiple-carousel__arrow--left {
     left: 0;
+  }
+}
+
+.productCardThumbGlobal {
+  &:hover {
+    .react-multiple-carousel__arrow {
+      opacity: 1;
+    }
+  }
+  .react-multiple-carousel__arrow {
+    z-index: 10;
+    &::before {
+      font-size: 0.8rem;
+      color: rgba(0, 0, 0, 0.8);
+      font-weight: bold;
+    }
+    display: grid;
+    place-items: center;
+    min-height: 0.2rem;
+    min-width: 0.2rem;
+    height: 1.75rem;
+    width: 1.75rem;
+    opacity: 0;
+    background: rgba(252, 252, 252, 0.78);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.24);
+    &:hover {
+      background: rgba(252, 252, 252, 0.78);
+      transform: scale(1.1);
+      box-shadow: 0 0 3px rgba(0, 0, 0, 0.24);
+    }
+    &.react-multiple-carousel__arrow--left {
+      &::before {
+        transform: translate(-2px, 0);
+      }
+    }
+    &.react-multiple-carousel__arrow--right {
+      &::before {
+        transform: translate(2px, 0);
+      }
+    }
+  }
+  .react-multi-carousel-dot {
+    align-items: center;
+    transform: translateY(-1rem);
+    li {
+      height: min-content !important;
+    }
+    button {
+      border: none;
+      margin-right: 0.5rem;
+      height: 0.5rem;
+      width: 0.5rem;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.2);
+    }
+    &.react-multi-carousel-dot--active {
+      button {
+        background: rgba(255, 255, 255, 0.7);
+      }
+    }
   }
 }
 

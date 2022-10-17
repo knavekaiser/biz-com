@@ -1,20 +1,10 @@
 import { endpoints } from "config";
+import { getSiteData } from "helpers";
 
 export default async function getServerSideProps(ctx) {
-  const props = {};
+  const props = {
+    siteData: await getSiteData(ctx),
+  };
 
-  // Get Site detail
-  // Title, Logo, favicon, theme, color-scheme,
-
-  // console.log(ctx.req.headers.host);
-
-  const siteData = await fetch(endpoints.server.siteConfig, {
-    headers: { origin: ctx.req.headers.host },
-  }).then((res) => res.json());
-
-  if (siteData?.success) {
-    props.siteData = siteData.data;
-  }
-
-  return { props: JSON.parse(JSON.stringify(props)) };
+  return { props };
 }

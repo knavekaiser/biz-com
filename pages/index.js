@@ -7,12 +7,29 @@ import Footer from "components/ui/Footer";
 import DomainFallback from "components/ui/domainFallback";
 
 import Hero from "components/pages/index/hero";
-import TopSellers from "components/pages/index/topSellers";
-import LiveAuction from "components/pages/index/liveAuction";
-import Explore from "components/pages/index/explore";
+import Shelves from "components/pages/index/shelves";
 import s from "components/pages/index/styles/landingPage.module.scss";
+import { paths } from "config";
 
-export { getServerSideProps } from "hooks";
+import { getSiteData } from "helpers";
+
+export async function getServerSideProps(ctx) {
+  const props = {
+    siteData: await getSiteData(ctx),
+  };
+  if (props.siteData) {
+    if (!props.siteData.siteConfig.landingPage.viewLandingPage) {
+      return {
+        redirect: {
+          destination: paths.browse,
+          permanent: false,
+        },
+      };
+    }
+  }
+
+  return { props };
+}
 
 const LandingPage = ({ siteData }) => {
   const { setSiteConfig } = useContext(SiteContext);
@@ -33,9 +50,7 @@ const LandingPage = ({ siteData }) => {
       </Head>
       <Header />
       <Hero />
-      <TopSellers />
-      <LiveAuction />
-      <Explore />
+      <Shelves />
       <Footer />
     </main>
   );

@@ -1,9 +1,9 @@
 import { endpoints } from "config";
 
 export const getServerSideProps = async (ctx) => {
-  const file = await fetch(`${endpoints.server.baseApiUrl}${ctx.resolvedUrl}`, {
-    headers: { origin: ctx.req.headers.host },
-  }).then((res) => res.blob());
+  // const file = await fetch(`${endpoints.server.baseApiUrl}${ctx.resolvedUrl}`, {
+  //   headers: { origin: ctx.req.headers.host },
+  // }).then((res) => res.blob());
   // console.log(ctx.res);
   // return { props: {} };
   return {

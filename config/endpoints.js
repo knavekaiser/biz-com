@@ -14,6 +14,7 @@ const endpoints = {
   browse: `${baseApiUrlPublic}/api/browse`,
   relatedItems: `${baseApiUrlPublic}/api/browse/related`,
   elements: `${baseApiUrlPublic}/api/elements`,
+  landingPageShelves: `${baseApiUrlPublic}/api/browse/landing-page-shelves`,
 };
 
 export default endpoints;

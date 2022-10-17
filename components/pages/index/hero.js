@@ -1,4 +1,5 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, useContext } from "react";
+import { SiteContext } from "SiteContext";
 import Carousel from "react-multi-carousel";
 import s from "./styles/hero.module.scss";
 
@@ -34,6 +35,36 @@ const popularItems = [
 ];
 
 export default function Hero() {
+  const { siteConfig } = useContext(SiteContext);
+  const responsive = {
+    desktop: {
+      breakpoint: { max: 3000, min: 0 },
+      items: 1,
+    },
+  };
+  if (siteConfig.siteConfig?.landingPage?.hero?.slides?.length > 0) {
+    return (
+      <div className={`${s.hero} heroGlobal`}>
+        <Carousel
+          containerClass={s.wrapper}
+          responsive={responsive}
+          dotListClass={s.dot}
+          autoPlaySpeed={1000}
+          infinite={true}
+          showDots={true}
+          draggable={false}
+        >
+          {siteConfig.siteConfig?.landingPage?.hero?.slides.map((url) => (
+            <img key={url} src={url} />
+          ))}
+        </Carousel>
+      </div>
+    );
+  }
+  return null;
+}
+
+function HeroOne() {
   const responsive = {
     desktop: {
       breakpoint: { max: 3000, min: 0 },
@@ -41,13 +72,13 @@ export default function Hero() {
     },
   };
   return (
-    <div className={`${s.hero} heroGlobal`}>
+    <div className={`${s.heroOne} heroGlobal`}>
       <img src="/assets/hero_background.jpg" className={s.background} />
       <div className={s.wrapper}>
         <Carousel
           containerClass={s.wrapper}
           responsive={responsive}
-          dotListClass="dot"
+          dotListClass={s.dot}
           autoPlaySpeed={1000}
           infinite={true}
           showDots={true}

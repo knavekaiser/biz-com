@@ -53,6 +53,9 @@ const Sidebar = ({ open, filters, setFilters }) => {
           const field = siteConfig.productFields.find(
             (field) => field.name === f.fieldName
           );
+          if (!field) {
+            return null;
+          }
           if (f.filterType === "textSearch" || f.filterType === "match") {
             return (
               <Section label={field.label} key={f.fieldName}>
@@ -144,7 +147,7 @@ const FilterList = ({ field, setFilters, sidebarItem, control }) => {
   const [selected, setSelected] = useState([]);
   const [options, setOptions] = useState([]);
   const { get: getOptions } = useFetch(
-    endpoints.elements + `/${field.collection || ""}`
+    endpoints.elements + `/${field?.collection || ""}`
   );
 
   useEffect(() => {
