@@ -409,11 +409,7 @@ export default function Explore() {
       </div>
       <div className={`${s.content} ${s.products}`}>
         {products.map((product, i) => (
-          <Link href="/item" key={i}>
-            <a>
-              <ProductThumb product={product} />
-            </a>
-          </Link>
+          <ProductThumb product={product} key={product._id} />
         ))}
       </div>
     </div>

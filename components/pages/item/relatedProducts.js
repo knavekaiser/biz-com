@@ -78,11 +78,7 @@ export default function Explore() {
       </div>
       <div className={s.products}>
         {products.map((product, i) => (
-          <Link href={paths.itemView.replace(":id", product._id)} key={i}>
-            <a>
-              <ProductThumb product={product} />
-            </a>
-          </Link>
+          <ProductThumb product={product} key={product._id} />
         ))}
       </div>
     </div>

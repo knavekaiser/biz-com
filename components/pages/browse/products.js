@@ -73,11 +73,7 @@ export default function Products() {
         <div className={s.products}>
           {products.length > 0 ? (
             products.map((product, i) => (
-              <Link href={paths.itemView.replace(":id", product._id)} key={i}>
-                <a>
-                  <ProductThumb product={product} />
-                </a>
-              </Link>
+              <ProductThumb product={product} key={product._id} />
             ))
           ) : (
             <div className={s.placeholder}>

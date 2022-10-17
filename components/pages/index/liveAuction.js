@@ -8,6 +8,7 @@ import s from "./styles/landingPage.module.scss";
 
 const products = [
   {
+    _id: "a243rrfsafsdfsadf",
     animated: true,
     favorite: 50,
     img:
@@ -28,6 +29,7 @@ const products = [
       "https://images.unsplash.com/photo-1604782206219-3b9576575203?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8bW9kZXJuJTIwYXJ0fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60",
   },
   {
+    _id: "as2323rdfsadf",
     animated: true,
     favorite: 50,
     img:
@@ -48,6 +50,7 @@ const products = [
       "https://images.unsplash.com/photo-1604782206219-3b9576575203?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8bW9kZXJuJTIwYXJ0fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60",
   },
   {
+    _id: "asd23fdfsadf",
     favorite: 50,
     img:
       "https://images.unsplash.com/photo-1577720643272-265f09367456?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NDl8fGNyeXB0byUyMGFydHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60",
@@ -67,6 +70,7 @@ const products = [
       "https://images.unsplash.com/photo-1604782206219-3b9576575203?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8bW9kZXJuJTIwYXJ0fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60",
   },
   {
+    _id: "asdfsasdfsdfadf",
     favorite: 50,
     img:
       "https://images.unsplash.com/photo-1535673774336-ef95d2851cf3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NjJ8fGNyeXB0byUyMGFydHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60",
@@ -86,6 +90,7 @@ const products = [
       "https://images.unsplash.com/photo-1604782206219-3b9576575203?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8bW9kZXJuJTIwYXJ0fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60",
   },
   {
+    _id: "asdfsadf",
     animated: true,
     favorite: 50,
     img:
@@ -206,11 +211,7 @@ export default function LiveAuction() {
       </div>
       <div className={`${s.content} ${s.products}`}>
         {products.map((product, i) => (
-          <Link href="/item" key={i}>
-            <a>
-              <ProductThumb product={product} />
-            </a>
-          </Link>
+          <ProductThumb product={product} key={product._id} />
         ))}
       </div>
     </div>
