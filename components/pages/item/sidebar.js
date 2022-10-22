@@ -56,32 +56,33 @@ const Sidebar = ({ product }) => {
         })}
       </div>
 
-      {siteConfig?.productViewPage?.viewWhatsApp && config.whatsappNumber && (
-        <a
-          style={{
-            width: "min-content",
-          }}
-          href={
-            `whatsapp://send/?${new URLSearchParams({
-              phone: config.whatsappNumber,
-              text: `I am interested on ${router.query.id} this product`,
-            }).toString()}`
-            // `https://api.whatsapp.com/send/?${new URLSearchParams({
-            //   phone: "01989479749",
-            //   text: "I am interested on --- this product",
-            //   type: "phone_number",
-            //   app_absent: 0,
-            // }).toString()}`
-          }
-          rel="noreferrer"
-          target="_blank"
-        >
-          <button className="btn whatsapp">
-            <IoLogoWhatsapp />
-            Chat On WhatsApp
-          </button>
-        </a>
-      )}
+      {siteConfig?.productViewPage?.viewWhatsApp &&
+        (config.whatsappNumber || product.whatsappNumber) && (
+          <a
+            style={{
+              width: "min-content",
+            }}
+            href={
+              `whatsapp://send/?${new URLSearchParams({
+                phone: config.whatsappNumber || product.whatsappNumber,
+                text: `I am interested on ${router.query.id} this product`,
+              }).toString()}`
+              // `https://api.whatsapp.com/send/?${new URLSearchParams({
+              //   phone: "01989479749",
+              //   text: "I am interested on --- this product",
+              //   type: "phone_number",
+              //   app_absent: 0,
+              // }).toString()}`
+            }
+            rel="noreferrer"
+            target="_blank"
+          >
+            <button className="btn whatsapp">
+              <IoLogoWhatsapp />
+              Chat On WhatsApp
+            </button>
+          </a>
+        )}
 
       <div className={s.actions}>
         <button
