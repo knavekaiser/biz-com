@@ -6,11 +6,12 @@ import Head from "next/head";
 import Header from "components/ui/Header";
 import Footer from "components/ui/Footer";
 import DomainFallback from "components/ui/domainFallback";
+import { Paths } from "components/elements";
 
 import Product from "components/pages/item/product";
 import s from "components/pages/item/styles/products.module.scss";
 
-import { endpoints } from "config";
+import { endpoints, paths } from "config";
 
 export async function getServerSideProps(ctx) {
   const { id: productId } = ctx.query;
@@ -77,6 +78,16 @@ const Item = ({ product, siteData }) => {
         <meta property="og:description" content={product.description} />
       </Head>
       <Header />
+      <Paths
+        paths={[
+          ...(siteData?.siteConfig?.landingPage?.viewLandingPage
+            ? [{ label: "Home", path: "/" }]
+            : []),
+          { label: "Browse", path: paths.browse },
+          { label: product.title },
+        ]}
+        className={s.paths}
+      />
       <Product product={product} />
       <Footer />
     </main>

@@ -32,7 +32,7 @@
     }
     .content {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 0.5fr));
+      grid-template-columns: repeat(auto-fit, minmax(280px, 350px));
       grid-column-gap: 1.5rem;
       grid-row-gap: 2rem;
       .seller {
@@ -94,6 +94,7 @@
         }
       }
       &.horizontal {
+        max-width: 100vw;
         border-radius: 1rem;
         display: flex;
         grid-gap: 1.5rem;
@@ -164,5 +165,24 @@
     font-weight: 500;
     padding: 2px 5px;
     border-radius: 4px;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .landingPage {
+    .shelf {
+      padding: 1rem;
+      .shelfHead {
+        padding: 0.5rem 0;
+      }
+      .content {
+        grid-template-columns: 1fr 1fr;
+        &.horizontal {
+          & > div {
+            min-width: 170px;
+          }
+        }
+      }
+    }
   }
 }

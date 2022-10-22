@@ -4,6 +4,7 @@ import React, {
   useRef,
   useLayoutEffect,
   forwardRef,
+  Fragment,
 } from "react";
 import { IoIosClose } from "react-icons/io";
 import { FaUpload, FaSearch, FaRegTrashAlt, FaTimes } from "react-icons/fa";
@@ -949,4 +950,23 @@ export const DatePicker = ({ control, name, formOptions }) => {
       <DateRangePicker onChange={onChange} />
     )}
   />;
+};
+
+export const Paths = ({ paths, className }) => {
+  return (
+    <div className={`${s.paths} ${className || ""}`}>
+      {paths.map((item, i) => (
+        <Fragment key={item.label}>
+          {item.path ? (
+            <Link href={item.path}>
+              <a>{item.label}</a>
+            </Link>
+          ) : (
+            <span>{item.label}</span>
+          )}
+          {paths[i + 1] ? <span className={s.divider}>/</span> : null}
+        </Fragment>
+      ))}
+    </div>
+  );
 };

@@ -868,6 +868,18 @@
   }
 }
 
+.paths {
+  display: flex;
+  grid-gap: 0.5rem;
+  a {
+    color: $primary-color-dark1;
+    font-weight: 500;
+  }
+  span {
+    color: $grey2;
+  }
+}
+
 $branch-angle: 35deg;
 
 @keyframes spin {

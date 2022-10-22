@@ -65,17 +65,12 @@
 }
 
 @media only screen and (max-width: 1200px) {
-  header {
-    .ribbon {
-      padding: 0.8rem 0.5rem;
-      .southSection {
-        display: none;
-      }
-    }
+  .header {
     .content {
-      .northSection {
-        .searchbox {
-          display: none;
+      .northSection,
+      .southSection {
+        a {
+          padding: 0;
         }
       }
     }

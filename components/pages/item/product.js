@@ -15,9 +15,7 @@ export default function Products({ product }) {
   });
   return (
     <div className={`${s.container}`}>
-      <div>
-        <Images product={product} />
-      </div>
+      <Images product={product} />
       <Sidebar product={product} />
       <Description product={product} />
       <RelatedProducts />

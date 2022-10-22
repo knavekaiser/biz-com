@@ -1,11 +1,17 @@
 @import "components/variables";
 
+.paths {
+  padding: 1rem;
+  padding-bottom: 0;
+  max-width: $max-width;
+  margin: auto;
+}
 .container {
   max-width: $max-width;
   margin: auto;
   display: grid;
   grid-template-columns: 1fr 25rem;
-  padding: 2rem 0.5rem;
+  padding: 2rem 1rem;
   grid-gap: 1.5rem;
   .sidebar {
     padding: 1.5rem;
@@ -58,11 +64,11 @@
     display: grid;
     grid-template-columns: min-content 1fr;
     grid-gap: 0.5rem;
+    min-width: 35rem;
     .thumbnails {
       display: grid;
       grid-auto-rows: min-content;
       grid-gap: 0.5rem;
-
       img {
         cursor: pointer;
         border-radius: 0.5rem;
@@ -119,6 +125,30 @@
       display: grid;
       grid-gap: 1.25rem;
       grid-template-columns: repeat(auto-fit, minmax(250px, 350px));
+    }
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .container {
+    grid-template-columns: 1fr;
+    .images {
+      min-width: 5rem;
+      grid-template-columns: 1fr;
+      .thumbnails {
+        grid-row: 2/3;
+        display: flex;
+        overflow-x: auto;
+        padding-bottom: 0.5rem;
+        border-radius: 0.5rem;
+        ::-webkit-scrollbar {
+          height: 4px;
+        }
+      }
+    }
+    .description,
+    .relatedProducts {
+      grid-column: 1/2;
     }
   }
 }
