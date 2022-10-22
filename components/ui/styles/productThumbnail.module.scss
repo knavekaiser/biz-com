@@ -5,10 +5,11 @@
   z-index: 1;
   .thumbnailWrapper {
     overflow: hidden;
+    aspect-ratio: 1;
     .thumbnail {
       a {
         display: block;
-        height: 100%;
+        aspect-ratio: 1;
         width: 100%;
         img {
           height: 100%;
@@ -21,7 +22,6 @@
     display: grid;
   }
   .productDetail {
-    border-radius: 0 0 0.5rem 0.5rem;
     display: grid;
     grid-gap: 0.5rem;
     padding: 0.5rem 0;

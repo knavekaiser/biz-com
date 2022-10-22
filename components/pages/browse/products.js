@@ -11,7 +11,11 @@ import { useRouter } from "next/router";
 import s from "./styles/products.module.scss";
 
 export default function Products() {
-  const [filters, setFilters] = useState({ sort: "price-asc" });
+  const router = useRouter();
+  const [filters, setFilters] = useState({
+    // ...router.query,
+    sort: "price-asc",
+  });
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [products, setProducts] = useState([]);
   const [metadata, setMetadata] = useState({
@@ -20,13 +24,12 @@ export default function Products() {
   });
   const { get: getProducts, loading } = useFetch(endpoints.browse);
   const { control } = useForm({
-    defaultValues: { sort: "price-asc", type: "buyNow" },
+    defaultValues: { sort: "price-asc" },
   });
-  const router = useRouter();
   useEffect(() => {
-    router.push(
+    router.replace(
       {
-        pathname: router.pathname,
+        pathname: paths.browse,
         query: {
           ...Object.entries({ ...router.query, ...filters })
             .filter(([key, value], i) => value)

@@ -14,6 +14,21 @@
     grid-gap: 1rem;
     grid-auto-rows: min-content;
     border-radius: 0.5rem;
+    .clearFilters {
+      button {
+        width: 100%;
+        color: $orange;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        grid-gap: 0.5rem;
+        border: 1px solid $orange;
+        background: white;
+        svg {
+          font-size: 1.4em;
+        }
+      }
+    }
     .section {
       width: 17rem;
       border-radius: 0.5rem;

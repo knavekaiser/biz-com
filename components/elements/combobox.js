@@ -324,7 +324,7 @@ export const Select = ({
         },
       })
         .then(({ data }) => {
-          if (!data?.success) {
+          if (data?.success === false) {
             return Prompt({
               type: "error",
               message: data?.message || "Could not load data",

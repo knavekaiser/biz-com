@@ -42,7 +42,7 @@ export const Input = ({
       name={name}
       rules={formOptions}
       render={({
-        field: { onChange, onBlur, value, name, ref },
+        field: { onChange, onBlur, value = "", name, ref },
         fieldState: { invalid, isTouched, isDirty, error },
       }) => {
         return (
@@ -61,12 +61,11 @@ export const Input = ({
                   ref={ref}
                   type={type || "text"}
                   id={rest.id || _id.current}
-                  {...(customOnChange && {
-                    onChange: (e) => {
-                      onChange(e.target.value);
-                      customOnChange(e);
-                    },
-                  })}
+                  value={value}
+                  onChange={(e) => {
+                    onChange(e.target.value);
+                    customOnChange && customOnChange(e);
+                  }}
                   {...rest}
                   placeholder={rest.placeholder || "Enter"}
                 />

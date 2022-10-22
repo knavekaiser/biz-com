@@ -121,6 +121,11 @@ button {
     .react-multiple-carousel__arrow {
       opacity: 1;
     }
+    .react-multi-carousel-dot {
+      button {
+        opacity: 1;
+      }
+    }
   }
   .react-multiple-carousel__arrow {
     z-index: 10;
@@ -161,6 +166,7 @@ button {
       height: min-content !important;
     }
     button {
+      opacity: 0;
       border: none;
       margin-right: 0.5rem;
       height: 0.5rem;
@@ -385,4 +391,27 @@ button {
       }
     }
   }
+}
+
+.spinner {
+  animation: spinner 1.5s cubic-bezier(0.14, 0.6, 0.98, 0.71) infinite;
+}
+@keyframes spinner {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+  background-color: rgba($primary-color, 0.2);
+  border-radius: 1rem;
+}
+::-webkit-scrollbar-thumb {
+  background-color: $primary-color;
+  border-radius: 1rem;
 }

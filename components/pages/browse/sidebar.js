@@ -2,15 +2,16 @@ import { useEffect, useState, useContext, useRef } from "react";
 import { SiteContext } from "SiteContext";
 import { ETH } from "components/svg";
 import { Checkbox, Input, Select } from "components/elements";
-import { HiChevronUp, HiChevronDown } from "react-icons/hi";
+import { HiChevronUp, HiChevronDown, HiOutlineX } from "react-icons/hi";
 import s from "./styles/products.module.scss";
 import { useForm } from "react-hook-form";
 import { useFetch } from "hooks";
-import { endpoints } from "config";
+import { endpoints, paths } from "config";
 import { useRouter } from "next/router";
 
 const Sidebar = ({ open, filters, setFilters }) => {
   const queryLoaded = useRef(false);
+  const fieldsRef = useRef({});
   const {
     siteConfig: { siteConfig },
   } = useContext(SiteContext);
@@ -40,14 +41,38 @@ const Sidebar = ({ open, filters, setFilters }) => {
       reset(values);
       queryLoaded.current = true;
     }
-  }, [siteConfig?.browsePage?.sidebarFilters]);
+  }, [siteConfig?.browsePage?.sidebarFilters, router.query]);
 
   if (!open) {
     return null;
   }
 
+  const color = watch("color");
   return (
     <form className={s.sidebar}>
+      {Object.keys(router.query).length > 1 && (
+        <div className={s.clearFilters}>
+          <button
+            className="btn"
+            type="button"
+            onClick={() => {
+              // setFilters({});
+              reset(fieldsRef.current);
+              router.replace(
+                {
+                  pathname: paths.browsePage,
+                  query: { sort: router.query.sort },
+                },
+                undefined,
+                { shallow: true }
+              );
+            }}
+          >
+            <HiOutlineX />
+            Clear All Filters
+          </button>
+        </div>
+      )}
       {siteConfig?.productFields &&
         (siteConfig?.browsePage?.sidebarFilters || []).map((f) => {
           const field = siteConfig.productFields.find(
@@ -57,6 +82,10 @@ const Sidebar = ({ open, filters, setFilters }) => {
             return null;
           }
           if (f.filterType === "textSearch" || f.filterType === "match") {
+            fieldsRef.current = {
+              ...fieldsRef.current,
+              [field.name]: "",
+            };
             return (
               <Section label={field.label} key={f.fieldName}>
                 <Input
@@ -73,6 +102,11 @@ const Sidebar = ({ open, filters, setFilters }) => {
               </Section>
             );
           } else if (f.filterType === "minMax") {
+            fieldsRef.current = {
+              ...fieldsRef.current,
+              [`${field.name}-min`]: "",
+              [`${field.name}-max`]: "",
+            };
             return (
               <Section label={field.label} key={f.fieldName}>
                 <Input
@@ -122,12 +156,16 @@ const Sidebar = ({ open, filters, setFilters }) => {
                 />
 
                 {+getValues(`${field.name}-max`) <
-                  getValues(`${field.name}-min`) && (
+                  +getValues(`${field.name}-min`) && (
                   <p className="subtitle1">Max must be greater then Min</p>
                 )}
               </Section>
             );
           } else if (["list", "dropdown"].includes(f.filterStyle)) {
+            fieldsRef.current = {
+              ...fieldsRef.current,
+              [field.name]: [],
+            };
             return (
               <FilterList
                 key={f.fieldName}
@@ -151,10 +189,14 @@ const FilterList = ({ field, setFilters, sidebarItem, control }) => {
   );
 
   useEffect(() => {
-    setFilters((prev) => ({
-      ...prev,
-      [field.name]: selected?.length ? selected : "",
-    }));
+    if (sidebarItem.filterStyle === "list") {
+      setFilters((prev) => {
+        return {
+          ...prev,
+          [field.name]: selected?.length ? selected : "",
+        };
+      });
+    }
   }, [selected]);
 
   useEffect(() => {
