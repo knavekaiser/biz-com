@@ -65,6 +65,7 @@
     grid-template-columns: min-content 1fr;
     grid-gap: 0.5rem;
     min-width: 35rem;
+    max-height: 35rem;
     .thumbnails {
       display: grid;
       grid-auto-rows: min-content;
