@@ -5,7 +5,7 @@ import { endpoints as defaultEndpoints } from "../config";
 
 export const useFetch = (
   url,
-  { his, headers: hookHeaders, defaultHeaders, noDbSchema } = {}
+  { headers: hookHeaders, defaultHeaders, noDbSchema } = {}
 ) => {
   const { user, logout } = useContext(SiteContext);
   const [error, setError] = useState(false);
@@ -34,16 +34,6 @@ export const useFetch = (
           query
         ).toString()}`;
       }
-      if (
-        noDbSchema !== true &&
-        !his &&
-        sessionStorage.getItem("db-schema") &&
-        !_url.startsWith(defaultEndpoints.apiUrl)
-      ) {
-        _url += `${
-          _url.includes("?") ? "" : "?"
-        }&tenantId=${sessionStorage.getItem("db-schema")}`;
-      }
       setLoading(true);
       const response = await fetch(_url, {
         method: method,
@@ -51,21 +41,9 @@ export const useFetch = (
           ...(!(typeof payload?.append === "function") && {
             "Content-Type": "application/json",
           }),
-          ...(defaultHeaders !== false &&
-            (!his
-              ? {
-                  Authorization:
-                    "Bearer " + sessionStorage.getItem("access-token"),
-                  // tenantId: sessionStorage.getItem("db-schema") || null,
-                }
-              : {
-                  SECURITY_TOKEN: sessionStorage.getItem("HIS-access-token"),
-                  FACILITY_ID: 1,
-                  CLIENT_REF_ID: "Napier123",
-                  "x-auth-token": sessionStorage.getItem("HIS-access-token"),
-                  "x-tenantid": sessionStorage.getItem("tenant-id"),
-                  "x-timezone": sessionStorage.getItem("tenant-timezone"),
-                })),
+          ...(defaultHeaders !== false && {
+            "x-access-token": localStorage.getItem("access_token"),
+          }),
           ...hookHeaders,
           ...headers,
         },
@@ -92,23 +70,6 @@ export const useFetch = (
           setError(err);
           return { error: err };
         });
-
-      if (response?.errorMessage || response?.error) {
-        if (
-          ["Invalid Token", "Token validation failed"].includes(
-            response.errorMessage
-          ) ||
-          ["invalid_token"].includes(response.error)
-        ) {
-          sessionStorage.removeItem("access-token");
-          sessionStorage.removeItem("HIS-access-token");
-          return Prompt({
-            type: "error",
-            message: `${user.name} is logged in from another device. Please log in again.`,
-            callback: logout,
-          });
-        }
-      }
       setLoading(false);
       return response;
     },

@@ -15,6 +15,12 @@ const endpoints = {
   relatedItems: `${baseApiUrlPublic}/api/browse/related`,
   elements: `${baseApiUrlPublic}/api/elements`,
   landingPageShelves: `${baseApiUrlPublic}/api/browse/landing-page-shelves`,
+  validateAccount: `${baseApiUrlPublic}/api/customers/validate-account`,
+  signup: `${baseApiUrlPublic}/api/customers/signup`,
+  login: `${baseApiUrlPublic}/api/customers/login`,
+  logout: `${baseApiUrlPublic}/api/customers/logout`,
+  profile: `${baseApiUrlPublic}/api/customers/profile`,
+  reviews: `${baseApiUrlPublic}/api/reviews`,
 };
 
 export default endpoints;

@@ -8,7 +8,8 @@ import {
 } from "react";
 import s from "./elements.module.scss";
 
-import { FaSortDown, FaSearch } from "react-icons/fa";
+import { FaSearch } from "react-icons/fa";
+import { HiChevronDown } from "react-icons/hi";
 import { Modal, Prompt } from "../modal";
 import { Input, Chip } from "./elements";
 import { Controller } from "react-hook-form";
@@ -26,6 +27,7 @@ export const Combobox = ({
   multiple,
   className,
   onChange: compOnChange,
+  optionsStyle,
   item,
   renderValue,
 }) => {
@@ -49,6 +51,7 @@ export const Combobox = ({
       ),
       width: width,
       maxHeight: Math.min(window.innerHeight - 16, 300),
+      ...optionsStyle,
     });
   }, [open, options]);
   useEffect(() => {
@@ -196,9 +199,13 @@ export const Combobox = ({
                 readOnly={true}
                 tabIndex={1}
               />
-              <span data-testid="combobox-btn" className={s.btn}>
-                <FaSortDown />
-              </span>
+              <button
+                type="button"
+                data-testid="combobox-btn"
+                className={s.btn}
+              >
+                <HiChevronDown />
+              </button>
             </div>
             {error && <span className={s.errMsg}>{error.message}</span>}
             <Modal
@@ -207,7 +214,7 @@ export const Combobox = ({
               backdropClass={s.comboboxBackdrop}
               setOpen={setOpen}
               onBackdropClick={() => setOpen(false)}
-              clickThroughBackdrop={true}
+              clickThroughBackdrop
               style={style}
             >
               <ComboboxList

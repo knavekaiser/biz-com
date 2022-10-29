@@ -19,11 +19,8 @@ const Sidebar = ({ product }) => {
       <h1>{product.title}</h1>
 
       <div className={s.rating}>
-        <HiStar className={product.rating >= 1 ? s.lit : ""} />
-        <HiStar className={product.rating >= 2 ? s.lit : ""} />
-        <HiStar className={product.rating >= 3 ? s.lit : ""} />
-        <HiStar className={product.rating >= 4 ? s.lit : ""} />
-        <HiStar className={product.rating >= 5 ? s.lit : ""} />
+        <HiStar /> {(product.rating || 0).fix(2)} · {product.totalReview || 0}{" "}
+        reviews
       </div>
 
       <div className={s.seller}>

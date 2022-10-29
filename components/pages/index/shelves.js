@@ -36,7 +36,9 @@ export default function LiveAuction() {
           <div key={shelf.title || i} className={`${s.shelf} ${s.products}`}>
             <div className={s.shelfHead}>
               <span className={s.shelfTitle}>
-                <Fire />
+                {
+                  // <Fire />
+                }
                 <h2>{shelf.title}</h2>
               </span>
               {
@@ -47,9 +49,9 @@ export default function LiveAuction() {
                   }}
                 >
                   <a>
-                    <div className={s.more}>
-                      See more <HiOutlineArrowNarrowRight />
-                    </div>
+                    <button className={`btn primary ${s.more}`}>
+                      See All <HiOutlineArrowNarrowRight />
+                    </button>
                   </a>
                 </Link>
               }

@@ -14,6 +14,17 @@
     .field {
       position: relative;
       display: flex;
+      align-items: center;
+      border-radius: 4px;
+      border: 1px solid #b7b7b7;
+      padding: 5px 8px;
+      // grid-gap: 0.5rem;
+      &:focus-within {
+        border-color: $primary-color;
+      }
+      span {
+        display: flex;
+      }
       input {
         flex-basis: 100%;
       }
@@ -25,6 +36,25 @@
         right: 6px;
         z-index: 10;
       }
+      .countries {
+        & > div {
+          border: none;
+          padding: 0;
+          width: 80px;
+          p {
+            border: none;
+            padding: 0;
+            display: flex;
+            grid-gap: 5px;
+          }
+          input {
+            background: red !important;
+            display: none !important;
+            height: 0.5rem;
+            width: 0.5rem;
+          }
+        }
+      }
     }
   }
   input,
@@ -32,8 +62,7 @@
     min-height: 30px;
     line-height: normal !important;
     width: 100%;
-    border: 1px solid #b7b7b7;
-    padding: 5px 6px;
+    border: none;
     outline: none;
     border-radius: 4px;
     min-width: 4rem;
@@ -63,8 +92,21 @@
     }
   }
   textarea {
+    padding: 5px 6px;
     resize: vertical;
     min-height: 3rem;
+    border: 1px solid #b7b7b7;
+    font-size: 1em;
+    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto;
+  }
+  .eye {
+    padding: 0;
+    background: none;
+    font-size: 1.3em;
+    color: $grey2;
+    &:hover {
+      color: $grey3;
+    }
   }
   &.err {
     input,
@@ -85,12 +127,6 @@
     svg {
       position: static;
     }
-  }
-  .errMsg {
-    font-size: 10pt;
-    color: red;
-    text-align: left;
-    display: block;
   }
   .calenderIcon {
     font-size: 15pt;
@@ -176,6 +212,12 @@
       transform: none;
     }
   }
+}
+.errMsg {
+  font-size: 10pt;
+  color: red;
+  text-align: left;
+  display: block;
 }
 .fileInput {
   .label {
@@ -348,10 +390,10 @@
 }
 .customRadio {
   position: relative;
-  display: flex;
+  display: grid;
   flex-wrap: wrap;
   align-items: center;
-  grid-gap: 1rem;
+  // grid-gap: 0.5rem;
   input {
     display: none;
   }
@@ -428,7 +470,7 @@
         border-radius: 4px 4px 0 0;
       }
       .btn {
-        transform: rotate(180deg);
+        transform: rotate(180deg) translateY(3px);
       }
     }
   }
@@ -474,17 +516,21 @@
       text-overflow: ellipsis;
     }
     .btn {
+      color: $grey3;
       z-index: 12;
       position: absolute;
       bottom: 6px;
       display: grid;
+      border: none;
+      background-color: hotpink;
+      font-size: 1.5rem;
       place-items: center;
       svg {
-        margin-top: -7px;
-        margin-right: 2px;
+        margin-top: -5px;
+        margin-left: -5px;
       }
       background: white;
-      right: 6px;
+      right: 4px;
       height: 1rem;
       width: 1rem;
     }

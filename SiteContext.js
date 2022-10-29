@@ -1,5 +1,13 @@
-import React, { createContext, useState, useEffect, useRef } from "react";
+import React, {
+  createContext,
+  useState,
+  useEffect,
+  useRef,
+  useCallback,
+} from "react";
 import { useRouter } from "next/router";
+import { useFetch } from "hooks";
+import { endpoints } from "config";
 
 export const SiteContext = createContext();
 export const Provider = ({ children }) => {
@@ -11,13 +19,42 @@ export const Provider = ({ children }) => {
   useEffect(() => {
     // do something
   }, [user]);
+
+  const logout = useCallback(() => {
+    fetch(endpoints.logout, {
+      method: "POST",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success) {
+          localStorage.removeItem("access_token");
+          setUser(null);
+          router.push(
+            siteConfig?.siteConfig?.landingPage?.viewLandingPage
+              ? "/"
+              : paths.browse
+          );
+        }
+      })
+      .catch((err) => console.log(err));
+  }, [user, siteConfig]);
+
   useEffect(() => {
-    const portal = document.createElement("div");
-    portal.id = "portal";
-    document.querySelector("body").appendChild(portal);
-    const prompt = document.createElement("div");
-    prompt.id = "prompt";
-    document.querySelector("body").appendChild(prompt);
+    const token = localStorage.getItem("access_token");
+    if (token) {
+      fetch(endpoints.profile, {
+        headers: {
+          "x-access-token": token,
+        },
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.success) {
+            setUser(data.data);
+          }
+        })
+        .catch((err) => console.log(err));
+    }
   }, []);
   return (
     <SiteContext.Provider
@@ -26,6 +63,7 @@ export const Provider = ({ children }) => {
         setUser,
         siteConfig,
         setSiteConfig,
+        logout,
       }}
     >
       {children}

@@ -9,6 +9,7 @@ import React, {
 import { IoIosClose } from "react-icons/io";
 import { FaUpload, FaSearch, FaRegTrashAlt, FaTimes } from "react-icons/fa";
 import { BsFillExclamationTriangleFill } from "react-icons/bs";
+import { HiEye, HiEyeOff } from "react-icons/hi";
 import { GoCalendar } from "react-icons/go";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -19,7 +20,7 @@ import { Modal } from "../modal";
 import s from "./elements.module.scss";
 import countries from "../countries";
 import { useFetch } from "hooks";
-import { phone } from "phone";
+import { phone as Phone } from "phone";
 import { Table, TableActions } from "./Table";
 
 import { Combobox } from "./combobox";
@@ -34,9 +35,22 @@ export const Input = ({
   type,
   label,
   onChange: customOnChange,
+  // onPaste: customOnPaste,
+  phone,
   ...rest
 }) => {
-  const _id = useRef(Math.random().toString(32).substr(-8));
+  const [_type, setType] = useState(type);
+  const { control: phCtrl, watch } = useForm({
+    defaultValues: {
+      country:
+        phone?.code ||
+        countries.find(
+          (c) => c.timezone === Intl.DateTimeFormat().resolvedOptions().timeZone
+        ) ||
+        {},
+    },
+  });
+  const country = watch("country");
   return (
     <Controller
       control={control}
@@ -56,32 +70,100 @@ export const Input = ({
               </label>
             )}
             <div className={s.wrapper}>
-              <span className={s.field}>
-                <span className={s.startAdornment}>{startAdornment}</span>
+              <div className={s.field}>
+                <span className={s.startAdornment}>
+                  {phone && (
+                    <>
+                      <Combobox
+                        control={phCtrl}
+                        name="country"
+                        className={s.countries}
+                        options={countries.map((c) => ({
+                          value: c,
+                          label: c.name,
+                        }))}
+                        renderValue={(selected) => {
+                          return selected ? (
+                            <>
+                              <img
+                                src={`https://flagcdn.com/w20/${country?.iso2?.toLowerCase()}.webp`}
+                              />
+                              {selected?.code}
+                            </>
+                          ) : (
+                            "No"
+                          );
+                        }}
+                        onChange={(opt) => {
+                          const number = Phone(value, country.iso2);
+                          customOnChange &&
+                            customOnChange({
+                              phoneNumber: number,
+                              country: opt.value,
+                            });
+                        }}
+                        optionsStyle={{
+                          minWidth: "max-content",
+                        }}
+                      />
+                    </>
+                  )}
+                  {startAdornment}
+                </span>
                 <input
                   ref={ref}
-                  type={type || "text"}
-                  id={rest.id || _id.current}
+                  type={type === "password" ? _type : type || "text"}
+                  id={rest.id || name}
                   value={value}
                   onChange={(e) => {
-                    onChange(e.target.value);
+                    let value = e.target.value;
+                    if (phone) {
+                      const number = Phone(value, {
+                        country: country?.iso2,
+                      });
+                      if (number?.isValid) {
+                        value = number.phoneNumber.replace(
+                          number.countryCode,
+                          ""
+                        );
+                        e.phoneNumber = number;
+                        e.country = country;
+                      }
+                    }
+                    onChange(value);
                     customOnChange && customOnChange(e);
                   }}
+                  // onPaste={(e) => {
+                  //   if (customOnPaste) {
+                  //     const value = customOnPaste(e);
+                  //     // e.preventDefault();
+                  //     console.log("setting value", value);
+                  //     onChange("test");
+                  //   }
+                  // }}
                   {...rest}
                   placeholder={rest.placeholder || "Enter"}
                 />
                 <span className={s.endAdornment}>
-                  {["date", "datetime-local"].includes(type) && (
-                    <label
-                      htmlFor={rest.id || _id.current}
-                      className={s.calenderIcon}
+                  {type === "password" && (
+                    <button
+                      type="button"
+                      className={`btn ${s.eye}`}
+                      onClick={() =>
+                        setType(_type === "password" ? "text" : "password")
+                      }
                     >
+                      {_type === "password" ? <HiEye /> : <HiEyeOff />}
+                    </button>
+                  )}
+                  {["date", "datetime-local"].includes(type) && (
+                    <label htmlFor={rest.id || name} className={s.calenderIcon}>
                       <GoCalendar />
                     </label>
                   )}
                   {endAdornment}
                 </span>
-              </span>
+              </div>
               {error && <span className={s.errMsg}>{error.message}</span>}
             </div>
           </section>
@@ -204,7 +286,7 @@ export const SearchField = ({
         backdropClass={s.searchFieldModalBackdrop}
         style={style}
         onBackdropClick={() => setShowResult(false)}
-        clickThroughBackdrop={true}
+        clickThroughBackdrop
       >
         <ul className={s.options}>
           {data.map((item, i) => (
@@ -448,14 +530,21 @@ export const uploadFiles = async ({ files, uploadFiles }) => {
   return { links, error };
 };
 
-export const Textarea = ({ control, name, formOptions, ...rest }) => {
+export const Textarea = ({
+  control,
+  name,
+  formOptions,
+  className,
+  label,
+  ...rest
+}) => {
   return (
     <Controller
       control={control}
       name={name}
       rules={formOptions}
       render={({
-        field: { onChange, onBlur, value, name, ref },
+        field: { onChange, onBlur, value = "", name, ref },
         fieldState: { invalid, isTouched, isDirty, error },
       }) => {
         return (
@@ -470,7 +559,14 @@ export const Textarea = ({ control, name, formOptions, ...rest }) => {
               </label>
             )}
             <span className={s.field}>
-              <textarea ref={ref} {...rest} />
+              <textarea
+                ref={ref}
+                value={value}
+                onChange={(e) => {
+                  onChange(e.target.value);
+                }}
+                {...rest}
+              />
               {error && (
                 <span
                   className={s.errIcon}
@@ -587,6 +683,7 @@ export const CustomRadio = ({
             </label>
           ))}
         </div>
+        {error && <span className={s.errMsg}>{error.message}</span>}
       </section>
     )}
   />
@@ -698,6 +795,7 @@ export const Toggle = ({ name, control, formOptions, disabled }) => {
               id={id.current}
             />
             <label className={s.ball} htmlFor={id.current} />
+            {error && <span className={s.errMsg}>{error.message}</span>}
           </section>
         );
       }}
@@ -705,147 +803,6 @@ export const Toggle = ({ name, control, formOptions, disabled }) => {
   );
 };
 
-export const MobileNumberInput = ({
-  label,
-  className,
-  name,
-  register,
-  required,
-  error,
-  clearErrors,
-  setValue,
-  watch,
-  icon,
-  ...rest
-}) => {
-  const { register: cRegister, watch: cWatch, setValue: cSetValue } = useForm();
-  const _id = useRef(Math.random().toString(32).substr(-8));
-  const [country, setCountry] = useState(null);
-  const phoneNumber = watch(name);
-  useEffect(() => {
-    const preferredCountry = countries.find((c) => c.iso2 === "IN");
-    cSetValue("country", preferredCountry.code);
-    setCountry({
-      value: preferredCountry.code,
-      label: preferredCountry.name,
-      iso2: preferredCountry.iso2,
-    });
-  }, []);
-  useEffect(() => {
-    const _number = phoneNumber?.trim().startsWith("+") && phone(phoneNumber);
-    if (_number?.isValid) {
-      const country = countries.find((c) => c.iso2 === _number.countryIso2);
-      cSetValue("country", country.code);
-      setCountry({
-        value: country.code,
-        label: country.name,
-        iso2: country.iso2,
-      });
-    } else if (country) {
-      const _number = phone(phoneNumber, { country: country.iso2 });
-      if (_number.isValid) {
-        setValue(name, _number.phoneNumber);
-      }
-    } else {
-      const _number = phone(phoneNumber);
-      if (_number.isValid) {
-        setValue(name, _number.phoneNumber);
-      }
-    }
-  }, [phoneNumber]);
-  return (
-    <section
-      data-testid="mobileNumberInput"
-      className={`${s.input} ${s.mobileNumberInput} ${className || ""} ${
-        error ? s.err : ""
-      }`}
-    >
-      {label && (
-        <label>
-          {label} {required && "*"}
-        </label>
-      )}
-      <div className={s.wrapper}>
-        <span className={s.field}>
-          <div className={s.country}>
-            <Combobox
-              className={s.countryFlags}
-              options={countries.map((c) => ({
-                value: c.code,
-                label: c.name,
-                iso2: c.iso2,
-              }))}
-              item={(option) => {
-                return (
-                  <>
-                    <img
-                      src={`https://flagcdn.com/w20/${option.iso2.toLowerCase()}.webp`}
-                    />
-                    <p style={{ marginLeft: "6px", display: "inline" }}>
-                      {option.label}
-                    </p>
-                  </>
-                );
-              }}
-              renderValue={(selected) => {
-                return selected ? (
-                  <img
-                    src={`https://flagcdn.com/w20/${countries
-                      .find((c) => c.code === selected)
-                      ?.iso2.toLowerCase()}.webp`}
-                  />
-                ) : (
-                  "No"
-                );
-              }}
-              register={cRegister}
-              name="country"
-              watch={cWatch}
-              setValue={cSetValue}
-              onChange={(option) => {
-                setCountry(option);
-                clearErrors?.(name);
-                const _number =
-                  phoneNumber && phone(phoneNumber, { country: option.iso2 });
-                if (_number?.isValid) {
-                  setValue(name, _number.phoneNumber);
-                }
-              }}
-            />
-          </div>
-          <input
-            type={"text"}
-            {...register(name, {
-              validate: (value) => {
-                if (value) {
-                  return (
-                    phone(value, { country: country.iso2 }).isValid ||
-                    "Phone Number is not valid"
-                  );
-                }
-                if (required) {
-                  return "Please provide a valid Phone Number";
-                }
-                return true;
-              },
-            })}
-            id={rest.id || _id.current}
-            placeholder={"#"}
-            maxLength="15"
-            {...rest}
-          />
-          {error && (
-            <span className={s.errIcon}>
-              <BsFillExclamationTriangleFill />
-            </span>
-          )}
-          {icon && icon}
-        </span>
-        {error && <span className={s.errMsg}>{error.message}</span>}
-      </div>
-    </section>
-  );
-};
 const CheckboxComp = ({ label, readOnly, ...rest }, ref) => {
   const id = useRef(Math.random().toString(36).substr(-8));
   return (

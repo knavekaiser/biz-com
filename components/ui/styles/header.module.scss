@@ -7,12 +7,15 @@
     max-width: $max-width;
     margin: auto;
     display: flex;
+    align-items: center;
+    flex-wrap: wrap;
     justify-content: space-between;
     .northSection,
     .southSection {
       display: flex;
       grid-gap: 0.7rem;
       align-items: center;
+      flex-wrap: wrap;
       .logo {
         display: flex;
         align-items: center;
@@ -57,6 +60,36 @@
         margin-right: 0.5rem;
       }
     }
+    .searchForm {
+      width: 28rem;
+      display: flex;
+      grid-gap: 0.5rem;
+      .input {
+        flex-basis: 100%;
+        .icon {
+          color: grey;
+          font-size: 1.5em;
+          margin-right: 0.5rem;
+        }
+      }
+    }
+    .southSection {
+      .account {
+        .icon {
+          display: grid;
+          font-size: 2rem;
+          // border-radius: 1rem;
+          // padding: 0.25rem 0.5rem;
+          // border: 1px solid $grey2;
+          border: none;
+          background: white;
+          cursor: pointer;
+          svg {
+            color: $primary-color;
+          }
+        }
+      }
+    }
   }
   position: sticky;
   top: 0;
@@ -64,14 +97,77 @@
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
 }
 
+.accountModal {
+  ul {
+    li {
+      padding: 0.7rem 1rem;
+      cursor: pointer;
+      &:hover {
+        background: $light-grey;
+      }
+    }
+  }
+  box-shadow: $shadow1;
+  position: absolute;
+}
+.accountModalBackdrop {
+  background: none;
+}
+.loginFormModal {
+  width: 100%;
+  max-width: 30rem;
+}
+.loginForm {
+  .head {
+    display: grid;
+    grid-template-columns: min-content 1fr;
+    align-items: center;
+    padding: 0.5rem 0.5rem;
+    border-bottom: 1px solid $grey2;
+    .title {
+      text-align: center;
+      grid-column: 1/3;
+      grid-row: 1/2;
+      font-weight: 600;
+    }
+    button {
+      cursor: pointer;
+      z-index: 5;
+      grid-column: 1/2;
+      font-size: 1.5rem;
+      grid-row: 1/2;
+    }
+  }
+  form {
+    padding: 1rem;
+    display: grid;
+    grid-gap: 1rem;
+    small {
+      color: $grey2;
+      a {
+        text-decoration: underline;
+      }
+    }
+    .btns {
+      display: flex;
+      justify-content: center;
+    }
+  }
+}
+
 @media only screen and (max-width: 1200px) {
   .header {
     .content {
       .northSection,
       .southSection {
+        order: 1;
         a {
           padding: 0;
         }
+      }
+      .searchForm {
+        flex-basis: 100%;
+        order: 3;
       }
     }
   }

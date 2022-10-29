@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Combobox, Tabs } from "components/elements";
 import Sidebar from "./sidebar";
 import Images from "./images";
+import Reviews from "./reviews";
 import { ProductThumb } from "components/ui/productThumbnail";
 import RelatedProducts from "./relatedProducts";
 import { useForm } from "react-hook-form";
@@ -18,6 +19,7 @@ export default function Products({ product }) {
       <Images product={product} />
       <Sidebar product={product} />
       <Description product={product} />
+      <Reviews product={product} />
       <RelatedProducts />
     </div>
   );
