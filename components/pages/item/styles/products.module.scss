@@ -62,7 +62,7 @@
   }
   .images {
     display: grid;
-    grid-template-columns: min-content 1fr;
+    grid-template-columns: 100px 1fr;
     grid-gap: 0.5rem;
     min-width: 35rem;
     max-height: 35rem;
@@ -72,7 +72,7 @@
       grid-gap: 0.5rem;
       max-height: calc(100vh - 5rem);
       overflow: auto;
-      padding-right: 0.5rem;
+      // padding-right: 0.5rem;
       border-radius: 0.5rem;
       img {
         cursor: pointer;
@@ -87,7 +87,6 @@
     }
     .mainImg {
       display: flex;
-      border: 1px dashed red;
       max-height: 35rem;
       img {
         margin: auto;
