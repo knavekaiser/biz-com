@@ -23,12 +23,14 @@
   }
   .productDetail {
     display: grid;
-    grid-gap: 0.5rem;
+    // grid-gap: 0.3rem;
     padding: 0.5rem 0;
     font-size: 14px;
     background: white;
     color: $grey3;
     h4 {
+      grid-column: 1/2;
+      grid-row: 1/2;
       color: black;
     }
     .productSeller {
@@ -76,9 +78,16 @@
       }
     }
     .rating {
-      color: $grey2;
-      .lit {
-        color: $yellow;
+      grid-column: 1/2;
+      grid-row: 1/2;
+      justify-content: flex-end;
+      color: $grey3;
+      display: flex;
+      align-items: center;
+      font-size: 1.2em;
+      svg {
+        font-size: 1.1em;
+        margin-top: 0.18em;
       }
     }
   }

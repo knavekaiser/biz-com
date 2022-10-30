@@ -39,59 +39,54 @@ export const ProductThumb = ({ product }) => {
       <Link href={`/item/${product._id}`}>
         <a>
           <div className={s.productDetail}>
-            <div className={s.details}>
-              <h4>{product.title}</h4>
-              {siteConfig?.siteConfig?.productCard?.map((item) => {
-                if (["string", "number"].includes(typeof product[item])) {
-                  if (item === "price") {
-                    return (
-                      <span className={s.price} key={item}>
-                        <span className={s.currentPrice}>
-                          {siteConfig?.siteConfig?.currency}{" "}
-                          {product.price.toLocaleString()}
-                        </span>
-
-                        {product.originalPrice > product.price && (
-                          <span className={s.originalPrice}>
-                            {siteConfig?.siteConfig?.currency}{" "}
-                            {product.originalPrice.toLocaleString()}
-                          </span>
-                        )}
-                      </span>
-                    );
-                  }
+            <h4>{product.title}</h4>
+            {siteConfig?.siteConfig?.productCard?.map((item) => {
+              if (["string", "number"].includes(typeof product[item])) {
+                if (item === "price") {
                   return (
-                    <span className={s.description} key={item}>
-                      {product[item]}
+                    <span className={s.price} key={item}>
+                      <span className={s.currentPrice}>
+                        {siteConfig?.siteConfig?.currency}{" "}
+                        {product.price.toLocaleString()}
+                      </span>
+
+                      {product.originalPrice > product.price && (
+                        <span className={s.originalPrice}>
+                          {siteConfig?.siteConfig?.currency}{" "}
+                          {product.originalPrice.toLocaleString()}
+                        </span>
+                      )}
                     </span>
                   );
                 }
-                if (item === "seller" && product.seller) {
-                  return (
-                    <div className={s.productSeller} key={item}>
-                      <img
-                        src={product.seller.logo || product.seller.profileImg}
-                      />
-                      <span className={s.productSeller}>
-                        {product.seller.name}
-                      </span>
-                    </div>
-                  );
-                }
-                if (item === "rating") {
-                  return (
-                    <div className={s.rating} key={item}>
-                      <HiStar className={product.rating >= 1 ? s.lit : ""} />
-                      <HiStar className={product.rating >= 2 ? s.lit : ""} />
-                      <HiStar className={product.rating >= 3 ? s.lit : ""} />
-                      <HiStar className={product.rating >= 4 ? s.lit : ""} />
-                      <HiStar className={product.rating >= 5 ? s.lit : ""} />
-                    </div>
-                  );
-                }
-                return <Fragment key={item} />;
-              })}
-            </div>
+                return (
+                  <span className={s.description} key={item}>
+                    {product[item]}
+                  </span>
+                );
+              }
+              if (item === "seller" && product.seller) {
+                return (
+                  <div className={s.productSeller} key={item}>
+                    <img
+                      src={product.seller.logo || product.seller.profileImg}
+                    />
+                    <span className={s.productSeller}>
+                      {product.seller.name}
+                    </span>
+                  </div>
+                );
+              }
+              if (item === "review") {
+                return (
+                  <div className={s.rating} key={item}>
+                    <HiStar />
+                    {product.rating || 0}
+                  </div>
+                );
+              }
+              return <Fragment key={item} />;
+            })}
 
             {
               // <span className={s.devider} />
