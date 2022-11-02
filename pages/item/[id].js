@@ -58,6 +58,7 @@ const Item = ({ product, siteData }) => {
           <meta charSet="utf-8" />
           <title>{siteData.siteTitle}</title>
           <meta property="og:title" content={siteData.siteTitle} />
+          {siteData?.favicon && <link rel="icon" href={siteData.favicon} />}
         </Head>
         <Header />
         <div>Sorry, Product can not be found</div>
@@ -76,6 +77,7 @@ const Item = ({ product, siteData }) => {
           content={`${product.title} | ${siteData.siteTitle}`}
         />
         <meta property="og:description" content={product.description} />
+        {siteData?.favicon && <link rel="icon" href={siteData.favicon} />}
       </Head>
       <Header />
       <Paths

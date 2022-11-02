@@ -40,8 +40,14 @@ export default function Reviews({ product }) {
         {reviews.length > 0 ? (
           <>
             <div className={s.summary}>
-              <HiStar /> {(product.rating || 0).fix(2)} ·{" "}
-              {product.totalReview || 0} reviews
+              <span className={s.stars}>
+                <HiStar className={product.rating >= 1 ? s.lit : ""} />
+                <HiStar className={product.rating >= 2 ? s.lit : ""} />
+                <HiStar className={product.rating >= 3 ? s.lit : ""} />
+                <HiStar className={product.rating >= 4 ? s.lit : ""} />
+                <HiStar className={product.rating >= 5 ? s.lit : ""} />
+              </span>
+              <span>·</span> <span>{product.totalReview || 0} reviews</span>
             </div>
             {reviews.map((review) => (
               <Review review={review} key={review._id} />

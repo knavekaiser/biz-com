@@ -1,7 +1,7 @@
 import { useEffect, useState, useContext, useRef } from "react";
 import { SiteContext } from "SiteContext";
 import { ETH } from "components/svg";
-import { Checkbox, Input, Select } from "components/elements";
+import { Checkbox, Input, Select, Combobox } from "components/elements";
 import { HiChevronUp, HiChevronDown, HiOutlineX } from "react-icons/hi";
 import s from "./styles/products.module.scss";
 import { useForm } from "react-hook-form";
@@ -16,7 +16,9 @@ const Sidebar = ({ open, filters, setFilters }) => {
     siteConfig: { siteConfig },
   } = useContext(SiteContext);
   const router = useRouter();
-  const { control, reset, watch, getValues } = useForm();
+  const { control, reset, watch, getValues } = useForm({
+    defaultValues: { sort: router.query?.sort || "price-asc" },
+  });
 
   useEffect(() => {
     if (
@@ -73,6 +75,18 @@ const Sidebar = ({ open, filters, setFilters }) => {
           </button>
         </div>
       )}
+      <Section label="Sort">
+        <Combobox
+          control={control}
+          name="sort"
+          options={[
+            // { label: "Popularity", value: "popular" },
+            { label: "Price Low to High", value: "price-asc" },
+            { label: "Price High to Low", value: "price-dsc" },
+          ]}
+          onChange={(opt) => setFilters({ ...filters, sort: opt.value })}
+        />
+      </Section>
       {siteConfig?.productFields &&
         (siteConfig?.browsePage?.sidebarFilters || []).map((f) => {
           const field = siteConfig.productFields.find(

@@ -42,12 +42,10 @@ export const Input = ({
   const [_type, setType] = useState(type);
   const { control: phCtrl, watch } = useForm({
     defaultValues: {
-      country:
-        phone?.code ||
+      country: phone?.code ||
         countries.find(
           (c) => c.timezone === Intl.DateTimeFormat().resolvedOptions().timeZone
-        ) ||
-        {},
+        ) || { iso2: "IN", code: "+91" },
     },
   });
   const country = watch("country");

@@ -210,7 +210,9 @@ const LoginForm = ({ setOpen, onSuccess }) => {
   const submit = useCallback(
     async (values) => {
       if (step === 1) {
-        const number = phone(values.username);
+        const number = phone(values.username, {
+          country: values?.country?.iso2,
+        });
         const payload = {};
         if (number.isValid) {
           payload.phone = number.phoneNumber;

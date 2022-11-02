@@ -28,6 +28,7 @@ const Browse = ({ siteData }) => {
         <meta charSet="utf-8" />
         <title>{siteData.siteTitle}</title>
         <meta property="og:title" content={siteData.siteTitle} />
+        {siteData?.favicon && <link rel="icon" href={siteData.favicon} />}
       </Head>
       <Header />
       {siteData?.siteConfig?.landingPage?.viewLandingPage && (

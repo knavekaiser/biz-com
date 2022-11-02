@@ -18,16 +18,6 @@ const Sidebar = ({ product }) => {
     <div className={s.sidebar}>
       <h1>{product.title}</h1>
 
-      <div className={s.rating}>
-        <HiStar /> {(product.rating || 0).fix(2)} · {product.totalReview || 0}{" "}
-        reviews
-      </div>
-
-      <div className={s.seller}>
-        <img src={product.seller.logo} />
-        <span>{product.seller.name}</span>
-      </div>
-
       <div className={s.details}>
         {siteConfig?.productViewPage?.productElements?.map((item) => {
           if (["string", "number"].includes(typeof product[item])) {
@@ -49,7 +39,31 @@ const Sidebar = ({ product }) => {
             }
             return <span key={item}>{product[item]}</span>;
           }
-          return <Fragment key={item} />;
+          if (item === "seller") {
+            return (
+              <div className={s.seller} key={item}>
+                <img src={product.seller.logo} />
+                <span>{product.seller.name}</span>
+              </div>
+            );
+          }
+          if (item === "review") {
+            return (
+              <div className={s.rating} key={item}>
+                <HiStar className={product.rating >= 1 ? s.lit : ""} />
+                <HiStar className={product.rating >= 2 ? s.lit : ""} />
+                <HiStar className={product.rating >= 3 ? s.lit : ""} />
+                <HiStar className={product.rating >= 4 ? s.lit : ""} />
+                <HiStar className={product.rating >= 5 ? s.lit : ""} />
+                {" · "}
+                <span className={s.reviewCount}>
+                  {product.totalReview || 0}{" "}
+                  {product.totalReview > 1 ? "reviews" : "review"}
+                </span>
+              </div>
+            );
+          }
+          return null;
         })}
       </div>
 
@@ -62,13 +76,13 @@ const Sidebar = ({ product }) => {
             href={
               `whatsapp://send/?${new URLSearchParams({
                 phone: config.whatsappNumber || product.whatsappNumber,
-                text: `I am interested on ${router.query.id} this product`,
+                text: `I am interested to know more about this ${product.title}`,
               }).toString()}`
               // `https://api.whatsapp.com/send/?${new URLSearchParams({
-              //   phone: "01989479749",
-              //   text: "I am interested on --- this product",
+              //   phone: config.whatsappNumber || product.whatsappNumber,
+              //   text: `I am interested to know more about this ${product.title}`,
               //   type: "phone_number",
-              //   app_absent: 0,
+              //   // app_absent: 0,
               // }).toString()}`
             }
             rel="noreferrer"
@@ -81,20 +95,22 @@ const Sidebar = ({ product }) => {
           </a>
         )}
 
-      <div className={s.actions}>
-        <button
-          className={`btn primary`}
-          onClick={() =>
-            router.push({
-              pathname: paths.checkout,
-              query: { product_id: product._id },
-            })
-          }
-        >
-          Buy Now
-        </button>
-        <button className={`btn secondary`}>Add to Cart</button>
-      </div>
+      {
+        //   <div className={s.actions}>
+        //   <button
+        //     className={`btn primary`}
+        //     onClick={() =>
+        //       router.push({
+        //         pathname: paths.checkout,
+        //         query: { product_id: product._id },
+        //       })
+        //     }
+        //   >
+        //     Buy Now
+        //   </button>
+        //   <button className={`btn secondary`}>Add to Cart</button>
+        // </div>
+      }
     </div>
   );
 };
