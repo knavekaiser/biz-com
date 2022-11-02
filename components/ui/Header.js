@@ -89,6 +89,7 @@ const Account = () => {
   }, []);
   return (
     <div className={s.account}>
+      {user && <span className={s.userName}>{user.name}</span>}
       <button
         className={s.icon}
         onClick={(e) => {
@@ -221,7 +222,6 @@ const LoginForm = ({ setOpen, onSuccess }) => {
         }
         validateAccount(payload)
           .then(({ data }) => {
-            console.log(data);
             if (data.success) {
               setNewUser(data.data.newUser);
               setStep(2);

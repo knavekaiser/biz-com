@@ -75,6 +75,15 @@
     }
     .southSection {
       .account {
+        display: flex;
+        align-items: center;
+        grid-gap: 0.3rem;
+        background: $grey1;
+        border-radius: 2rem;
+        .userName {
+          font-weight: 500;
+          margin-left: 0.8rem;
+        }
         .icon {
           display: grid;
           font-size: 2rem;
@@ -82,7 +91,7 @@
           // padding: 0.25rem 0.5rem;
           // border: 1px solid $grey2;
           border: none;
-          background: white;
+          background: none;
           cursor: pointer;
           svg {
             color: $primary-color;
