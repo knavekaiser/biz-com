@@ -43,6 +43,9 @@ export const ProductThumb = ({ product }) => {
             <div className={s.left}>
               <h4>{product.title}</h4>
               {siteConfig?.siteConfig?.productCard?.map((item) => {
+                if (item === "whatsappNumber") {
+                  return null;
+                }
                 if (["string", "number"].includes(typeof product[item])) {
                   if (item === "price") {
                     return (
