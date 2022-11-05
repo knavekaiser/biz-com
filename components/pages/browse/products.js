@@ -16,7 +16,7 @@ export default function Products() {
     // ...router.query,
     sort: "price-asc",
   });
-  const [sidebarOpen, setSidebarOpen] = useState(true);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
   const [products, setProducts] = useState([]);
   const [metadata, setMetadata] = useState({
     page: 1,
@@ -57,9 +57,20 @@ export default function Products() {
       })
       .catch((err) => Prompt({ type: "error", message: err.message }));
   }, [router.query]);
+  useEffect(() => {
+    if (window.innerWidth > 480) {
+      setSidebarOpen(true);
+    }
+  }, []);
   return (
-    <div className={`${s.container}`}>
+    <div className={`${s.container} ${sidebarOpen ? s.sidebarOpen : ""}`}>
       <Sidebar open={sidebarOpen} filters={filters} setFilters={setFilters} />
+      <button
+        className={`btn ${s.sidebarToggle}`}
+        onClick={() => setSidebarOpen(!sidebarOpen)}
+      >
+        Filters
+      </button>
       <div className={`${s.content} ${s.products}`}>
         {
           //   <div className={s.ribbon}>

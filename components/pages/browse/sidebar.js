@@ -1,7 +1,7 @@
 import { useEffect, useState, useContext, useRef } from "react";
 import { SiteContext } from "SiteContext";
 import { ETH } from "components/svg";
-import { Checkbox, Input, Select, Combobox } from "components/elements";
+import { Checkbox, Input, Select, Combobox, Range } from "components/elements";
 import { HiChevronUp, HiChevronDown, HiOutlineX } from "react-icons/hi";
 import s from "./styles/products.module.scss";
 import { useForm } from "react-hook-form";
@@ -33,10 +33,19 @@ const Sidebar = ({ open, filters, setFilters }) => {
           router.query[field.fieldName + "-min"] ||
           router.query[field.fieldName + "-max"]
         ) {
-          values[field.fieldName + "-min"] =
-            router.query[field.fieldName + "-min"];
-          values[field.fieldName + "-max"] =
-            router.query[field.fieldName + "-max"];
+          if (field.filterType === "range") {
+            values[field.fieldName + "-range"] = {
+              min: +router.query[field.fieldName + "-min"],
+              max: +router.query[field.fieldName + "-max"],
+            };
+          } else {
+            values[field.fieldName + "-min"] = +router.query[
+              field.fieldName + "-min"
+            ];
+            values[field.fieldName + "-max"] = +router.query[
+              field.fieldName + "-max"
+            ];
+          }
         }
       });
 
@@ -131,7 +140,7 @@ const Sidebar = ({ open, filters, setFilters }) => {
                   onChange={(e) => {
                     const max = getValues(`${field.name}-max`);
 
-                    if (+e.target.value < +max) {
+                    if (+e.target.value <= +max) {
                       setFilters((prev) => ({
                         ...prev,
                         [`${field.name}-min`]: +e.target.value,
@@ -153,7 +162,7 @@ const Sidebar = ({ open, filters, setFilters }) => {
                   placeholder="MAX"
                   onChange={(e) => {
                     const min = getValues(`${field.name}-min`);
-                    if (+e.target.value > +min) {
+                    if (+e.target.value >= +min) {
                       setFilters((prev) => ({
                         ...prev,
                         [`${field.name}-max`]: +e.target.value,
@@ -173,6 +182,34 @@ const Sidebar = ({ open, filters, setFilters }) => {
                   +getValues(`${field.name}-min`) && (
                   <p className="subtitle1">Max must be greater then Min</p>
                 )}
+              </Section>
+            );
+          } else if (f.filterType === "range") {
+            return (
+              <Section label={field.label} key={f.fieldName}>
+                <Range
+                  control={control}
+                  name={`${field.name}-range`}
+                  type={field.inputType}
+                  placeholder={`${field.label} range`}
+                  onChange={({ min, max }) => {
+                    if (min <= max) {
+                      setFilters((prev) => ({
+                        ...prev,
+                        [`${field.name}-min`]: min,
+                        [`${field.name}-max`]: max,
+                      }));
+                    } else {
+                      setFilters((prev) => ({
+                        ...prev,
+                        [`${field.name}-min`]: "",
+                        [`${field.name}-max`]: "",
+                      }));
+                    }
+                  }}
+                  min={+f.min}
+                  max={+f.max}
+                />
               </Section>
             );
           } else if (["list", "dropdown"].includes(f.filterStyle)) {
@@ -299,6 +336,7 @@ const FilterList = ({ field, setFilters, sidebarItem, control }) => {
 
 const Section = ({ label, children, className }) => {
   const [open, setOpen] = useState(true);
+
   return (
     <div className={`${s.section} ${className || ""}`}>
       <div className={s.head} onClick={() => setOpen(!open)}>

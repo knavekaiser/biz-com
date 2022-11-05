@@ -5,6 +5,7 @@ import React, {
   useLayoutEffect,
   forwardRef,
   Fragment,
+  useCallback,
 } from "react";
 import { IoIosClose } from "react-icons/io";
 import { FaUpload, FaSearch, FaRegTrashAlt, FaTimes } from "react-icons/fa";
@@ -923,5 +924,254 @@ export const Paths = ({ paths, className }) => {
         </Fragment>
       ))}
     </div>
+  );
+};
+
+export const Slider = ({
+  control,
+  name,
+  label,
+  formOptions,
+  onChange: customOnChange,
+  error,
+}) => {
+  return (
+    <Controller
+      control={control}
+      name={name}
+      rules={formOptions}
+      render={({
+        field: { onChange, onBlur, value = "", name, ref },
+        fieldState: { invalid, isTouched, isDirty, error },
+      }) => {
+        return (
+          <section
+            className={`${s.input} ${className || ""} ${error ? s.err : ""}`}
+          >
+            {label && (
+              <label>
+                {label} {formOptions?.required && "*"}
+              </label>
+            )}
+            <div className={s.wrapper}>
+              <div className={s.field}>
+                <input
+                  ref={ref}
+                  type={type === "password" ? _type : type || "text"}
+                  id={rest.id || name}
+                  value={value}
+                  onChange={(e) => {
+                    let value = e.target.value;
+                    if (phone) {
+                      const number = Phone(value, {
+                        country: country?.iso2,
+                      });
+                      if (number?.isValid) {
+                        value = number.phoneNumber.replace(
+                          number.countryCode,
+                          ""
+                        );
+                        e.phoneNumber = number;
+                        e.country = country;
+                      }
+                    }
+                    onChange(value);
+                    customOnChange && customOnChange(e);
+                  }}
+                  {...rest}
+                  placeholder={rest.placeholder || "Enter"}
+                />
+              </div>
+              {error && <span className={s.errMsg}>{error.message}</span>}
+            </div>
+          </section>
+        );
+      }}
+    />
+  );
+};
+
+export const Range = ({
+  control,
+  name,
+  label,
+  formOptions,
+  onChange: customOnChange,
+  className,
+  error,
+  min = 0,
+  max = 100,
+  step,
+}) => {
+  const valueLoaded = useRef(false);
+  const [activeHandle, setActiveHandle] = useState(false);
+  const [minPos, setMinPos] = useState(0);
+  const [maxPos, setMaxPos] = useState(100);
+  const trackRef = useRef();
+
+  const handleTrackMove = useCallback(
+    (e) => {
+      e.stopPropagation();
+      if (activeHandle) {
+        const track = trackRef.current;
+        const boundingBox = track.getBoundingClientRect();
+        const val = Math.max(
+          Math.min(
+            +(
+              (e.clientX - boundingBox.x - 10) /
+              (boundingBox.width - 20)
+            ).toFixed(2),
+            1
+          ),
+          0
+        );
+        if (activeHandle === "min") {
+          setMinPos(Math.min(maxPos, +(val * 100).toFixed(step)));
+        }
+        if (activeHandle === "max") {
+          setMaxPos(Math.max(minPos, +(val * 100).toFixed(step)));
+        }
+      }
+    },
+    [activeHandle, minPos, maxPos]
+  );
+  const updateValue = useCallback(
+    (onChange) => {
+      const value = {
+        min: +(minPos / (100 / (max - min)) + min).toFixed(step),
+        max: +(maxPos / (100 / (max - min)) + min).toFixed(step),
+      };
+      onChange(value);
+      customOnChange && customOnChange(value);
+    },
+    [min, max, minPos, maxPos]
+  );
+
+  useEffect(() => {
+    const mouseUpHandler = () => {
+      setActiveHandle(null);
+    };
+    document.addEventListener("mouseup", mouseUpHandler);
+    return () => {
+      document.removeEventListener("mouseup", mouseUpHandler);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!valueLoaded.current && control._formValues[name]) {
+      let { min: valueMin, max: valueMax } = control._formValues[name];
+      if (["", undefined].includes(valueMin)) {
+        valueMin = min;
+      } else {
+        valueMin = valueMin - min;
+      }
+      if (["", undefined].includes(valueMax)) {
+        valueMax = max;
+      } else {
+        valueMax = valueMax - min;
+      }
+      setMinPos(
+        +((valueMin / max) * 100 + ((valueMin / max) * 100) / 100).toFixed(step)
+      );
+      setMaxPos(
+        (+((valueMax / max) * 100) + ((valueMax / max) * 100) / 100).toFixed(
+          step
+        )
+      );
+      valueLoaded.current = true;
+    }
+  }, [control._formValues[name]]);
+  return (
+    <Controller
+      control={control}
+      name={name}
+      rules={formOptions}
+      render={({
+        field: { onChange, onBlur, value = { min, max }, name, ref },
+        fieldState: { invalid, isTouched, isDirty, error },
+      }) => {
+        return (
+          <section
+            className={`${s.range} ${className || ""} ${error ? s.err : ""}`}
+          >
+            {label && (
+              <label>
+                {label} {formOptions?.required && "*"}
+              </label>
+            )}
+            <div className={s.wrapper}>
+              <div className={s.field}>
+                <div
+                  className={s.track}
+                  ref={trackRef}
+                  onMouseMove={handleTrackMove}
+                  onTouchMove={handleTrackMove}
+                  onMouseOut={() => {
+                    if (activeHandle) {
+                      updateValue(onChange);
+                    }
+                  }}
+                >
+                  <span
+                    className={`${s.handle} ${s.min}`}
+                    onMouseDown={() => setActiveHandle("min")}
+                    onTouchStart={() => setActiveHandle("min")}
+                    onMouseUp={() => {
+                      setActiveHandle(null);
+                      updateValue(onChange);
+                    }}
+                    style={{
+                      left: `${Math.min(98, Math.max(2, minPos))}%`,
+                      zIndex: minPos > 50 ? 2 : 1,
+                    }}
+                  />
+                  <span
+                    className={s.fill}
+                    style={{
+                      left: `${Math.min(98, Math.max(2, minPos))}%`,
+                      right: `${Math.min(98, Math.max(2, 100 - maxPos))}%`,
+                    }}
+                  />
+                  <span
+                    className={`${s.handle} ${s.max}`}
+                    onMouseDown={() => setActiveHandle("max")}
+                    onTouchStart={() => setActiveHandle("max")}
+                    onMouseUp={() => {
+                      setActiveHandle(null);
+                      updateValue(onChange);
+                    }}
+                    style={{
+                      left: `${Math.min(98, Math.max(2, maxPos))}%`,
+                      zIndex: maxPos < 50 ? 2 : 1,
+                    }}
+                  />
+                </div>
+                <div className={s.values}>
+                  <span className={s.min}>
+                    {+(minPos / (100 / (max - min)) + min).toFixed(step)}
+                  </span>
+                  <span className={s.max}>
+                    {+(maxPos / (100 / (max - min)) + min).toFixed(step)}
+                  </span>
+                </div>
+                {
+                  // <>
+                  //   <div className={s.values}>
+                  //     <span className={s.min}>{minPos}</span>
+                  //     <span className={s.max}>{maxPos}</span>
+                  //   </div>
+                  //   <div className={s.values}>
+                  //     <span className={s.min}>{value.min}</span>
+                  //     <span className={s.max}>{value.max}</span>
+                  //   </div>
+                  // </>
+                }
+              </div>
+              {error && <span className={s.errMsg}>{error.message}</span>}
+            </div>
+          </section>
+        );
+      }}
+    />
   );
 };
