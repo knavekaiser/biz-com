@@ -16,7 +16,7 @@ const Sidebar = ({ open, filters, setFilters }) => {
     siteConfig: { siteConfig },
   } = useContext(SiteContext);
   const router = useRouter();
-  const { control, reset, watch, getValues } = useForm({
+  const { control, reset, watch, getValues, setValue } = useForm({
     defaultValues: { sort: router.query?.sort || "price-asc" },
   });
 
@@ -190,6 +190,7 @@ const Sidebar = ({ open, filters, setFilters }) => {
                 <Range
                   control={control}
                   name={`${field.name}-range`}
+                  setValue={setValue}
                   type={field.inputType}
                   placeholder={`${field.label} range`}
                   onChange={({ min, max }) => {
@@ -343,7 +344,11 @@ const Section = ({ label, children, className }) => {
         {label}
         {open ? <HiChevronDown /> : <HiChevronUp />}
       </div>
-      {open && <div className={s.sectionContent}>{children}</div>}
+      {open && (
+        <div className={s.sectionContent} onClick={(e) => e.stopPropagation()}>
+          {children}
+        </div>
+      )}
     </div>
   );
 };

@@ -24,7 +24,12 @@ export const Provider = ({ children }) => {
     fetch(endpoints.logout, {
       method: "POST",
     })
-      .then((res) => res.json())
+      .then((res) => {
+        if (res.status === 401) {
+          localStorage.removeItem("access_token");
+        }
+        return res.json();
+      })
       .then((data) => {
         if (data.success) {
           localStorage.removeItem("access_token");
@@ -47,7 +52,12 @@ export const Provider = ({ children }) => {
           "x-access-token": token,
         },
       })
-        .then((res) => res.json())
+        .then((res) => {
+          if (res.status === 401) {
+            localStorage.removeItem("access_token");
+          }
+          return res.json();
+        })
         .then((data) => {
           if (data.success) {
             setUser(data.data);

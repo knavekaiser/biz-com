@@ -993,6 +993,7 @@ export const Slider = ({
 
 export const Range = ({
   control,
+  setValue,
   name,
   label,
   formOptions,
@@ -1011,16 +1012,22 @@ export const Range = ({
 
   const handleTrackMove = useCallback(
     (e) => {
-      e.stopPropagation();
       if (activeHandle) {
+        if (e.type !== "touchmove") {
+          if (e.preventDefault) e.preventDefault();
+        }
+        if (e.stopPropagation) e.stopPropagation();
+        e.cancelBubble = true;
+        e.returnValue = false;
+
         const track = trackRef.current;
         const boundingBox = track.getBoundingClientRect();
+        const evtX = e.type === "touchmove" ? e.touches[0].clientX : e.clientX;
         const val = Math.max(
           Math.min(
-            +(
-              (e.clientX - boundingBox.x - 10) /
-              (boundingBox.width - 20)
-            ).toFixed(2),
+            +((evtX - boundingBox.x - 10) / (boundingBox.width - 20)).toFixed(
+              2
+            ),
             1
           ),
           0
@@ -1041,21 +1048,38 @@ export const Range = ({
         min: +(minPos / (100 / (max - min)) + min).toFixed(step),
         max: +(maxPos / (100 / (max - min)) + min).toFixed(step),
       };
-      onChange(value);
+      setValue(name, value);
+      // onChange(value);
       customOnChange && customOnChange(value);
     },
     [min, max, minPos, maxPos]
   );
-
   useEffect(() => {
+    if (activeHandle === null) {
+      updateValue();
+    }
+  }, [activeHandle]);
+  useEffect(() => {
+    document
+      .querySelector("body")
+      .addEventListener("mousemove", handleTrackMove);
     const mouseUpHandler = () => {
       setActiveHandle(null);
     };
-    document.addEventListener("mouseup", mouseUpHandler);
+    document.querySelector("body").addEventListener("mouseup", mouseUpHandler);
+    document.querySelector("body").addEventListener("touchend", mouseUpHandler);
     return () => {
-      document.removeEventListener("mouseup", mouseUpHandler);
+      document
+        .querySelector("body")
+        .removeEventListener("mouseup", mouseUpHandler);
+      document
+        .querySelector("body")
+        .removeEventListener("mousemove", handleTrackMove);
+      document
+        .querySelector("body")
+        .removeEventListener("touchend", mouseUpHandler);
     };
-  }, []);
+  }, [handleTrackMove, activeHandle]);
 
   useEffect(() => {
     if (!valueLoaded.current && control._formValues[name]) {
@@ -1104,22 +1128,12 @@ export const Range = ({
                 <div
                   className={s.track}
                   ref={trackRef}
-                  onMouseMove={handleTrackMove}
                   onTouchMove={handleTrackMove}
-                  onMouseOut={() => {
-                    if (activeHandle) {
-                      updateValue(onChange);
-                    }
-                  }}
                 >
                   <span
                     className={`${s.handle} ${s.min}`}
                     onMouseDown={() => setActiveHandle("min")}
                     onTouchStart={() => setActiveHandle("min")}
-                    onMouseUp={() => {
-                      setActiveHandle(null);
-                      updateValue(onChange);
-                    }}
                     style={{
                       left: `${Math.min(98, Math.max(2, minPos))}%`,
                       zIndex: minPos > 50 ? 2 : 1,
@@ -1136,10 +1150,6 @@ export const Range = ({
                     className={`${s.handle} ${s.max}`}
                     onMouseDown={() => setActiveHandle("max")}
                     onTouchStart={() => setActiveHandle("max")}
-                    onMouseUp={() => {
-                      setActiveHandle(null);
-                      updateValue(onChange);
-                    }}
                     style={{
                       left: `${Math.min(98, Math.max(2, maxPos))}%`,
                       zIndex: maxPos < 50 ? 2 : 1,
