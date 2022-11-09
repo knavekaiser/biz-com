@@ -4,6 +4,7 @@ import { Prompt } from "components/modal";
 import Sidebar from "./sidebar";
 import Link from "next/link";
 import { ProductThumb } from "components/ui/productThumbnail";
+import { HiChevronUp, HiChevronDown } from "react-icons/hi";
 import { useForm } from "react-hook-form";
 import { endpoints, paths } from "config";
 import { useFetch } from "hooks";
@@ -32,7 +33,7 @@ export default function Products() {
         pathname: paths.browse,
         query: {
           ...Object.entries({ ...router.query, ...filters })
-            .filter(([key, value], i) => value)
+            .filter(([key, value], i) => value === 0 || value)
             .reduce((p, c) => {
               p[c[0]] = c[1];
               return p;
@@ -64,13 +65,13 @@ export default function Products() {
   }, []);
   return (
     <div className={`${s.container} ${sidebarOpen ? s.sidebarOpen : ""}`}>
-      <Sidebar open={sidebarOpen} filters={filters} setFilters={setFilters} />
       <button
         className={`btn ${s.sidebarToggle}`}
         onClick={() => setSidebarOpen(!sidebarOpen)}
       >
-        Filters
+        Filters {sidebarOpen ? <HiChevronUp /> : <HiChevronDown />}
       </button>
+      <Sidebar open={sidebarOpen} filters={filters} setFilters={setFilters} />
       <div className={`${s.content} ${s.products}`}>
         {
           //   <div className={s.ribbon}>

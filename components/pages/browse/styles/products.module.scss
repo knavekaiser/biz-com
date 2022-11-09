@@ -117,9 +117,13 @@
       }
     }
     .sidebarToggle {
-      // margin: auto;
-      // margin-right: 0;
-      display: block;
+      display: flex;
+      align-items: center;
+      grid-gap: 0.5rem;
+      justify-content: space-between;
+      svg {
+        font-size: 1.75em;
+      }
     }
     .content {
       .products {
