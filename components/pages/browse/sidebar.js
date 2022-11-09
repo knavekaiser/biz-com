@@ -342,7 +342,7 @@ const Section = ({ label, children, className }) => {
     <div className={`${s.section} ${className || ""}`}>
       <div className={s.head} onClick={() => setOpen(!open)}>
         {label}
-        {open ? <HiChevronDown /> : <HiChevronUp />}
+        {open ? <HiChevronUp /> : <HiChevronDown />}
       </div>
       {open && (
         <div className={s.sectionContent} onClick={(e) => e.stopPropagation()}>
