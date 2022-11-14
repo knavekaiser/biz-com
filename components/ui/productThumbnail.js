@@ -127,8 +127,10 @@ export const ProductThumb = ({ product }) => {
                       <HiStar className={product.rating >= 4 ? s.lit : ""} />
                       <HiStar className={product.rating >= 5 ? s.lit : ""} />
                       <span className={s.reviewCount}>
-                        {product.totalReview || 0}{" "}
-                        {product.totalReview > 1 ? "reviews" : "review"}
+                        ({product.totalReview || 0})
+                        {
+                          //product.totalReview > 1 ? "reviews" : "review"
+                        }
                       </span>
                     </div>
                   );

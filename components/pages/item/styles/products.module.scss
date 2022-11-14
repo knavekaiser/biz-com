@@ -29,6 +29,74 @@
       .lit {
         color: $yellow;
       }
+      position: relative;
+      cursor: pointer;
+      &:hover {
+        .breakdown {
+          display: block;
+        }
+      }
+      .breakdown {
+        width: max-content;
+        padding: 0.75rem;
+        border-radius: 0.5rem;
+        filter: drop-shadow($shadow1);
+        background: white;
+        position: absolute;
+        top: 130%;
+        display: none;
+        z-index: 10;
+        &::before {
+          content: "";
+          display: block;
+          border: 7px solid transparent;
+          border-top: 0;
+          border-bottom: 10px solid white;
+          position: absolute;
+          top: -10px;
+          left: 13%;
+        }
+        .subtitle {
+          margin-top: 0.25rem;
+          margin-bottom: 0.75rem;
+          font-size: 0.9em;
+        }
+        .title {
+          font-weight: 500;
+          span {
+            color: black;
+            margin-left: 6px;
+          }
+        }
+        .graph {
+          display: grid;
+          grid-gap: 0.25rem;
+          font-size: 0.85em;
+          li {
+            display: grid;
+            align-items: center;
+            grid-gap: 0.5rem;
+            grid-template-columns: 2.5rem 10rem 2rem;
+            .bar {
+              border-radius: 4px;
+              flex: 1;
+              background: $grey1;
+              position: relative;
+              height: 15px;
+              border: 1px solid rgba(0, 0, 0, 0.1);
+              .fill {
+                border-radius: 4px;
+                display: block;
+                height: 100%;
+                background: $yellow;
+              }
+            }
+            .percent {
+              text-align: right;
+            }
+          }
+        }
+      }
     }
     .seller {
       display: flex;

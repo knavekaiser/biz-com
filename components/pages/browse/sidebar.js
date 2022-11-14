@@ -336,7 +336,12 @@ const FilterList = ({ field, setFilters, sidebarItem, control }) => {
 };
 
 const Section = ({ label, children, className }) => {
-  const [open, setOpen] = useState(true);
+  const {
+    siteConfig: { siteConfig },
+  } = useContext(SiteContext);
+  const [open, setOpen] = useState(
+    siteConfig?.browsePage?.sidebarFiltersDefaultState === "open" ? true : false
+  );
 
   return (
     <div className={`${s.section} ${className || ""}`}>

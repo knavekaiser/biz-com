@@ -60,6 +60,49 @@ const Sidebar = ({ product }) => {
                   {product.totalReview || 0}{" "}
                   {product.totalReview > 1 ? "reviews" : "review"}
                 </span>
+
+                <div className={s.breakdown}>
+                  <div className={s.title}>
+                    <HiStar className={product.rating >= 1 ? s.lit : ""} />
+                    <HiStar className={product.rating >= 2 ? s.lit : ""} />
+                    <HiStar className={product.rating >= 3 ? s.lit : ""} />
+                    <HiStar className={product.rating >= 4 ? s.lit : ""} />
+                    <HiStar className={product.rating >= 5 ? s.lit : ""} />
+
+                    <span>{product.rating} out of 5</span>
+                  </div>
+
+                  <div className={s.subtitle}>
+                    {product.totalReview} global ratings
+                  </div>
+
+                  <ul className={s.graph}>
+                    {[5, 4, 3, 2, 1].map((item, i) => {
+                      const rating = product.ratingBreakdown.find(
+                        (i) => i.rating === item
+                      );
+                      return (
+                        <li key={item}>
+                          <span>{item} star</span>
+                          <span className={s.bar}>
+                            <span
+                              className={s.fill}
+                              style={{
+                                width: `${(
+                                  ((rating?.total || 0) / 5) *
+                                  100
+                                ).fix()}%`,
+                              }}
+                            />
+                          </span>
+                          <span className={s.percent}>
+                            {(((rating?.total || 0) / 5) * 100).fix()}%
+                          </span>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                </div>
               </div>
             );
           }

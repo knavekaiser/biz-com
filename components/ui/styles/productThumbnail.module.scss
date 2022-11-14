@@ -122,12 +122,13 @@
       //   }
       // }
       .reviewCount {
-        background: white;
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        text-align: center;
-        display: none;
+        // background: white;
+        // position: absolute;
+        // width: 100%;
+        // height: 100%;
+        // text-align: center;
+        // display: block;
+        margin-left: 4px;
       }
       &:hover {
         .reviewCount {
