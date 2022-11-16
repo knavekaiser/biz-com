@@ -13,6 +13,7 @@ import s from "./styles/footer.module.scss";
 
 const Footer = () => {
   const { siteConfig } = useContext(SiteContext);
+  console.log(siteConfig?.siteConfig?.footer?.sections);
   return (
     <footer className={s.footer}>
       <div className={s.watermark}>
@@ -23,80 +24,55 @@ const Footer = () => {
           <img src={siteConfig.logo} />
           <h2>{siteConfig.siteTitle}</h2>
         </div>
-        <ul className={s.links}>
-          <li>
-            <h4>Menu</h4>
-          </li>
-          <li>
-            <Link href="/">Explore</Link>
-          </li>
-          <li>
-            <Link href="/">Loot box</Link>
-          </li>
-          <li>
-            <Link href="/">Launchpad</Link>
-          </li>
-          <li>
-            <Link href="/">Staking</Link>
-          </li>
-        </ul>
-        <ul className={s.links}>
-          <li>
-            <h4>Community</h4>
-          </li>
-          <li>
-            <Link href="/">Suggest feature</Link>
-          </li>
-          <li>
-            <Link href="/">Help center</Link>
-          </li>
-        </ul>
-        <ul className={s.links}>
-          <li>
-            <h4>Legal</h4>
-          </li>
-          <li>
-            <Link href="/">Terms of use</Link>
-          </li>
-          <li>
-            <Link href="/">Privacy policy</Link>
-          </li>
-          <li>
-            <Link href="/">Cookie management</Link>
-          </li>
-        </ul>
-        <ul className={`${s.links} ${s.social}`}>
-          <li>
-            <h4>Contact</h4>
-          </li>
-          <li className={s.social_icons}>
-            <Link href="/">
-              <a>
-                <IoLogoYoutube />
-              </a>
-            </Link>
-            <Link href="/">
-              <a>
-                <IoLogoFacebook />
-              </a>
-            </Link>
-            <Link href="/">
-              <a>
-                <IoLogoWhatsapp />
-              </a>
-            </Link>
-            <Link href="/">
-              <a>
-                <IoLogoLinkedin />
-              </a>
-            </Link>
-            <Link href="/">
-              <a>
-                <IoLogoInstagram />
-              </a>
-            </Link>
-          </li>
-        </ul>
+        {(siteConfig?.siteConfig?.footer?.sections || []).map((section) => (
+          <ul
+            key={section.title}
+            className={`${s.links} ${s[section.viewStyle]}`}
+          >
+            <li>
+              <h4>{section.title}</h4>
+            </li>
+            {section.items.map((item) => (
+              <li key={item.label}>
+                <Link href={item.href}>{item.label}</Link>
+              </li>
+            ))}
+          </ul>
+        ))}
+        {
+          //   <ul className={`${s.links} ${s.social}`}>
+          //   <li>
+          //     <h4>Contact</h4>
+          //   </li>
+          //   <li className={s.social_icons}>
+          //     <Link href="/">
+          //       <a>
+          //         <IoLogoYoutube />
+          //       </a>
+          //     </Link>
+          //     <Link href="/">
+          //       <a>
+          //         <IoLogoFacebook />
+          //       </a>
+          //     </Link>
+          //     <Link href="/">
+          //       <a>
+          //         <IoLogoWhatsapp />
+          //       </a>
+          //     </Link>
+          //     <Link href="/">
+          //       <a>
+          //         <IoLogoLinkedin />
+          //       </a>
+          //     </Link>
+          //     <Link href="/">
+          //       <a>
+          //         <IoLogoInstagram />
+          //       </a>
+          //     </Link>
+          //   </li>
+          // </ul>
+        }
       </div>
     </footer>
   );

@@ -41,6 +41,13 @@
       display: grid;
       grid-gap: 1rem;
       grid-auto-rows: min-content;
+      &.grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        li:first-child {
+          grid-column: 1/-1;
+        }
+      }
     }
   }
   .social {
