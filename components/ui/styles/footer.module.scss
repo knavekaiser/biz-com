@@ -14,7 +14,7 @@
     margin: auto;
     max-width: $max-width;
     display: flex;
-    justify-content: space-between;
+    justify-content: left;
     flex-wrap: wrap;
     grid-gap: 1.5rem;
     .branding {
@@ -31,6 +31,7 @@
       // }
     }
     .links {
+      min-width: 10rem;
       h4 {
         font-size: 20px;
         font-weight: 700;

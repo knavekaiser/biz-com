@@ -13,7 +13,6 @@ import s from "./styles/footer.module.scss";
 
 const Footer = () => {
   const { siteConfig } = useContext(SiteContext);
-  console.log(siteConfig?.siteConfig?.footer?.sections);
   return (
     <footer className={s.footer}>
       <div className={s.watermark}>
@@ -34,7 +33,17 @@ const Footer = () => {
             </li>
             {section.items.map((item) => (
               <li key={item.label}>
-                <Link href={item.href}>{item.label}</Link>
+                {item.type === "dynamicPage" && (
+                  <Link href={"/dynamic-page" + item.href}>{item.label}</Link>
+                )}
+                {item.type === "internalLink" && (
+                  <Link href={item.href}>{item.label}</Link>
+                )}
+                {item.type === "externalLink" && (
+                  <a href={item.href} target="_blank" rel="noopener noreferrer">
+                    {item.label}
+                  </a>
+                )}
               </li>
             ))}
           </ul>
