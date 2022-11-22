@@ -119,7 +119,9 @@ const Sidebar = ({ product }) => {
             href={
               `whatsapp://send/?${new URLSearchParams({
                 phone: config.whatsappNumber || product.whatsappNumber,
-                text: `I am interested to know more about this ${product.title}`,
+                text: `I am interested to know more about this ${
+                  product.title
+                }\n${window.location.href.replace(/\?.+/, "")}`,
               }).toString()}`
               // `https://api.whatsapp.com/send/?${new URLSearchParams({
               //   phone: config.whatsappNumber || product.whatsappNumber,

@@ -104,7 +104,9 @@ export const ProductThumb = ({ product }) => {
                         a.href = `whatsapp://send/?${new URLSearchParams({
                           phone:
                             siteConfig.whatsappNumber || product.whatsappNumber,
-                          text: `I am interested to know more about this ${product.title}`,
+                          text: `I am interested to know more about this ${
+                            product.title
+                          }\n${window.location.href.replace(/\?.+/, "")}`,
                         }).toString()}`;
                         a.rel = "noreferrer";
                         a.target = "_blank";
