@@ -488,6 +488,53 @@ button {
   }
 }
 
+.rdrDateRangePickerWrapper {
+  .rdrDefinedRangesWrapper {
+    display: none;
+  }
+  .rdrDateDisplayWrapper {
+    .rdrDateDisplayItemActive {
+      color: $primary-color;
+    }
+  }
+  .rdrDays {
+    button {
+      z-index: 1;
+      .rdrStartEdge,
+      .rdrInRange,
+      .rdrEndEdge {
+        color: $primary-color-dark1 !important;
+      }
+      .rdrDayStartPreview,
+      .rdrDayInPreview,
+      .rdrDayEndPreview {
+        border-color: $primary-color-dark1 !important;
+      }
+      &.rdrDayToday {
+        span::after {
+          background: $primary-color-dark2;
+        }
+      }
+    }
+  }
+  &.multiple {
+    .rdrDays {
+      button {
+        .rdrStartEdge,
+        .rdrInRange,
+        .rdrEndEdge {
+          color: $orange !important;
+        }
+        .rdrDayStartPreview,
+        .rdrDayInPreview,
+        .rdrDayEndPreview {
+          border-color: $orange !important;
+        }
+      }
+    }
+  }
+}
+
 ::-webkit-scrollbar {
   width: 10px;
   height: 10px;

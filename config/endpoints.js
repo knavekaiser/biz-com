@@ -8,6 +8,7 @@ const endpoints = {
     siteConfig: `${baseApiUrl}/api/site-config`,
     browse: `${baseApiUrl}/api/browse`,
     getDynamicPageFiles: `${baseApiUrl}/api/dynamic-page-files`,
+    sitemapUrls: `${baseApiUrl}/api/sitemap-urls`,
   },
 
   //------------Frontend-----------

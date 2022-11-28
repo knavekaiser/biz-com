@@ -781,6 +781,51 @@
   }
 }
 
+.calendarInput {
+  display: grid;
+  label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin-bottom: 0.2rem;
+    white-space: nowrap;
+  }
+  .calendarWrapper {
+    overflow: hidden;
+    border-radius: 4px;
+    width: max-content;
+    border: 1px solid #b7b7b7;
+    .selected {
+      font-weight: bold;
+      position: relative;
+      &::before {
+        content: "";
+        display: block;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        border-radius: 6px;
+        transform: translate(-50%, -50%);
+        height: 2.85em;
+        width: 3.5em;
+        margin: auto;
+        background: rgba($primary-color, 0.3);
+        z-index: -1;
+      }
+    }
+    .actions {
+      padding: 8px;
+      padding-top: 0;
+      display: flex;
+      grid-gap: 12px;
+    }
+  }
+  &:focus-within {
+    .calendarWrapper {
+      border-color: $primary-color;
+    }
+  }
+}
+
 .tableActions {
   display: flex;
   grid-gap: 6px;

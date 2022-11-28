@@ -18,11 +18,15 @@ import { useForm, Controller } from "react-hook-form";
 import { DateRangePicker } from "react-date-range";
 import { Modal } from "../modal";
 
+import "react-date-range/dist/styles.css";
+import "react-date-range/dist/theme/default.css";
+
 import s from "./elements.module.scss";
 import countries from "../countries";
 import { useFetch } from "hooks";
 import { phone as Phone } from "phone";
 import { Table, TableActions } from "./Table";
+import { moment, getAllDates } from "./moment";
 
 import { Combobox } from "./combobox";
 
@@ -897,15 +901,142 @@ export const Chip = ({ label, remove }) => {
   );
 };
 
-export const DatePicker = ({ control, name, formOptions }) => {
-  <Controller
-    control={control}
-    name={name}
-    rules={formOptions}
-    render={({ field: { onChange, onBlur, value, name, ref } }) => (
-      <DateRangePicker onChange={onChange} />
-    )}
-  />;
+export const CalendarInput = ({
+  control,
+  name,
+  label,
+  formOptions,
+  dateWindow,
+  disabledDates = [],
+  multipleRanges,
+}) => {
+  const [dateRange, setDateRange] = useState({});
+  const setDefaultRange = useCallback(() => {
+    let startDate = new Date();
+    let endDate = new Date();
+    if (dateWindow === "pastIncludingToday") {
+      startDate = new Date();
+      endDate = new Date();
+    } else if (dateWindow === "pastExcludingToday") {
+      startDate = new Date().deduct("0 0 0 1");
+      endDate = new Date().deduct("0 0 0 1");
+    } else if (dateWindow === "futureIncludingToday") {
+      startDate = new Date();
+      endDate = new Date();
+    } else if (dateWindow === "futureExcludingToday") {
+      startDate = new Date().add("0 0 0 1");
+      endDate = new Date().add("0 0 0 1");
+    }
+    setDateRange({ startDate, endDate, key: "selection" });
+  }, [dateWindow]);
+  useEffect(() => {
+    setDefaultRange();
+  }, [dateWindow]);
+  return (
+    <Controller
+      control={control}
+      name={name}
+      rules={formOptions}
+      render={({ field: { onChange, onBlur, value = [], name, ref } }) => {
+        return (
+          <section className={s.calendarInput}>
+            {label && <label>{label}</label>}
+            <div className={s.calendarWrapper}>
+              <DateRangePicker
+                className={multipleRanges ? "multiple" : ""}
+                disabledDay={(date) => {
+                  if (dateWindow === "pastIncludingToday") {
+                    return (
+                      date.setHours(0, 0, 0, 0) >
+                      new Date().setHours(0, 0, 0, 0)
+                    );
+                  } else if (dateWindow === "pastExcludingToday") {
+                    return (
+                      date.setHours(0, 0, 0, 0) >=
+                      new Date().setHours(0, 0, 0, 0)
+                    );
+                  } else if (dateWindow === "futureIncludingToday") {
+                    return (
+                      date.setHours(0, 0, 0, 0) <
+                      new Date().setHours(0, 0, 0, 0)
+                    );
+                  } else if (dateWindow === "futureExcludingToday") {
+                    return (
+                      date.setHours(0, 0, 0, 0) <=
+                      new Date().setHours(0, 0, 0, 0)
+                    );
+                  }
+                  if (disabledDates.includes(moment(date, "YYYY-MM-DD"))) {
+                    return true;
+                  }
+                  return false;
+                }}
+                ranges={[dateRange]}
+                onChange={({ selection }) => {
+                  setDateRange(selection);
+                  if (!multipleRanges) {
+                    onChange(getAllDates(selection));
+                  }
+                }}
+                staticRanges={[]}
+                inputRanges={[]}
+                dayContentRenderer={(date) => {
+                  return (
+                    <span
+                      className={
+                        multipleRanges &&
+                        value.includes(moment(date, "YYYY-MM-DD"))
+                          ? s.selected
+                          : ""
+                      }
+                    >
+                      {date.getDate()}
+                    </span>
+                  );
+                }}
+              />
+              {multipleRanges && (
+                <div className={`flex p-1 pt-0 gap-1`}>
+                  <button
+                    className={`btn all-columns`}
+                    type="button"
+                    onClick={() => {
+                      onChange(
+                        [
+                          ...new Set([...value, ...getAllDates(dateRange)]),
+                        ].sort((a, b) => (a > b ? 1 : -1))
+                      );
+                      setDefaultRange();
+                    }}
+                  >
+                    Add Days
+                  </button>
+                  <button
+                    className={`btn all-columns`}
+                    type="button"
+                    onClick={() => {
+                      const dates = getAllDates(dateRange);
+                      onChange(
+                        value
+                          .filter(
+                            (date) =>
+                              !dates.includes(moment(date, "YYYY-MM-DD"))
+                          )
+                          .sort((a, b) => (a > b ? 1 : -1))
+                      );
+                      setDefaultRange();
+                    }}
+                  >
+                    Remove Days
+                  </button>
+                </div>
+              )}
+            </div>
+          </section>
+        );
+      }}
+    />
+  );
 };
 
 export const Paths = ({ paths, className }) => {
@@ -999,7 +1130,6 @@ export const Range = ({
   formOptions,
   onChange: customOnChange,
   className,
-  error,
   min = 0,
   max = 100,
   step,

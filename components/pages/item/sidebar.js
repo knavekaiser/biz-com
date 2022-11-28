@@ -1,6 +1,6 @@
 import { useEffect, useState, useContext, Fragment } from "react";
 import { SiteContext } from "SiteContext";
-import { Checkbox, Input } from "components/elements";
+import { Checkbox, Input, CalendarInput } from "components/elements";
 import { HiChevronUp, HiChevronDown, HiStar } from "react-icons/hi";
 import s from "./styles/products.module.scss";
 import { useRouter } from "next/router";
@@ -14,12 +14,24 @@ const Sidebar = ({ product }) => {
     siteConfig: config,
     siteConfig: { siteConfig },
   } = useContext(SiteContext);
+  const { control } = useForm();
   return (
     <div className={s.sidebar}>
       <h1>{product.title}</h1>
 
       <div className={s.details}>
         {siteConfig?.productViewPage?.productElements?.map((item) => {
+          if (item === "dateRange") {
+            return (
+              <CalendarInput
+                label="Date"
+                key={item}
+                control={control}
+                dateWindow="futureIncludingToday"
+                name="dates"
+              />
+            );
+          }
           if (["string", "number"].includes(typeof product[item])) {
             if (item === "price") {
               return (
