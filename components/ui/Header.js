@@ -1,7 +1,6 @@
 import { useEffect, useContext, useState, useRef, useCallback } from "react";
 import { SiteContext } from "SiteContext";
-import { ETH } from "components/svg";
-import { Searchbox, Combobox, Input } from "components/elements";
+import { Input } from "components/elements";
 import { Modal, Prompt } from "components/modal";
 import { HiSearch, HiUserCircle, HiX, HiChevronLeft } from "react-icons/hi";
 import Link from "next/link";
@@ -15,10 +14,6 @@ import s from "./styles/header.module.scss";
 
 const Header = () => {
   const { siteConfig } = useContext(SiteContext);
-  const { control } = useForm({
-    defaultValues: { currency: "eth", language: "english" },
-  });
-
   return (
     <header className={s.header}>
       <span className={s.gred + ` gred`} />
@@ -33,7 +28,6 @@ const Header = () => {
         </div>
         <SearchForm />
         <div className={s.southSection}>
-          <Link href="/">About us</Link>
           <Account />
         </div>
       </div>
@@ -76,7 +70,6 @@ const SearchForm = () => {
 const Account = () => {
   const { user, setUser, logout } = useContext(SiteContext);
   const iconRef = useRef();
-  const { siteConfig } = useContext(SiteContext);
   const [open, setOpen] = useState(false);
   const [style, setStyle] = useState({});
   const [loginForm, setLoginForm] = useState(false);
