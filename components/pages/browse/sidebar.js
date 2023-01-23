@@ -1,7 +1,6 @@
 import { useEffect, useState, useContext, useRef } from "react";
 import { SiteContext } from "SiteContext";
-import { ETH } from "components/svg";
-import { Checkbox, Input, Select, Combobox, Range } from "components/elements";
+import { Input, Select, Combobox, Range } from "components/elements";
 import { HiChevronUp, HiChevronDown, HiOutlineX } from "react-icons/hi";
 import s from "./styles/products.module.scss";
 import { useForm } from "react-hook-form";
@@ -39,12 +38,10 @@ const Sidebar = ({ open, filters, setFilters }) => {
               max: +router.query[field.fieldName + "-max"],
             };
           } else {
-            values[field.fieldName + "-min"] = +router.query[
-              field.fieldName + "-min"
-            ];
-            values[field.fieldName + "-max"] = +router.query[
-              field.fieldName + "-max"
-            ];
+            values[field.fieldName + "-min"] =
+              +router.query[field.fieldName + "-min"];
+            values[field.fieldName + "-max"] =
+              +router.query[field.fieldName + "-max"];
           }
         }
       });
@@ -58,7 +55,6 @@ const Sidebar = ({ open, filters, setFilters }) => {
     return null;
   }
 
-  const color = watch("color");
   return (
     <form className={s.sidebar}>
       {Object.keys(router.query).length > 1 && (
@@ -272,7 +268,7 @@ const FilterList = ({ field, setFilters, sidebarItem, control }) => {
     return (
       <Section label={field.label}>
         <ul className={s.filterList}>
-          {(field.optionsType === "predefined" ? field.options : options).map(
+          {(field.optionType === "array" ? field.options : options).map(
             (option, i) => (
               <li key={i}>
                 <input
@@ -303,19 +299,19 @@ const FilterList = ({ field, setFilters, sidebarItem, control }) => {
       <Section label={field.label}>
         <Select
           control={control}
-          {...(field.optionType === "predefined" && {
+          {...(field.optionType === "array" && {
             options: field.options,
           })}
           {...(field.optionType === "collection" && {
             url: `${endpoints.elements}/${field.collection}`,
-          })}
-          getQuery={(inputValue, selected) => ({
-            ...(inputValue && { [field.optionLabel]: inputValue }),
-            ...(selected && { [field.optionValue]: selected }),
-          })}
-          handleData={(item) => ({
-            label: item[field.optionLabel],
-            value: item[field.optionValue],
+            getQuery: (inputValue, selected) => ({
+              ...(inputValue && { [field.optionLabel]: inputValue }),
+              ...(selected && { [field.optionValue]: selected }),
+            }),
+            handleData: (item) => ({
+              label: item[field.optionLabel],
+              value: item[field.optionValue],
+            }),
           })}
           multiple
           name={field.name}
