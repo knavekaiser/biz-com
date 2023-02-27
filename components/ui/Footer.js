@@ -7,14 +7,7 @@ const Footer = () => {
   const { siteConfig } = useContext(SiteContext);
   return (
     <footer className={s.footer}>
-      <div className={s.watermark}>
-        <img src={siteConfig.logo} />
-      </div>
       <div className={s.wrapper}>
-        <div className={s.branding}>
-          <img src={siteConfig.logo} />
-          <h2>{siteConfig.siteTitle}</h2>
-        </div>
         {(siteConfig?.siteConfig?.footer?.sections || []).map((section) => (
           <ul
             key={section.title}
@@ -40,6 +33,10 @@ const Footer = () => {
             ))}
           </ul>
         ))}
+      </div>
+      <div className={s.branding}>
+        <img src={siteConfig.logo} />
+        <h2>{siteConfig.siteTitle}</h2>
       </div>
     </footer>
   );

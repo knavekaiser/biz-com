@@ -1,16 +1,8 @@
-import React, { useState, useEffect, useContext } from "react";
-import { SiteContext } from "SiteContext";
+import React, { useState } from "react";
 import s from "./styles/products.module.scss";
 
 export default function Images({ product }) {
-  const { siteConfig } = useContext(SiteContext);
   const [viewImage, setViewImage] = useState(0);
-  const responsive = {
-    desktop: {
-      breakpoint: { max: 3000, min: 0 },
-      items: 1,
-    },
-  };
   return (
     <div className={s.images}>
       <div className={s.thumbnails}>

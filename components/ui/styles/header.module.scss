@@ -1,7 +1,8 @@
 @import "components/variables";
 
 .header {
-  background: white;
+  // background: white;
+  background: #131921;
   .content {
     padding: 0.5rem;
     max-width: $max-width;
@@ -10,6 +11,7 @@
     align-items: center;
     flex-wrap: wrap;
     justify-content: space-between;
+    color: white;
     .northSection,
     .southSection {
       display: flex;
@@ -29,14 +31,11 @@
       .devider {
         width: 2px;
         height: 1.75rem;
-        background: rgba(0, 0, 0, 0.16);
       }
       a {
-        color: rgba(0, 0, 0, 0.6);
         font-weight: 400;
         position: relative;
         display: inline-block;
-        padding: 0.8rem 0;
         &::after {
           content: "";
           height: 0;
@@ -63,14 +62,20 @@
     .searchForm {
       width: 28rem;
       display: flex;
-      grid-gap: 0.5rem;
       .input {
         flex-basis: 100%;
-        .icon {
-          color: grey;
-          font-size: 1.5em;
-          margin-right: 0.5rem;
+        input {
+          border-radius: 4px 0 0 4px !important;
+          font-size: 1.3rem;
+          padding: 0.5rem;
         }
+      }
+      button {
+        font-size: 1.75rem;
+        padding: 0.25rem 0.5rem;
+        margin-left: -4px;
+        z-index: 5;
+        border-radius: 0 4px 4px 0;
       }
     }
     .southSection {
@@ -165,9 +170,10 @@
   }
 }
 
-@media only screen and (max-width: 1200px) {
+@media only screen and (max-width: 650px) {
   .header {
     .content {
+      grid-gap: 0.5rem;
       .northSection,
       .southSection {
         order: 1;

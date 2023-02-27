@@ -38,9 +38,6 @@ const Header = () => {
 const SearchForm = () => {
   const { handleSubmit, control } = useForm();
   const router = useRouter();
-  if (router.pathname !== "/") {
-    return null;
-  }
   return (
     <form
       className={s.searchForm}
@@ -58,11 +55,13 @@ const SearchForm = () => {
       <Input
         className={s.input}
         placeholder="Search"
-        startAdornment={<HiSearch className={s.icon} />}
+        // startAdornment={<HiSearch className={s.icon} />}
         control={control}
         name="search"
       />
-      <button className="btn primary">Search</button>
+      <button className="btn primary">
+        <HiSearch />
+      </button>
     </form>
   );
 };

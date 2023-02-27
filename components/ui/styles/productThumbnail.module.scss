@@ -3,9 +3,17 @@
 .productThumb {
   position: relative;
   z-index: 1;
+  border: 1px solid rgb(238, 238, 238);
+  border-radius: 0.4rem;
+  overflow: hidden;
   .thumbnailWrapper {
     overflow: hidden;
     aspect-ratio: 1;
+    img {
+      height: 100%;
+      width: 100%;
+      object-fit: contain;
+    }
     .thumbnail {
       a {
         display: block;
@@ -18,34 +26,28 @@
         }
       }
     }
-    border-radius: 1rem;
     object-fit: cover;
     display: grid;
   }
   .productDetail {
-    grid-gap: 0.3rem;
-    padding: 0.5rem 0;
+    grid-gap: 0.4rem;
+    padding: 0.5rem 0.4rem;
     font-size: 14px;
     background: white;
     color: $grey3;
-    display: flex;
-    .left {
-      flex: 1;
-      display: grid;
-    }
-    .right {
-      display: grid;
-      justify-content: flex-end;
-      grid-auto-rows: min-content;
-    }
+    display: grid;
     h4 {
-      grid-column: 1/2;
-      grid-row: 1/2;
+      font-size: 22px;
+      line-height: 24px;
+      font-weight: 400;
       color: black;
       display: -webkit-box;
       -webkit-box-orient: vertical;
       overflow: hidden;
-      -webkit-line-clamp: 2;
+      -webkit-line-clamp: 3;
+      &:hover {
+        color: $orange;
+      }
     }
     .productSeller {
       display: flex;
@@ -86,65 +88,34 @@
       }
     }
     .rating {
-      grid-column: 1/2;
-      grid-row: 1/2;
-      justify-content: flex-end;
       display: flex;
       align-items: center;
       font-size: 1.2em;
-      margin: auto;
-      margin-right: 0;
-      svg {
-        font-size: 1.1em;
-        margin-top: 0.18em;
+      .value {
+        font-weight: 500;
       }
-      color: $grey2;
-      .lit {
-        color: $yellow;
+      .stars {
+        color: $orange;
+        svg {
+          font-size: 1.2em;
+        }
       }
       position: relative;
-      // .reviewCount {
-      //   width: max-content;
-      //   background: white;
-      //   padding: 0.5rem;
-      //   border-radius: 0.5rem;
-      //   position: absolute;
-      //   bottom: calc(100% + 10px);
-      //   left: 50%;
-      //   transform: translateX(-50%);
-      //   filter: drop-shadow($shadow1);
-      //   display: none;
-      //   &::before {
-      //     content: "";
-      //     display: block;
-      //     border: 7px solid transparent;
-      //     border-bottom: 0;
-      //     border-top: 10px solid white;
-      //     position: absolute;
-      //     bottom: -10px;
-      //     left: 50%;
-      //     transform: translateX(-50%);
-      //   }
-      // }
+      grid-gap: 4px;
+      .chev {
+        color: $grey2;
+      }
       .reviewCount {
-        // background: white;
-        // position: absolute;
-        // width: 100%;
-        // height: 100%;
-        // text-align: center;
-        // display: block;
-        margin-left: 4px;
+        color: #007185;
       }
       &:hover {
         .reviewCount {
-          display: block;
+          color: $orange;
         }
       }
     }
     .whatsappBtn {
       display: grid;
-      margin: auto;
-      margin-right: 0;
       border: none;
       background: none;
       font-size: 1.5em;

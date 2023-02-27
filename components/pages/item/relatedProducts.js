@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Fire } from "components/svg";
-import { Combobox } from "components/elements";
 import { ProductThumb } from "components/ui/productThumbnail";
-import Link from "next/link";
 import { useRouter } from "next/router";
 import { useFetch } from "hooks";
-import { endpoints, paths } from "config";
+import { endpoints } from "config";
 import s from "./styles/products.module.scss";
 
 export default function Explore() {

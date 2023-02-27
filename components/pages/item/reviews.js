@@ -1,10 +1,9 @@
 import React, { useState, useEffect, useCallback, useContext } from "react";
 import { SiteContext } from "SiteContext";
-import Link from "next/link";
 import { HiStar, HiOutlineUserCircle } from "react-icons/hi";
 import { useRouter } from "next/router";
 import { useFetch } from "hooks";
-import { endpoints, paths } from "config";
+import { endpoints } from "config";
 import { useForm } from "react-hook-form";
 import { Moment } from "components/elements";
 import { Prompt } from "components/modal";

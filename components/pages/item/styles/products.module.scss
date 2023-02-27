@@ -10,26 +10,58 @@
   max-width: $max-width;
   margin: auto;
   display: grid;
-  grid-template-columns: 1fr 25rem;
+  grid-template-columns: 1fr 2fr;
   padding: 2rem 1rem;
   grid-gap: 1.5rem;
   .sidebar {
     padding: 1.5rem;
     display: grid;
+    grid-template-columns: 1.5fr 1fr;
     grid-gap: 1rem;
     grid-auto-rows: min-content;
-    border-radius: 0.5rem;
-    box-shadow: $shadow1;
+    .left,
+    .right {
+      display: grid;
+      grid-gap: 1rem;
+      grid-auto-rows: min-content;
+    }
+    .right {
+      padding: 1rem;
+      border-radius: 0.5rem;
+      border: 1px solid $grey1;
+      max-width: 40rem;
+    }
+    h1 {
+      font-weight: 400;
+      font-size: 1.8rem;
+    }
     .rating {
-      font-size: 1.05em;
-      svg {
-        transform: translateY(0.15em);
+      display: flex;
+      align-items: center;
+      font-size: 1.2rem;
+      .value {
+        font-weight: 500;
       }
-      color: $grey2;
-      .lit {
-        color: $yellow;
+      .stars {
+        color: $orange;
+        svg {
+          font-size: 1em;
+        }
       }
       position: relative;
+      grid-gap: 4px;
+      .chev {
+        color: $grey2;
+      }
+      .reviewCount {
+        font-size: 0.9em;
+        color: #007185;
+      }
+      &:hover {
+        .reviewCount {
+          color: $orange;
+        }
+      }
       cursor: pointer;
       &:hover {
         .breakdown {
@@ -38,9 +70,9 @@
       }
       .breakdown {
         width: max-content;
-        padding: 0.75rem;
+        padding: 0.75rem 1rem;
         border-radius: 0.5rem;
-        filter: drop-shadow($shadow1);
+        filter: drop-shadow(0 0 1px $grey2) drop-shadow($shadow1);
         background: white;
         position: absolute;
         top: 130%;
@@ -62,33 +94,43 @@
           font-size: 0.9em;
         }
         .title {
-          font-weight: 500;
+          font-weight: 400;
+          display: flex;
+          align-items: center;
+          grid-gap: 0.5rem;
+          .stars {
+            color: $orange;
+            svg {
+              font-size: 1.2em;
+            }
+          }
           span {
             color: black;
-            margin-left: 6px;
+            // margin-left: 6px;
           }
         }
         .graph {
           display: grid;
-          grid-gap: 0.25rem;
-          font-size: 0.85em;
+          grid-gap: 0.75rem;
+          font-size: 0.9em;
           li {
             display: grid;
             align-items: center;
-            grid-gap: 0.5rem;
-            grid-template-columns: 2.5rem 10rem 2rem;
+            grid-gap: 0.85rem;
+            grid-template-columns: 3rem 10rem 2rem;
+            color: #007185;
             .bar {
               border-radius: 4px;
               flex: 1;
               background: $grey1;
               position: relative;
-              height: 15px;
+              height: 20px;
               border: 1px solid rgba(0, 0, 0, 0.1);
               .fill {
                 border-radius: 4px;
                 display: block;
                 height: 100%;
-                background: $yellow;
+                background: $orange;
               }
             }
             .percent {
@@ -127,44 +169,63 @@
         }
       }
     }
+    .description {
+      h4 {
+        margin-bottom: 0.5rem;
+      }
+      P {
+        font-size: 0.9em;
+      }
+    }
+    .inventory {
+      color: green;
+    }
     .actions {
-      display: flex;
+      display: grid;
       grid-gap: 0.5rem;
+      button {
+        border-radius: 2rem;
+        justify-content: center;
+        font-weight: 400;
+      }
+      .addToCart {
+        background: $yellow;
+      }
+      .buyNow {
+        background: $orange2;
+      }
     }
   }
   .images {
     display: grid;
-    grid-template-columns: 100px 1fr;
+    grid-template-columns: 62px 1fr;
     grid-gap: 0.5rem;
-    min-width: 35rem;
-    max-height: 35rem;
+    min-width: 25rem;
     .thumbnails {
       display: grid;
       grid-auto-rows: min-content;
       grid-gap: 0.5rem;
-      max-height: 100%;
+      max-height: 30rem;
       overflow: auto;
-      // padding-right: 0.5rem;
-      border-radius: 0.5rem;
+      border-radius: 0.3rem;
       img {
         cursor: pointer;
-        border-radius: 0.5rem;
+        border-radius: 0.3rem;
         object-fit: cover;
-        height: 5rem;
-        width: 5rem;
+        height: 3rem;
+        width: 3rem;
         &.inView {
-          border: 5px solid $primary-color;
+          border: 3px solid $primary-color;
         }
       }
     }
     .mainImg {
       display: flex;
+      width: 100%;
       max-height: 35rem;
       img {
         margin: auto;
-        max-width: 100%;
-        max-height: 100%;
-        min-height: 32rem;
+        width: 100%;
       }
     }
   }
@@ -181,15 +242,6 @@
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
       grid-gap: 1.25rem;
-    }
-  }
-  .description {
-    box-shadow: $shadow1;
-    border-radius: 0.5rem;
-    overflow: hidden;
-    grid-column: 1 / 3;
-    .descriptionContent {
-      padding: 1.5rem;
     }
   }
   .reviews {

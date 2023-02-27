@@ -2,7 +2,8 @@
 
 .footer {
   margin-top: 4rem;
-  background: $primary-color;
+  background: #232f3e;
+  color: white;
   position: sticky;
   top: 100%;
   z-index: 1;
@@ -17,19 +18,7 @@
     justify-content: left;
     flex-wrap: wrap;
     grid-gap: 1.5rem;
-    .branding {
-      display: flex;
-      align-items: center;
-      grid-gap: 0.5rem;
-      img {
-        height: 5rem;
-        width: 5rem;
-      }
-      //   width: 269px;
-      //   height: 74px;
-      // svg {
-      // }
-    }
+    padding-bottom: 1rem;
     .links {
       min-width: 10rem;
       h4 {
@@ -51,6 +40,22 @@
       }
     }
   }
+  .branding {
+    padding-top: 1rem;
+    border-top: 1px solid $grey3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    grid-gap: 0.5rem;
+    img {
+      height: 4rem;
+      width: 4rem;
+    }
+    //   width: 269px;
+    //   height: 74px;
+    // svg {
+    // }
+  }
   .social {
     .social_icons {
       color: $grey4;
@@ -59,18 +64,6 @@
       grid-template-columns: 1fr 1fr 1fr 1fr;
       grid-gap: 1rem;
     }
-  }
-  .watermark {
-    z-index: -1;
-    display: grid;
-    position: absolute;
-    img {
-      height: 14rem;
-      width: 14rem;
-    }
-    bottom: -2rem;
-    left: -2rem;
-    opacity: 0.2;
   }
 }
 

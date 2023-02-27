@@ -42,12 +42,9 @@
       border-radius: 0.5rem;
       .head {
         cursor: pointer;
-        border-radius: 0.5rem 0.5rem 0 0;
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: 0.75rem;
-        border: 1px solid $grey1;
         font-weight: 600;
         svg {
           font-size: 1.5rem;
@@ -57,7 +54,6 @@
         display: grid;
         grid-gap: 1rem;
         padding: 0.75rem;
-        background: $light-grey;
         .filterList {
           label,
           input {
@@ -92,7 +88,7 @@
     }
     .products {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 350px));
+      grid-template-columns: repeat(auto-fit, minmax(200px, 330px));
       grid-gap: 1.25rem;
       grid-auto-rows: min-content;
       .placeholder {

@@ -31,7 +31,7 @@ const ModalComp = ({
   useEffect(() => {
     if (onOutsideClick) {
       const eventHandler = (e) => {
-        if (!e.path.includes(ref.current)) {
+        if (!e.path?.includes(ref.current)) {
           onOutsideClick();
         }
       };

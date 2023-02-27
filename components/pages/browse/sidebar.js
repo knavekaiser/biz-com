@@ -336,14 +336,15 @@ const Section = ({ label, children, className }) => {
     siteConfig: { siteConfig },
   } = useContext(SiteContext);
   const [open, setOpen] = useState(
-    siteConfig?.browsePage?.sidebarFiltersDefaultState === "open" ? true : false
+    true
+    // siteConfig?.browsePage?.sidebarFiltersDefaultState === "open" ? true : false
   );
 
   return (
     <div className={`${s.section} ${className || ""}`}>
       <div className={s.head} onClick={() => setOpen(!open)}>
         {label}
-        {open ? <HiChevronUp /> : <HiChevronDown />}
+        {/* {open ? <HiChevronUp /> : <HiChevronDown />} */}
       </div>
       {open && (
         <div className={s.sectionContent} onClick={(e) => e.stopPropagation()}>

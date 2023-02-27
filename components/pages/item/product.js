@@ -1,24 +1,17 @@
-import React, { useState, useEffect } from "react";
-import { Combobox, Tabs } from "components/elements";
+import React, { useState } from "react";
 import Sidebar from "./sidebar";
 import Images from "./images";
 import Reviews from "./reviews";
-import { ProductThumb } from "components/ui/productThumbnail";
 import RelatedProducts from "./relatedProducts";
-import { useForm } from "react-hook-form";
 import s from "./styles/products.module.scss";
+import { Tabs } from "components/elements";
 
 export default function Products({ product }) {
-  const [filters, setFilters] = useState("");
-  const [sidebarOpen, setSidebarOpen] = useState(true);
-  const { control } = useForm({
-    defaultValues: { sort: "popular", type: "buyNow" },
-  });
   return (
     <div className={`${s.container}`}>
       <Images product={product} />
       <Sidebar product={product} />
-      <Description product={product} />
+      {/* <Description product={product} /> */}
       <Reviews product={product} />
       <RelatedProducts />
     </div>
