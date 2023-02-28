@@ -5,13 +5,14 @@
   background: #131921;
   .content {
     padding: 0.5rem;
-    max-width: $max-width;
+    // max-width: $max-width;
     margin: auto;
     display: flex;
     align-items: center;
     flex-wrap: wrap;
     justify-content: space-between;
     color: white;
+    grid-gap: 2rem;
     .northSection,
     .southSection {
       display: flex;
@@ -60,14 +61,14 @@
       }
     }
     .searchForm {
-      width: 28rem;
+      flex: 1;
       display: flex;
       .input {
         flex-basis: 100%;
         input {
           border-radius: 4px 0 0 4px !important;
-          font-size: 1.3rem;
-          padding: 0.5rem;
+          font-size: 1rem;
+          padding: 0.65rem;
         }
       }
       button {
