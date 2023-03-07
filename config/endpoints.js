@@ -23,6 +23,7 @@ const endpoints = {
   logout: `${baseApiUrlPublic}/api/customers/logout`,
   profile: `${baseApiUrlPublic}/api/customers/profile`,
   reviews: `${baseApiUrlPublic}/api/reviews`,
+  cart: `${baseApiUrlPublic}/api/cart`,
 };
 
 export default endpoints;

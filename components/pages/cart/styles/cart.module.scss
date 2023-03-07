@@ -1,0 +1,106 @@
+@import "components/variables";
+
+.container {
+  max-width: $max-width;
+  display: grid;
+  grid-template-columns: 1fr 25rem;
+  padding: 2rem 0.5rem;
+  grid-gap: 1.5rem;
+  // background: $light-grey;
+  padding-bottom: 4rem;
+  margin-bottom: -4rem;
+  background: $grey1;
+  h2 {
+    font-size: 1.75rem;
+    font-weight: 400;
+  }
+  .products {
+    background: white;
+    padding: 1rem 1.5rem;
+    display: grid;
+    // grid-gap: 1.25rem;
+    .items {
+      margin-top: 1.25rem;
+      border-top: 1px solid $grey2;
+      border-bottom: 1px solid $grey2;
+      padding: 1rem 0;
+      position: relative;
+      .priceLabel {
+        display: block;
+        position: absolute;
+        top: -22px;
+        right: 0;
+        color: $grey3;
+      }
+      display: grid;
+      grid-gap: 0.5rem;
+      .product {
+        img {
+          max-height: 7rem;
+          max-width: 7rem;
+          object-fit: contain;
+        }
+        .productDetail {
+          h3 {
+            font-weight: 400;
+          }
+          flex: 1;
+          .detail {
+            font-size: 0.85rem;
+          }
+          .actions {
+            margin-top: 0.5rem;
+            display: flex;
+            grid-gap: 1rem;
+            .devider {
+              width: 1px;
+              background: $grey1;
+            }
+            .qty {
+              width: 4rem;
+            }
+            & > button {
+              font-size: 0.9rem;
+              padding: 0;
+              background: none;
+              color: $blue;
+              &:hover {
+                text-decoration: underline;
+              }
+            }
+          }
+        }
+        .price {
+          font-size: 1.25rem;
+          font-weight: 600;
+        }
+        display: flex;
+        grid-gap: 0.5rem;
+      }
+    }
+    .subtotal {
+      font-size: 1.2rem;
+      text-align: right;
+      margin-bottom: 2rem;
+    }
+  }
+  .summary {
+    background: white;
+    padding: 1.5rem;
+    display: grid;
+    grid-gap: 1rem;
+    grid-auto-rows: min-content;
+    height: min-content;
+    .detail {
+      display: flex;
+      justify-content: space-between;
+    }
+    .subtotal {
+      font-size: 1.2rem;
+    }
+  }
+  .notes {
+    font-size: 0.8rem;
+    color: $grey3;
+  }
+}

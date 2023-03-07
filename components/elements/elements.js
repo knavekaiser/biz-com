@@ -10,6 +10,7 @@ import React, {
 import { IoIosClose } from "react-icons/io";
 import { FaUpload, FaSearch, FaRegTrashAlt, FaTimes } from "react-icons/fa";
 import { BsFillExclamationTriangleFill } from "react-icons/bs";
+import { BiChevronRight } from "react-icons/bi";
 import { HiEye, HiEyeOff } from "react-icons/hi";
 import { GoCalendar } from "react-icons/go";
 import Link from "next/link";
@@ -631,6 +632,7 @@ export const CustomRadio = ({
   multiple,
   className,
   selectedClassName,
+  onChange: customOnChange,
 }) => (
   <Controller
     control={control}
@@ -672,12 +674,15 @@ export const CustomRadio = ({
                   if (_v === value || value.includes(_v)) {
                     if (multiple) {
                       onChange(value.filter((v) => v !== _v));
+                      customOnChange?.(value.filter((v) => v !== _v));
                     }
                   } else {
                     if (multiple) {
                       onChange([...value, _v]);
+                      customOnChange?.([...value, _v]);
                     } else {
                       onChange(_v);
+                      customOnChange?.(_v);
                     }
                   }
                 }}
@@ -1051,7 +1056,7 @@ export const Paths = ({ paths, className }) => {
           ) : (
             <span>{item.label}</span>
           )}
-          {paths[i + 1] ? <span className={s.divider}>/</span> : null}
+          {paths[i + 1] ? <BiChevronRight className={s.divider} /> : null}
         </Fragment>
       ))}
     </div>

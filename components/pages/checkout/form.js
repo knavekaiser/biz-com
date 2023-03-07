@@ -1,11 +1,9 @@
-import React, { useState, useEffect, useContext } from "react";
-import { SiteContext } from "SiteContext";
+import React from "react";
 import { Input } from "components/elements";
 import { useForm } from "react-hook-form";
 import s from "./styles/checkout.module.scss";
 
 export default function Images() {
-  const { siteConfig } = useContext(SiteContext);
   const { control } = useForm();
   return (
     <div className={s.forms}>

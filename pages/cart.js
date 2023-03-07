@@ -4,9 +4,9 @@ import Header from "components/ui/Header";
 
 import Footer from "components/ui/Footer";
 
-import Checkout from "components/pages/checkout/checkout";
+import Products from "components/pages/cart/products";
 import DomainFallback from "components/ui/domainFallback";
-import s from "components/pages/checkout/styles/checkout.module.scss";
+import s from "components/pages/cart/styles/cart.module.scss";
 
 import { endpoints } from "config";
 
@@ -40,7 +40,7 @@ const Page = ({ siteData }) => {
   return (
     <main className={s.checkout}>
       <Header />
-      <Checkout />
+      <Products />
       <Footer />
     </main>
   );

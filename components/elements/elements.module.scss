@@ -963,12 +963,10 @@
 .paths {
   display: flex;
   grid-gap: 0.5rem;
-  a {
-    color: $primary-color-dark1;
-    font-weight: 500;
-  }
-  span {
-    color: $grey2;
+  font-size: 0.85rem;
+  color: $grey2;
+  a:hover {
+    text-decoration: underline;
   }
 }
 

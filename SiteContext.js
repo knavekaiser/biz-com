@@ -1,24 +1,100 @@
-import React, {
-  createContext,
-  useState,
-  useEffect,
-  useRef,
-  useCallback,
-} from "react";
+import React, { createContext, useState, useEffect, useCallback } from "react";
 import { useRouter } from "next/router";
-import { useFetch } from "hooks";
 import { endpoints } from "config";
+import { useFetch } from "hooks";
 
 export const SiteContext = createContext();
 export const Provider = ({ children }) => {
   const router = useRouter();
+
   const [siteConfig, setSiteConfig] = useState({
     siteTitle: "Biz App",
   });
+
   const [user, setUser] = useState(null);
   useEffect(() => {
     // do something
+    if (user) {
+      // load cart from backend
+    } else {
+      try {
+        const _cart = JSON.parse(localStorage.getItem("cart") || "[]");
+        setCart(_cart);
+      } catch (err) {
+        localStorage.setItem("cart", "[]");
+      }
+    }
   }, [user]);
+
+  const [cart, setCart] = useState([]);
+  const {
+    get: getCart,
+    post: updateCart,
+    loading: loadingCart,
+  } = useFetch(endpoints.cart);
+  const addToCart = useCallback(
+    async (product, qty) => {
+      let newCart = [];
+      try {
+        newCart = JSON.parse(localStorage.getItem("cart") || "[]");
+      } catch (err) {
+        localStorage.setItem("cart", "[]");
+      }
+
+      const existingProductIndex = newCart.findIndex(
+        (item) =>
+          item.product._id === product.product._id &&
+          (!product.variant
+            ? !item.variant
+            : item.variant?._id === product.variant._id)
+      );
+
+      if (existingProductIndex !== -1) {
+        if (qty) {
+          newCart[existingProductIndex].qty = qty;
+        } else {
+          newCart[existingProductIndex].qty += product.qty;
+        }
+      } else {
+        newCart.push(product);
+      }
+
+      localStorage.setItem("cart", JSON.stringify(newCart));
+      setCart(newCart);
+      if (user) {
+        await updateCart({ products: newCart });
+      }
+    },
+    [user]
+  );
+  const removeFromCart = useCallback(
+    async (product) => {
+      let newCart = [];
+      try {
+        newCart = JSON.parse(localStorage.getItem("cart") || "[]");
+      } catch (err) {
+        localStorage.setItem("cart", "[]");
+      }
+
+      const existingProductIndex = newCart.findIndex(
+        (item) =>
+          item.product._id === product.product._id &&
+          (!product.variant
+            ? !item.variant
+            : item.variant?._id === product.variant._id)
+      );
+      if (existingProductIndex >= 0) {
+        newCart.splice(existingProductIndex, 1);
+      }
+
+      localStorage.setItem("cart", JSON.stringify(newCart));
+      setCart(newCart);
+      if (user) {
+        await updateCart({ products: newCart });
+      }
+    },
+    [user]
+  );
 
   const logout = useCallback(() => {
     fetch(endpoints.logout, {
@@ -73,6 +149,10 @@ export const Provider = ({ children }) => {
         setUser,
         siteConfig,
         setSiteConfig,
+        cart,
+        addToCart,
+        removeFromCart,
+        loadingCart,
         logout,
       }}
     >

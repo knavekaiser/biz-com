@@ -3,6 +3,7 @@ import { SiteContext } from "SiteContext";
 import { Input } from "components/elements";
 import { Modal, Prompt } from "components/modal";
 import { HiSearch, HiUserCircle, HiX, HiChevronLeft } from "react-icons/hi";
+import { RiShoppingCartLine } from "react-icons/ri";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { paths, endpoints } from "config";
@@ -13,7 +14,8 @@ import * as yup from "yup";
 import s from "./styles/header.module.scss";
 
 const Header = () => {
-  const { siteConfig } = useContext(SiteContext);
+  const { siteConfig, cart } = useContext(SiteContext);
+  const router = useRouter();
   return (
     <header className={s.header}>
       <span className={s.gred + ` gred`} />
@@ -29,6 +31,17 @@ const Header = () => {
         <SearchForm />
         <div className={s.southSection}>
           <Account />
+          <button
+            className={s.icon}
+            onClick={(e) => {
+              router.push(paths.cart);
+            }}
+          >
+            <span className={s.itemCount}>
+              {cart.reduce((p, c) => p + c.qty, 0) || 0}
+            </span>
+            <RiShoppingCartLine /> <label>Cart</label>
+          </button>
         </div>
       </div>
     </header>
@@ -81,7 +94,6 @@ const Account = () => {
   }, []);
   return (
     <div className={s.account}>
-      {user && <span className={s.userName}>{user.name}</span>}
       <button
         className={s.icon}
         onClick={(e) => {
@@ -90,7 +102,7 @@ const Account = () => {
         }}
         ref={iconRef}
       >
-        <HiUserCircle />
+        <small>Hello,</small> {user?.name || "Sign In"}
       </button>
 
       <Modal

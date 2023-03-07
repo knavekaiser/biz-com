@@ -7,6 +7,17 @@
   margin: 0;
 }
 
+.rdw-editor-wrapper * {
+  box-sizing: revert;
+  padding: revert;
+  margin: revert;
+  list-style: revert;
+}
+
+.rdw-editor-main {
+  height: max-content !important;
+}
+
 @font-face {
   font-family: "amazon ember";
   src: url(/assets/amazon_ember.ttf);
@@ -19,7 +30,9 @@ body {
     sans-serif;
   #__next {
     main {
+      display: grid;
       min-height: calc((var(--vh) * 100));
+      grid-template-rows: max-content 1fr max-content;
     }
   }
 }
@@ -66,15 +79,19 @@ button {
     align-items: center;
     padding: 0.5rem 1rem;
     font-size: 0.95rem;
-    font-weight: 600;
+    font-weight: 500;
     border-radius: 4px;
     border: none;
     cursor: pointer;
+    justify-content: center;
     &.primary {
       background: $primary-color;
       &:active {
         background: $primary-color-dark1;
       }
+    }
+    &.secondary {
+      background: $yellow;
     }
     &.whatsapp {
       display: flex;
@@ -116,6 +133,10 @@ button {
         // background: blue;
         animation: loading_after 1s infinite;
       }
+    }
+    &.fullWidth {
+      flex-basis: 100%;
+      width: 100%;
     }
   }
 }

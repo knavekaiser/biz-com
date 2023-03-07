@@ -1,17 +1,9 @@
-import React, { useState, useEffect } from "react";
-import { Combobox, Tabs } from "components/elements";
+import React from "react";
 import Sidebar from "./sidebar";
 import Form from "./form";
-import { ProductThumb } from "components/ui/productThumbnail";
-import { useForm } from "react-hook-form";
 import s from "./styles/checkout.module.scss";
 
 export default function Checkout({ product }) {
-  const [filters, setFilters] = useState("");
-  const [sidebarOpen, setSidebarOpen] = useState(true);
-  const { control } = useForm({
-    defaultValues: { sort: "popular", type: "buyNow" },
-  });
   return (
     <div className={`${s.container}`}>
       <Form />

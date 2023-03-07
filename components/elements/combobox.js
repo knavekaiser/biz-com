@@ -214,7 +214,7 @@ export const Combobox = ({
               backdropClass={s.comboboxBackdrop}
               setOpen={setOpen}
               onBackdropClick={() => setOpen(false)}
-              clickThroughBackdrop
+              // clickThroughBackdrop
               style={style}
             >
               <ComboboxList

@@ -1,6 +1,5 @@
 import { useEffect, useContext } from "react";
 import { SiteContext } from "SiteContext";
-import { useRouter } from "next/router";
 import Head from "next/head";
 
 import Header from "components/ui/Header";

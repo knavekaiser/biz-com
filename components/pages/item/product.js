@@ -4,14 +4,15 @@ import Images from "./images";
 import Reviews from "./reviews";
 import RelatedProducts from "./relatedProducts";
 import s from "./styles/products.module.scss";
-import { Tabs } from "components/elements";
+import { RichText } from "components/elements";
 
 export default function Products({ product }) {
+  const [variant, setVariant] = useState(product.variants?.[0] || null);
   return (
     <div className={`${s.container}`}>
-      <Images product={product} />
-      <Sidebar product={product} />
-      {/* <Description product={product} /> */}
+      <Images product={product} variant={variant} />
+      <Sidebar product={product} variant={variant} setVariant={setVariant} />
+      <Description product={product} />
       <Reviews product={product} />
       <RelatedProducts />
     </div>
@@ -19,28 +20,10 @@ export default function Products({ product }) {
 }
 
 const Description = ({ product }) => {
-  const [activeTab, setActiveTab] = useState("description");
   return (
     <div className={s.description}>
-      <Tabs
-        secondary
-        activeTab={activeTab}
-        onChange={(tab) => setActiveTab(tab.value)}
-        tabs={[
-          {
-            label: "Description",
-            value: "description",
-          },
-          ...((product?.specification && {
-            label: "Specifications",
-            value: "specification",
-          }) ||
-            []),
-        ]}
-      />
-      <div className={s.descriptionContent}>
-        {activeTab === "description" && <>{product.description}</>}
-      </div>
+      <hr />
+      <RichText data={product.description} />
     </div>
   );
 };

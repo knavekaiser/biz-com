@@ -1,9 +1,8 @@
+import { endpoints } from "config";
+import { useFetch } from "hooks";
 import { useEffect, useState, useContext } from "react";
 import { SiteContext } from "SiteContext";
-import { Checkbox, Input } from "components/elements";
-import { HiChevronUp, HiChevronDown, HiStar } from "react-icons/hi";
 import s from "./styles/checkout.module.scss";
-import { useForm } from "react-hook-form";
 
 const Detail = ({ label, value }) => {
   return (
@@ -14,23 +13,33 @@ const Detail = ({ label, value }) => {
   );
 };
 
-const Sidebar = ({ product }) => {
-  const { siteConfig } = useContext(SiteContext);
+const Sidebar = () => {
+  const { siteConfig, cart } = useContext(SiteContext);
+  const { post: placeOrder, loading } = useFetch(endpoints.placeOrder);
   return (
     <div className={s.summary}>
       <h3>Summary</h3>
 
       <Detail
         label="Total item costs"
-        value={siteConfig.siteConfig?.currency + " " + product.price}
+        value={
+          siteConfig.siteConfig?.currency +
+          " " +
+          cart
+            .reduce(
+              (p, c) => p + (c.product.price + (c.variant?.price || 0)) * c.qty,
+              0
+            )
+            .toLocaleString()
+        }
       />
       <Detail
         label="Total Shipping"
-        value={siteConfig.siteConfig?.currency + " " + "12"}
+        value={siteConfig.siteConfig?.currency + " " + "0"}
       />
 
       <div className={s.actions}>
-        <button className={`btn primary`}>Pay Now</button>
+        <button className={`btn secondary fullWidth`}>Pay Now</button>
       </div>
     </div>
   );

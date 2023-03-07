@@ -1,7 +1,5 @@
 import { useState, useEffect } from "react";
-import { Fire } from "components/svg";
 import Link from "next/link";
-import { Select } from "components/elements";
 import { ProductThumb } from "components/ui/productThumbnail";
 import { useFetch } from "hooks";
 import { endpoints, paths } from "config";
@@ -10,7 +8,7 @@ import { HiOutlineArrowNarrowRight } from "react-icons/hi";
 import { ImSpinner8 } from "react-icons/im";
 import s from "./styles/landingPage.module.scss";
 
-export default function LiveAuction() {
+export default function Shelves() {
   const [shelves, setShelves] = useState([]);
   const { get: getShelves, loading } = useFetch(endpoints.landingPageShelves);
   useEffect(() => {

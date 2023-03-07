@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback, useRef, useContext } from "react";
-import { SiteContext } from "../SiteContext";
+// import { SiteContext } from "../SiteContext";
 import { Prompt } from "../components/modal";
 import { endpoints as defaultEndpoints } from "../config";
 
@@ -7,7 +7,7 @@ export const useFetch = (
   url,
   { headers: hookHeaders, defaultHeaders, noDbSchema } = {}
 ) => {
-  const { user, logout } = useContext(SiteContext);
+  // const { user, logout } = useContext(SiteContext);
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
   const controller = useRef();

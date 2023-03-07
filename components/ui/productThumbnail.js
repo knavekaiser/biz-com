@@ -134,6 +134,71 @@ export const ProductThumb = ({ product }) => {
                         //product.totalReview > 1 ? "reviews" : "review"
                       }
                     </span>
+
+                    <div className={s.breakdown}>
+                      <div className={s.title}>
+                        <span className={s.stars}>
+                          {product.rating >= 2 ? (
+                            <ImStarFull />
+                          ) : (
+                            <ImStarEmpty />
+                          )}
+                          {product.rating >= 1 ? (
+                            <ImStarFull />
+                          ) : (
+                            <ImStarEmpty />
+                          )}
+                          {product.rating >= 3 ? (
+                            <ImStarFull />
+                          ) : (
+                            <ImStarEmpty />
+                          )}
+                          {product.rating >= 4 ? (
+                            <ImStarFull />
+                          ) : (
+                            <ImStarEmpty />
+                          )}
+                          {product.rating >= 5 ? (
+                            <ImStarFull />
+                          ) : (
+                            <ImStarEmpty />
+                          )}
+                        </span>
+
+                        <span>{product.rating} out of 5</span>
+                      </div>
+
+                      <div className={s.subtitle}>
+                        {product.totalReview} global ratings
+                      </div>
+
+                      <ul className={s.graph}>
+                        {[5, 4, 3, 2, 1].map((item, i) => {
+                          const rating = product.ratingBreakdown.find(
+                            (i) => i.rating === item
+                          );
+                          return (
+                            <li key={item}>
+                              <span>{item} star</span>
+                              <span className={s.bar}>
+                                <span
+                                  className={s.fill}
+                                  style={{
+                                    width: `${(
+                                      ((rating?.total || 0) / 5) *
+                                      100
+                                    ).fix()}%`,
+                                  }}
+                                />
+                              </span>
+                              <span className={s.percent}>
+                                {(((rating?.total || 0) / 5) * 100).fix()}%
+                              </span>
+                            </li>
+                          );
+                        })}
+                      </ul>
+                    </div>
                   </div>
                 );
               }
