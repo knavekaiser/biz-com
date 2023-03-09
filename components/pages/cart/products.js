@@ -101,7 +101,7 @@ const Product = ({ product }) => {
               name="qty"
               options={(
                 siteConfig.siteConfig.orderFields
-                  .find((item) => item.name === "products")
+                  ?.find((item) => item.name === "products")
                   ?.fields?.find((item) => item.name === "qty").options || []
               ).sort((a, b) => (a.value > b.value ? 1 : -1))}
               onChange={(opt) => addToCart(product, opt.value)}
