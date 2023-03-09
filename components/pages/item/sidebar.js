@@ -27,11 +27,7 @@ const Sidebar = ({ product, variant, setVariant }) => {
       const variant = product.variants[0];
       // data[.field] = product.variants[0].value;
       siteConfig?.productFields
-        .filter(
-          (item) =>
-            item.dataType === "array" &&
-            ["select", "combobox"].includes(item.fieldType)
-        )
+        .filter((item) => item.dataType === "variantArray")
         .forEach((item) => {
           data[item.name] = variant[item.name];
         });
@@ -158,7 +154,10 @@ const Sidebar = ({ product, variant, setVariant }) => {
                 />
               );
             }
-            if (Array.isArray(product[item])) {
+            if (
+              siteConfig.productFields.find((i) => i.name === item)
+                ?.dataType === "variantArray"
+            ) {
               const field = siteConfig.productFields.find(
                 (i) => i.name === item
               );
@@ -179,11 +178,7 @@ const Sidebar = ({ product, variant, setVariant }) => {
                     onChange={(_) => {
                       if (product.variants?.length) {
                         const variableFields = siteConfig.productFields
-                          .filter(
-                            (item) =>
-                              Array.isArray(product[item.name]) &&
-                              ["combobox", "select"].includes(item.fieldType)
-                          )
+                          .filter((item) => item.dataType === "variantArray")
                           .reduce((p, c) => {
                             p[c.name] = getValues(c.name);
                             return p;
@@ -203,7 +198,10 @@ const Sidebar = ({ product, variant, setVariant }) => {
                 </div>
               );
             }
-            if (["string", "number", ""].includes(typeof product[item])) {
+            if (
+              ["string", "number", ""].includes(typeof product[item]) ||
+              Array.isArray(product[item])
+            ) {
               if (item === "price") {
                 return (
                   <span className={s.price} key={item}>
@@ -227,7 +225,10 @@ const Sidebar = ({ product, variant, setVariant }) => {
               );
               return (
                 <span key={item}>
-                  <strong>{field.label}:</strong> {product[item]}
+                  <strong>{field.label}:</strong>{" "}
+                  {Array.isArray(product[item])
+                    ? product[item].join(", ")
+                    : product[item]}
                 </span>
               );
             }

@@ -18,14 +18,15 @@ const Sidebar = ({}) => {
       /> */}
 
       <p className={s.subtotal}>
-        Subtotal ({cart.reduce((p, c) => p + c.qty, 0)} item):{" "}
+        Subtotal ({cart.reduce((p, c) => p + (c.qty || 1), 0)} item):{" "}
         <strong>
           {siteConfig.siteConfig?.currency +
             " " +
             cart
               .reduce(
                 (p, c) =>
-                  p + (c.product.price + (c.variant?.price || 0)) * c.qty,
+                  p +
+                  (c.product.price + (c.variant?.price || 0)) * (c.qty || 1),
                 0
               )
               .toLocaleString()}
