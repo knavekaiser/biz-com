@@ -4,17 +4,28 @@ import Images from "./images";
 import Reviews from "./reviews";
 import RelatedProducts from "./relatedProducts";
 import s from "./styles/products.module.scss";
-import { RichText } from "components/elements";
+import { Paths, RichText } from "components/elements";
+import { paths } from "config";
 
-export default function Products({ product }) {
+export default function Products({ product, showHomePath }) {
   const [variant, setVariant] = useState(product.variants?.[0] || null);
   return (
     <div className={`${s.container}`}>
-      <Images product={product} variant={variant} />
-      <Sidebar product={product} variant={variant} setVariant={setVariant} />
-      <Description product={product} />
-      <Reviews product={product} />
-      <RelatedProducts />
+      <Paths
+        paths={[
+          ...(showHomePath ? [{ label: "Home", path: "/" }] : []),
+          { label: "Browse", path: paths.browse },
+          { label: product.title },
+        ]}
+        className={s.paths}
+      />
+      <div className={s.wrapper}>
+        <Images product={product} variant={variant} />
+        <Sidebar product={product} variant={variant} setVariant={setVariant} />
+        <Description product={product} />
+        <Reviews product={product} />
+        <RelatedProducts />
+      </div>
     </div>
   );
 }

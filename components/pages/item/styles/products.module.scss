@@ -1,446 +1,450 @@
 @import "components/variables";
 
 .paths {
-  padding: 1rem;
   padding-bottom: 0;
-  max-width: $max-width;
 }
 .container {
-  max-width: $max-width;
-  margin: auto;
-  display: grid;
-  grid-template-columns: 1fr 2fr;
+  width: 100%;
   padding: 1rem 1rem;
   grid-gap: 1.5rem;
-  .sidebar {
-    padding: 0 1.5rem;
+  .wrapper {
+    margin: auto;
+    max-width: $max-width;
+    width: 100%;
     display: grid;
-    grid-template-columns: 1.5fr 1fr;
-    grid-gap: 1rem;
-    grid-auto-rows: min-content;
-    .left,
-    .right {
+    grid-template-columns: 1fr 2fr;
+    .sidebar {
+      padding: 0 1.5rem;
       display: grid;
+      grid-template-columns: 1.5fr 1fr;
+      grid-gap: 1rem;
       grid-auto-rows: min-content;
+      .left,
+      .right {
+        display: grid;
+        grid-auto-rows: min-content;
+      }
+      .left {
+        & > hr {
+          margin: 1rem 0;
+        }
+      }
+      .right {
+        grid-gap: 1rem;
+        padding: 1rem;
+        border-radius: 0.5rem;
+        border: 1px solid $grey1;
+        max-width: 40rem;
+        height: min-content;
+        position: sticky;
+        top: 80px;
+        .specification {
+          display: none;
+        }
+      }
+      h1 {
+        font-weight: 400;
+        font-size: 1.8rem;
+      }
+      .rating {
+        display: flex;
+        align-items: center;
+        font-size: 1.2rem;
+        .value {
+          font-weight: 500;
+        }
+        .stars {
+          color: $orange;
+          svg {
+            font-size: 1em;
+          }
+        }
+        position: relative;
+        grid-gap: 4px;
+        .chev {
+          color: $grey2;
+        }
+        .reviewCount {
+          font-size: 0.9em;
+          color: #007185;
+        }
+        &:hover {
+          .reviewCount {
+            color: $orange;
+          }
+        }
+        cursor: pointer;
+        &:hover {
+          .breakdown {
+            display: block;
+          }
+        }
+        .breakdown {
+          width: max-content;
+          padding: 0.75rem 1rem;
+          border-radius: 0.5rem;
+          filter: drop-shadow(0 0 1px $grey2) drop-shadow($shadow1);
+          background: white;
+          position: absolute;
+          top: 130%;
+          display: none;
+          z-index: 10;
+          &::before {
+            content: "";
+            display: block;
+            border: 7px solid transparent;
+            border-top: 0;
+            border-bottom: 10px solid white;
+            position: absolute;
+            top: -10px;
+            left: 13%;
+          }
+          .subtitle {
+            margin-top: 0.25rem;
+            margin-bottom: 0.75rem;
+            font-size: 0.9em;
+          }
+          .title {
+            font-weight: 400;
+            display: flex;
+            align-items: center;
+            grid-gap: 0.5rem;
+            .stars {
+              color: $orange;
+              svg {
+                font-size: 1.2em;
+              }
+            }
+            span {
+              color: black;
+              // margin-left: 6px;
+            }
+          }
+          .graph {
+            display: grid;
+            grid-gap: 0.75rem;
+            font-size: 0.9em;
+            li {
+              display: grid;
+              align-items: center;
+              grid-gap: 0.85rem;
+              grid-template-columns: 3rem 10rem 2rem;
+              color: #007185;
+              .bar {
+                border-radius: 4px;
+                flex: 1;
+                background: $grey1;
+                position: relative;
+                height: 20px;
+                border: 1px solid rgba(0, 0, 0, 0.1);
+                .fill {
+                  border-radius: 4px;
+                  display: block;
+                  height: 100%;
+                  background: $orange;
+                }
+              }
+              .percent {
+                text-align: right;
+              }
+            }
+          }
+        }
+      }
+      .variant {
+        display: flex;
+        grid-gap: 6px;
+        section {
+          flex: 1;
+        }
+        .customRadio {
+          label {
+            background: white;
+            color: $grey2;
+            border-color: $grey2;
+            &.selected {
+              color: rgb(148, 0, 0);
+              border-color: $orange;
+            }
+          }
+        }
+      }
+
+      .seller {
+        display: flex;
+        align-items: center;
+        grid-gap: 0.5rem;
+        img {
+          height: 2rem;
+          width: 2rem;
+          border-radius: 50%;
+          object-fit: cover;
+        }
+      }
+      .details {
+        display: grid;
+        grid-gap: 0.5rem;
+        & > hr {
+          margin: 0.75rem 0;
+        }
+        .price {
+          display: block;
+          display: flex;
+          align-items: flex-end;
+          flex-wrap: wrap;
+          grid-gap: 5px;
+          color: rgb(148, 0, 0);
+          .currentPrice {
+            font-weight: 500;
+            font-size: 1.5rem;
+          }
+          .originalPrice {
+            text-decoration: line-through;
+          }
+        }
+      }
+      .inventory {
+        color: green;
+      }
+      .actions {
+        display: grid;
+        grid-gap: 0.5rem;
+        button {
+          border-radius: 2rem;
+          justify-content: center;
+          font-weight: 400;
+        }
+        .addToCart {
+          background: $yellow;
+        }
+        .buyNow {
+          background: $orange2;
+        }
+      }
     }
-    .left {
+    .images {
+      display: grid;
+      grid-template-columns: 62px 1fr;
+      grid-gap: 0.5rem;
+      min-width: 25rem;
+      .thumbnails {
+        height: min-content;
+        position: sticky;
+        top: 80px;
+        display: grid;
+        grid-auto-rows: min-content;
+        grid-gap: 0.5rem;
+        max-height: 30rem;
+        overflow: auto;
+        border-radius: 0.3rem;
+        img {
+          cursor: pointer;
+          border-radius: 0.3rem;
+          object-fit: cover;
+          height: 3rem;
+          width: 3rem;
+          &.inView {
+            border: 3px solid $primary-color;
+          }
+        }
+      }
+      .mainImg {
+        height: min-content;
+        position: sticky;
+        top: 80px;
+        display: flex;
+        width: 100%;
+        max-height: 35rem;
+        img {
+          margin: auto;
+          max-width: 100%;
+          max-height: 100%;
+        }
+      }
+    }
+    .content {
+      display: grid;
+      grid-gap: 1rem;
+      .ribbon {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        grid-gap: 10px;
+      }
+      .products {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        grid-gap: 1.25rem;
+      }
+    }
+    .description {
       & > hr {
         margin: 1rem 0;
       }
+      grid-column: 1 / -1;
     }
-    .right {
+    .reviews {
+      grid-column: 1 / -1;
+      display: grid;
       grid-gap: 1rem;
-      padding: 1rem;
-      border-radius: 0.5rem;
-      border: 1px solid $grey1;
-      max-width: 40rem;
-      height: min-content;
-      position: sticky;
-      top: 80px;
-      .specification {
-        display: none;
-      }
-    }
-    h1 {
-      font-weight: 400;
-      font-size: 1.8rem;
-    }
-    .rating {
-      display: flex;
-      align-items: center;
-      font-size: 1.2rem;
-      .value {
-        font-weight: 500;
-      }
-      .stars {
-        color: $orange;
-        svg {
-          font-size: 1em;
-        }
-      }
-      position: relative;
-      grid-gap: 4px;
-      .chev {
-        color: $grey2;
-      }
-      .reviewCount {
-        font-size: 0.9em;
-        color: #007185;
-      }
-      &:hover {
-        .reviewCount {
-          color: $orange;
-        }
-      }
-      cursor: pointer;
-      &:hover {
-        .breakdown {
-          display: block;
-        }
-      }
-      .breakdown {
-        width: max-content;
-        padding: 0.75rem 1rem;
+      .reviewForm {
+        border: 1px solid $grey2;
+        padding: 1rem;
         border-radius: 0.5rem;
-        filter: drop-shadow(0 0 1px $grey2) drop-shadow($shadow1);
-        background: white;
-        position: absolute;
-        top: 130%;
-        display: none;
-        z-index: 10;
-        &::before {
-          content: "";
-          display: block;
-          border: 7px solid transparent;
-          border-top: 0;
-          border-bottom: 10px solid white;
-          position: absolute;
-          top: -10px;
-          left: 13%;
-        }
-        .subtitle {
-          margin-top: 0.25rem;
-          margin-bottom: 0.75rem;
-          font-size: 0.9em;
-        }
-        .title {
-          font-weight: 400;
-          display: flex;
-          align-items: center;
-          grid-gap: 0.5rem;
-          .stars {
-            color: $orange;
-            svg {
-              font-size: 1.2em;
-            }
-          }
-          span {
-            color: black;
-            // margin-left: 6px;
-          }
-        }
-        .graph {
-          display: grid;
-          grid-gap: 0.75rem;
-          font-size: 0.9em;
-          li {
-            display: grid;
-            align-items: center;
-            grid-gap: 0.85rem;
-            grid-template-columns: 3rem 10rem 2rem;
-            color: #007185;
-            .bar {
-              border-radius: 4px;
-              flex: 1;
-              background: $grey1;
-              position: relative;
-              height: 20px;
-              border: 1px solid rgba(0, 0, 0, 0.1);
-              .fill {
-                border-radius: 4px;
-                display: block;
-                height: 100%;
-                background: $orange;
-              }
-            }
-            .percent {
-              text-align: right;
-            }
-          }
-        }
-      }
-    }
-    .variant {
-      display: flex;
-      grid-gap: 6px;
-      section {
-        flex: 1;
-      }
-      .customRadio {
-        label {
-          background: white;
-          color: $grey2;
-          border-color: $grey2;
-          &.selected {
-            color: rgb(148, 0, 0);
-            border-color: $orange;
-          }
-        }
-      }
-    }
-
-    .seller {
-      display: flex;
-      align-items: center;
-      grid-gap: 0.5rem;
-      img {
-        height: 2rem;
-        width: 2rem;
-        border-radius: 50%;
-        object-fit: cover;
-      }
-    }
-    .details {
-      display: grid;
-      grid-gap: 0.5rem;
-      & > hr {
-        margin: 0.75rem 0;
-      }
-      .price {
-        display: block;
-        display: flex;
-        align-items: flex-end;
-        flex-wrap: wrap;
-        grid-gap: 5px;
-        color: rgb(148, 0, 0);
-        .currentPrice {
-          font-weight: 500;
-          font-size: 1.5rem;
-        }
-        .originalPrice {
-          text-decoration: line-through;
-        }
-      }
-    }
-    .inventory {
-      color: green;
-    }
-    .actions {
-      display: grid;
-      grid-gap: 0.5rem;
-      button {
-        border-radius: 2rem;
-        justify-content: center;
-        font-weight: 400;
-      }
-      .addToCart {
-        background: $yellow;
-      }
-      .buyNow {
-        background: $orange2;
-      }
-    }
-  }
-  .images {
-    display: grid;
-    grid-template-columns: 62px 1fr;
-    grid-gap: 0.5rem;
-    min-width: 25rem;
-    .thumbnails {
-      height: min-content;
-      position: sticky;
-      top: 80px;
-      display: grid;
-      grid-auto-rows: min-content;
-      grid-gap: 0.5rem;
-      max-height: 30rem;
-      overflow: auto;
-      border-radius: 0.3rem;
-      img {
-        cursor: pointer;
-        border-radius: 0.3rem;
-        object-fit: cover;
-        height: 3rem;
-        width: 3rem;
-        &.inView {
-          border: 3px solid $primary-color;
-        }
-      }
-    }
-    .mainImg {
-      height: min-content;
-      position: sticky;
-      top: 80px;
-      display: flex;
-      width: 100%;
-      max-height: 35rem;
-      img {
-        margin: auto;
-        max-width: 100%;
-        max-height: 100%;
-      }
-    }
-  }
-  .content {
-    display: grid;
-    grid-gap: 1rem;
-    .ribbon {
-      display: flex;
-      align-items: center;
-      justify-content: flex-end;
-      grid-gap: 10px;
-    }
-    .products {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      grid-gap: 1.25rem;
-    }
-  }
-  .description {
-    & > hr {
-      margin: 1rem 0;
-    }
-    grid-column: 1 / -1;
-  }
-  .reviews {
-    grid-column: 1 / -1;
-    display: grid;
-    grid-gap: 1rem;
-    .reviewForm {
-      border: 1px solid $grey2;
-      padding: 1rem;
-      border-radius: 0.5rem;
-      display: grid;
-      grid-gap: 1rem;
-      background: $light-grey;
-      .ratingStars {
-        div {
-          grid-gap: 0;
-          label {
-            color: $yellow;
-            border: none;
-            padding: 0;
-            font-size: 1.5em;
-            &.selected {
-              background: none;
-              color: $yellow;
-              & ~ * {
-                color: $grey2;
-              }
-            }
-            &:hover {
-              color: $yellow;
-              & ~ * {
-                color: $grey2;
-              }
-            }
-          }
-        }
-      }
-      .btns {
-        display: flex;
-        justify-content: flex-end;
-      }
-    }
-    .allReviews {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      grid-gap: 2rem;
-      .summary {
-        grid-column: 1 / 3;
-        font-size: 1.5rem;
-        display: flex;
-        grid-gap: 0.5rem;
-        align-items: center;
-        font-weight: 500;
-        .stars {
-          transform: translateY(4px);
-          color: $grey2;
-          .lit {
-            color: $yellow;
-          }
-        }
-      }
-      .reviewWrapper {
         display: grid;
-        grid-gap: 0.5rem;
-        .customer {
+        grid-gap: 1rem;
+        background: $light-grey;
+        .ratingStars {
+          div {
+            grid-gap: 0;
+            label {
+              color: $yellow;
+              border: none;
+              padding: 0;
+              font-size: 1.5em;
+              &.selected {
+                background: none;
+                color: $yellow;
+                & ~ * {
+                  color: $grey2;
+                }
+              }
+              &:hover {
+                color: $yellow;
+                & ~ * {
+                  color: $grey2;
+                }
+              }
+            }
+          }
+        }
+        .btns {
+          display: flex;
+          justify-content: flex-end;
+        }
+      }
+      .allReviews {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-gap: 2rem;
+        .summary {
+          grid-column: 1 / 3;
+          font-size: 1.5rem;
           display: flex;
           grid-gap: 0.5rem;
           align-items: center;
-          .profilePic {
-            display: grid;
-            place-items: center;
-            height: 3rem;
-            width: 3rem;
-            border-radius: 50%;
-            font-size: 2.75rem;
-            background: $grey1;
+          font-weight: 500;
+          .stars {
+            transform: translateY(4px);
             color: $grey2;
-          }
-          .detail {
-            height: min-content;
-            h6 {
-              font-size: 1rem;
-              font-weight: 500;
+            .lit {
+              color: $yellow;
             }
-            time {
-              font-size: 0.9em;
+          }
+        }
+        .reviewWrapper {
+          display: grid;
+          grid-gap: 0.5rem;
+          .customer {
+            display: flex;
+            grid-gap: 0.5rem;
+            align-items: center;
+            .profilePic {
+              display: grid;
+              place-items: center;
+              height: 3rem;
+              width: 3rem;
+              border-radius: 50%;
+              font-size: 2.75rem;
+              background: $grey1;
               color: $grey2;
             }
+            .detail {
+              height: min-content;
+              h6 {
+                font-size: 1rem;
+                font-weight: 500;
+              }
+              time {
+                font-size: 0.9em;
+                color: $grey2;
+              }
+            }
           }
         }
       }
     }
-  }
-  .relatedProducts {
-    grid-column: 1 / 3;
-    .head {
-      display: flex;
-      align-items: center;
-      grid-gap: 0.5rem;
-      margin: 1rem 0;
-    }
-    .products {
-      display: grid;
-      grid-gap: 1.25rem;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 350px));
+    .relatedProducts {
+      grid-column: 1 / 3;
+      .head {
+        display: flex;
+        align-items: center;
+        grid-gap: 0.5rem;
+        margin: 1rem 0;
+      }
+      .products {
+        display: grid;
+        grid-gap: 1.25rem;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 350px));
+      }
     }
   }
 }
 
 @media only screen and (max-width: 480px) {
   .container {
-    grid-template-columns: 1fr;
-    .images {
-      min-width: 5rem;
+    .wrapper {
       grid-template-columns: 1fr;
-      .thumbnails {
-        grid-row: 2/3;
-        display: flex;
-        padding-bottom: 0.5rem;
-        padding-right: 0;
-        position: unset;
-        ::-webkit-scrollbar {
-          height: 4px;
-        }
-      }
-      .mainImg {
-        position: unset;
-      }
-    }
-    .sidebar {
-      grid-template-columns: 1fr;
-      padding: 0;
-      h1 {
-        font-weight: 400;
-        font-size: 1.5rem;
-      }
-      .left {
-        .specification {
-          display: none;
-        }
-      }
-      .right {
-        position: unset;
-        border: none;
-        padding: 0;
-        .specification {
-          display: block;
-        }
-        // grid-row: 1/2;
-      }
-    }
-    .specification,
-    .reviews,
-    .relatedProducts {
-      grid-column: 1/2;
-    }
-    .reviews {
-      .allReviews {
+      .images {
+        min-width: 5rem;
         grid-template-columns: 1fr;
-        .summary {
-          grid-column: 1 / 2;
+        .thumbnails {
+          grid-row: 2/3;
+          display: flex;
+          padding-bottom: 0.5rem;
+          padding-right: 0;
+          position: unset;
+          ::-webkit-scrollbar {
+            height: 4px;
+          }
+        }
+        .mainImg {
+          position: unset;
+        }
+      }
+      .sidebar {
+        grid-template-columns: 1fr;
+        padding: 0;
+        h1 {
+          font-weight: 400;
+          font-size: 1.5rem;
+        }
+        .left {
+          .specification {
+            display: none;
+          }
+        }
+        .right {
+          position: unset;
+          border: none;
+          padding: 0;
+          .specification {
+            display: block;
+          }
+          // grid-row: 1/2;
+        }
+      }
+      .specification,
+      .reviews,
+      .relatedProducts {
+        grid-column: 1/2;
+      }
+      .reviews {
+        .allReviews {
+          grid-template-columns: 1fr;
+          .summary {
+            grid-column: 1 / 2;
+          }
         }
       }
     }

@@ -5,10 +5,8 @@ import Head from "next/head";
 import Header from "components/ui/Header";
 import Footer from "components/ui/Footer";
 import DomainFallback from "components/ui/domainFallback";
-import { Paths } from "components/elements";
 
 import Products from "components/pages/browse/products";
-import s from "components/pages/browse/styles/products.module.scss";
 
 export { getServerSideProps } from "hooks";
 
@@ -33,13 +31,7 @@ const Browse = ({ siteData }) => {
         {siteData?.favicon && <link rel="icon" href={siteData.favicon} />}
       </Head>
       <Header />
-      {siteData?.siteConfig?.landingPage?.viewLandingPage && (
-        <Paths
-          paths={[{ label: "Home", path: "/" }, { label: "Browse" }]}
-          className={s.paths}
-        />
-      )}
-      <Products />
+      <Products showPath={siteData?.siteConfig?.landingPage?.viewLandingPage} />
       <Footer />
     </main>
   );

@@ -8,20 +8,21 @@ import s from "./styles/cart.module.scss";
 export default function Checkout({ product }) {
   return (
     <div className={`${s.container}`}>
-      <Products product={product} />
-      <Sidebar product={product} />
-
-      <div className={s.notes}>
-        <p>
-          {
-            "The price and availability of items at Amazon.com are subject to change. The Cart is a temporary place to store a list of your items and reflects each item's most recent price. Shopping Cart"
-          }
-        </p>
-        <p>
-          {
-            "Do you have a gift card or promotional code? We'll ask you to enter your claim code when it's time to pay."
-          }
-        </p>
+      <div className={s.wrapper}>
+        <Products product={product} />
+        <Sidebar product={product} />
+        <div className={s.notes}>
+          <p>
+            {
+              "The price and availability of items at Amazon.com are subject to change. The Cart is a temporary place to store a list of your items and reflects each item's most recent price. Shopping Cart"
+            }
+          </p>
+          <p>
+            {
+              "Do you have a gift card or promotional code? We'll ask you to enter your claim code when it's time to pay."
+            }
+          </p>
+        </div>
       </div>
     </div>
   );

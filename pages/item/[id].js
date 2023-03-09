@@ -5,7 +5,6 @@ import Head from "next/head";
 import Header from "components/ui/Header";
 import Footer from "components/ui/Footer";
 import DomainFallback from "components/ui/domainFallback";
-import { Paths } from "components/elements";
 
 import Product from "components/pages/item/product";
 import s from "components/pages/item/styles/products.module.scss";
@@ -79,17 +78,10 @@ const Item = ({ product, siteData }) => {
         {siteData?.favicon && <link rel="icon" href={siteData.favicon} />}
       </Head>
       <Header />
-      <Paths
-        paths={[
-          ...(siteData?.siteConfig?.landingPage?.viewLandingPage
-            ? [{ label: "Home", path: "/" }]
-            : []),
-          { label: "Browse", path: paths.browse },
-          { label: product.title },
-        ]}
-        className={s.paths}
+      <Product
+        product={product}
+        showHomePath={siteData?.siteConfig?.landingPage?.viewLandingPage}
       />
-      <Product product={product} />
       <Footer />
     </main>
   );

@@ -156,7 +156,8 @@ const Sidebar = ({ product, variant, setVariant }) => {
             }
             if (
               siteConfig.productFields.find((i) => i.name === item)
-                ?.dataType === "variantArray"
+                ?.dataType === "variantArray" &&
+              Array.isArray(product[item])
             ) {
               const field = siteConfig.productFields.find(
                 (i) => i.name === item

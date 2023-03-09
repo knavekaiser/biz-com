@@ -7,8 +7,9 @@ import { endpoints, paths } from "config";
 import { useFetch } from "hooks";
 import { useRouter } from "next/router";
 import s from "./styles/products.module.scss";
+import { Paths } from "components/elements";
 
-export default function Products() {
+export default function Products({ showPath }) {
   const router = useRouter();
   const [filters, setFilters] = useState({
     sort: "price-asc",
@@ -58,6 +59,13 @@ export default function Products() {
   }, []);
   return (
     <div className={`${s.container} ${sidebarOpen ? s.sidebarOpen : ""}`}>
+      {showPath && (
+        <Paths
+          paths={[{ label: "Home", path: "/" }, { label: "Browse" }]}
+          className={s.paths}
+        />
+      )}
+
       <button
         className={`btn ${s.sidebarToggle}`}
         onClick={() => setSidebarOpen(!sidebarOpen)}
