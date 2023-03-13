@@ -139,7 +139,10 @@ export const Prompt = ({ className, type, message, btns, callback }) => {
                 }
               </div>
             )}
-            <p className="question">{message}</p>
+            <p className="question">
+              {message}
+              {type === "error" && !message && "Unexpected Error Occured!"}
+            </p>
             <div className="actions">
               {btns || (
                 <>

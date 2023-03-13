@@ -120,9 +120,14 @@ const Account = () => {
         <ul>
           {user ? (
             <>
-              <Link href={paths.profile}>
+              <Link href={paths.clientArea.profile}>
                 <a>
                   <li>Profile</li>
+                </a>
+              </Link>
+              <Link href={paths.clientArea.orders}>
+                <a>
+                  <li>Orders</li>
                 </a>
               </Link>
               <li onClick={logout}>Logout</li>

@@ -1,6 +1,9 @@
+import { Prompt } from "components/modal";
+import { paths } from "config";
 import { endpoints } from "config";
 import { useFetch } from "hooks";
-import { useEffect, useState, useContext } from "react";
+import { useRouter } from "next/router";
+import { useEffect, useState, useContext, useCallback } from "react";
 import { SiteContext } from "SiteContext";
 import s from "./styles/checkout.module.scss";
 
@@ -14,8 +17,30 @@ const Detail = ({ label, value }) => {
 };
 
 const Sidebar = () => {
-  const { siteConfig, cart } = useContext(SiteContext);
-  const { post: placeOrder, loading } = useFetch(endpoints.placeOrder);
+  const { siteConfig, cart, emptyCart } = useContext(SiteContext);
+  const { post, loading } = useFetch(endpoints.placeOrder);
+  const router = useRouter();
+  const placeOrder = useCallback((payment_method) => {
+    post({
+      payment_method,
+      // some other address
+    })
+      .then(({ data }) => {
+        if (data?.success) {
+          Prompt({
+            type: "success",
+            message: data.message,
+            callback: () => {
+              emptyCart();
+              router.push(paths.clientArea.orders);
+            },
+          });
+        } else if (data) {
+          Prompt({ type: "error", message: data.message });
+        }
+      })
+      .catch((err) => Prompt({ type: "error", message: err.message }));
+  }, []);
   return (
     <div className={s.summary}>
       <h3>Summary</h3>
@@ -39,7 +64,20 @@ const Sidebar = () => {
       />
 
       <div className={s.actions}>
-        <button className={`btn secondary fullWidth`}>Pay Now</button>
+        <button
+          className={`btn secondary fullWidth`}
+          disabled={loading}
+          onClick={() => placeOrder("payNow")}
+        >
+          Pay Now
+        </button>
+        <button
+          className={`btn fullWidth`}
+          disabled={loading}
+          onClick={() => placeOrder("cod")}
+        >
+          Cash On delivery
+        </button>
       </div>
     </div>
   );

@@ -4,7 +4,13 @@ const paths = {
   cart: "/cart",
   itemView: "/item/:id",
   checkout: "/checkout",
-  profile: "/profile",
+
+  clientArea: {
+    baseUrl: "/client-area",
+    orders: "/client-area/orders",
+    payments: "/client-area/payments",
+    profile: "/client-area/profile",
+  },
 };
 
 export default paths;

@@ -24,6 +24,8 @@ const endpoints = {
   profile: `${baseApiUrlPublic}/api/customers/profile`,
   reviews: `${baseApiUrlPublic}/api/reviews`,
   cart: `${baseApiUrlPublic}/api/cart`,
+  orders: `${baseApiUrlPublic}/api/customers/orders`,
+  placeOrder: `${baseApiUrlPublic}/api/place-order`,
 };
 
 export default endpoints;

@@ -1,0 +1,107 @@
+@import "components/variables";
+
+.clientDashboard {
+  display: grid;
+  grid-template-columns: 20rem 1fr;
+  height: 100%;
+  .sidebar {
+    border-right: 1px solid $text-grey;
+    .links {
+      a {
+        padding: 1rem;
+        &:hover {
+          background: rgba($yellow, 0.1);
+        }
+        &:active {
+          background: rgba($yellow, 0.2);
+        }
+        &.active {
+          background: $yellow;
+        }
+      }
+      display: grid;
+    }
+  }
+  .content {
+    padding: 1rem;
+  }
+  .orders {
+    .items {
+      display: grid;
+      grid-gap: 1rem;
+      .order {
+        padding: 1rem;
+        border: 1px solid $grey2;
+        display: grid;
+        grid-template-columns: 1fr max-content;
+        grid-auto-rows: min-content;
+        border-radius: 6px;
+        .products {
+          position: relative;
+          display: grid;
+          grid-gap: 0.5rem;
+          .product {
+            .thumbnail {
+              height: 6rem;
+              width: 6rem;
+              img {
+                height: 100%;
+                width: 100%;
+                object-fit: contain;
+              }
+            }
+            .productDetail {
+              h3 {
+                font-weight: 400;
+              }
+              flex: 1;
+              .detail {
+                font-size: 0.85rem;
+              }
+              .actions {
+                margin-top: 0.5rem;
+                display: flex;
+                grid-gap: 1rem;
+                .devider {
+                  width: 1px;
+                  background: $grey1;
+                }
+                .qty {
+                  width: 4rem;
+                }
+              }
+            }
+            .price {
+              font-size: 1.25rem;
+              font-weight: 600;
+            }
+            display: flex;
+            grid-gap: 0.5rem;
+          }
+        }
+        .state {
+          margin: auto;
+          display: grid;
+          place-items: center;
+          grid-auto-rows: min-content;
+          grid-gap: 0.5rem;
+          .price {
+            font-size: 1.5rem;
+            font-weight: 500;
+          }
+          .status {
+            color: $orange;
+            font-weight: 600;
+            border: 2px solid $orange;
+            padding: 0.6em 2em;
+            margin: auto;
+            border-radius: 2rem;
+          }
+        }
+      }
+    }
+  }
+  ~ footer {
+    margin: 0;
+  }
+}

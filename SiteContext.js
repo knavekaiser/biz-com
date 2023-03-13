@@ -95,6 +95,14 @@ export const Provider = ({ children }) => {
     },
     [user]
   );
+  const emptyCart = useCallback(async () => {
+    let newCart = [];
+    localStorage.setItem("cart", JSON.stringify(newCart));
+    setCart(newCart);
+    if (user) {
+      await updateCart({ products: newCart });
+    }
+  }, [user]);
 
   const logout = useCallback(() => {
     fetch(endpoints.logout, {
@@ -152,6 +160,7 @@ export const Provider = ({ children }) => {
         cart,
         addToCart,
         removeFromCart,
+        emptyCart,
         loadingCart,
         logout,
       }}
