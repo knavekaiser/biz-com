@@ -1,6 +1,7 @@
 import { useEffect, useContext } from "react";
 import { SiteContext } from "SiteContext";
 import Header from "components/ui/Header";
+import { AiOutlineLock } from "react-icons/ai";
 
 import Footer from "components/ui/Footer";
 
@@ -20,12 +21,11 @@ export async function getServerSideProps(ctx) {
   if (siteData?.success) {
     props.siteData = siteData.data;
   }
-
   return { props: JSON.parse(JSON.stringify(props)) };
 }
 
 const Page = ({ siteData }) => {
-  const { setSiteConfig } = useContext(SiteContext);
+  const { setSiteConfig, user } = useContext(SiteContext);
   useEffect(() => {
     if (siteData) {
       setSiteConfig(siteData);
@@ -33,6 +33,13 @@ const Page = ({ siteData }) => {
   }, [siteData]);
   if (!siteData) {
     return <DomainFallback />;
+  }
+  if (!user) {
+    return (
+      <main className={s.checkout}>
+        <AiOutlineLock />
+      </main>
+    );
   }
   return (
     <main className={s.checkout}>

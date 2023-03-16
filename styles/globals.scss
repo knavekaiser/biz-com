@@ -286,6 +286,19 @@ button {
   }
 }
 
+.privateRouteFallback {
+  display: grid;
+  place-items: center;
+  .content {
+    display: grid;
+    place-items: center;
+    .icon {
+      display: grid;
+      font-size: 5rem;
+    }
+  }
+}
+
 .reactSelect {
   width: 100%;
   &:focus-within {

@@ -8,7 +8,12 @@ const Sidebar = () => {
   const router = useRouter();
   const routes = useRef([
     { label: "Orders", path: paths.clientArea.orders },
-    { label: "Payments", path: paths.clientArea.payments },
+    {
+      label: "Payments",
+      path: paths.clientArea.payments,
+      disabled: true,
+      tag: "Soon",
+    },
     { label: "Profile", path: paths.clientArea.profile },
   ]);
   return (
@@ -16,8 +21,14 @@ const Sidebar = () => {
       <div className={s.links}>
         {routes.current.map((item) => (
           <Link href={item.path} key={item.path}>
-            <a className={router.pathname === item.path ? s.active : ""}>
+            <a
+              className={`${router.pathname === item.path ? s.active : ""} ${
+                item.disabled ? s.disabled : ""
+              }`}
+              tabIndex={item.disabled ? "1" : "0"}
+            >
               {item.label}
+              {item.tag && <span className={s.tag}>{item.tag}</span>}
             </a>
           </Link>
         ))}

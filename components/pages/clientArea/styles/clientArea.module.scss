@@ -9,6 +9,7 @@
     .links {
       a {
         padding: 1rem;
+        position: relative;
         &:hover {
           background: rgba($yellow, 0.1);
         }
@@ -17,6 +18,18 @@
         }
         &.active {
           background: $yellow;
+        }
+        &.disabled {
+          pointer-events: none;
+        }
+        .tag {
+          font-size: 0.8rem;
+          border-radius: 1rem;
+          position: absolute;
+          right: 1rem;
+          display: inline-block;
+          background: $orange;
+          padding: 0.25em 1em;
         }
       }
       display: grid;
@@ -100,6 +113,20 @@
         }
       }
     }
+  }
+  .profile {
+    padding: 1rem 2rem;
+    max-width: 30rem;
+    form {
+      display: grid;
+      grid-gap: 1rem;
+      .contact,
+      .address {
+        display: grid;
+        grid-gap: 0.5rem;
+      }
+    }
+    margin-bottom: 2rem;
   }
   ~ footer {
     margin: 0;

@@ -9,6 +9,7 @@ import s from "components/pages/checkout/styles/checkout.module.scss";
 
 import { endpoints } from "config";
 import Orders from "components/pages/clientArea/orders";
+import { AiOutlineLock } from "react-icons/ai";
 
 export async function getServerSideProps(ctx) {
   const props = {};
@@ -24,7 +25,7 @@ export async function getServerSideProps(ctx) {
 }
 
 const Page = ({ siteData }) => {
-  const { setSiteConfig } = useContext(SiteContext);
+  const { setSiteConfig, user } = useContext(SiteContext);
   useEffect(() => {
     if (siteData) {
       setSiteConfig(siteData);
@@ -32,6 +33,22 @@ const Page = ({ siteData }) => {
   }, [siteData]);
   if (!siteData) {
     return <DomainFallback />;
+  }
+  if (!user) {
+    return (
+      <main>
+        <Header />
+        <div className="privateRouteFallback">
+          <div className="content">
+            <span className="icon">
+              <AiOutlineLock />
+            </span>
+            <span>Please log in to continue!</span>
+          </div>
+        </div>
+        <Footer />
+      </main>
+    );
   }
   return (
     <main className={s.checkout}>

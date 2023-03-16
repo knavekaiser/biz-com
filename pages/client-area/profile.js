@@ -5,11 +5,13 @@ import Header from "components/ui/Header";
 import Footer from "components/ui/Footer";
 
 import DomainFallback from "components/ui/domainFallback";
-import s from "components/pages/checkout/styles/checkout.module.scss";
 
 import { endpoints } from "config";
 
 import Profile from "components/pages/clientArea/profile";
+import { AiOutlineLock } from "react-icons/ai";
+import { useRouter } from "next/router";
+import { paths } from "config";
 
 export async function getServerSideProps(ctx) {
   const props = {};
@@ -25,17 +27,34 @@ export async function getServerSideProps(ctx) {
 }
 
 const Page = ({ siteData }) => {
-  const { setSiteConfig } = useContext(SiteContext);
+  const { setSiteConfig, user } = useContext(SiteContext);
   useEffect(() => {
     if (siteData) {
       setSiteConfig(siteData);
     }
   }, [siteData]);
+  const router = useRouter();
   if (!siteData) {
     return <DomainFallback />;
   }
+  if (!user) {
+    return (
+      <main>
+        <Header />
+        <div className="privateRouteFallback">
+          <div className="content">
+            <span className="icon">
+              <AiOutlineLock />
+            </span>
+            <span>Please log in to continue!</span>
+          </div>
+        </div>
+        <Footer />
+      </main>
+    );
+  }
   return (
-    <main className={s.checkout}>
+    <main>
       <Header />
       <Profile />
       <Footer />
