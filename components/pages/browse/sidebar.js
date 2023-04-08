@@ -1,14 +1,25 @@
 import { useEffect, useState, useContext, useRef } from "react";
 import { SiteContext } from "SiteContext";
-import { Input, Select, Combobox, Range } from "components/elements";
-import { HiChevronUp, HiChevronDown, HiOutlineX } from "react-icons/hi";
+import { Input, Select, Combobox, Range, Checkbox } from "components/elements";
+import { HiOutlineX } from "react-icons/hi";
 import s from "./styles/products.module.scss";
 import { useForm } from "react-hook-form";
 import { useFetch } from "hooks";
 import { endpoints, paths } from "config";
 import { useRouter } from "next/router";
+import { BsArrowLeft } from "react-icons/bs";
+import { FiChevronRight } from "react-icons/fi";
 
-const Sidebar = ({ open, filters, setFilters }) => {
+const Sidebar = ({
+  categories,
+  subCategory,
+  setSubCategory,
+  fields,
+  setFields,
+  open,
+  filters,
+  setFilters,
+}) => {
   const queryLoaded = useRef(false);
   const fieldsRef = useRef({});
   const {
@@ -51,6 +62,14 @@ const Sidebar = ({ open, filters, setFilters }) => {
     }
   }, [siteConfig?.browsePage?.sidebarFilters, router.query]);
 
+  console.log(
+    siteConfig.browsePage.sidebarFilters.find(
+      (item) =>
+        item.category === filters.category &&
+        item.subCategory === filters.subCategory
+    )?.filters
+  );
+
   if (!open) {
     return null;
   }
@@ -65,6 +84,7 @@ const Sidebar = ({ open, filters, setFilters }) => {
             onClick={() => {
               // setFilters({});
               reset(fieldsRef.current);
+              setFields(null);
               router.replace(
                 {
                   pathname: paths.browsePage,
@@ -92,139 +112,219 @@ const Sidebar = ({ open, filters, setFilters }) => {
           onChange={(opt) => setFilters({ ...filters, sort: opt.value })}
         />
       </Section>
-      {siteConfig?.productFields &&
-        (siteConfig?.browsePage?.sidebarFilters || []).map((f) => {
-          const field = siteConfig.productFields.find(
-            (field) => field.name === f.fieldName
-          );
-          if (!field) {
-            return null;
-          }
-          if (f.filterType === "textSearch" || f.filterType === "match") {
-            fieldsRef.current = {
-              ...fieldsRef.current,
-              [field.name]: "",
-            };
-            return (
-              <Section label={field.label} key={f.fieldName}>
-                <Input
-                  control={control}
-                  name={field.name}
-                  type={field.inputType}
+      {!fields ? (
+        <section className={s.categorySection}>
+          <p>
+            <strong>Categories</strong>
+          </p>
+          <ul className={s.categories}>
+            {categories.map((cat) => (
+              <li key={cat.name}>
+                <Checkbox
+                  label={cat.name}
+                  checked={filters.category === cat.name}
                   onChange={(e) => {
+                    if (filters.category === cat.name) {
+                      setFilters((prev) => ({
+                        ...prev,
+                        category: undefined,
+                      }));
+                    } else {
+                      setFilters((prev) => ({
+                        ...prev,
+                        category: cat.name,
+                      }));
+                    }
+                  }}
+                />
+                {cat.subCategories?.length > 0 && (
+                  <ul className={s.subCategories}>
+                    {cat.subCategories.map((subCat) => (
+                      <li key={subCat.name} label={subCat.name}>
+                        <Checkbox
+                          label={subCat.name}
+                          checked={filters.subCategory === subCat.name}
+                          onChange={(e) => {
+                            if (filters.subCategory === subCat.name) {
+                              setFilters((prev) => ({
+                                ...prev,
+                                subCategory: undefined,
+                              }));
+                            } else {
+                              setFilters((prev) => ({
+                                ...prev,
+                                category: cat.name,
+                                subCategory: subCat.name,
+                              }));
+                            }
+                            setFields(
+                              e.target.checked
+                                ? siteConfig.browsePage.sidebarFilters.find(
+                                    (item) =>
+                                      item.category === cat.name &&
+                                      item.subCategory === subCat.name
+                                  )?.filters
+                                : null
+                            );
+                          }}
+                        />
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </li>
+            ))}
+          </ul>
+        </section>
+      ) : (
+        <section
+          className={s.backToCategories}
+          onClick={() => {
+            setFields(null);
+            setFilters((prev) => ({
+              category: prev.category,
+              subCategory: undefined,
+            }));
+          }}
+        >
+          <BsArrowLeft style={{ fontSize: "1.3em" }} />{" "}
+          <p className="flex align-center gap_5">
+            {filters.category} <FiChevronRight /> {filters.subCategory}
+          </p>
+        </section>
+      )}
+      {(fields || []).map((f) => {
+        const field = siteConfig.productFields.find(
+          (field) => field.name === f.fieldName
+        );
+        if (!field) {
+          return null;
+        }
+        if (f.filterType === "textSearch" || f.filterType === "match") {
+          fieldsRef.current = {
+            ...fieldsRef.current,
+            [field.name]: "",
+          };
+          return (
+            <Section label={field.label} key={f.fieldName}>
+              <Input
+                control={control}
+                name={field.name}
+                type={field.inputType}
+                onChange={(e) => {
+                  setFilters((prev) => ({
+                    ...prev,
+                    [field.name]: e.target.value || "",
+                  }));
+                }}
+              />
+            </Section>
+          );
+        } else if (f.filterType === "minMax") {
+          fieldsRef.current = {
+            ...fieldsRef.current,
+            [`${field.name}-min`]: "",
+            [`${field.name}-max`]: "",
+          };
+          return (
+            <Section label={field.label} key={f.fieldName}>
+              <Input
+                control={control}
+                name={`${field.name}-min`}
+                type={field.inputType}
+                placeholder="MIN"
+                onChange={(e) => {
+                  const max = getValues(`${field.name}-max`);
+
+                  if (+e.target.value <= +max) {
                     setFilters((prev) => ({
                       ...prev,
-                      [field.name]: e.target.value || "",
+                      [`${field.name}-min`]: +e.target.value,
+                      [`${field.name}-max`]: +max,
                     }));
-                  }}
-                />
-              </Section>
-            );
-          } else if (f.filterType === "minMax") {
-            fieldsRef.current = {
-              ...fieldsRef.current,
-              [`${field.name}-min`]: "",
-              [`${field.name}-max`]: "",
-            };
-            return (
-              <Section label={field.label} key={f.fieldName}>
-                <Input
-                  control={control}
-                  name={`${field.name}-min`}
-                  type={field.inputType}
-                  placeholder="MIN"
-                  onChange={(e) => {
-                    const max = getValues(`${field.name}-max`);
-
-                    if (+e.target.value <= +max) {
-                      setFilters((prev) => ({
-                        ...prev,
-                        [`${field.name}-min`]: +e.target.value,
-                        [`${field.name}-max`]: +max,
-                      }));
-                    } else {
-                      setFilters((prev) => ({
-                        ...prev,
-                        [`${field.name}-min`]: "",
-                        [`${field.name}-max`]: "",
-                      }));
-                    }
-                  }}
-                />
-                <Input
-                  control={control}
-                  name={`${field.name}-max`}
-                  type={field.inputType}
-                  placeholder="MAX"
-                  onChange={(e) => {
-                    const min = getValues(`${field.name}-min`);
-                    if (+e.target.value >= +min) {
-                      setFilters((prev) => ({
-                        ...prev,
-                        [`${field.name}-max`]: +e.target.value,
-                        [`${field.name}-min`]: +min,
-                      }));
-                    } else {
-                      setFilters((prev) => ({
-                        ...prev,
-                        [`${field.name}-max`]: "",
-                        [`${field.name}-min`]: "",
-                      }));
-                    }
-                  }}
-                />
-
-                {+getValues(`${field.name}-max`) <
-                  +getValues(`${field.name}-min`) && (
-                  <p className="subtitle1">Max must be greater then Min</p>
-                )}
-              </Section>
-            );
-          } else if (f.filterType === "range") {
-            return (
-              <Section label={field.label} key={f.fieldName}>
-                <Range
-                  control={control}
-                  name={`${field.name}-range`}
-                  setValue={setValue}
-                  type={field.inputType}
-                  placeholder={`${field.label} range`}
-                  onChange={({ min, max }) => {
-                    if (min <= max) {
-                      setFilters((prev) => ({
-                        ...prev,
-                        [`${field.name}-min`]: min,
-                        [`${field.name}-max`]: max,
-                      }));
-                    } else {
-                      setFilters((prev) => ({
-                        ...prev,
-                        [`${field.name}-min`]: "",
-                        [`${field.name}-max`]: "",
-                      }));
-                    }
-                  }}
-                  min={+f.min}
-                  max={+f.max}
-                />
-              </Section>
-            );
-          } else if (["list", "dropdown"].includes(f.filterStyle)) {
-            fieldsRef.current = {
-              ...fieldsRef.current,
-              [field.name]: [],
-            };
-            return (
-              <FilterList
-                key={f.fieldName}
-                field={field}
-                sidebarItem={f}
-                setFilters={setFilters}
-                control={control}
+                  } else {
+                    setFilters((prev) => ({
+                      ...prev,
+                      [`${field.name}-min`]: "",
+                      [`${field.name}-max`]: "",
+                    }));
+                  }
+                }}
               />
-            );
-          }
-        })}
+              <Input
+                control={control}
+                name={`${field.name}-max`}
+                type={field.inputType}
+                placeholder="MAX"
+                onChange={(e) => {
+                  const min = getValues(`${field.name}-min`);
+                  if (+e.target.value >= +min) {
+                    setFilters((prev) => ({
+                      ...prev,
+                      [`${field.name}-max`]: +e.target.value,
+                      [`${field.name}-min`]: +min,
+                    }));
+                  } else {
+                    setFilters((prev) => ({
+                      ...prev,
+                      [`${field.name}-max`]: "",
+                      [`${field.name}-min`]: "",
+                    }));
+                  }
+                }}
+              />
+
+              {+getValues(`${field.name}-max`) <
+                +getValues(`${field.name}-min`) && (
+                <p className="subtitle1">Max must be greater then Min</p>
+              )}
+            </Section>
+          );
+        } else if (f.filterType === "range") {
+          return (
+            <Section label={field.label} key={f.fieldName}>
+              <Range
+                control={control}
+                name={`${field.name}-range`}
+                setValue={setValue}
+                type={field.inputType}
+                placeholder={`${field.label} range`}
+                onChange={({ min, max }) => {
+                  if (min <= max) {
+                    setFilters((prev) => ({
+                      ...prev,
+                      [`${field.name}-min`]: min,
+                      [`${field.name}-max`]: max,
+                    }));
+                  } else {
+                    setFilters((prev) => ({
+                      ...prev,
+                      [`${field.name}-min`]: "",
+                      [`${field.name}-max`]: "",
+                    }));
+                  }
+                }}
+                min={+f.min}
+                max={+f.max}
+              />
+            </Section>
+          );
+        } else if (["list", "dropdown"].includes(f.filterStyle)) {
+          fieldsRef.current = {
+            ...fieldsRef.current,
+            [field.name]: [],
+          };
+          return (
+            <FilterList
+              key={f.fieldName}
+              field={field}
+              sidebarItem={f}
+              setFilters={setFilters}
+              control={control}
+            />
+          );
+        }
+      })}
     </form>
   );
 };

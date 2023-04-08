@@ -15,12 +15,18 @@ export default function Products({ showPath }) {
     sort: "price-asc",
   });
   const [sidebarOpen, setSidebarOpen] = useState(false);
+
   const [products, setProducts] = useState([]);
   const [metadata, setMetadata] = useState({
     page: 1,
     pageSize: 10,
   });
+  const [fields, setFields] = useState(null);
+  const [subCategory, setSubCategory] = useState(null);
+  const [categories, setCategories] = useState([]);
+  const { get: getCategories } = useFetch(endpoints.categories);
   const { get: getProducts, loading } = useFetch(endpoints.browse);
+
   useEffect(() => {
     router.replace(
       {
@@ -53,6 +59,15 @@ export default function Products({ showPath }) {
       .catch((err) => Prompt({ type: "error", message: err.message }));
   }, [router.query]);
   useEffect(() => {
+    getCategories()
+      .then(({ data }) => {
+        if (data?.success) {
+          setCategories(data.data);
+        } else {
+          Prompt({ type: "error", message: data.message });
+        }
+      })
+      .catch((err) => Prompt({ type: "error", message: err.message }));
     if (window.innerWidth > 480) {
       setSidebarOpen(true);
     }
@@ -72,7 +87,16 @@ export default function Products({ showPath }) {
       >
         Filters {sidebarOpen ? <HiChevronUp /> : <HiChevronDown />}
       </button>
-      <Sidebar open={sidebarOpen} filters={filters} setFilters={setFilters} />
+      <Sidebar
+        categories={categories}
+        fields={fields}
+        setFields={setFields}
+        subCategory={subCategory}
+        setSubCategory={setSubCategory}
+        open={sidebarOpen}
+        filters={filters}
+        setFilters={setFilters}
+      />
       <div className={`${s.content} ${s.products}`}>
         <div className={s.products}>
           {products.length > 0 ? (

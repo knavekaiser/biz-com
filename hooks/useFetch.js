@@ -1,13 +1,9 @@
-import { useState, useEffect, useCallback, useRef, useContext } from "react";
-// import { SiteContext } from "../SiteContext";
-import { Prompt } from "../components/modal";
-import { endpoints as defaultEndpoints } from "../config";
+import { useState, useEffect, useCallback, useRef } from "react";
 
 export const useFetch = (
   url,
-  { headers: hookHeaders, defaultHeaders, noDbSchema } = {}
+  { headers: hookHeaders, defaultHeaders } = {}
 ) => {
-  // const { user, logout } = useContext(SiteContext);
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
   const controller = useRef();
@@ -35,43 +31,43 @@ export const useFetch = (
         ).toString()}`;
       }
       setLoading(true);
-      const response = await fetch(_url, {
-        method: method,
-        headers: {
-          ...(!(typeof payload?.append === "function") && {
-            "Content-Type": "application/json",
+
+      return new Promise((resolve, reject) => {
+        fetch(_url, {
+          method: method,
+          headers: {
+            ...(!(typeof payload?.append === "function") && {
+              "Content-Type": "application/json",
+            }),
+            ...(defaultHeaders !== false && {
+              "x-access-token": localStorage.getItem("access_token"),
+            }),
+            ...hookHeaders,
+            ...headers,
+          },
+          ...(["POST", "PUT", "PATCH", "DELETE"].includes(method) && {
+            body:
+              typeof payload?.append === "function"
+                ? payload
+                : JSON.stringify(payload),
           }),
-          ...(defaultHeaders !== false && {
-            "x-access-token": localStorage.getItem("access_token"),
-          }),
-          ...hookHeaders,
-          ...headers,
-        },
-        ...(["POST", "PUT", "PATCH", "DELETE"].includes(method) && {
-          body:
-            typeof payload?.append === "function"
-              ? payload
-              : JSON.stringify(payload),
-        }),
-        signal: controller.current.signal,
-      })
-        .then(async (res) => {
-          const data = await res
-            .json()
-            .catch((err) => {})
-            .finally(() => null);
-          return {
-            ...data,
-            res,
-            data,
-          };
+          signal: controller.current.signal,
         })
-        .catch((err) => {
-          setError(err);
-          return { error: err };
-        });
-      setLoading(false);
-      return response;
+          .then(async (res) => {
+            let data = await res.json();
+            setLoading(false);
+            resolve({ res, data });
+          })
+          .catch((err) => {
+            setLoading(false);
+            if (["The user aborted a request."].includes(err?.message)) {
+              // user aborted
+            } else {
+              setError(err);
+              reject(err);
+            }
+          });
+      });
     },
     [url]
   );
