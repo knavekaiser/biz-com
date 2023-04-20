@@ -62,14 +62,6 @@ const Sidebar = ({
     }
   }, [siteConfig?.browsePage?.sidebarFilters, router.query]);
 
-  console.log(
-    siteConfig.browsePage.sidebarFilters.find(
-      (item) =>
-        item.category === filters.category &&
-        item.subCategory === filters.subCategory
-    )?.filters
-  );
-
   if (!open) {
     return null;
   }
@@ -159,7 +151,7 @@ const Sidebar = ({
                             }
                             setFields(
                               e.target.checked
-                                ? siteConfig.browsePage.sidebarFilters.find(
+                                ? siteConfig?.browsePage?.sidebarFilters.find(
                                     (item) =>
                                       item.category === cat.name &&
                                       item.subCategory === subCat.name

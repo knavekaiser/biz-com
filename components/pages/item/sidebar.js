@@ -5,6 +5,7 @@ import {
   Combobox,
   CustomRadio,
   RichText,
+  GoogleMap,
 } from "components/elements";
 import s from "./styles/products.module.scss";
 import { useForm } from "react-hook-form";
@@ -153,6 +154,10 @@ const Sidebar = ({ product, variant, setVariant }) => {
                   name="dates"
                 />
               );
+            }
+            if (item === "latlng" && product[item]) {
+              const [lat, lng] = product[item].split(",").map((i) => +i);
+              return <GoogleMap key={item} center={{ lat, lng }} />;
             }
             if (
               siteConfig.productFields.find((i) => i.name === item)

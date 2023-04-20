@@ -18,6 +18,11 @@ import { useRouter } from "next/router";
 import { useForm, Controller } from "react-hook-form";
 import { DateRangePicker } from "react-date-range";
 import { Modal } from "../modal";
+import {
+  GoogleMap as GoogleMapLib,
+  Marker,
+  useLoadScript,
+} from "@react-google-maps/api";
 
 import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
@@ -1318,5 +1323,49 @@ export const Range = ({
         );
       }}
     />
+  );
+};
+
+export const GoogleMap = ({ center }) => {
+  const [map, setMap] = useState(null);
+  const [marker, setMarker] = useState(null);
+  const { isLoaded, loadError } = useLoadScript({
+    googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAP_API_KEY, // ,
+    // ...otherOptions
+  });
+
+  useEffect(() => {
+    if (map) {
+      setMarker(center);
+    }
+  }, [map]);
+
+  if (loadError) {
+    return <div>Map cannot be loaded right now, sorry.</div>;
+  }
+
+  return isLoaded ? (
+    <div>
+      <p>
+        <strong>Location:</strong>
+      </p>
+      <GoogleMapLib
+        mapContainerStyle={{
+          width: "100%",
+          aspectRatio: 1.75,
+        }}
+        center={center}
+        onClick={(e) => {
+          //
+        }}
+        zoom={16}
+        onLoad={(map) => setMap(map)}
+        onUnmount={() => setMap(null)}
+      >
+        {marker && <Marker position={marker} />}
+      </GoogleMapLib>
+    </div>
+  ) : (
+    <div>Loading Map...</div>
   );
 };
