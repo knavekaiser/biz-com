@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { SiteContext } from "SiteContext";
 import {
   CalendarInput,
@@ -157,7 +157,7 @@ const Sidebar = ({ product, variant, setVariant }) => {
             }
             if (item === "latlng" && product[item]) {
               const [lat, lng] = product[item].split(",").map((i) => +i);
-              return <GoogleMap key={item} center={{ lat, lng }} />;
+              return <Map key={item} lat={lat} lng={lng} />;
             }
             if (
               siteConfig.productFields.find((i) => i.name === item)
@@ -336,6 +336,21 @@ const Sidebar = ({ product, variant, setVariant }) => {
         )}
       </div>
     </form>
+  );
+};
+
+const Map = ({ lat, lng }) => {
+  const [showMap, setShowMap] = useState(false);
+  return (
+    <div className={s.map}>
+      <p>
+        <strong>Location:</strong>{" "}
+        <span onClick={() => setShowMap((prev) => !prev)}>
+          {showMap ? "Hide" : "Show on"} Map
+        </span>
+      </p>
+      {showMap && <GoogleMap center={{ lat, lng }} />}
+    </div>
   );
 };
 

@@ -1,7 +1,7 @@
 @import "components/variables";
 
 .paths {
-  padding-bottom: 0;
+  padding-bottom: 1rem;
 }
 .container {
   width: 100%;
@@ -221,6 +221,16 @@
           background: $orange2;
         }
       }
+      .map {
+        p {
+          margin-bottom: 0.5rem;
+          span {
+            cursor: pointer;
+            color: $blue;
+            text-decoration: underline;
+          }
+        }
+      }
     }
     .images {
       display: grid;
@@ -392,6 +402,9 @@
 }
 
 @media only screen and (max-width: 480px) {
+  .paths {
+    padding-bottom: 0;
+  }
   .container {
     .wrapper {
       grid-template-columns: 1fr;

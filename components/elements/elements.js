@@ -1346,9 +1346,6 @@ export const GoogleMap = ({ center }) => {
 
   return isLoaded ? (
     <div>
-      <p>
-        <strong>Location:</strong>
-      </p>
       <GoogleMapLib
         mapContainerStyle={{
           width: "100%",
