@@ -93,6 +93,9 @@ button {
     &.secondary {
       background: $yellow;
     }
+    &.small {
+      width: max-content;
+    }
     &.whatsapp {
       display: flex;
       align-items: center;

@@ -4,6 +4,7 @@ const paths = {
   cart: "/cart",
   itemView: "/item/:id",
   checkout: "/checkout",
+  compare: "/compare",
 
   clientArea: {
     baseUrl: "/client-area",

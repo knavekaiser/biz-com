@@ -7,11 +7,13 @@ import Footer from "components/ui/Footer";
 import DomainFallback from "components/ui/domainFallback";
 
 import Products from "components/pages/browse/products";
+import Link from "next/link";
+import { paths } from "config";
 
 export { getServerSideProps } from "hooks";
 
 const Browse = ({ siteData }) => {
-  const { setSiteConfig } = useContext(SiteContext);
+  const { compare, setSiteConfig } = useContext(SiteContext);
   useEffect(() => {
     if (siteData) {
       setSiteConfig(siteData);
@@ -33,6 +35,11 @@ const Browse = ({ siteData }) => {
       <Header />
       <Products showPath={siteData?.siteConfig?.landingPage?.viewLandingPage} />
       <Footer />
+      {compare?.length > 0 && (
+        <Link href={paths.compare}>
+          <a>Compare</a>
+        </Link>
+      )}
     </main>
   );
 };

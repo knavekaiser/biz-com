@@ -13,10 +13,13 @@ import { IoLogoWhatsapp } from "react-icons/io";
 import { ImStarEmpty, ImStarFull } from "react-icons/im";
 import { FiChevronDown } from "react-icons/fi";
 import { useRouter } from "next/router";
+import { BsCheckLg } from "react-icons/bs";
 
 const Sidebar = ({ product, variant, setVariant }) => {
   const router = useRouter();
   const {
+    compare,
+    setCompare,
     siteConfig: { siteConfig, ...config },
     addToCart,
   } = useContext(SiteContext);
@@ -158,6 +161,29 @@ const Sidebar = ({ product, variant, setVariant }) => {
             if (item === "latlng" && product[item]) {
               const [lat, lng] = product[item].split(",").map((i) => +i);
               return <Map key={item} lat={lat} lng={lng} />;
+            }
+            if (item === "compare") {
+              return (
+                <button
+                  className={`btn ${
+                    compare.includes(product._id) ? "" : "primary"
+                  } small`}
+                  onClick={() => {
+                    setCompare((prev) =>
+                      compare.includes(product._id)
+                        ? prev.filter((item) => item !== product._id)
+                        : [...prev, product._id]
+                    );
+                  }}
+                >
+                  {compare.includes(product._id) && (
+                    <BsCheckLg
+                      style={{ color: "#327e53", marginRight: ".5rem" }}
+                    />
+                  )}{" "}
+                  Compare
+                </button>
+              );
             }
             if (
               siteConfig.productFields.find((i) => i.name === item)

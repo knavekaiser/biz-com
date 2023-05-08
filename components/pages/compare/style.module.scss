@@ -1,0 +1,58 @@
+@import "components/variables";
+
+.container {
+  display: grid;
+  grid-auto-rows: max-content;
+  padding: 2rem 0.5rem;
+  padding-bottom: 4rem;
+  margin-bottom: -4rem;
+  background: $grey1;
+  .wrapper {
+    display: grid;
+    max-width: $max-width;
+    width: 100%;
+    grid-gap: 1.5rem;
+    grid-template-columns: 1fr;
+    h2 {
+      font-size: 1.75rem;
+      font-weight: 400;
+    }
+    .products {
+      width: 100%;
+      background: white;
+      padding: 1rem 1.5rem;
+      display: grid;
+      .items {
+        border-top: 1px solid $grey2;
+        margin-top: 1.25rem;
+        border-bottom: 1px solid $grey2;
+      }
+    }
+  }
+}
+
+.items {
+  padding: 1rem 0;
+  position: relative;
+  grid-template-columns: repeat(auto-fit, 250px);
+  display: grid;
+  .product {
+    display: grid;
+    grid-template-rows: 1fr;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+    & > div:first-child {
+      margin: 0.5rem;
+    }
+    .detailLabel {
+      border-left: 1px solid rgba(0, 0, 0, 0.15);
+      background: rgba(0, 0, 0, 0.05);
+    }
+    .detailLabel,
+    .detail {
+      border-top: 1px solid rgba(0, 0, 0, 0.15);
+      border-right: 1px solid rgba(0, 0, 0, 0.15);
+      padding: 1rem 0.5rem;
+      min-height: 3.5rem;
+    }
+  }
+}

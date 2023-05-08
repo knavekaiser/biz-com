@@ -10,6 +10,7 @@ import Product from "components/pages/item/product";
 import s from "components/pages/item/styles/products.module.scss";
 
 import { endpoints, paths } from "config";
+import Link from "next/link";
 
 export async function getServerSideProps(ctx) {
   const { id: productId } = ctx.query;
@@ -40,7 +41,7 @@ export async function getServerSideProps(ctx) {
 }
 
 const Item = ({ product, siteData }) => {
-  const { setSiteConfig } = useContext(SiteContext);
+  const { compare, setSiteConfig } = useContext(SiteContext);
   useEffect(() => {
     if (siteData) {
       setSiteConfig(siteData);
@@ -83,6 +84,11 @@ const Item = ({ product, siteData }) => {
         showHomePath={siteData?.siteConfig?.landingPage?.viewLandingPage}
       />
       <Footer />
+      {compare?.length > 0 && (
+        <Link href={paths.compare}>
+          <a className={s.compareLink}>Compare</a>
+        </Link>
+      )}
     </main>
   );
 };

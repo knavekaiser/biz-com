@@ -10,6 +10,7 @@ export const Provider = ({ children }) => {
   const [siteConfig, setSiteConfig] = useState({
     siteTitle: "Biz App",
   });
+  const [compare, setCompare] = useState([]);
 
   const [user, setUser] = useState(null);
   useEffect(() => {
@@ -153,6 +154,8 @@ export const Provider = ({ children }) => {
   return (
     <SiteContext.Provider
       value={{
+        compare,
+        setCompare,
         user,
         setUser,
         siteConfig,

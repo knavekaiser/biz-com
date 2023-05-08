@@ -4,7 +4,6 @@ import { Provider, SiteContext } from "SiteContext";
 import NProgress from "nprogress";
 import Head from "next/head";
 import Router from "next/router";
-import { LoadScript } from "@react-google-maps/api";
 
 require("react-multi-carousel/lib/styles.css");
 
@@ -40,13 +39,6 @@ const Wrapper = ({ children }) => {
         <title>{siteConfig.siteTitle}</title>
       </Head>
       {children}
-      {/* {browser && !window.google && (
-        <LoadScript
-          loadingElement={<div style={{ display: "none" }}>Loading...</div>}
-          googleMapsApiKey={process.env.NEXT_PUBLIC_GOOGLE_MAP_API_KEY}
-          // libraries={["places"]}
-        />
-      )} */}
     </>
   );
 };
