@@ -5,6 +5,7 @@ import s from "./styles/clientArea.module.scss";
 import Layout from "./layout";
 import { Prompt } from "components/modal";
 import { SiteContext } from "SiteContext";
+import Image from "next/image";
 
 const Orders = () => {
   const [orders, setOrders] = useState([]);
@@ -75,7 +76,7 @@ const Product = ({ product }) => {
           src={(product.variant?.images || product.product.images)[0]}
           height={120}
           width={120}
-          alt={product.name}
+          alt={product.title}
         />
       </div>
       <div className={s.productDetail}>

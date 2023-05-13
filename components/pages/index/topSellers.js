@@ -210,9 +210,7 @@ export default function TopSellers() {
       <div className={`${s.content} ${s.sellers}`}>
         {sellers.map((seller, i) => (
           <Link href="/browse" key={i}>
-            <a>
-              <Seller seller={seller} />
-            </a>
+            <Seller seller={seller} />
           </Link>
         ))}
       </div>

@@ -85,8 +85,8 @@ const Item = ({ product, siteData }) => {
       />
       <Footer />
       {compare?.length > 0 && (
-        <Link href={paths.compare}>
-          <a className={s.compareLink}>Compare</a>
+        <Link href={paths.compare} className={s.compareLink}>
+          Compare
         </Link>
       )}
     </main>

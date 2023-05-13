@@ -23,7 +23,7 @@ const Products = ({ product }) => {
             src={product.images[0]}
             height={120}
             width={120}
-            alt={product.name}
+            alt={product.title}
           />
           <div className={s.productDetail}>
             <h3>{product.title}</h3>

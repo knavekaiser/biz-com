@@ -80,7 +80,7 @@ const Product = ({ product }) => {
         src={product.variant?.images[0] || product.product.images[0]}
         height={120}
         width={120}
-        alt={product.name}
+        alt={product.title}
         className={s.thumbnail}
       />
       <div className={s.productDetail}>

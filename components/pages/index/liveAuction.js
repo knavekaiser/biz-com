@@ -11,8 +11,7 @@ const products = [
     _id: "a243rrfsafsdfsadf",
     animated: true,
     favorite: 50,
-    img:
-      "https://images.unsplash.com/photo-1549887552-cb1071d3e5ca?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjF8fGNyeXB0byUyMGFydHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60",
+    img: "https://images.unsplash.com/photo-1549887552-cb1071d3e5ca?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjF8fGNyeXB0byUyMGFydHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60",
     name: "Official Cryptomon PepeHoeH",
     price: 0.0669,
     bid: {
@@ -32,8 +31,7 @@ const products = [
     _id: "as2323rdfsadf",
     animated: true,
     favorite: 50,
-    img:
-      "https://images.unsplash.com/photo-1526389157-6a5cc2bb4afa?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MzR8fGNyeXB0byUyMGFydHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60",
+    img: "https://images.unsplash.com/photo-1526389157-6a5cc2bb4afa?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MzR8fGNyeXB0byUyMGFydHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60",
     name: "Official Cryptomon PepeHoeH",
     price: 0.0669,
     bid: {
@@ -52,8 +50,7 @@ const products = [
   {
     _id: "asd23fdfsadf",
     favorite: 50,
-    img:
-      "https://images.unsplash.com/photo-1577720643272-265f09367456?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NDl8fGNyeXB0byUyMGFydHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60",
+    img: "https://images.unsplash.com/photo-1577720643272-265f09367456?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NDl8fGNyeXB0byUyMGFydHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60",
     name: "Official Cryptomon PepeHoeH",
     price: 0.0669,
     bid: {
@@ -72,8 +69,7 @@ const products = [
   {
     _id: "asdfsasdfsdfadf",
     favorite: 50,
-    img:
-      "https://images.unsplash.com/photo-1535673774336-ef95d2851cf3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NjJ8fGNyeXB0byUyMGFydHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60",
+    img: "https://images.unsplash.com/photo-1535673774336-ef95d2851cf3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NjJ8fGNyeXB0byUyMGFydHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60",
     name: "Official Cryptomon PepeHoeH",
     price: 0.0669,
     bid: {
@@ -93,8 +89,7 @@ const products = [
     _id: "asdfsadf",
     animated: true,
     favorite: 50,
-    img:
-      "https://images.unsplash.com/photo-1549887534-1541e9326642?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTh8fGNyeXB0byUyMGFydHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60",
+    img: "https://images.unsplash.com/photo-1549887534-1541e9326642?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTh8fGNyeXB0byUyMGFydHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60",
     name: "Official Cryptomon PepeHoeH",
     price: 0.0669,
     bid: {
@@ -185,27 +180,25 @@ export default function LiveAuction() {
         </span>
         <div className={s.more}>
           <Link href="/browse">
-            <a>
-              See more{" "}
-              <svg
-                width="11"
-                height="10"
-                viewBox="0 0 11 10"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M9.5 5L10.2071 5.70711L10.9142 5L10.2071 4.29289L9.5 5ZM6.45711 9.45711L10.2071 5.70711L8.79289 4.29289L5.04289 8.04289L6.45711 9.45711ZM10.2071 4.29289L6.45711 0.542892L5.04289 1.95711L8.79289 5.70711L10.2071 4.29289Z"
-                  fill="#242424"
-                />
-                <path
-                  d="M9.5 5L0.5 5"
-                  stroke="#242424"
-                  strokeWidth="2"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </a>
+            See more{" "}
+            <svg
+              width="11"
+              height="10"
+              viewBox="0 0 11 10"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M9.5 5L10.2071 5.70711L10.9142 5L10.2071 4.29289L9.5 5ZM6.45711 9.45711L10.2071 5.70711L8.79289 4.29289L5.04289 8.04289L6.45711 9.45711ZM10.2071 4.29289L6.45711 0.542892L5.04289 1.95711L8.79289 5.70711L10.2071 4.29289Z"
+                fill="#242424"
+              />
+              <path
+                d="M9.5 5L0.5 5"
+                stroke="#242424"
+                strokeWidth="2"
+                strokeLinejoin="round"
+              />
+            </svg>
           </Link>
         </div>
       </div>

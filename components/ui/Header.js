@@ -22,16 +22,16 @@ const Header = () => {
       <span className={s.gred + ` gred`} />
       <div className={s.content}>
         <div className={s.northSection}>
-          <Link href={paths.home}>
-            <a className={s.logo}>
+          <Link href={paths.home} className={s.logo}>
+            {siteConfig.logo && (
               <Image
                 src={siteConfig.logo}
                 height={48}
                 width={48}
                 alt="Site Logo"
               />
-              <h2>{siteConfig.siteTitle}</h2>
-            </a>
+            )}
+            <h2>{siteConfig.siteTitle}</h2>
           </Link>
         </div>
         <SearchForm />
@@ -127,14 +127,10 @@ const Account = () => {
           {user ? (
             <>
               <Link href={paths.clientArea.profile}>
-                <a>
-                  <li>Profile</li>
-                </a>
+                <li>Profile</li>
               </Link>
               <Link href={paths.clientArea.orders}>
-                <a>
-                  <li>Orders</li>
-                </a>
+                <li>Orders</li>
               </Link>
               <li onClick={logout}>Logout</li>
             </>
@@ -353,10 +349,8 @@ const LoginForm = ({ setOpen, onSuccess }) => {
             <small>
               We’ll call or text you to confirm your number. Standard message
               and data rates apply.{" "}
-              <Link href="/" passHref>
-                <a target="_blank" rel="noopener noreferrer">
-                  Privacy Policy
-                </a>
+              <Link href="/" passHref target="_blank" rel="noopener noreferrer">
+                Privacy Policy
               </Link>
             </small>
           </>

@@ -35,11 +35,9 @@ const Sidebar = ({}) => {
 
       <div className={s.actions}>
         <Link href={paths.checkout}>
-          <a>
-            <button className={`btn secondary fullWidth`}>
-              Proceed to Chekcout
-            </button>
-          </a>
+          <button className={`btn secondary fullWidth`}>
+            Proceed to Chekcout
+          </button>
         </Link>
       </div>
     </div>

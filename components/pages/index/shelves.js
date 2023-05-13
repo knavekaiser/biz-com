@@ -46,11 +46,9 @@ export default function Shelves() {
                     query: shelf.query,
                   }}
                 >
-                  <a>
-                    <button className={`btn primary ${s.more}`}>
-                      See All <HiOutlineArrowNarrowRight />
-                    </button>
-                  </a>
+                  <button className={`btn primary ${s.more}`}>
+                    See All <HiOutlineArrowNarrowRight />
+                  </button>
                 </Link>
               }
             </div>
@@ -68,11 +66,9 @@ export default function Shelves() {
       ) : (
         <div className={s.shelfPlaceholder}>
           <Link href={paths.browse}>
-            <a>
-              <button className="btn primary">
-                Browse all of our products <HiOutlineArrowNarrowRight />
-              </button>
-            </a>
+            <button className="btn primary">
+              Browse all of our products <HiOutlineArrowNarrowRight />
+            </button>
           </Link>
         </div>
       )}

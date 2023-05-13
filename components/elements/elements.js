@@ -875,17 +875,14 @@ export const Tabs = ({
                 query: tab.search,
               }),
             }}
+            className={
+              // location?.pathname.endsWith(path) ? s.active : ""
+              location?.pathname.includes(tab.path.replace("/*", ""))
+                ? s.active
+                : ""
+            }
           >
-            <a
-              className={
-                // location?.pathname.endsWith(path) ? s.active : ""
-                location?.pathname.includes(tab.path.replace("/*", ""))
-                  ? s.active
-                  : ""
-              }
-            >
-              {tab.label}
-            </a>
+            {tab.label}
           </Link>
         )
       )}
@@ -1055,9 +1052,7 @@ export const Paths = ({ paths, className }) => {
       {paths.map((item, i) => (
         <Fragment key={item.label}>
           {item.path ? (
-            <Link href={item.path}>
-              <a>{item.label}</a>
-            </Link>
+            <Link href={item.path}>{item.label}</Link>
           ) : (
             <span>{item.label}</span>
           )}

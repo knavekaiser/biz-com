@@ -14,7 +14,7 @@ export default function Images({ product, variant }) {
             src={src}
             height={48}
             width={48}
-            alt={product.name}
+            alt={product.title}
             className={viewImage === i ? s.inView : ""}
             onClick={() => {
               setViewImage(i);
@@ -30,7 +30,7 @@ export default function Images({ product, variant }) {
           }
           height={420}
           width={420}
-          alt={product.name}
+          alt={product.title}
         />
       </div>
     </div>

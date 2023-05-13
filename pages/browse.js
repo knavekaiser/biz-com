@@ -35,11 +35,7 @@ const Browse = ({ siteData }) => {
       <Header />
       <Products showPath={siteData?.siteConfig?.landingPage?.viewLandingPage} />
       <Footer />
-      {compare?.length > 0 && (
-        <Link href={paths.compare}>
-          <a>Compare</a>
-        </Link>
-      )}
+      {compare?.length > 0 && <Link href={paths.compare}>Compare</Link>}
     </main>
   );
 };

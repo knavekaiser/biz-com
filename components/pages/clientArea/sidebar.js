@@ -20,16 +20,16 @@ const Sidebar = () => {
     <div className={s.sidebar}>
       <div className={s.links}>
         {routes.current.map((item) => (
-          <Link href={item.path} key={item.path}>
-            <a
-              className={`${router.pathname === item.path ? s.active : ""} ${
-                item.disabled ? s.disabled : ""
-              }`}
-              tabIndex={item.disabled ? "1" : "0"}
-            >
-              {item.label}
-              {item.tag && <span className={s.tag}>{item.tag}</span>}
-            </a>
+          <Link
+            href={item.path}
+            key={item.path}
+            className={`${router.pathname === item.path ? s.active : ""} ${
+              item.disabled ? s.disabled : ""
+            }`}
+            tabIndex={item.disabled ? "1" : "0"}
+          >
+            {item.label}
+            {item.tag && <span className={s.tag}>{item.tag}</span>}
           </Link>
         ))}
       </div>
