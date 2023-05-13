@@ -12,6 +12,7 @@ import { useRouter } from "next/router";
 import { phone } from "phone";
 import * as yup from "yup";
 import s from "./styles/header.module.scss";
+import Image from "next/image";
 
 const Header = () => {
   const { siteConfig, cart } = useContext(SiteContext);
@@ -23,7 +24,12 @@ const Header = () => {
         <div className={s.northSection}>
           <Link href={paths.home}>
             <a className={s.logo}>
-              <img src={siteConfig.logo} />
+              <Image
+                src={siteConfig.logo}
+                height={48}
+                width={48}
+                alt="Site Logo"
+              />
               <h2>{siteConfig.siteTitle}</h2>
             </a>
           </Link>

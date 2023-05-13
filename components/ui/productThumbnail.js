@@ -7,6 +7,7 @@ import { IoLogoWhatsapp } from "react-icons/io";
 import Link from "next/link";
 import Carousel from "react-multi-carousel";
 import s from "./styles/productThumbnail.module.scss";
+import Image from "next/image";
 
 export const ProductThumb = ({ product }) => {
   const { siteConfig } = useContext(SiteContext);
@@ -21,7 +22,12 @@ export const ProductThumb = ({ product }) => {
       <Link href={`/item/${product._id}`}>
         <a>
           <div className={s.thumbnailWrapper}>
-            <img src={product.images[0]} />
+            <Image
+              src={product.images[0]}
+              height={328}
+              width={328}
+              alt={product.name}
+            />
             {/* <Carousel
           containerClass={`${s.thumbnail} productCardThumbGlobal`}
           responsive={responsive}
@@ -73,8 +79,11 @@ export const ProductThumb = ({ product }) => {
               if (item === "seller" && product.seller) {
                 return (
                   <div className={s.productSeller} key={item}>
-                    <img
+                    <Image
                       src={product.seller.logo || product.seller.profileImg}
+                      height={20}
+                      width={20}
+                      alt={product.seller.name}
                     />
                     <span className={s.productSeller}>
                       {product.seller.name}
@@ -215,8 +224,11 @@ export const ProductThumbOld = ({ product }) => {
   const { siteConfig } = useContext(SiteContext);
   return (
     <div className={`${s.productThumb}`}>
-      <img
+      <Image
         src={product.images ? product.images[0] : product.img}
+        height={328}
+        width={328}
+        alt={product.name}
         className={s.thumbnail}
       />
       <div className={s.productDetail}>
@@ -250,7 +262,12 @@ export const ProductThumbOld = ({ product }) => {
             if (item === "seller" && product.seller) {
               return (
                 <div className={s.productSeller} key={item}>
-                  <img src={product.seller.logo || product.seller.profileImg} />
+                  <Image
+                    src={product.seller.logo || product.seller.profileImg}
+                    height={20}
+                    width={20}
+                    alt={product.seller.name}
+                  />
                   <span className={s.productSeller}>{product.seller.name}</span>
                 </div>
               );

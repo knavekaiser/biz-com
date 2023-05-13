@@ -14,6 +14,7 @@ import { ImStarEmpty, ImStarFull } from "react-icons/im";
 import { FiChevronDown } from "react-icons/fi";
 import { useRouter } from "next/router";
 import { BsCheckLg } from "react-icons/bs";
+import Image from "next/image";
 
 const Sidebar = ({ product, variant, setVariant }) => {
   const router = useRouter();
@@ -272,7 +273,12 @@ const Sidebar = ({ product, variant, setVariant }) => {
             if (item === "seller") {
               return (
                 <div className={s.seller} key={item}>
-                  <img src={product.seller.logo} />
+                  <Image
+                    src={product.seller.logo}
+                    height={48}
+                    width={48}
+                    alt={product.seller.name}
+                  />
                   <span>{product.seller.name}</span>
                 </div>
               );

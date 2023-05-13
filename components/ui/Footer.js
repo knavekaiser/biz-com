@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { SiteContext } from "SiteContext";
 import Link from "next/link";
 import s from "./styles/footer.module.scss";
+import Image from "next/image";
 
 const Footer = () => {
   const { siteConfig } = useContext(SiteContext);
@@ -35,7 +36,7 @@ const Footer = () => {
         ))}
       </div>
       <div className={s.branding}>
-        <img src={siteConfig.logo} />
+        <Image src={siteConfig.logo} height={48} width={48} alt="Site Logo" />
         <h2>{siteConfig.siteTitle}</h2>
       </div>
     </footer>

@@ -2,6 +2,7 @@ import React from "react";
 import Sidebar from "./sidebar";
 import Form from "./form";
 import s from "./styles/checkout.module.scss";
+import Image from "next/image";
 
 export default function Checkout({ product }) {
   return (
@@ -18,7 +19,12 @@ const Products = ({ product }) => {
     <div className={s.products}>
       {product && (
         <div className={s.product}>
-          <img src={product.images[0]} />
+          <Image
+            src={product.images[0]}
+            height={120}
+            width={120}
+            alt={product.name}
+          />
           <div className={s.productDetail}>
             <h3>{product.title}</h3>
             <p>{product.description}</p>

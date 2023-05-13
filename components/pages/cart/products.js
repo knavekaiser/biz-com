@@ -3,6 +3,7 @@ import React, { useContext, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { SiteContext } from "SiteContext";
 import Sidebar from "./sidebar";
+import Image from "next/image";
 import s from "./styles/cart.module.scss";
 
 export default function Checkout({ product }) {
@@ -75,9 +76,12 @@ const Product = ({ product }) => {
   }, []);
   return (
     <div className={s.product}>
-      <img
-        className={s.thumbnail}
+      <Image
         src={product.variant?.images[0] || product.product.images[0]}
+        height={120}
+        width={120}
+        alt={product.name}
+        className={s.thumbnail}
       />
       <div className={s.productDetail}>
         <h3>{product.product.title}</h3>

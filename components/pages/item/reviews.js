@@ -9,6 +9,7 @@ import { Moment } from "components/elements";
 import { Prompt } from "components/modal";
 import { CustomRadio, Textarea } from "components/elements";
 import s from "./styles/products.module.scss";
+import Image from "next/image";
 
 export default function Reviews({ product }) {
   const { user } = useContext(SiteContext);
@@ -130,7 +131,12 @@ const Review = ({ review }) => {
       <div className={s.customer}>
         <div className={s.profilePic}>
           {review.customer?.image ? (
-            <img src={review.customer.image} />
+            <Image
+              src={review.customer.image}
+              height={48}
+              width={48}
+              alt={review.customer.name}
+            />
           ) : (
             <HiOutlineUserCircle className={s.profilePicPlaceholder} />
           )}

@@ -71,7 +71,12 @@ const Product = ({ product }) => {
   return (
     <div className={s.product}>
       <div className={s.thumbnail}>
-        <img src={(product.variant?.images || product.product.images)[0]} />
+        <Image
+          src={(product.variant?.images || product.product.images)[0]}
+          height={120}
+          width={120}
+          alt={product.name}
+        />
       </div>
       <div className={s.productDetail}>
         <h4>{product.product.title}</h4>
