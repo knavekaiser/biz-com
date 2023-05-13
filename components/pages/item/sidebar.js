@@ -118,32 +118,36 @@ const Sidebar = ({ product, variant, setVariant }) => {
           )}
           {siteConfig?.productViewPage?.viewWhatsApp &&
             (config.whatsappNumber || product.whatsappNumber) && (
-              <a
-                style={{
-                  width: "min-content",
-                }}
-                href={
-                  `whatsapp://send/?${new URLSearchParams({
+              <button
+                className="btn whatsapp"
+                onClick={(e) => {
+                  e.preventDefault();
+                  const a = document.createElement("a");
+                  a.href = `whatsapp://send/?${new URLSearchParams({
                     phone: config.whatsappNumber || product.whatsappNumber,
                     text: `I am interested to know more about this ${
                       product.title
                     }\n${window.location.href.replace(/\?.+/, "")}`,
-                  }).toString()}`
+                  }).toString()}`;
+
                   // `https://api.whatsapp.com/send/?${new URLSearchParams({
                   //   phone: config.whatsappNumber || product.whatsappNumber,
                   //   text: `I am interested to know more about this ${product.title}`,
                   //   type: "phone_number",
                   //   // app_absent: 0,
                   // }).toString()}`
-                }
-                rel="noreferrer"
-                target="_blank"
+
+                  a.rel = "noreferrer";
+                  a.target = "_blank";
+
+                  document.querySelector("body").append(a);
+                  a.click();
+                  a.remove();
+                }}
               >
-                <button className="btn whatsapp">
-                  <IoLogoWhatsapp />
-                  Chat On WhatsApp
-                </button>
-              </a>
+                <IoLogoWhatsapp />
+                Chat On WhatsApp
+              </button>
             )}
           <hr />
           {siteConfig?.productViewPage?.productElements?.map((item) => {
@@ -165,6 +169,7 @@ const Sidebar = ({ product, variant, setVariant }) => {
             if (item === "compare") {
               return (
                 <button
+                  key={item}
                   className={`btn ${
                     compare.includes(product._id) ? "" : "primary"
                   } small`}
