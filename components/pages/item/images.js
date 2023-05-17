@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import s from "./styles/products.module.scss";
 import Image from "next/image";
 
 export default function Images({ product, variant }) {
   const [viewImage, setViewImage] = useState(0);
-  useEffect(() => {}, [variant]);
   return (
     <div className={s.images}>
       <div className={s.thumbnails}>
@@ -22,17 +21,46 @@ export default function Images({ product, variant }) {
           />
         ))}
       </div>
-      <div className={s.mainImg}>
-        <Image
-          src={
-            (variant?.images || product.images)[viewImage] ||
-            (variant?.images || product.images)[0]
-          }
-          height={420}
-          width={420}
-          alt={product.title}
-        />
-      </div>
+      <MainImg
+        src={
+          (variant?.images || product.images)[viewImage] ||
+          (variant?.images || product.images)[0]
+        }
+        alt={product.title}
+      />
     </div>
   );
 }
+
+const MainImg = ({ src, alt }) => {
+  const [browser, setBrowser] = useState(false);
+  const mainImgRef = useRef();
+  const imgRef = useRef();
+  const [bounding, setBounding] = useState(null);
+  useEffect(() => {
+    setBounding(mainImgRef.current.getBoundingClientRect());
+  }, [src]);
+  useEffect(() => {
+    setBrowser(false);
+  }, []);
+  return (
+    <div
+      className={s.mainImg}
+      ref={mainImgRef}
+      onMouseMove={(e) => {
+        if (mainImgRef.current && imgRef.current) {
+          const x = Math.round(
+            ((e.clientX - (bounding?.x || 0)) / bounding?.width) * 100
+          );
+          const y = Math.round(
+            ((e.clientY - (bounding?.y || 0)) / bounding?.height) * 100
+          );
+          imgRef.current.style.left = `-${x * 1.5}%`;
+          imgRef.current.style.top = `-${y * 1.5}%`;
+        }
+      }}
+    >
+      <Image ref={imgRef} src={src} height={600} width={600} alt={alt} />
+    </div>
+  );
+};
