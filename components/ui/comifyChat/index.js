@@ -2,7 +2,7 @@ import { useCallback, useContext, useRef, useState } from "react";
 import { AiOutlineMessage, AiOutlineSend } from "react-icons/ai";
 import { BiArrowBack } from "react-icons/bi";
 import { TiArrowMinimise } from "react-icons/ti";
-import s from "./style.module.css";
+import s from "./style.module.scss";
 import { ChatContextProvider, ChatContext } from "./ChatContext";
 import { useFetch } from "./utils/useFetch";
 import endpoints from "./utils/endpoints";
