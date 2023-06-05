@@ -4,6 +4,7 @@ import { Provider, SiteContext } from "SiteContext";
 import NProgress from "nprogress";
 import Head from "next/head";
 import Router from "next/router";
+import ComifyChat, { ChatContextProvider } from "components/ui/comifyChat";
 
 require("react-multi-carousel/lib/styles.css");
 
@@ -50,11 +51,14 @@ function MyApp({ Component, pageProps }) {
   }, []);
 
   return (
-    <Provider>
-      <Wrapper>
-        <Component {...pageProps} />
-      </Wrapper>
-    </Provider>
+    <ChatContextProvider>
+      <Provider>
+        <Wrapper>
+          <ComifyChat />
+          <Component {...pageProps} />
+        </Wrapper>
+      </Provider>
+    </ChatContextProvider>
   );
 }
 
