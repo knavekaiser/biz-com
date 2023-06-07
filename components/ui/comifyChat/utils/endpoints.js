@@ -1,4 +1,4 @@
-const baseApiUrl = "";
+const baseApiUrl = process.env.NEXT_PUBLIC_BIZ_APP_BASE_URL;
 
 const endpoints = {
   baseApiUrl,
