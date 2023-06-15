@@ -18,7 +18,7 @@ export async function getServerSideProps(ctx) {
     siteData: await getSiteData(ctx),
   };
   if (props.siteData) {
-    if (!props.siteData.siteConfig.landingPage.viewLandingPage) {
+    if (!props.siteData.siteConfig?.landingPage?.viewLandingPage) {
       return {
         redirect: {
           destination: paths.browse,

@@ -4,7 +4,8 @@ import { Provider, SiteContext } from "SiteContext";
 import NProgress from "nprogress";
 import Head from "next/head";
 import Router from "next/router";
-import ComifyChat, { ChatContextProvider } from "components/ui/comifyChat";
+import { loadScript } from "helpers";
+import { endpoints } from "config";
 
 require("react-multi-carousel/lib/styles.css");
 
@@ -48,17 +49,21 @@ function MyApp({ Component, pageProps }) {
   useEffect(() => {
     window.addEventListener("resize", () => resizeWindow());
     resizeWindow();
+
+    loadScript(endpoints.comifyChat).then(() => {
+      if (window.ComifyChat) {
+        const { default: mountComifyChat } = window.ComifyChat;
+        mountComifyChat();
+      }
+    });
   }, []);
 
   return (
-    <ChatContextProvider>
-      <Provider>
-        <Wrapper>
-          <ComifyChat />
-          <Component {...pageProps} />
-        </Wrapper>
-      </Provider>
-    </ChatContextProvider>
+    <Provider>
+      <Wrapper>
+        <Component {...pageProps} />
+      </Wrapper>
+    </Provider>
   );
 }
 
