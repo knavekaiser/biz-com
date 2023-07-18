@@ -35,6 +35,21 @@ const Wrapper = ({ children }) => {
   useEffect(() => {
     setBrowser(true);
   }, []);
+  useEffect(() => {
+    if (siteConfig.chatbot && !window.InfinAI) {
+      console.log("loading chatbot");
+      loadScript(endpoints.comifyChat).then(() => {
+        if (window.InfinAI) {
+          const { default: mountInfinAI } = window.InfinAI;
+          mountInfinAI({
+            baseUrl: endpoints.baseApiUrlPublic,
+            chatbotId: siteConfig.chatbot._id,
+            defaultUrl: siteConfig.domain,
+          });
+        }
+      });
+    }
+  }, [siteConfig]);
   return (
     <>
       <Head>
@@ -49,13 +64,6 @@ function MyApp({ Component, pageProps }) {
   useEffect(() => {
     window.addEventListener("resize", () => resizeWindow());
     resizeWindow();
-
-    loadScript(endpoints.comifyChat).then(() => {
-      if (window.ComifyChat) {
-        const { default: mountComifyChat } = window.ComifyChat;
-        mountComifyChat();
-      }
-    });
   }, []);
 
   return (

@@ -7,7 +7,7 @@ const endpoints = {
     baseApiUrl,
     siteConfig: `${baseApiUrl}/api/site-config`,
     browse: `${baseApiUrl}/api/browse`,
-    getDynamicPageFiles: `${baseApiUrl}/api/dynamic-page-files`,
+    getDynamicPageFiles: `${baseApiUrl}/api/dynamic-pages`,
     sitemapUrls: `${baseApiUrl}/api/sitemap-urls`,
   },
 
@@ -28,7 +28,7 @@ const endpoints = {
   placeOrder: `${baseApiUrlPublic}/api/place-order`,
   categories: `${baseApiUrlPublic}/api/categories`,
 
-  comifyChat: `${baseApiUrlPublic}/assets/sdk/comify-chat-sdk-v0.9.0.js`,
+  comifyChat: `${baseApiUrlPublic}/assets/sdk/infinai-chat-sdk-v0.9.0.js`,
 };
 
 export default endpoints;
