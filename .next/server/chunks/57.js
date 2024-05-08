@@ -2987,7 +2987,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 function myImageLoader({ src , width , quality  }) {
     if (src.startsWith("/assets")) {
-        return `${"http://localhost:8060"}${src}?w=${width}&q=${quality || 75}`;
+        return `${"https://biz.infinai.in"}${src}?w=${width}&q=${quality || 75}`;
     }
     return `${src}?w=${width}&q=${quality || 75}`;
 }
