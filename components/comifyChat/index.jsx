@@ -538,6 +538,7 @@ const Chat = ({ setOpen, fullScreen, setFullScreen }) => {
               )}
               {!("type" in item) && (
                 <Message
+                  setOpen={setOpen}
                   msg={item}
                   loading={loading}
                   style={{
@@ -632,7 +633,7 @@ const Avatar = ({ onClick, src }) => {
   );
 };
 
-const Message = ({ msg, castVote, loading, style }) => {
+const Message = ({ setOpen, msg, castVote, loading, style }) => {
   const { chatbotConfig, convo } = useContext(ChatContext);
   let productList = null;
   if (
@@ -669,7 +670,11 @@ const Message = ({ msg, castVote, loading, style }) => {
         {productList ? (
           <div className={s.productList}>
             {productList.map((product) => (
-              <ProductThumb key={product._id} product={product} />
+              <ProductThumb
+                key={product._id}
+                onClick={() => setOpen(false)}
+                product={product}
+              />
             ))}
           </div>
         ) : (

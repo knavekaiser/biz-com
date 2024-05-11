@@ -67,12 +67,13 @@ module.exports = {
 
 
 
-const ProductThumb = ({ product  })=>{
+const ProductThumb = ({ product , onClick =()=>{}  })=>{
     const { siteConfig  } = (0,react__WEBPACK_IMPORTED_MODULE_1__.useContext)(SiteContext__WEBPACK_IMPORTED_MODULE_2__/* .SiteContext */ .D);
     return /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
         className: `${(_styles_productThumbnail_module_scss__WEBPACK_IMPORTED_MODULE_8___default().productThumb)}`,
         children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)((next_link__WEBPACK_IMPORTED_MODULE_6___default()), {
             href: `/item/${product._id}`,
+            onClick: onClick,
             children: [
                 /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
                     className: (_styles_productThumbnail_module_scss__WEBPACK_IMPORTED_MODULE_8___default().thumbnailWrapper),

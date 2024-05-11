@@ -7,11 +7,11 @@ import Link from "next/link";
 import s from "./styles/productThumbnail.module.scss";
 import Image from "next/image";
 
-export const ProductThumb = ({ product }) => {
+export const ProductThumb = ({ product, onClick = () => {} }) => {
   const { siteConfig } = useContext(SiteContext);
   return (
     <div className={`${s.productThumb}`}>
-      <Link href={`/item/${product._id}`}>
+      <Link href={`/item/${product._id}`} onClick={onClick}>
         <div className={s.thumbnailWrapper}>
           <Image
             src={product.images[0]}

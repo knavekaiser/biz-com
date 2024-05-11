@@ -1211,6 +1211,7 @@ const Chat = ({ setOpen , fullScreen , setFullScreen  })=>{
                                 ]
                             }),
                             !("type" in item) && /*#__PURE__*/ jsx_runtime.jsx(comifyChat_Message, {
+                                setOpen: setOpen,
                                 msg: item,
                                 loading: loading,
                                 style: {
@@ -1299,7 +1300,7 @@ const Avatar = ({ onClick , src  })=>{
         })
     });
 };
-const comifyChat_Message = ({ msg , castVote , loading , style  })=>{
+const comifyChat_Message = ({ setOpen , msg , castVote , loading , style  })=>{
     const { chatbotConfig , convo  } = (0,external_react_.useContext)(ChatContext);
     let productList = null;
     if (msg.role === "assistant" && msg.content.startsWith("[") && msg.content.endsWith("]")) {
@@ -1332,6 +1333,7 @@ const comifyChat_Message = ({ msg , castVote , loading , style  })=>{
                     productList ? /*#__PURE__*/ jsx_runtime.jsx("div", {
                         className: (style_module_default()).productList,
                         children: productList.map((product)=>/*#__PURE__*/ jsx_runtime.jsx(productThumbnail/* ProductThumb */.B, {
+                                onClick: ()=>setOpen(false),
                                 product: product
                             }, product._id))
                     }) : /*#__PURE__*/ jsx_runtime.jsx("p", {
