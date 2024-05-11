@@ -1,22 +1,14 @@
-import { useContext, Fragment } from "react";
+import { useContext } from "react";
 import { SiteContext } from "SiteContext";
-import { HiStar } from "react-icons/hi";
 import { FiChevronDown } from "react-icons/fi";
 import { ImStarEmpty, ImStarFull } from "react-icons/im";
 import { IoLogoWhatsapp } from "react-icons/io";
 import Link from "next/link";
-import Carousel from "react-multi-carousel";
 import s from "./styles/productThumbnail.module.scss";
 import Image from "next/image";
 
 export const ProductThumb = ({ product }) => {
   const { siteConfig } = useContext(SiteContext);
-  const responsive = {
-    desktop: {
-      breakpoint: { max: 3000, min: 0 },
-      items: 1,
-    },
-  };
   return (
     <div className={`${s.productThumb}`}>
       <Link href={`/item/${product._id}`}>
@@ -190,81 +182,6 @@ export const ProductThumb = ({ product }) => {
           })}
         </div>
       </Link>
-    </div>
-  );
-};
-
-export const ProductThumbOld = ({ product }) => {
-  const { siteConfig } = useContext(SiteContext);
-  return (
-    <div className={`${s.productThumb}`}>
-      <Image
-        src={product.images ? product.images[0] : product.img}
-        height={328}
-        width={328}
-        alt={product.title}
-        className={s.thumbnail}
-      />
-      <div className={s.productDetail}>
-        <h4>{product.title}</h4>
-        <div className={s.details}>
-          {siteConfig?.siteConfig?.productCard?.map((item) => {
-            if (["string", "number"].includes(typeof product[item])) {
-              if (item === "price") {
-                return (
-                  <span className={s.price} key={item}>
-                    <span className={s.currentPrice}>
-                      {siteConfig?.siteConfig?.currency}{" "}
-                      {product.price.toLocaleString()}
-                    </span>
-
-                    {product.originalPrice > product.price && (
-                      <span className={s.originalPrice}>
-                        {siteConfig?.siteConfig?.currency}{" "}
-                        {product.originalPrice.toLocaleString()}
-                      </span>
-                    )}
-                  </span>
-                );
-              }
-              return (
-                <span className={s.description} key={item}>
-                  {product[item]}
-                </span>
-              );
-            }
-            if (item === "seller" && product.seller) {
-              return (
-                <div className={s.productSeller} key={item}>
-                  <Image
-                    src={product.seller.logo || product.seller.profileImg}
-                    height={20}
-                    width={20}
-                    alt={product.seller.name}
-                  />
-                  <span className={s.productSeller}>{product.seller.name}</span>
-                </div>
-              );
-            }
-            if (item === "rating") {
-              return (
-                <div className={s.rating} key={item}>
-                  <HiStar className={product.rating >= 1 ? s.lit : ""} />
-                  <HiStar className={product.rating >= 2 ? s.lit : ""} />
-                  <HiStar className={product.rating >= 3 ? s.lit : ""} />
-                  <HiStar className={product.rating >= 4 ? s.lit : ""} />
-                  <HiStar className={product.rating >= 5 ? s.lit : ""} />
-                </div>
-              );
-            }
-            return <Fragment key={item} />;
-          })}
-        </div>
-
-        {
-          // <span className={s.devider} />
-        }
-      </div>
     </div>
   );
 };

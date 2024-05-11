@@ -42,29 +42,22 @@ module.exports = {
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "B": () => (/* binding */ ProductThumb)
 /* harmony export */ });
-/* unused harmony export ProductThumbOld */
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(5893);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(6689);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var SiteContext__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(9711);
-/* harmony import */ var react_icons_hi__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(1111);
-/* harmony import */ var react_icons_hi__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react_icons_hi__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var react_icons_fi__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(2750);
-/* harmony import */ var react_icons_fi__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(react_icons_fi__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var react_icons_im__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(924);
-/* harmony import */ var react_icons_im__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(react_icons_im__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var react_icons_io__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(4751);
-/* harmony import */ var react_icons_io__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(react_icons_io__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(1664);
-/* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(next_link__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var react_multi_carousel__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(5804);
-/* harmony import */ var react_multi_carousel__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(react_multi_carousel__WEBPACK_IMPORTED_MODULE_8__);
-/* harmony import */ var _styles_productThumbnail_module_scss__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(7301);
-/* harmony import */ var _styles_productThumbnail_module_scss__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(_styles_productThumbnail_module_scss__WEBPACK_IMPORTED_MODULE_10__);
-/* harmony import */ var next_image__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(5675);
-/* harmony import */ var next_image__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(next_image__WEBPACK_IMPORTED_MODULE_9__);
-
-
+/* harmony import */ var react_icons_fi__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(2750);
+/* harmony import */ var react_icons_fi__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react_icons_fi__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var react_icons_im__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(924);
+/* harmony import */ var react_icons_im__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(react_icons_im__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var react_icons_io__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(4751);
+/* harmony import */ var react_icons_io__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(react_icons_io__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(1664);
+/* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(next_link__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _styles_productThumbnail_module_scss__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(7301);
+/* harmony import */ var _styles_productThumbnail_module_scss__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_styles_productThumbnail_module_scss__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var next_image__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(5675);
+/* harmony import */ var next_image__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(next_image__WEBPACK_IMPORTED_MODULE_7__);
 
 
 
@@ -76,23 +69,14 @@ module.exports = {
 
 const ProductThumb = ({ product  })=>{
     const { siteConfig  } = (0,react__WEBPACK_IMPORTED_MODULE_1__.useContext)(SiteContext__WEBPACK_IMPORTED_MODULE_2__/* .SiteContext */ .D);
-    const responsive = {
-        desktop: {
-            breakpoint: {
-                max: 3000,
-                min: 0
-            },
-            items: 1
-        }
-    };
     return /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
-        className: `${(_styles_productThumbnail_module_scss__WEBPACK_IMPORTED_MODULE_10___default().productThumb)}`,
-        children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)((next_link__WEBPACK_IMPORTED_MODULE_7___default()), {
+        className: `${(_styles_productThumbnail_module_scss__WEBPACK_IMPORTED_MODULE_8___default().productThumb)}`,
+        children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)((next_link__WEBPACK_IMPORTED_MODULE_6___default()), {
             href: `/item/${product._id}`,
             children: [
                 /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
-                    className: (_styles_productThumbnail_module_scss__WEBPACK_IMPORTED_MODULE_10___default().thumbnailWrapper),
-                    children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_image__WEBPACK_IMPORTED_MODULE_9___default()), {
+                    className: (_styles_productThumbnail_module_scss__WEBPACK_IMPORTED_MODULE_8___default().thumbnailWrapper),
+                    children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_image__WEBPACK_IMPORTED_MODULE_7___default()), {
                         src: product.images[0],
                         height: 328,
                         width: 328,
@@ -100,7 +84,7 @@ const ProductThumb = ({ product  })=>{
                     })
                 }),
                 /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
-                    className: (_styles_productThumbnail_module_scss__WEBPACK_IMPORTED_MODULE_10___default().productDetail),
+                    className: (_styles_productThumbnail_module_scss__WEBPACK_IMPORTED_MODULE_8___default().productDetail),
                     children: [
                         /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("h4", {
                             children: product.title
@@ -115,10 +99,10 @@ const ProductThumb = ({ product  })=>{
                             ].includes(typeof product[item])) {
                                 if (item === "price") {
                                     return /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("span", {
-                                        className: (_styles_productThumbnail_module_scss__WEBPACK_IMPORTED_MODULE_10___default().price),
+                                        className: (_styles_productThumbnail_module_scss__WEBPACK_IMPORTED_MODULE_8___default().price),
                                         children: [
                                             /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("span", {
-                                                className: (_styles_productThumbnail_module_scss__WEBPACK_IMPORTED_MODULE_10___default().currentPrice),
+                                                className: (_styles_productThumbnail_module_scss__WEBPACK_IMPORTED_MODULE_8___default().currentPrice),
                                                 children: [
                                                     siteConfig?.siteConfig?.currency,
                                                     " ",
@@ -126,7 +110,7 @@ const ProductThumb = ({ product  })=>{
                                                 ]
                                             }),
                                             product.originalPrice > product.price && /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("span", {
-                                                className: (_styles_productThumbnail_module_scss__WEBPACK_IMPORTED_MODULE_10___default().originalPrice),
+                                                className: (_styles_productThumbnail_module_scss__WEBPACK_IMPORTED_MODULE_8___default().originalPrice),
                                                 children: [
                                                     siteConfig?.siteConfig?.currency,
                                                     " ",
@@ -137,22 +121,22 @@ const ProductThumb = ({ product  })=>{
                                     }, item);
                                 }
                                 return /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("span", {
-                                    className: (_styles_productThumbnail_module_scss__WEBPACK_IMPORTED_MODULE_10___default().description),
+                                    className: (_styles_productThumbnail_module_scss__WEBPACK_IMPORTED_MODULE_8___default().description),
                                     children: product[item]
                                 }, item);
                             }
                             if (item === "seller" && product.seller) {
                                 return /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
-                                    className: (_styles_productThumbnail_module_scss__WEBPACK_IMPORTED_MODULE_10___default().productSeller),
+                                    className: (_styles_productThumbnail_module_scss__WEBPACK_IMPORTED_MODULE_8___default().productSeller),
                                     children: [
-                                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_image__WEBPACK_IMPORTED_MODULE_9___default()), {
+                                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_image__WEBPACK_IMPORTED_MODULE_7___default()), {
                                             src: product.seller.logo || product.seller.profileImg,
                                             height: 20,
                                             width: 20,
                                             alt: product.seller.name
                                         }),
                                         /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("span", {
-                                            className: (_styles_productThumbnail_module_scss__WEBPACK_IMPORTED_MODULE_10___default().productSeller),
+                                            className: (_styles_productThumbnail_module_scss__WEBPACK_IMPORTED_MODULE_8___default().productSeller),
                                             children: product.seller.name
                                         })
                                     ]
@@ -166,7 +150,7 @@ const ProductThumb = ({ product  })=>{
                                     style: {
                                         width: "min-content"
                                     },
-                                    className: (_styles_productThumbnail_module_scss__WEBPACK_IMPORTED_MODULE_10___default().whatsappBtn),
+                                    className: (_styles_productThumbnail_module_scss__WEBPACK_IMPORTED_MODULE_8___default().whatsappBtn),
                                     onClick: (e)=>{
                                         e.preventDefault();
                                         const a = document.createElement("a");
@@ -180,32 +164,32 @@ const ProductThumb = ({ product  })=>{
                                         a.click();
                                         a.remove();
                                     },
-                                    children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_icons_io__WEBPACK_IMPORTED_MODULE_6__.IoLogoWhatsapp, {})
+                                    children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_icons_io__WEBPACK_IMPORTED_MODULE_5__.IoLogoWhatsapp, {})
                                 }, item);
                             }
                             if (item === "review") {
                                 return /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
-                                    className: (_styles_productThumbnail_module_scss__WEBPACK_IMPORTED_MODULE_10___default().rating),
+                                    className: (_styles_productThumbnail_module_scss__WEBPACK_IMPORTED_MODULE_8___default().rating),
                                     children: [
                                         /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("span", {
-                                            className: (_styles_productThumbnail_module_scss__WEBPACK_IMPORTED_MODULE_10___default().value),
+                                            className: (_styles_productThumbnail_module_scss__WEBPACK_IMPORTED_MODULE_8___default().value),
                                             children: product.rating || 0
                                         }),
                                         /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("span", {
-                                            className: (_styles_productThumbnail_module_scss__WEBPACK_IMPORTED_MODULE_10___default().stars),
+                                            className: (_styles_productThumbnail_module_scss__WEBPACK_IMPORTED_MODULE_8___default().stars),
                                             children: [
-                                                product.rating >= 1 ? /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_icons_im__WEBPACK_IMPORTED_MODULE_5__.ImStarFull, {}) : /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_icons_im__WEBPACK_IMPORTED_MODULE_5__.ImStarEmpty, {}),
-                                                product.rating >= 2 ? /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_icons_im__WEBPACK_IMPORTED_MODULE_5__.ImStarFull, {}) : /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_icons_im__WEBPACK_IMPORTED_MODULE_5__.ImStarEmpty, {}),
-                                                product.rating >= 3 ? /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_icons_im__WEBPACK_IMPORTED_MODULE_5__.ImStarFull, {}) : /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_icons_im__WEBPACK_IMPORTED_MODULE_5__.ImStarEmpty, {}),
-                                                product.rating >= 4 ? /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_icons_im__WEBPACK_IMPORTED_MODULE_5__.ImStarFull, {}) : /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_icons_im__WEBPACK_IMPORTED_MODULE_5__.ImStarEmpty, {}),
-                                                product.rating >= 5 ? /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_icons_im__WEBPACK_IMPORTED_MODULE_5__.ImStarFull, {}) : /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_icons_im__WEBPACK_IMPORTED_MODULE_5__.ImStarEmpty, {})
+                                                product.rating >= 1 ? /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_icons_im__WEBPACK_IMPORTED_MODULE_4__.ImStarFull, {}) : /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_icons_im__WEBPACK_IMPORTED_MODULE_4__.ImStarEmpty, {}),
+                                                product.rating >= 2 ? /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_icons_im__WEBPACK_IMPORTED_MODULE_4__.ImStarFull, {}) : /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_icons_im__WEBPACK_IMPORTED_MODULE_4__.ImStarEmpty, {}),
+                                                product.rating >= 3 ? /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_icons_im__WEBPACK_IMPORTED_MODULE_4__.ImStarFull, {}) : /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_icons_im__WEBPACK_IMPORTED_MODULE_4__.ImStarEmpty, {}),
+                                                product.rating >= 4 ? /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_icons_im__WEBPACK_IMPORTED_MODULE_4__.ImStarFull, {}) : /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_icons_im__WEBPACK_IMPORTED_MODULE_4__.ImStarEmpty, {}),
+                                                product.rating >= 5 ? /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_icons_im__WEBPACK_IMPORTED_MODULE_4__.ImStarFull, {}) : /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_icons_im__WEBPACK_IMPORTED_MODULE_4__.ImStarEmpty, {})
                                             ]
                                         }),
-                                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_icons_fi__WEBPACK_IMPORTED_MODULE_4__.FiChevronDown, {
-                                            className: (_styles_productThumbnail_module_scss__WEBPACK_IMPORTED_MODULE_10___default().chev)
+                                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_icons_fi__WEBPACK_IMPORTED_MODULE_3__.FiChevronDown, {
+                                            className: (_styles_productThumbnail_module_scss__WEBPACK_IMPORTED_MODULE_8___default().chev)
                                         }),
                                         /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("span", {
-                                            className: (_styles_productThumbnail_module_scss__WEBPACK_IMPORTED_MODULE_10___default().reviewCount),
+                                            className: (_styles_productThumbnail_module_scss__WEBPACK_IMPORTED_MODULE_8___default().reviewCount),
                                             children: [
                                                 "(",
                                                 product.totalReview || 0,
@@ -213,19 +197,19 @@ const ProductThumb = ({ product  })=>{
                                             ]
                                         }),
                                         /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
-                                            className: (_styles_productThumbnail_module_scss__WEBPACK_IMPORTED_MODULE_10___default().breakdown),
+                                            className: (_styles_productThumbnail_module_scss__WEBPACK_IMPORTED_MODULE_8___default().breakdown),
                                             children: [
                                                 /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
-                                                    className: (_styles_productThumbnail_module_scss__WEBPACK_IMPORTED_MODULE_10___default().title),
+                                                    className: (_styles_productThumbnail_module_scss__WEBPACK_IMPORTED_MODULE_8___default().title),
                                                     children: [
                                                         /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("span", {
-                                                            className: (_styles_productThumbnail_module_scss__WEBPACK_IMPORTED_MODULE_10___default().stars),
+                                                            className: (_styles_productThumbnail_module_scss__WEBPACK_IMPORTED_MODULE_8___default().stars),
                                                             children: [
-                                                                product.rating >= 2 ? /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_icons_im__WEBPACK_IMPORTED_MODULE_5__.ImStarFull, {}) : /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_icons_im__WEBPACK_IMPORTED_MODULE_5__.ImStarEmpty, {}),
-                                                                product.rating >= 1 ? /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_icons_im__WEBPACK_IMPORTED_MODULE_5__.ImStarFull, {}) : /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_icons_im__WEBPACK_IMPORTED_MODULE_5__.ImStarEmpty, {}),
-                                                                product.rating >= 3 ? /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_icons_im__WEBPACK_IMPORTED_MODULE_5__.ImStarFull, {}) : /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_icons_im__WEBPACK_IMPORTED_MODULE_5__.ImStarEmpty, {}),
-                                                                product.rating >= 4 ? /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_icons_im__WEBPACK_IMPORTED_MODULE_5__.ImStarFull, {}) : /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_icons_im__WEBPACK_IMPORTED_MODULE_5__.ImStarEmpty, {}),
-                                                                product.rating >= 5 ? /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_icons_im__WEBPACK_IMPORTED_MODULE_5__.ImStarFull, {}) : /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_icons_im__WEBPACK_IMPORTED_MODULE_5__.ImStarEmpty, {})
+                                                                product.rating >= 2 ? /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_icons_im__WEBPACK_IMPORTED_MODULE_4__.ImStarFull, {}) : /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_icons_im__WEBPACK_IMPORTED_MODULE_4__.ImStarEmpty, {}),
+                                                                product.rating >= 1 ? /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_icons_im__WEBPACK_IMPORTED_MODULE_4__.ImStarFull, {}) : /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_icons_im__WEBPACK_IMPORTED_MODULE_4__.ImStarEmpty, {}),
+                                                                product.rating >= 3 ? /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_icons_im__WEBPACK_IMPORTED_MODULE_4__.ImStarFull, {}) : /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_icons_im__WEBPACK_IMPORTED_MODULE_4__.ImStarEmpty, {}),
+                                                                product.rating >= 4 ? /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_icons_im__WEBPACK_IMPORTED_MODULE_4__.ImStarFull, {}) : /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_icons_im__WEBPACK_IMPORTED_MODULE_4__.ImStarEmpty, {}),
+                                                                product.rating >= 5 ? /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_icons_im__WEBPACK_IMPORTED_MODULE_4__.ImStarFull, {}) : /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_icons_im__WEBPACK_IMPORTED_MODULE_4__.ImStarEmpty, {})
                                                             ]
                                                         }),
                                                         /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("span", {
@@ -237,14 +221,14 @@ const ProductThumb = ({ product  })=>{
                                                     ]
                                                 }),
                                                 /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
-                                                    className: (_styles_productThumbnail_module_scss__WEBPACK_IMPORTED_MODULE_10___default().subtitle),
+                                                    className: (_styles_productThumbnail_module_scss__WEBPACK_IMPORTED_MODULE_8___default().subtitle),
                                                     children: [
                                                         product.totalReview,
                                                         " global ratings"
                                                     ]
                                                 }),
                                                 /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("ul", {
-                                                    className: (_styles_productThumbnail_module_scss__WEBPACK_IMPORTED_MODULE_10___default().graph),
+                                                    className: (_styles_productThumbnail_module_scss__WEBPACK_IMPORTED_MODULE_8___default().graph),
                                                     children: [
                                                         5,
                                                         4,
@@ -262,16 +246,16 @@ const ProductThumb = ({ product  })=>{
                                                                     ]
                                                                 }),
                                                                 /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("span", {
-                                                                    className: (_styles_productThumbnail_module_scss__WEBPACK_IMPORTED_MODULE_10___default().bar),
+                                                                    className: (_styles_productThumbnail_module_scss__WEBPACK_IMPORTED_MODULE_8___default().bar),
                                                                     children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("span", {
-                                                                        className: (_styles_productThumbnail_module_scss__WEBPACK_IMPORTED_MODULE_10___default().fill),
+                                                                        className: (_styles_productThumbnail_module_scss__WEBPACK_IMPORTED_MODULE_8___default().fill),
                                                                         style: {
                                                                             width: `${((rating?.total || 0) / 5 * 100).fix()}%`
                                                                         }
                                                                     })
                                                                 }),
                                                                 /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("span", {
-                                                                    className: (_styles_productThumbnail_module_scss__WEBPACK_IMPORTED_MODULE_10___default().percent),
+                                                                    className: (_styles_productThumbnail_module_scss__WEBPACK_IMPORTED_MODULE_8___default().percent),
                                                                     children: [
                                                                         ((rating?.total || 0) / 5 * 100).fix(),
                                                                         "%"
@@ -292,106 +276,6 @@ const ProductThumb = ({ product  })=>{
                 })
             ]
         })
-    });
-};
-const ProductThumbOld = ({ product  })=>{
-    const { siteConfig  } = useContext(SiteContext);
-    return /*#__PURE__*/ _jsxs("div", {
-        className: `${s.productThumb}`,
-        children: [
-            /*#__PURE__*/ _jsx(Image, {
-                src: product.images ? product.images[0] : product.img,
-                height: 328,
-                width: 328,
-                alt: product.title,
-                className: s.thumbnail
-            }),
-            /*#__PURE__*/ _jsxs("div", {
-                className: s.productDetail,
-                children: [
-                    /*#__PURE__*/ _jsx("h4", {
-                        children: product.title
-                    }),
-                    /*#__PURE__*/ _jsx("div", {
-                        className: s.details,
-                        children: siteConfig?.siteConfig?.productCard?.map((item)=>{
-                            if ([
-                                "string",
-                                "number"
-                            ].includes(typeof product[item])) {
-                                if (item === "price") {
-                                    return /*#__PURE__*/ _jsxs("span", {
-                                        className: s.price,
-                                        children: [
-                                            /*#__PURE__*/ _jsxs("span", {
-                                                className: s.currentPrice,
-                                                children: [
-                                                    siteConfig?.siteConfig?.currency,
-                                                    " ",
-                                                    product.price.toLocaleString()
-                                                ]
-                                            }),
-                                            product.originalPrice > product.price && /*#__PURE__*/ _jsxs("span", {
-                                                className: s.originalPrice,
-                                                children: [
-                                                    siteConfig?.siteConfig?.currency,
-                                                    " ",
-                                                    product.originalPrice.toLocaleString()
-                                                ]
-                                            })
-                                        ]
-                                    }, item);
-                                }
-                                return /*#__PURE__*/ _jsx("span", {
-                                    className: s.description,
-                                    children: product[item]
-                                }, item);
-                            }
-                            if (item === "seller" && product.seller) {
-                                return /*#__PURE__*/ _jsxs("div", {
-                                    className: s.productSeller,
-                                    children: [
-                                        /*#__PURE__*/ _jsx(Image, {
-                                            src: product.seller.logo || product.seller.profileImg,
-                                            height: 20,
-                                            width: 20,
-                                            alt: product.seller.name
-                                        }),
-                                        /*#__PURE__*/ _jsx("span", {
-                                            className: s.productSeller,
-                                            children: product.seller.name
-                                        })
-                                    ]
-                                }, item);
-                            }
-                            if (item === "rating") {
-                                return /*#__PURE__*/ _jsxs("div", {
-                                    className: s.rating,
-                                    children: [
-                                        /*#__PURE__*/ _jsx(HiStar, {
-                                            className: product.rating >= 1 ? s.lit : ""
-                                        }),
-                                        /*#__PURE__*/ _jsx(HiStar, {
-                                            className: product.rating >= 2 ? s.lit : ""
-                                        }),
-                                        /*#__PURE__*/ _jsx(HiStar, {
-                                            className: product.rating >= 3 ? s.lit : ""
-                                        }),
-                                        /*#__PURE__*/ _jsx(HiStar, {
-                                            className: product.rating >= 4 ? s.lit : ""
-                                        }),
-                                        /*#__PURE__*/ _jsx(HiStar, {
-                                            className: product.rating >= 5 ? s.lit : ""
-                                        })
-                                    ]
-                                }, item);
-                            }
-                            return /*#__PURE__*/ _jsx(Fragment, {}, item);
-                        })
-                    })
-                ]
-            })
-        ]
     });
 };
 

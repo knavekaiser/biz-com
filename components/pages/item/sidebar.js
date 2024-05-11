@@ -201,7 +201,7 @@ const Sidebar = ({ product, variant, setVariant }) => {
               );
               return (
                 <div key={item} className={s.variant}>
-                  <strong>{field.label}:</strong>{" "}
+                  <strong>{field?.label}:</strong>{" "}
                   <CustomRadio
                     control={control}
                     name={item}
@@ -263,7 +263,7 @@ const Sidebar = ({ product, variant, setVariant }) => {
               );
               return (
                 <span key={item}>
-                  <strong>{field.label}:</strong>{" "}
+                  <strong>{field?.label}:</strong>{" "}
                   {Array.isArray(product[item])
                     ? product[item].join(", ")
                     : product[item]}

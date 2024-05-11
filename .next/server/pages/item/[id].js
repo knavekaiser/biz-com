@@ -1171,7 +1171,7 @@ const Sidebar = ({ product , variant , setVariant  })=>{
                                         children: [
                                             /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("strong", {
                                                 children: [
-                                                    field.label,
+                                                    field?.label,
                                                     ":"
                                                 ]
                                             }),
@@ -1237,7 +1237,7 @@ const Sidebar = ({ product , variant , setVariant  })=>{
                                         children: [
                                             /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("strong", {
                                                 children: [
-                                                    field.label,
+                                                    field?.label,
                                                     ":"
                                                 ]
                                             }),
@@ -1947,14 +1947,6 @@ module.exports = require("react-icons/io5");
 
 "use strict";
 module.exports = require("react-icons/ri");
-
-/***/ }),
-
-/***/ 5804:
-/***/ ((module) => {
-
-"use strict";
-module.exports = require("react-multi-carousel");
 
 /***/ }),
 

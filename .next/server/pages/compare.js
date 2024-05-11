@@ -325,13 +325,6 @@ module.exports = require("react-icons/ri");
 
 /***/ }),
 
-/***/ 5804:
-/***/ ((module) => {
-
-module.exports = require("react-multi-carousel");
-
-/***/ }),
-
 /***/ 1929:
 /***/ ((module) => {
 

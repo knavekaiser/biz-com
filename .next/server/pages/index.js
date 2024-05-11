@@ -60,28 +60,36 @@ module.exports = {
 
 /***/ }),
 
-/***/ 1841:
+/***/ 8286:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "Z": () => (/* binding */ Hero)
-/* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(5893);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(6689);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var SiteContext__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(9711);
-/* harmony import */ var react_multi_carousel__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(5804);
-/* harmony import */ var react_multi_carousel__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react_multi_carousel__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _styles_hero_module_scss__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(4389);
-/* harmony import */ var _styles_hero_module_scss__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_styles_hero_module_scss__WEBPACK_IMPORTED_MODULE_4__);
+
+// EXPORTS
+__webpack_require__.d(__webpack_exports__, {
+  "Z": () => (/* binding */ Hero)
+});
+
+// EXTERNAL MODULE: ./node_modules/react/jsx-runtime.js
+var jsx_runtime = __webpack_require__(5893);
+// EXTERNAL MODULE: external "react"
+var external_react_ = __webpack_require__(6689);
+// EXTERNAL MODULE: ./SiteContext.js
+var SiteContext = __webpack_require__(9711);
+;// CONCATENATED MODULE: external "react-multi-carousel"
+const external_react_multi_carousel_namespaceObject = require("react-multi-carousel");
+var external_react_multi_carousel_default = /*#__PURE__*/__webpack_require__.n(external_react_multi_carousel_namespaceObject);
+// EXTERNAL MODULE: ./components/pages/index/styles/hero.module.scss
+var hero_module = __webpack_require__(4389);
+var hero_module_default = /*#__PURE__*/__webpack_require__.n(hero_module);
+;// CONCATENATED MODULE: ./components/pages/index/hero.js
 
 
 
 
 
 function Hero() {
-    const { siteConfig  } = (0,react__WEBPACK_IMPORTED_MODULE_1__.useContext)(SiteContext__WEBPACK_IMPORTED_MODULE_2__/* .SiteContext */ .D);
+    const { siteConfig  } = (0,external_react_.useContext)(SiteContext/* SiteContext */.D);
     const responsive = {
         desktop: {
             breakpoint: {
@@ -92,17 +100,17 @@ function Hero() {
         }
     };
     if (siteConfig.siteConfig?.landingPage?.hero?.viewHeroSection && siteConfig.siteConfig?.landingPage?.hero?.slides?.length > 0) {
-        return /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
-            className: `${(_styles_hero_module_scss__WEBPACK_IMPORTED_MODULE_4___default().hero)} heroGlobal`,
-            children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((react_multi_carousel__WEBPACK_IMPORTED_MODULE_3___default()), {
-                containerClass: (_styles_hero_module_scss__WEBPACK_IMPORTED_MODULE_4___default().wrapper),
+        return /*#__PURE__*/ jsx_runtime.jsx("div", {
+            className: `${(hero_module_default()).hero} heroGlobal`,
+            children: /*#__PURE__*/ jsx_runtime.jsx((external_react_multi_carousel_default()), {
+                containerClass: (hero_module_default()).wrapper,
                 responsive: responsive,
-                dotListClass: (_styles_hero_module_scss__WEBPACK_IMPORTED_MODULE_4___default().dot),
+                dotListClass: (hero_module_default()).dot,
                 autoPlaySpeed: 1000,
                 infinite: true,
                 showDots: true,
                 draggable: false,
-                children: siteConfig.siteConfig?.landingPage?.hero?.slides.map((url)=>/*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("img", {
+                children: siteConfig.siteConfig?.landingPage?.hero?.slides.map((url)=>/*#__PURE__*/ jsx_runtime.jsx("img", {
                         src: url
                     }, url))
             })
@@ -358,7 +366,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var components_ui_Header__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(152);
 /* harmony import */ var components_ui_Footer__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(2860);
 /* harmony import */ var components_ui_domainFallback__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(8380);
-/* harmony import */ var components_pages_index_hero__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(1841);
+/* harmony import */ var components_pages_index_hero__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(8286);
 /* harmony import */ var components_pages_index_shelves__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(8933);
 /* harmony import */ var components_pages_index_styles_landingPage_module_scss__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(2492);
 /* harmony import */ var components_pages_index_styles_landingPage_module_scss__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(components_pages_index_styles_landingPage_module_scss__WEBPACK_IMPORTED_MODULE_11__);
@@ -736,14 +744,6 @@ module.exports = require("react-icons/io5");
 
 "use strict";
 module.exports = require("react-icons/ri");
-
-/***/ }),
-
-/***/ 5804:
-/***/ ((module) => {
-
-"use strict";
-module.exports = require("react-multi-carousel");
 
 /***/ }),
 

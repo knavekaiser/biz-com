@@ -1858,14 +1858,6 @@ module.exports = require("react-icons/fi");
 
 /***/ }),
 
-/***/ 1111:
-/***/ ((module) => {
-
-"use strict";
-module.exports = require("react-icons/hi");
-
-/***/ }),
-
 /***/ 924:
 /***/ ((module) => {
 
@@ -1879,14 +1871,6 @@ module.exports = require("react-icons/im");
 
 "use strict";
 module.exports = require("react-icons/io");
-
-/***/ }),
-
-/***/ 5804:
-/***/ ((module) => {
-
-"use strict";
-module.exports = require("react-multi-carousel");
 
 /***/ })
 
