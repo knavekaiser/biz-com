@@ -31,7 +31,6 @@ export const useFetch = (
         ).toString()}`;
       }
       setLoading(true);
-
       return new Promise((resolve, reject) => {
         fetch(_url, {
           method: method,
@@ -60,7 +59,12 @@ export const useFetch = (
           })
           .catch((err) => {
             setLoading(false);
-            if (["The user aborted a request."].includes(err?.message)) {
+            if (
+              [
+                "The user aborted a request.",
+                "signal is aborted without reason",
+              ].includes(err?.message)
+            ) {
               // user aborted
             } else {
               setError(err);

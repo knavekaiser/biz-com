@@ -7,6 +7,13 @@
   margin: 0;
 }
 
+:root {
+  --primary-color: 0, 180, 216;
+  --green: rgb(34, 189, 99);
+  --red: rgb(189, 34, 60);
+  --chat-width: 22rem;
+}
+
 .rdw-editor-wrapper * {
   box-sizing: revert;
   padding: revert;

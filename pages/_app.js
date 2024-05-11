@@ -4,8 +4,10 @@ import { Provider, SiteContext } from "SiteContext";
 import NProgress from "nprogress";
 import Head from "next/head";
 import Router from "next/router";
-import { loadScript } from "helpers";
-import { endpoints } from "config";
+import { ChatContextProvider } from "components/comifyChat/context";
+import { ComifyChat } from "components/comifyChat";
+// import { loadScript } from "helpers";
+// import { endpoints } from "config";
 
 require("react-multi-carousel/lib/styles.css");
 
@@ -37,17 +39,17 @@ const Wrapper = ({ children }) => {
   }, []);
   useEffect(() => {
     if (siteConfig.chatbot && !window.InfinAI) {
-      console.log("loading chatbot");
-      loadScript(endpoints.comifyChat).then(() => {
-        if (window.InfinAI) {
-          const { default: mountInfinAI } = window.InfinAI;
-          mountInfinAI({
-            baseUrl: endpoints.baseApiUrlPublic,
-            chatbotId: siteConfig.chatbot._id,
-            defaultUrl: siteConfig.domain,
-          });
-        }
-      });
+      // console.log("loading chatbot");
+      // loadScript(endpoints.comifyChat).then(() => {
+      //   if (window.InfinAI) {
+      //     const { default: mountInfinAI } = window.InfinAI;
+      //     mountInfinAI({
+      //       baseUrl: endpoints.baseApiUrlPublic,
+      //       chatbotId: siteConfig.chatbot._id,
+      //       defaultUrl: siteConfig.domain,
+      //     });
+      //   }
+      // });
     }
   }, [siteConfig]);
   return (
@@ -70,6 +72,12 @@ function MyApp({ Component, pageProps }) {
     <Provider>
       <Wrapper>
         <Component {...pageProps} />
+        <ChatContextProvider
+          containerId="chatContainer"
+          standaloneContainerId="chatWrapper"
+        >
+          <ComifyChat openAtStart={false} />
+        </ChatContextProvider>
       </Wrapper>
     </Provider>
   );

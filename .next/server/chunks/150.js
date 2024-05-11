@@ -162,7 +162,10 @@ const endpoints = {
     orders: `${baseApiUrlPublic}/api/customers/orders`,
     placeOrder: `${baseApiUrlPublic}/api/place-order`,
     categories: `${baseApiUrlPublic}/api/categories`,
-    comifyChat: `${baseApiUrlPublic}/assets/sdk/infinai-chat-sdk-v0.9.0.js`
+    topics: `${baseApiUrlPublic}/api/chat/topics`,
+    chat: `${baseApiUrlPublic}/api/chat/:chat_id`,
+    message: `${baseApiUrlPublic}/api/chat/:chat_id/:message_id`,
+    chatbotConfig: `${baseApiUrlPublic}/api/get-chatbot`
 };
 /* harmony default export */ const config_endpoints = (endpoints);
 
