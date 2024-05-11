@@ -252,7 +252,7 @@ const ProductThumb = ({ product  })=>{
                                                         2,
                                                         1
                                                     ].map((item, i)=>{
-                                                        const rating = product.ratingBreakdown.find((i)=>i.rating === item);
+                                                        const rating = (product.ratingBreakdown || []).find((i)=>i.rating === item);
                                                         return /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("li", {
                                                             children: [
                                                                 /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("span", {

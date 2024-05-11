@@ -158,7 +158,7 @@ export const ProductThumb = ({ product }) => {
 
                     <ul className={s.graph}>
                       {[5, 4, 3, 2, 1].map((item, i) => {
-                        const rating = product.ratingBreakdown.find(
+                        const rating = (product.ratingBreakdown || []).find(
                           (i) => i.rating === item
                         );
                         return (
