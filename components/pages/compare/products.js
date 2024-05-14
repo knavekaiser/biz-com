@@ -56,7 +56,7 @@ export const CompareProducts = ({ products }) => {
         siteConfig?.siteConfig?.productFields
           .filter(
             (item) =>
-              !item.subCategory || item.subCategory === products[0].subCategory
+              !item.subcategory || item.subcategory === products[0].subcategory
           )
           .filter(
             (item) =>
@@ -70,7 +70,7 @@ export const CompareProducts = ({ products }) => {
                 "specification",
                 "variants",
                 "category",
-                "subCategory",
+                "subcategory",
               ].includes(item.name)
           )
       );

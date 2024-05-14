@@ -101,7 +101,7 @@ const CompareProducts = ({ products  })=>{
     const [fields, setFields] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([]);
     (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(()=>{
         if (products.length) {
-            setFields(siteConfig?.siteConfig?.productFields.filter((item)=>!item.subCategory || item.subCategory === products[0].subCategory).filter((item)=>![
+            setFields(siteConfig?.siteConfig?.productFields.filter((item)=>!item.subcategory || item.subcategory === products[0].subcategory).filter((item)=>![
                     "title",
                     "description",
                     "images",
@@ -111,7 +111,7 @@ const CompareProducts = ({ products  })=>{
                     "specification",
                     "variants",
                     "category",
-                    "subCategory"
+                    "subcategory"
                 ].includes(item.name)));
         }
     }, [

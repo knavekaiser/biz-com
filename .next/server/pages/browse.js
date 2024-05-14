@@ -80,7 +80,7 @@ function Products({ showPath  }) {
         pageSize: 10
     });
     const [fields, setFields] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(null);
-    const [subCategory, setSubCategory] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(null);
+    const [subcategory, setSubcategory] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(null);
     const [categories, setCategories] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([]);
     const { get: getCategories  } = (0,hooks__WEBPACK_IMPORTED_MODULE_7__/* .useFetch */ .ib)(config__WEBPACK_IMPORTED_MODULE_6__/* .endpoints.categories */ .Hv.categories);
     const { get: getProducts , loading  } = (0,hooks__WEBPACK_IMPORTED_MODULE_7__/* .useFetch */ .ib)(config__WEBPACK_IMPORTED_MODULE_6__/* .endpoints.browse */ .Hv.browse);
@@ -169,8 +169,8 @@ function Products({ showPath  }) {
                 categories: categories,
                 fields: fields,
                 setFields: setFields,
-                subCategory: subCategory,
-                setSubCategory: setSubCategory,
+                subcategory: subcategory,
+                setSubCategory: setSubcategory,
                 open: sidebarOpen,
                 filters: filters,
                 setFilters: setFilters
@@ -236,7 +236,7 @@ var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([comp
 
 
 
-const Sidebar = ({ categories , subCategory , setSubCategory , fields , setFields , open , filters , setFilters  })=>{
+const Sidebar = ({ categories , subcategory , setSubcategory , fields , setFields , open , filters , setFilters  })=>{
     const queryLoaded = (0,react__WEBPACK_IMPORTED_MODULE_1__.useRef)(false);
     const fieldsRef = (0,react__WEBPACK_IMPORTED_MODULE_1__.useRef)({});
     const { siteConfig: { siteConfig  }  } = (0,react__WEBPACK_IMPORTED_MODULE_1__.useContext)(SiteContext__WEBPACK_IMPORTED_MODULE_2__/* .SiteContext */ .D);
@@ -358,21 +358,21 @@ const Sidebar = ({ categories , subCategory , setSubCategory , fields , setField
                                                 label: subCat.name,
                                                 children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(components_elements__WEBPACK_IMPORTED_MODULE_3__/* .Checkbox */ .XZ, {
                                                     label: subCat.name,
-                                                    checked: filters.subCategory === subCat.name,
+                                                    checked: filters.subcategory === subCat.name,
                                                     onChange: (e)=>{
-                                                        if (filters.subCategory === subCat.name) {
+                                                        if (filters.subcategory === subCat.name) {
                                                             setFilters((prev)=>({
                                                                     ...prev,
-                                                                    subCategory: undefined
+                                                                    subcategory: undefined
                                                                 }));
                                                         } else {
                                                             setFilters((prev)=>({
                                                                     ...prev,
                                                                     category: cat.name,
-                                                                    subCategory: subCat.name
+                                                                    subcategory: subCat.name
                                                                 }));
                                                         }
-                                                        setFields(e.target.checked ? siteConfig?.browsePage?.sidebarFilters.find((item)=>item.category === cat.name && item.subCategory === subCat.name)?.filters : null);
+                                                        setFields(e.target.checked ? siteConfig?.browsePage?.sidebarFilters.find((item)=>item.category === cat.name && item.subcategory === subCat.name)?.filters : null);
                                                     }
                                                 })
                                             }, subCat.name))
@@ -387,7 +387,7 @@ const Sidebar = ({ categories , subCategory , setSubCategory , fields , setField
                     setFields(null);
                     setFilters((prev)=>({
                             category: prev.category,
-                            subCategory: undefined
+                            subcategory: undefined
                         }));
                 },
                 children: [
@@ -404,7 +404,7 @@ const Sidebar = ({ categories , subCategory , setSubCategory , fields , setField
                             " ",
                             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_icons_fi__WEBPACK_IMPORTED_MODULE_10__.FiChevronRight, {}),
                             " ",
-                            filters.subCategory
+                            filters.subcategory
                         ]
                     })
                 ]

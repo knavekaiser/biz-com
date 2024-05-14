@@ -12,8 +12,8 @@ import { FiChevronRight } from "react-icons/fi";
 
 const Sidebar = ({
   categories,
-  subCategory,
-  setSubCategory,
+  subcategory,
+  setSubcategory,
   fields,
   setFields,
   open,
@@ -135,18 +135,18 @@ const Sidebar = ({
                       <li key={subCat.name} label={subCat.name}>
                         <Checkbox
                           label={subCat.name}
-                          checked={filters.subCategory === subCat.name}
+                          checked={filters.subcategory === subCat.name}
                           onChange={(e) => {
-                            if (filters.subCategory === subCat.name) {
+                            if (filters.subcategory === subCat.name) {
                               setFilters((prev) => ({
                                 ...prev,
-                                subCategory: undefined,
+                                subcategory: undefined,
                               }));
                             } else {
                               setFilters((prev) => ({
                                 ...prev,
                                 category: cat.name,
-                                subCategory: subCat.name,
+                                subcategory: subCat.name,
                               }));
                             }
                             setFields(
@@ -154,7 +154,7 @@ const Sidebar = ({
                                 ? siteConfig?.browsePage?.sidebarFilters.find(
                                     (item) =>
                                       item.category === cat.name &&
-                                      item.subCategory === subCat.name
+                                      item.subcategory === subCat.name
                                   )?.filters
                                 : null
                             );
@@ -175,13 +175,13 @@ const Sidebar = ({
             setFields(null);
             setFilters((prev) => ({
               category: prev.category,
-              subCategory: undefined,
+              subcategory: undefined,
             }));
           }}
         >
           <BsArrowLeft style={{ fontSize: "1.3em" }} />{" "}
           <p className="flex align-center gap_5">
-            {filters.category} <FiChevronRight /> {filters.subCategory}
+            {filters.category} <FiChevronRight /> {filters.subcategory}
           </p>
         </section>
       )}

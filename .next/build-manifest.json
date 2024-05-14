@@ -5,8 +5,8 @@
   "devFiles": [],
   "ampDevFiles": [],
   "lowPriorityFiles": [
-    "static/q_w6UKmzzv20MdHZW2I23/_buildManifest.js",
-    "static/q_w6UKmzzv20MdHZW2I23/_ssgManifest.js"
+    "static/Q6Im9DVjKbiFmfsSFn4WG/_buildManifest.js",
+    "static/Q6Im9DVjKbiFmfsSFn4WG/_ssgManifest.js"
   ],
   "rootMainFiles": [],
   "pages": {
@@ -64,7 +64,7 @@
       "static/css/32166d1c3e442007.css",
       "static/chunks/441-6bfbcdc0be18d73d.js",
       "static/css/606c191a2efbd6f4.css",
-      "static/chunks/pages/browse-4d45ff1a510e3845.js"
+      "static/chunks/pages/browse-5c3748fdb3959191.js"
     ],
     "/cart": [
       "static/chunks/webpack-96153bdfd0616663.js",
@@ -194,7 +194,7 @@
       "static/css/32166d1c3e442007.css",
       "static/chunks/441-6bfbcdc0be18d73d.js",
       "static/css/4ee2f5280c14b457.css",
-      "static/chunks/pages/compare-1cc57a68c86d69ae.js"
+      "static/chunks/pages/compare-ba1567921276816a.js"
     ],
     "/dynamic-page/[path]": [
       "static/chunks/webpack-96153bdfd0616663.js",
@@ -231,7 +231,7 @@
       "static/css/32166d1c3e442007.css",
       "static/chunks/441-6bfbcdc0be18d73d.js",
       "static/css/4efcd6ff647e8e8b.css",
-      "static/chunks/pages/item/[id]-cd4439ce883a3ee8.js"
+      "static/chunks/pages/item/[id]-ac66d4bd88668061.js"
     ],
     "/sitemap.xml": [
       "static/chunks/webpack-96153bdfd0616663.js",

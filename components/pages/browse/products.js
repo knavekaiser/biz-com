@@ -22,7 +22,7 @@ export default function Products({ showPath }) {
     pageSize: 10,
   });
   const [fields, setFields] = useState(null);
-  const [subCategory, setSubCategory] = useState(null);
+  const [subcategory, setSubcategory] = useState(null);
   const [categories, setCategories] = useState([]);
   const { get: getCategories } = useFetch(endpoints.categories);
   const { get: getProducts, loading } = useFetch(endpoints.browse);
@@ -91,8 +91,8 @@ export default function Products({ showPath }) {
         categories={categories}
         fields={fields}
         setFields={setFields}
-        subCategory={subCategory}
-        setSubCategory={setSubCategory}
+        subcategory={subcategory}
+        setSubCategory={setSubcategory}
         open={sidebarOpen}
         filters={filters}
         setFilters={setFilters}
