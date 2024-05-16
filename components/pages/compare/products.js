@@ -8,7 +8,7 @@ import { ProductThumb } from "components/ui/productThumbnail";
 
 export default function Checkout({ product }) {
   return (
-    <div className={`${s.container}`}>
+    <div className={s.container}>
       <div className={s.wrapper}>
         <Products product={product} />
       </div>
@@ -77,7 +77,7 @@ export const CompareProducts = ({ products }) => {
     }
   }, [products]);
   return (
-    <div className={s.items}>
+    <div className={s.itemWrapper}>
       <div className={s.product}>
         <div />
         {fields.map((item) => (
@@ -86,9 +86,11 @@ export const CompareProducts = ({ products }) => {
           </p>
         ))}
       </div>
-      {products.map((item, i) => (
-        <Product key={i} product={item} fields={fields} />
-      ))}
+      <div className={s.products}>
+        {products.map((item, i) => (
+          <Product key={i} product={item} fields={fields} />
+        ))}
+      </div>
     </div>
   );
 };

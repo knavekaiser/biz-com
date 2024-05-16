@@ -1284,7 +1284,7 @@ const Sidebar = ({ product , variant , setVariant  })=>{
                     })
                 ]
             }),
-            /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+            siteConfig?.productViewPage?.viewAddToCart && /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
                 className: (_styles_products_module_scss__WEBPACK_IMPORTED_MODULE_11___default().right),
                 children: [
                     /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {

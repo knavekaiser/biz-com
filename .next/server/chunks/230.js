@@ -11,6 +11,7 @@ module.exports = {
 	"wrapper": "style_wrapper__MBIS0",
 	"products": "style_products__cGXnc",
 	"items": "style_items___kUo9",
+	"itemWrapper": "style_itemWrapper__QxseI",
 	"product": "style_product__oAPk0",
 	"detailLabel": "style_detailLabel__bgUQv",
 	"detail": "style_detail__HYN3T"
@@ -47,7 +48,7 @@ module.exports = {
 
 function Checkout({ product  }) {
     return /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
-        className: `${(_style_module_scss__WEBPACK_IMPORTED_MODULE_7___default().container)}`,
+        className: (_style_module_scss__WEBPACK_IMPORTED_MODULE_7___default().container),
         children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
             className: (_style_module_scss__WEBPACK_IMPORTED_MODULE_7___default().wrapper),
             children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(Products, {
@@ -118,7 +119,7 @@ const CompareProducts = ({ products  })=>{
         products
     ]);
     return /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
-        className: (_style_module_scss__WEBPACK_IMPORTED_MODULE_7___default().items),
+        className: (_style_module_scss__WEBPACK_IMPORTED_MODULE_7___default().itemWrapper),
         children: [
             /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
                 className: (_style_module_scss__WEBPACK_IMPORTED_MODULE_7___default().product),
@@ -130,10 +131,13 @@ const CompareProducts = ({ products  })=>{
                         }, item.name))
                 ]
             }),
-            products.map((item, i)=>/*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(Product, {
-                    product: item,
-                    fields: fields
-                }, i))
+            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
+                className: (_style_module_scss__WEBPACK_IMPORTED_MODULE_7___default().products),
+                children: products.map((item, i)=>/*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(Product, {
+                        product: item,
+                        fields: fields
+                    }, i))
+            })
         ]
     });
 };
