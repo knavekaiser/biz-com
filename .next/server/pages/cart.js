@@ -74,7 +74,7 @@ function Checkout({ product  }) {
                     className: (_styles_cart_module_scss__WEBPACK_IMPORTED_MODULE_7___default().notes),
                     children: [
                         /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("p", {
-                            children: "The price and availability of items at Amazon.com are subject to change. The Cart is a temporary place to store a list of your items and reflects each item's most recent price. Shopping Cart"
+                            children: `The price and availability of items are subject to change. The Cart is a temporary place to store a list of your items and reflects each item's most recent price. Shopping Cart`
                         }),
                         /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("p", {
                             children: "Do you have a gift card or promotional code? We'll ask you to enter your claim code when it's time to pay."

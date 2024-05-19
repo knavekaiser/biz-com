@@ -15,6 +15,7 @@ import { FiChevronDown } from "react-icons/fi";
 import { useRouter } from "next/router";
 import { BsCheckLg } from "react-icons/bs";
 import Image from "next/image";
+import {paths} from "config";
 
 const Sidebar = ({ product, variant, setVariant }) => {
   const router = useRouter();

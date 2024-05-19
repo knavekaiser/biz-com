@@ -1,9 +1,8 @@
 import { Prompt } from "components/modal";
-import { paths } from "config";
-import { endpoints } from "config";
+import { paths , endpoints} from "config";
 import { useFetch } from "hooks";
 import { useRouter } from "next/router";
-import { useEffect, useState, useContext, useCallback } from "react";
+import {  useContext, useCallback } from "react";
 import { SiteContext } from "SiteContext";
 import s from "./styles/checkout.module.scss";
 

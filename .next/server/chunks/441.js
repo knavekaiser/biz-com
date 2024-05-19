@@ -2751,17 +2751,24 @@ const LoginForm = ({ setOpen , onSuccess  })=>{
         }))
     });
     const submit = (0,react__WEBPACK_IMPORTED_MODULE_1__.useCallback)(async (values)=>{
+        const number = (0,phone__WEBPACK_IMPORTED_MODULE_12__.phone)(values.username, {
+            country: values?.country?.iso2
+        });
+        if (number.isValid) {
+            values.phone = number.phoneNumber;
+        } else {
+            values.email = values.username;
+        }
+        values.password = values.pass;
+        delete values.country;
+        delete values.username;
+        delete values.pass;
+        delete values.confirmPass;
         if (step === 1) {
-            const number = (0,phone__WEBPACK_IMPORTED_MODULE_12__.phone)(values.username, {
-                country: values?.country?.iso2
-            });
-            const payload = {};
-            if (number.isValid) {
-                payload.phone = number.phoneNumber;
-            } else {
-                payload.email = values.username;
-            }
-            validateAccount(payload).then(({ data  })=>{
+            validateAccount({
+                phone: values.phone,
+                email: values.email
+            }).then(({ data  })=>{
                 if (data.success) {
                     setNewUser(data.data.newUser);
                     setStep(2);
@@ -2778,19 +2785,8 @@ const LoginForm = ({ setOpen , onSuccess  })=>{
                 });
             });
         } else if (step === 2) {
-            const number = (0,phone__WEBPACK_IMPORTED_MODULE_12__.phone)(values.username);
             if (newUser) {
-                const payload = {
-                    ...values,
-                    password: values.pass,
-                    pass: undefined
-                };
-                if (number.isValid) {
-                    payload.phone = number.phoneNumber;
-                } else {
-                    payload.email = values.username;
-                }
-                signup(payload).then(({ data  })=>{
+                signup(values).then(({ data  })=>{
                     if (data.success) {
                         onSuccess(data.data);
                         localStorage.setItem("access_token", data.token);
@@ -2805,15 +2801,7 @@ const LoginForm = ({ setOpen , onSuccess  })=>{
                         message: err.message
                     }));
             } else {
-                const payload = {
-                    password: values.pass
-                };
-                if (number.isValid) {
-                    payload.phone = number.phoneNumber;
-                } else {
-                    payload.email = values.username;
-                }
-                login(payload).then(({ data  })=>{
+                login(values).then(({ data  })=>{
                     if (data.success) {
                         onSuccess(data.data);
                         localStorage.setItem("access_token", data.token);

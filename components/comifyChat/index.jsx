@@ -229,7 +229,7 @@ const Chat = ({ setOpen, fullScreen, setFullScreen }) => {
             )}
             <div>
               <p className={s.ellepsis}>
-                {chatbotConfig?.display_name || "Infin AI"}
+                {convo?.title || chatbotConfig?.display_name || "Infin AI"}
               </p>
               {convo?.topic && (
                 <>

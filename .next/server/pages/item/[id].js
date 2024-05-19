@@ -937,8 +937,8 @@ __webpack_require__.a(module, async (__webpack_handle_async_dependencies__, __we
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var SiteContext__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(9711);
 /* harmony import */ var components_elements__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(9234);
-/* harmony import */ var _styles_products_module_scss__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(2370);
-/* harmony import */ var _styles_products_module_scss__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(_styles_products_module_scss__WEBPACK_IMPORTED_MODULE_11__);
+/* harmony import */ var _styles_products_module_scss__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(2370);
+/* harmony import */ var _styles_products_module_scss__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(_styles_products_module_scss__WEBPACK_IMPORTED_MODULE_12__);
 /* harmony import */ var react_hook_form__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(5641);
 /* harmony import */ var react_icons_io__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(4751);
 /* harmony import */ var react_icons_io__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(react_icons_io__WEBPACK_IMPORTED_MODULE_5__);
@@ -952,8 +952,10 @@ __webpack_require__.a(module, async (__webpack_handle_async_dependencies__, __we
 /* harmony import */ var react_icons_bs__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(react_icons_bs__WEBPACK_IMPORTED_MODULE_9__);
 /* harmony import */ var next_image__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(5675);
 /* harmony import */ var next_image__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(next_image__WEBPACK_IMPORTED_MODULE_10__);
+/* harmony import */ var config__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(1150);
 var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([components_elements__WEBPACK_IMPORTED_MODULE_3__, react_hook_form__WEBPACK_IMPORTED_MODULE_4__]);
 ([components_elements__WEBPACK_IMPORTED_MODULE_3__, react_hook_form__WEBPACK_IMPORTED_MODULE_4__] = __webpack_async_dependencies__.then ? (await __webpack_async_dependencies__)() : __webpack_async_dependencies__);
+
 
 
 
@@ -993,22 +995,22 @@ const Sidebar = ({ product , variant , setVariant  })=>{
                 variant
             });
         }),
-        className: (_styles_products_module_scss__WEBPACK_IMPORTED_MODULE_11___default().sidebar),
+        className: (_styles_products_module_scss__WEBPACK_IMPORTED_MODULE_12___default().sidebar),
         children: [
             /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
-                className: (_styles_products_module_scss__WEBPACK_IMPORTED_MODULE_11___default().left),
+                className: (_styles_products_module_scss__WEBPACK_IMPORTED_MODULE_12___default().left),
                 children: [
                     /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("h1", {
                         children: product.title
                     }),
                     /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
-                        className: (_styles_products_module_scss__WEBPACK_IMPORTED_MODULE_11___default().details),
+                        className: (_styles_products_module_scss__WEBPACK_IMPORTED_MODULE_12___default().details),
                         children: [
                             siteConfig?.productViewPage?.productElements.includes("review") && /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
-                                className: (_styles_products_module_scss__WEBPACK_IMPORTED_MODULE_11___default().rating),
+                                className: (_styles_products_module_scss__WEBPACK_IMPORTED_MODULE_12___default().rating),
                                 children: [
                                     /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("span", {
-                                        className: (_styles_products_module_scss__WEBPACK_IMPORTED_MODULE_11___default().stars),
+                                        className: (_styles_products_module_scss__WEBPACK_IMPORTED_MODULE_12___default().stars),
                                         children: [
                                             product.rating >= 1 ? /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_icons_im__WEBPACK_IMPORTED_MODULE_6__.ImStarFull, {}) : /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_icons_im__WEBPACK_IMPORTED_MODULE_6__.ImStarEmpty, {}),
                                             product.rating >= 2 ? /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_icons_im__WEBPACK_IMPORTED_MODULE_6__.ImStarFull, {}) : /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_icons_im__WEBPACK_IMPORTED_MODULE_6__.ImStarEmpty, {}),
@@ -1018,23 +1020,23 @@ const Sidebar = ({ product , variant , setVariant  })=>{
                                         ]
                                     }),
                                     /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_icons_fi__WEBPACK_IMPORTED_MODULE_7__.FiChevronDown, {
-                                        className: (_styles_products_module_scss__WEBPACK_IMPORTED_MODULE_11___default().chev)
+                                        className: (_styles_products_module_scss__WEBPACK_IMPORTED_MODULE_12___default().chev)
                                     }),
                                     /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("span", {
-                                        className: (_styles_products_module_scss__WEBPACK_IMPORTED_MODULE_11___default().reviewCount),
+                                        className: (_styles_products_module_scss__WEBPACK_IMPORTED_MODULE_12___default().reviewCount),
                                         children: [
                                             product.totalReview || 0,
                                             " ratings"
                                         ]
                                     }),
                                     /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
-                                        className: (_styles_products_module_scss__WEBPACK_IMPORTED_MODULE_11___default().breakdown),
+                                        className: (_styles_products_module_scss__WEBPACK_IMPORTED_MODULE_12___default().breakdown),
                                         children: [
                                             /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
-                                                className: (_styles_products_module_scss__WEBPACK_IMPORTED_MODULE_11___default().title),
+                                                className: (_styles_products_module_scss__WEBPACK_IMPORTED_MODULE_12___default().title),
                                                 children: [
                                                     /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("span", {
-                                                        className: (_styles_products_module_scss__WEBPACK_IMPORTED_MODULE_11___default().stars),
+                                                        className: (_styles_products_module_scss__WEBPACK_IMPORTED_MODULE_12___default().stars),
                                                         children: [
                                                             product.rating >= 2 ? /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_icons_im__WEBPACK_IMPORTED_MODULE_6__.ImStarFull, {}) : /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_icons_im__WEBPACK_IMPORTED_MODULE_6__.ImStarEmpty, {}),
                                                             product.rating >= 1 ? /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_icons_im__WEBPACK_IMPORTED_MODULE_6__.ImStarFull, {}) : /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_icons_im__WEBPACK_IMPORTED_MODULE_6__.ImStarEmpty, {}),
@@ -1052,14 +1054,14 @@ const Sidebar = ({ product , variant , setVariant  })=>{
                                                 ]
                                             }),
                                             /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
-                                                className: (_styles_products_module_scss__WEBPACK_IMPORTED_MODULE_11___default().subtitle),
+                                                className: (_styles_products_module_scss__WEBPACK_IMPORTED_MODULE_12___default().subtitle),
                                                 children: [
                                                     product.totalReview,
                                                     " global ratings"
                                                 ]
                                             }),
                                             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("ul", {
-                                                className: (_styles_products_module_scss__WEBPACK_IMPORTED_MODULE_11___default().graph),
+                                                className: (_styles_products_module_scss__WEBPACK_IMPORTED_MODULE_12___default().graph),
                                                 children: [
                                                     5,
                                                     4,
@@ -1077,16 +1079,16 @@ const Sidebar = ({ product , variant , setVariant  })=>{
                                                                 ]
                                                             }),
                                                             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("span", {
-                                                                className: (_styles_products_module_scss__WEBPACK_IMPORTED_MODULE_11___default().bar),
+                                                                className: (_styles_products_module_scss__WEBPACK_IMPORTED_MODULE_12___default().bar),
                                                                 children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("span", {
-                                                                    className: (_styles_products_module_scss__WEBPACK_IMPORTED_MODULE_11___default().fill),
+                                                                    className: (_styles_products_module_scss__WEBPACK_IMPORTED_MODULE_12___default().fill),
                                                                     style: {
                                                                         width: `${((rating?.total || 0) / 5 * 100).fix()}%`
                                                                     }
                                                                 })
                                                             }),
                                                             /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("span", {
-                                                                className: (_styles_products_module_scss__WEBPACK_IMPORTED_MODULE_11___default().percent),
+                                                                className: (_styles_products_module_scss__WEBPACK_IMPORTED_MODULE_12___default().percent),
                                                                 children: [
                                                                     ((rating?.total || 0) / 5 * 100).fix(),
                                                                     "%"
@@ -1167,7 +1169,7 @@ const Sidebar = ({ product , variant , setVariant  })=>{
                                 if (siteConfig.productFields.find((i)=>i.name === item)?.dataType === "variantArray" && Array.isArray(product[item])) {
                                     const field = siteConfig.productFields.find((i)=>i.name === item);
                                     return /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
-                                        className: (_styles_products_module_scss__WEBPACK_IMPORTED_MODULE_11___default().variant),
+                                        className: (_styles_products_module_scss__WEBPACK_IMPORTED_MODULE_12___default().variant),
                                         children: [
                                             /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("strong", {
                                                 children: [
@@ -1186,7 +1188,7 @@ const Sidebar = ({ product , variant , setVariant  })=>{
                                                         label: item,
                                                         value: item
                                                     })),
-                                                className: (_styles_products_module_scss__WEBPACK_IMPORTED_MODULE_11___default().customRadio),
+                                                className: (_styles_products_module_scss__WEBPACK_IMPORTED_MODULE_12___default().customRadio),
                                                 onChange: (_)=>{
                                                     if (product.variants?.length) {
                                                         const variableFields = siteConfig.productFields.filter((item)=>item.dataType === "variantArray").reduce((p, c)=>{
@@ -1199,7 +1201,7 @@ const Sidebar = ({ product , variant , setVariant  })=>{
                                                         }));
                                                     }
                                                 },
-                                                selectedClassName: (_styles_products_module_scss__WEBPACK_IMPORTED_MODULE_11___default().selected)
+                                                selectedClassName: (_styles_products_module_scss__WEBPACK_IMPORTED_MODULE_12___default().selected)
                                             })
                                         ]
                                     }, item);
@@ -1211,10 +1213,10 @@ const Sidebar = ({ product , variant , setVariant  })=>{
                                 ].includes(typeof product[item]) || Array.isArray(product[item])) {
                                     if (item === "price") {
                                         return /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("span", {
-                                            className: (_styles_products_module_scss__WEBPACK_IMPORTED_MODULE_11___default().price),
+                                            className: (_styles_products_module_scss__WEBPACK_IMPORTED_MODULE_12___default().price),
                                             children: [
                                                 /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("span", {
-                                                    className: (_styles_products_module_scss__WEBPACK_IMPORTED_MODULE_11___default().currentPrice),
+                                                    className: (_styles_products_module_scss__WEBPACK_IMPORTED_MODULE_12___default().currentPrice),
                                                     children: [
                                                         siteConfig?.currency,
                                                         " ",
@@ -1222,7 +1224,7 @@ const Sidebar = ({ product , variant , setVariant  })=>{
                                                     ]
                                                 }),
                                                 product.originalPrice > product.price + (variant?.price || 0) && /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("span", {
-                                                    className: (_styles_products_module_scss__WEBPACK_IMPORTED_MODULE_11___default().originalPrice),
+                                                    className: (_styles_products_module_scss__WEBPACK_IMPORTED_MODULE_12___default().originalPrice),
                                                     children: [
                                                         siteConfig?.siteConfig?.currency,
                                                         " ",
@@ -1248,7 +1250,7 @@ const Sidebar = ({ product , variant , setVariant  })=>{
                                 }
                                 if (item === "seller") {
                                     return /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
-                                        className: (_styles_products_module_scss__WEBPACK_IMPORTED_MODULE_11___default().seller),
+                                        className: (_styles_products_module_scss__WEBPACK_IMPORTED_MODULE_12___default().seller),
                                         children: [
                                             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_image__WEBPACK_IMPORTED_MODULE_10___default()), {
                                                 src: product.seller.logo,
@@ -1270,7 +1272,7 @@ const Sidebar = ({ product , variant , setVariant  })=>{
                         children: [
                             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("hr", {}),
                             /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
-                                className: (_styles_products_module_scss__WEBPACK_IMPORTED_MODULE_11___default().specification),
+                                className: (_styles_products_module_scss__WEBPACK_IMPORTED_MODULE_12___default().specification),
                                 children: [
                                     /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("h4", {
                                         children: "About this item"
@@ -1285,7 +1287,7 @@ const Sidebar = ({ product , variant , setVariant  })=>{
                 ]
             }),
             siteConfig?.productViewPage?.viewAddToCart && /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
-                className: (_styles_products_module_scss__WEBPACK_IMPORTED_MODULE_11___default().right),
+                className: (_styles_products_module_scss__WEBPACK_IMPORTED_MODULE_12___default().right),
                 children: [
                     /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
                         children: [
@@ -1297,7 +1299,7 @@ const Sidebar = ({ product , variant , setVariant  })=>{
                     /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
                         children: [
                             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("h4", {
-                                className: (_styles_products_module_scss__WEBPACK_IMPORTED_MODULE_11___default().inventory),
+                                className: (_styles_products_module_scss__WEBPACK_IMPORTED_MODULE_12___default().inventory),
                                 children: "In Stock"
                             }),
                             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(components_elements__WEBPACK_IMPORTED_MODULE_3__/* .Combobox */ .hQ, {
@@ -1430,17 +1432,17 @@ const Sidebar = ({ product , variant , setVariant  })=>{
                         ]
                     }),
                     /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
-                        className: (_styles_products_module_scss__WEBPACK_IMPORTED_MODULE_11___default().actions),
+                        className: (_styles_products_module_scss__WEBPACK_IMPORTED_MODULE_12___default().actions),
                         children: [
                             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("button", {
-                                className: `btn secondary ${(_styles_products_module_scss__WEBPACK_IMPORTED_MODULE_11___default().addToCart)}`,
+                                className: `btn secondary ${(_styles_products_module_scss__WEBPACK_IMPORTED_MODULE_12___default().addToCart)}`,
                                 children: "Add to Cart"
                             }),
                             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("button", {
-                                className: `btn primary ${(_styles_products_module_scss__WEBPACK_IMPORTED_MODULE_11___default().buyNow)}`,
+                                className: `btn primary ${(_styles_products_module_scss__WEBPACK_IMPORTED_MODULE_12___default().buyNow)}`,
                                 type: "button",
                                 onClick: ()=>router.push({
-                                        pathname: paths.checkout,
+                                        pathname: config__WEBPACK_IMPORTED_MODULE_11__/* .paths.checkout */ .Hb.checkout,
                                         query: {
                                             product_id: product._id
                                         }
@@ -1453,7 +1455,7 @@ const Sidebar = ({ product , variant , setVariant  })=>{
                         children: [
                             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("hr", {}),
                             /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
-                                className: (_styles_products_module_scss__WEBPACK_IMPORTED_MODULE_11___default().specification),
+                                className: (_styles_products_module_scss__WEBPACK_IMPORTED_MODULE_12___default().specification),
                                 children: [
                                     /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("h4", {
                                         children: "About this item"
@@ -1473,7 +1475,7 @@ const Sidebar = ({ product , variant , setVariant  })=>{
 const Map = ({ lat , lng  })=>{
     const [showMap, setShowMap] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
     return /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
-        className: (_styles_products_module_scss__WEBPACK_IMPORTED_MODULE_11___default().map),
+        className: (_styles_products_module_scss__WEBPACK_IMPORTED_MODULE_12___default().map),
         children: [
             /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("p", {
                 children: [

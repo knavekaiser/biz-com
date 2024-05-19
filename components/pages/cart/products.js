@@ -14,9 +14,7 @@ export default function Checkout({ product }) {
         <Sidebar product={product} />
         <div className={s.notes}>
           <p>
-            {
-              "The price and availability of items at Amazon.com are subject to change. The Cart is a temporary place to store a list of your items and reflects each item's most recent price. Shopping Cart"
-            }
+            {`The price and availability of items are subject to change. The Cart is a temporary place to store a list of your items and reflects each item's most recent price. Shopping Cart`}
           </p>
           <p>
             {

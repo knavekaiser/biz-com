@@ -221,17 +221,22 @@ const LoginForm = ({ setOpen, onSuccess }) => {
   });
   const submit = useCallback(
     async (values) => {
+      const number = phone(values.username, {
+        country: values?.country?.iso2,
+      });
+      if (number.isValid) {
+        values.phone = number.phoneNumber;
+      } else {
+        values.email = values.username;
+      }
+      values.password = values.pass;
+      delete values.country;
+      delete values.username;
+      delete values.pass;
+      delete values.confirmPass;
+
       if (step === 1) {
-        const number = phone(values.username, {
-          country: values?.country?.iso2,
-        });
-        const payload = {};
-        if (number.isValid) {
-          payload.phone = number.phoneNumber;
-        } else {
-          payload.email = values.username;
-        }
-        validateAccount(payload)
+        validateAccount({ phone: values.phone, email: values.email })
           .then(({ data }) => {
             if (data.success) {
               setNewUser(data.data.newUser);
@@ -250,15 +255,8 @@ const LoginForm = ({ setOpen, onSuccess }) => {
             });
           });
       } else if (step === 2) {
-        const number = phone(values.username);
         if (newUser) {
-          const payload = { ...values, password: values.pass, pass: undefined };
-          if (number.isValid) {
-            payload.phone = number.phoneNumber;
-          } else {
-            payload.email = values.username;
-          }
-          signup(payload)
+          signup(values)
             .then(({ data }) => {
               if (data.success) {
                 onSuccess(data.data);
@@ -272,15 +270,7 @@ const LoginForm = ({ setOpen, onSuccess }) => {
             })
             .catch((err) => Prompt({ type: "error", message: err.message }));
         } else {
-          const payload = {
-            password: values.pass,
-          };
-          if (number.isValid) {
-            payload.phone = number.phoneNumber;
-          } else {
-            payload.email = values.username;
-          }
-          login(payload)
+          login(values)
             .then(({ data }) => {
               if (data.success) {
                 onSuccess(data.data);

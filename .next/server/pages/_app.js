@@ -944,7 +944,7 @@ const Chat = ({ setOpen , fullScreen , setFullScreen  })=>{
                                     children: [
                                         /*#__PURE__*/ jsx_runtime.jsx("p", {
                                             className: (style_module_default()).ellepsis,
-                                            children: chatbotConfig?.display_name || "Infin AI"
+                                            children: convo?.title || chatbotConfig?.display_name || "Infin AI"
                                         }),
                                         convo?.topic && /*#__PURE__*/ jsx_runtime.jsx(jsx_runtime.Fragment, {
                                             children: /*#__PURE__*/ jsx_runtime.jsx("span", {

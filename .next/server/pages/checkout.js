@@ -220,7 +220,6 @@ __webpack_async_result__();
 
 
 
-
 const Detail = ({ label , value  })=>{
     return /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
         className: (_styles_checkout_module_scss__WEBPACK_IMPORTED_MODULE_7___default().detail),
