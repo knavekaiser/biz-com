@@ -55,7 +55,7 @@ const Wrapper = ({ children }) => {
   return (
     <>
       <Head>
-        <title>{siteConfig.siteTitle}</title>
+        <title>{siteConfig.siteConfig?.siteTitle}</title>
       </Head>
       {children}
     </>

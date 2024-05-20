@@ -1644,7 +1644,7 @@ const Wrapper = ({ children  })=>{
         children: [
             /*#__PURE__*/ jsx_runtime.jsx((head_default()), {
                 children: /*#__PURE__*/ jsx_runtime.jsx("title", {
-                    children: siteConfig.siteTitle
+                    children: siteConfig.siteConfig?.siteTitle
                 })
             }),
             children

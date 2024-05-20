@@ -118,124 +118,6 @@ function Hero() {
     }
     return null;
 }
-const popularItems = [
-    {
-        label: "Top items",
-        title: "Jordan Immortal #3 Rare Limited Edition",
-        images: [
-            "https://d1iczm3wxxz9zd.cloudfront.net/55d57c6d-0986-4ea3-ae31-76f61f5d7519/000000-0000000002/13217307497841280502913285800380124840902678847690935389542581177216891648005/ITEM_PREVIEW1.gif",
-            "https://d1iczm3wxxz9zd.cloudfront.net/d014b825-5d57-4b9f-a280-b6137541c412/000000-0000000002/10127432022877634189365778124244719449024239341522417111769156633193654536487/ITEM_PREVIEW1.gif",
-            "https://d1iczm3wxxz9zd.cloudfront.net/80adf45d-c5a9-42dc-874b-3b962b038feb/000000-0000000000/60972941801828568119289275729780257962306693057622454507545479710310788509792/ITEM_PREVIEW1.jpg"
-        ]
-    },
-    {
-        label: "Just dropped",
-        title: "4 Abstract painting from Marek Okon",
-        images: [
-            "https://images.unsplash.com/photo-1633702879143-acd134698722?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1yZWxhdGVkfDF8fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60",
-            "https://images.unsplash.com/photo-1638064867432-8d3e00905d6e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxM3x8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=60",
-            "https://images.unsplash.com/photo-1629627262826-7e2e7c4db12e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1yZWxhdGVkfDE2fHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=500&q=60",
-            "https://images.unsplash.com/photo-1632211198451-1e1b70c15b8e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1yZWxhdGVkfDEwfHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=500&q=60"
-        ]
-    },
-    {
-        label: "Just dropped",
-        title: "Images of some gold coins",
-        images: [
-            "https://images.unsplash.com/photo-1621504450181-5d356f61d307?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8Y3J5cHRvfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&h=500&q=60",
-            "https://images.unsplash.com/photo-1591994843349-f415893b3a6b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTJ8fGNyeXB0b3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&h=500&q=60",
-            "https://images.unsplash.com/photo-1621504450188-702fdbbfc9d7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTl8fGNyeXB0b3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&h=500&q=60"
-        ]
-    }
-];
-function HeroOne() {
-    const responsive = {
-        desktop: {
-            breakpoint: {
-                max: 3000,
-                min: 0
-            },
-            items: 1
-        }
-    };
-    return /*#__PURE__*/ _jsxs("div", {
-        className: `${s.heroOne} heroGlobal`,
-        children: [
-            /*#__PURE__*/ _jsx("img", {
-                src: "/assets/hero_background.jpg",
-                className: s.background
-            }),
-            /*#__PURE__*/ _jsx("div", {
-                className: s.wrapper,
-                children: /*#__PURE__*/ _jsx(Carousel, {
-                    containerClass: s.wrapper,
-                    responsive: responsive,
-                    dotListClass: s.dot,
-                    autoPlaySpeed: 1000,
-                    infinite: true,
-                    showDots: true,
-                    draggable: false,
-                    children: popularItems.map((item, i)=>/*#__PURE__*/ _jsx(HeroItem, {
-                            item: item
-                        }, i))
-                })
-            })
-        ]
-    });
-}
-const HeroItem = ({ item  })=>{
-    const img_ref = useRef();
-    const [img, setImg] = useState(item.images[0]);
-    const [style, setStyle] = useState({
-        transform: "translateY(0)"
-    });
-    useEffect(()=>{
-        if (item.images.indexOf(img) !== item.images.length - 1) {
-            const { height  } = img_ref.current.getBoundingClientRect();
-            setStyle({
-                transform: `translateY(-${(height + 8) * item.images.indexOf(img) - (height + 8)}px)`
-            });
-        }
-    }, [
-        img
-    ]);
-    return /*#__PURE__*/ _jsxs("div", {
-        className: s.heroItem,
-        children: [
-            /*#__PURE__*/ _jsxs("div", {
-                className: s.heroTitle,
-                children: [
-                    /*#__PURE__*/ _jsx("h3", {
-                        children: item.label
-                    }),
-                    /*#__PURE__*/ _jsx("h1", {
-                        children: item.title
-                    })
-                ]
-            }),
-            /*#__PURE__*/ _jsx("div", {
-                className: s.image,
-                children: img && /*#__PURE__*/ _jsx("img", {
-                    src: img
-                })
-            }),
-            item.images.length > 1 && /*#__PURE__*/ _jsx("div", {
-                className: s.heroThumbnail,
-                children: /*#__PURE__*/ _jsx("div", {
-                    className: s.thumbnailWrapper,
-                    style: style,
-                    children: item.images.map((_img)=>/*#__PURE__*/ _jsx("img", {
-                            ref: img_ref,
-                            className: img === _img ? "selected" : "",
-                            src: _img,
-                            onClick: ()=>setImg(_img),
-                            draggable: false
-                        }, _img))
-                })
-            })
-        ]
-    });
-};
 
 
 /***/ }),
@@ -425,19 +307,23 @@ const LandingPage = ({ siteData  })=>{
                         charSet: "utf-8"
                     }),
                     /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("title", {
-                        children: siteData.siteTitle
+                        children: siteData.siteConfig?.siteTitle
                     }),
                     /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("meta", {
                         property: "og:title",
-                        content: siteData.siteTitle
+                        content: siteData.siteConfig?.siteTitle
                     }),
                     /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("meta", {
                         property: "og:image",
                         content: siteData.logo
                     }),
                     /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("meta", {
+                        property: "description",
+                        content: siteData.siteConfig?.siteDescription
+                    }),
+                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("meta", {
                         property: "og:description",
-                        content: siteData.siteDescription
+                        content: siteData.siteConfig?.siteDescription
                     }),
                     siteData?.favicon && /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("link", {
                         rel: "icon",

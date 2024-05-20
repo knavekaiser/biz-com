@@ -39,7 +39,7 @@ const Footer = () => {
         {siteConfig.logo && (
           <Image src={siteConfig.logo} height={48} width={48} alt="Site Logo" />
         )}
-        <h2>{siteConfig.siteTitle}</h2>
+        <h2>{siteConfig.siteConfig?.siteTitle}</h2>
       </div>
     </footer>
   );

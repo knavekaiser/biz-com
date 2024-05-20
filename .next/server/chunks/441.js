@@ -2474,7 +2474,7 @@ const Footer = ()=>{
                         alt: "Site Logo"
                     }),
                     /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("h2", {
-                        children: siteConfig.siteTitle
+                        children: siteConfig.siteConfig?.siteTitle
                     })
                 ]
             })
@@ -2562,7 +2562,7 @@ const Header = ()=>{
                                     alt: "Site Logo"
                                 }),
                                 /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("h2", {
-                                    children: siteConfig.siteTitle
+                                    children: siteConfig.siteConfig?.siteTitle
                                 })
                             ]
                         })

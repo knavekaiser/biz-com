@@ -113,7 +113,7 @@ const Item = ({ content , metadata , siteData  })=>{
                         charSet: "utf-8"
                     }),
                     /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("title", {
-                        children: metadata?.title || siteData.siteTitle
+                        children: metadata?.title || siteData.siteConfig?.siteTitle
                     }),
                     metadata?.description && /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
                         children: [
@@ -129,7 +129,7 @@ const Item = ({ content , metadata , siteData  })=>{
                     }),
                     /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("meta", {
                         property: "og:title",
-                        content: metadata?.title || siteData.siteTitle
+                        content: metadata?.title || siteData.siteConfig?.siteTitle
                     }),
                     siteData?.favicon && /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("link", {
                         rel: "icon",

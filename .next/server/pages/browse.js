@@ -723,19 +723,23 @@ const Browse = ({ siteData  })=>{
                         charSet: "utf-8"
                     }),
                     /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("title", {
-                        children: siteData.siteTitle
+                        children: siteData.siteConfig?.siteTitle
                     }),
                     /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("meta", {
                         property: "og:title",
-                        content: siteData.siteTitle
+                        content: siteData.siteConfig?.siteTitle
                     }),
                     /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("meta", {
                         property: "og:image",
                         content: siteData.logo
                     }),
                     /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("meta", {
+                        property: "description",
+                        content: siteData.siteConfig.siteDescription
+                    }),
+                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("meta", {
                         property: "og:description",
-                        content: siteData.siteDescription
+                        content: siteData.siteConfig.siteDescription
                     }),
                     siteData?.favicon && /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("link", {
                         rel: "icon",

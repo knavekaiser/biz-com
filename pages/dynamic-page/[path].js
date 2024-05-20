@@ -94,7 +94,7 @@ const Item = ({ content, metadata, siteData }) => {
     <main className={`${s.dynamicPage} dynamicPage`}>
       <Head>
         <meta charSet="utf-8" />
-        <title>{metadata?.title || siteData.siteTitle}</title>
+        <title>{metadata?.title || siteData.siteConfig?.siteTitle}</title>
         {metadata?.description && (
           <>
             <meta name="description" content={metadata.description} />
@@ -103,7 +103,7 @@ const Item = ({ content, metadata, siteData }) => {
         )}
         <meta
           property="og:title"
-          content={metadata?.title || siteData.siteTitle}
+          content={metadata?.title || siteData.siteConfig?.siteTitle}
         />
         {siteData?.favicon && <link rel="icon" href={siteData.favicon} />}
       </Head>

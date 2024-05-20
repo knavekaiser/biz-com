@@ -31,7 +31,7 @@ const Header = () => {
                 alt="Site Logo"
               />
             )}
-            <h2>{siteConfig.siteTitle}</h2>
+            <h2>{siteConfig.siteConfig?.siteTitle}</h2>
           </Link>
         </div>
         <SearchForm />

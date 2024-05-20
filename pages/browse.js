@@ -26,10 +26,17 @@ const Browse = ({ siteData }) => {
     <main>
       <Head>
         <meta charSet="utf-8" />
-        <title>{siteData.siteTitle}</title>
-        <meta property="og:title" content={siteData.siteTitle} />
+        <title>{siteData.siteConfig?.siteTitle}</title>
+        <meta property="og:title" content={siteData.siteConfig?.siteTitle} />
         <meta property="og:image" content={siteData.logo} />
-        <meta property="og:description" content={siteData.siteDescription} />
+        <meta
+          property="description"
+          content={siteData.siteConfig.siteDescription}
+        />
+        <meta
+          property="og:description"
+          content={siteData.siteConfig.siteDescription}
+        />
         {siteData?.favicon && <link rel="icon" href={siteData.favicon} />}
       </Head>
       <Header />
