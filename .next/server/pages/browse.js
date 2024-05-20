@@ -283,7 +283,6 @@ const Sidebar = ({ categories , subcategory , setSubcategory , fields , setField
                     className: "btn",
                     type: "button",
                     onClick: ()=>{
-                        // setFilters({});
                         reset(fieldsRef.current);
                         setFields(null);
                         router.replace({
@@ -294,6 +293,9 @@ const Sidebar = ({ categories , subcategory , setSubcategory , fields , setField
                         }, undefined, {
                             shallow: true
                         });
+                        setTimeout(()=>{
+                            setFilters({});
+                        }, 10);
                     },
                     children: [
                         /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_icons_hi__WEBPACK_IMPORTED_MODULE_4__.HiOutlineX, {}),

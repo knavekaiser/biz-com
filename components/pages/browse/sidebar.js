@@ -74,7 +74,6 @@ const Sidebar = ({
             className="btn"
             type="button"
             onClick={() => {
-              // setFilters({});
               reset(fieldsRef.current);
               setFields(null);
               router.replace(
@@ -85,6 +84,9 @@ const Sidebar = ({
                 undefined,
                 { shallow: true }
               );
+              setTimeout(() => {
+                setFilters({});
+              }, 10);
             }}
           >
             <HiOutlineX />
