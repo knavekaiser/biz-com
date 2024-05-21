@@ -131,9 +131,9 @@ const Sidebar = ({
                     }
                   }}
                 />
-                {cat.subCategories?.length > 0 && (
-                  <ul className={s.subCategories}>
-                    {cat.subCategories.map((subCat) => (
+                {cat.subcategories?.length > 0 && (
+                  <ul className={s.subcategories}>
+                    {cat.subcategories.map((subCat) => (
                       <li key={subCat.name} label={subCat.name}>
                         <Checkbox
                           label={subCat.name}

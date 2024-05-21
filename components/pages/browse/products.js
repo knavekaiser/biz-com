@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import { Prompt } from "components/modal";
 import Sidebar from "./sidebar";
 import { ProductThumb } from "components/ui/productThumbnail";
@@ -10,6 +10,7 @@ import s from "./styles/products.module.scss";
 import { Paths } from "components/elements";
 
 export default function Products({ showPath }) {
+  const anchorRef = useRef();
   const router = useRouter();
   const [filters, setFilters] = useState({
     sort: "price-asc",
@@ -25,7 +26,7 @@ export default function Products({ showPath }) {
   const [subcategory, setSubcategory] = useState(null);
   const [categories, setCategories] = useState([]);
   const { get: getCategories } = useFetch(endpoints.categories);
-  const { get: getProducts, loading } = useFetch(endpoints.browse);
+  const { get: fetchProducts, loading } = useFetch(endpoints.browse);
 
   useEffect(() => {
     router.replace(
@@ -44,19 +45,36 @@ export default function Products({ showPath }) {
       { shallow: true }
     );
   }, [filters]);
-  useEffect(() => {
-    getProducts({ query: router.query })
-      .then(({ data }) => {
-        if (!data?.success) {
-          if (data?.message) {
-            Prompt({ type: "error", message: data.message });
-          }
-          return;
-        }
-        setProducts(data.data);
-        setMetadata(data.metadata);
+
+  const getProducts = useCallback(
+    ({ page, pageSize } = {}) => {
+      if (loading) return;
+      fetchProducts({
+        query: {
+          ...router.query,
+          page: page || metadata?.page || 1,
+          pageSize: pageSize || metadata?.pageSize || 10,
+        },
       })
-      .catch((err) => Prompt({ type: "error", message: err.message }));
+        .then(({ data }) => {
+          if (!data?.success) {
+            if (data?.message) {
+              Prompt({ type: "error", message: data.message });
+            }
+            return;
+          }
+          setProducts((prev) =>
+            data.metadata?.page === 1 ? data.data : [...prev, ...data.data]
+          );
+          setMetadata(data.metadata);
+        })
+        .catch((err) => Prompt({ type: "error", message: err.message }));
+    },
+    [router.query, metadata, loading]
+  );
+
+  useEffect(() => {
+    getProducts({ page: 1, pageSize: 10 });
   }, [router.query]);
   useEffect(() => {
     getCategories()
@@ -72,6 +90,26 @@ export default function Products({ showPath }) {
       setSidebarOpen(true);
     }
   }, []);
+
+  useEffect(() => {
+    let lastScrollY = window.scrollY;
+    const handler = () => {
+      let direction = lastScrollY < window.scrollY ? "down" : "up";
+      lastScrollY = window.scrollY;
+      const anchorVisible =
+        anchorRef.current?.getBoundingClientRect().top < window.innerHeight;
+      if (direction === "down" && !loading && anchorVisible) {
+        getProducts({
+          page: (metadata?.page || 0) + 1,
+          pageSize: metadata?.pageSize || 10,
+        });
+      }
+    };
+    window.addEventListener("scroll", handler);
+    return () => {
+      window.removeEventListener("scroll", handler);
+    };
+  }, [loading, metadata]);
   return (
     <div className={`${s.container} ${sidebarOpen ? s.sidebarOpen : ""}`}>
       {showPath && (
@@ -109,6 +147,17 @@ export default function Products({ showPath }) {
             </div>
           )}
         </div>
+        {loading && <div className={s.loading}>Loading...</div>}
+        {metadata?.totalRecord > products.length && !loading && (
+          <div
+            className="anchor"
+            ref={anchorRef}
+            style={{
+              height: "1rem",
+              width: "1rem",
+            }}
+          />
+        )}
       </div>
     </div>
   );

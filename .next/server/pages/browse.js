@@ -20,13 +20,14 @@ module.exports = {
 	"filterList": "products_filterList__5ZzyN",
 	"categorySection": "products_categorySection__BPRDk",
 	"categories": "products_categories__OGk1q",
-	"subCategories": "products_subCategories__bB8PD",
+	"subcategories": "products_subcategories__GIiUY",
 	"backToCategories": "products_backToCategories__Nh1Vw",
 	"sidebarToggle": "products_sidebarToggle__tHi7m",
 	"content": "products_content__Fq2Bz",
 	"ribbon": "products_ribbon__b5c7V",
 	"products": "products_products__9hKj8",
-	"placeholder": "products_placeholder__ZT0QY"
+	"placeholder": "products_placeholder__ZT0QY",
+	"loading": "products_loading__tx5k8"
 };
 
 
@@ -69,6 +70,7 @@ var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([_sid
 
 
 function Products({ showPath  }) {
+    const anchorRef = (0,react__WEBPACK_IMPORTED_MODULE_1__.useRef)();
     const router = (0,next_router__WEBPACK_IMPORTED_MODULE_8__.useRouter)();
     const [filters, setFilters] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)({
         sort: "price-asc"
@@ -83,7 +85,7 @@ function Products({ showPath  }) {
     const [subcategory, setSubcategory] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(null);
     const [categories, setCategories] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([]);
     const { get: getCategories  } = (0,hooks__WEBPACK_IMPORTED_MODULE_7__/* .useFetch */ .ib)(config__WEBPACK_IMPORTED_MODULE_6__/* .endpoints.categories */ .Hv.categories);
-    const { get: getProducts , loading  } = (0,hooks__WEBPACK_IMPORTED_MODULE_7__/* .useFetch */ .ib)(config__WEBPACK_IMPORTED_MODULE_6__/* .endpoints.browse */ .Hv.browse);
+    const { get: fetchProducts , loading  } = (0,hooks__WEBPACK_IMPORTED_MODULE_7__/* .useFetch */ .ib)(config__WEBPACK_IMPORTED_MODULE_6__/* .endpoints.browse */ .Hv.browse);
     (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(()=>{
         router.replace({
             pathname: config__WEBPACK_IMPORTED_MODULE_6__/* .paths.browse */ .Hb.browse,
@@ -102,9 +104,14 @@ function Products({ showPath  }) {
     }, [
         filters
     ]);
-    (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(()=>{
-        getProducts({
-            query: router.query
+    const getProducts = (0,react__WEBPACK_IMPORTED_MODULE_1__.useCallback)(({ page , pageSize  } = {})=>{
+        if (loading) return;
+        fetchProducts({
+            query: {
+                ...router.query,
+                page: page || metadata?.page || 1,
+                pageSize: pageSize || metadata?.pageSize || 10
+            }
         }).then(({ data  })=>{
             if (!data?.success) {
                 if (data?.message) {
@@ -115,12 +122,25 @@ function Products({ showPath  }) {
                 }
                 return;
             }
-            setProducts(data.data);
+            setProducts((prev)=>data.metadata?.page === 1 ? data.data : [
+                    ...prev,
+                    ...data.data
+                ]);
             setMetadata(data.metadata);
         }).catch((err)=>(0,components_modal__WEBPACK_IMPORTED_MODULE_2__/* .Prompt */ .N)({
                 type: "error",
                 message: err.message
             }));
+    }, [
+        router.query,
+        metadata,
+        loading
+    ]);
+    (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(()=>{
+        getProducts({
+            page: 1,
+            pageSize: 10
+        });
     }, [
         router.query
     ]);
@@ -142,6 +162,27 @@ function Products({ showPath  }) {
             setSidebarOpen(true);
         }
     }, []);
+    (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(()=>{
+        let lastScrollY = window.scrollY;
+        const handler = ()=>{
+            let direction = lastScrollY < window.scrollY ? "down" : "up";
+            lastScrollY = window.scrollY;
+            const anchorVisible = anchorRef.current?.getBoundingClientRect().top < window.innerHeight;
+            if (direction === "down" && !loading && anchorVisible) {
+                getProducts({
+                    page: (metadata?.page || 0) + 1,
+                    pageSize: metadata?.pageSize || 10
+                });
+            }
+        };
+        window.addEventListener("scroll", handler);
+        return ()=>{
+            window.removeEventListener("scroll", handler);
+        };
+    }, [
+        loading,
+        metadata
+    ]);
     return /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
         className: `${(_styles_products_module_scss__WEBPACK_IMPORTED_MODULE_10___default().container)} ${sidebarOpen ? (_styles_products_module_scss__WEBPACK_IMPORTED_MODULE_10___default().sidebarOpen) : ""}`,
         children: [
@@ -175,17 +216,31 @@ function Products({ showPath  }) {
                 filters: filters,
                 setFilters: setFilters
             }),
-            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
+            /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
                 className: `${(_styles_products_module_scss__WEBPACK_IMPORTED_MODULE_10___default().content)} ${(_styles_products_module_scss__WEBPACK_IMPORTED_MODULE_10___default().products)}`,
-                children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
-                    className: (_styles_products_module_scss__WEBPACK_IMPORTED_MODULE_10___default().products),
-                    children: products.length > 0 ? products.map((product, i)=>/*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(components_ui_productThumbnail__WEBPACK_IMPORTED_MODULE_4__/* .ProductThumb */ .B, {
-                            product: product
-                        }, product._id)) : /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
-                        className: (_styles_products_module_scss__WEBPACK_IMPORTED_MODULE_10___default().placeholder),
-                        children: loading ? "Loading..." : "No Product found"
+                children: [
+                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
+                        className: (_styles_products_module_scss__WEBPACK_IMPORTED_MODULE_10___default().products),
+                        children: products.length > 0 ? products.map((product, i)=>/*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(components_ui_productThumbnail__WEBPACK_IMPORTED_MODULE_4__/* .ProductThumb */ .B, {
+                                product: product
+                            }, product._id)) : /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
+                            className: (_styles_products_module_scss__WEBPACK_IMPORTED_MODULE_10___default().placeholder),
+                            children: loading ? "Loading..." : "No Product found"
+                        })
+                    }),
+                    loading && /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
+                        className: (_styles_products_module_scss__WEBPACK_IMPORTED_MODULE_10___default().loading),
+                        children: "Loading..."
+                    }),
+                    metadata?.totalRecord > products.length && !loading && /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
+                        className: "anchor",
+                        ref: anchorRef,
+                        style: {
+                            height: "1rem",
+                            width: "1rem"
+                        }
                     })
-                })
+                ]
             })
         ]
     });
@@ -354,9 +409,9 @@ const Sidebar = ({ categories , subcategory , setSubcategory , fields , setField
                                             }
                                         }
                                     }),
-                                    cat.subCategories?.length > 0 && /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("ul", {
-                                        className: (_styles_products_module_scss__WEBPACK_IMPORTED_MODULE_11___default().subCategories),
-                                        children: cat.subCategories.map((subCat)=>/*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("li", {
+                                    cat.subcategories?.length > 0 && /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("ul", {
+                                        className: (_styles_products_module_scss__WEBPACK_IMPORTED_MODULE_11___default().subcategories),
+                                        children: cat.subcategories.map((subCat)=>/*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("li", {
                                                 label: subCat.name,
                                                 children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(components_elements__WEBPACK_IMPORTED_MODULE_3__/* .Checkbox */ .XZ, {
                                                     label: subCat.name,
