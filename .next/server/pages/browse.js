@@ -429,7 +429,7 @@ const Sidebar = ({ categories , subcategory , setSubcategory , fields , setField
                                                                     ...prev,
                                                                     category: cat.name,
                                                                     subcategories: [
-                                                                        ...prev.subcategories || [],
+                                                                        ...(prev.subcategories || []).filter((sc)=>(cat.subcategories || []).some((item)=>item.name === sc)),
                                                                         subCat.name
                                                                     ]
                                                                 }));
