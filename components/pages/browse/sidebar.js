@@ -27,16 +27,18 @@ const Sidebar = ({
   } = useContext(SiteContext);
   const router = useRouter();
   const { control, reset, watch, getValues, setValue } = useForm({
-    defaultValues: { sort: router.query?.sort || "price-asc" },
+    // defaultValues: { sort: router.query?.sort || "price-asc" },
   });
 
   useEffect(() => {
-    if (
-      siteConfig?.browsePage?.sidebarFilters?.length &&
-      !queryLoaded.current
-    ) {
-      const values = {};
-      siteConfig.browsePage.sidebarFilters.forEach((field) => {
+    if (!queryLoaded.current) {
+      const values = {
+        sort: router.query?.sort || "price-asc",
+        category: router.query.category || undefined,
+        subcategories: router.query.subcategories || [],
+      };
+
+      siteConfig?.browsePage?.sidebarFilters?.forEach((field) => {
         if (router.query[field.fieldName]) {
           values[field.fieldName] = router.query[field.fieldName];
         } else if (
@@ -58,6 +60,7 @@ const Sidebar = ({
       });
 
       reset(values);
+      setFilters(values);
       queryLoaded.current = true;
     }
   }, [siteConfig?.browsePage?.sidebarFilters, router.query]);
@@ -141,11 +144,13 @@ const Sidebar = ({
                       <li key={subCat.name} label={subCat.name}>
                         <Checkbox
                           label={subCat.name}
-                          checked={(filters.subcategories || []).includes(
-                            subCat.name
-                          )}
+                          checked={
+                            filters.category === cat.name &&
+                            (filters.subcategories || []).includes(subCat.name)
+                          }
                           onChange={(e) => {
                             if (
+                              filters.category === cat.name &&
                               (filters.subcategories || []).includes(
                                 subCat.name
                               )
@@ -160,14 +165,18 @@ const Sidebar = ({
                               setFilters((prev) => ({
                                 ...prev,
                                 category: cat.name,
-                                subcategories: [
-                                  ...(prev.subcategories || []).filter((sc) =>
-                                    (cat.subcategories || []).some(
-                                      (item) => item.name === sc
-                                    )
-                                  ),
-                                  subCat.name,
-                                ],
+                                subcategories:
+                                  prev.category !== cat.name
+                                    ? [subCat.name]
+                                    : [
+                                        ...(prev.subcategories || []).filter(
+                                          (sc) =>
+                                            (cat.subcategories || []).some(
+                                              (item) => item.name === sc
+                                            )
+                                        ),
+                                        subCat.name,
+                                      ],
                               }));
                             }
                             setFields(

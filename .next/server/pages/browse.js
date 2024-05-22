@@ -297,14 +297,15 @@ const Sidebar = ({ categories , subcategory , setSubcategory , fields , setField
     const { siteConfig: { siteConfig  }  } = (0,react__WEBPACK_IMPORTED_MODULE_1__.useContext)(SiteContext__WEBPACK_IMPORTED_MODULE_2__/* .SiteContext */ .D);
     const router = (0,next_router__WEBPACK_IMPORTED_MODULE_8__.useRouter)();
     const { control , reset , watch , getValues , setValue  } = (0,react_hook_form__WEBPACK_IMPORTED_MODULE_5__.useForm)({
-        defaultValues: {
-            sort: router.query?.sort || "price-asc"
-        }
     });
     (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(()=>{
-        if (siteConfig?.browsePage?.sidebarFilters?.length && !queryLoaded.current) {
-            const values = {};
-            siteConfig.browsePage.sidebarFilters.forEach((field)=>{
+        if (!queryLoaded.current) {
+            const values = {
+                sort: router.query?.sort || "price-asc",
+                category: router.query.category || undefined,
+                subcategories: router.query.subcategories || []
+            };
+            siteConfig?.browsePage?.sidebarFilters?.forEach((field)=>{
                 if (router.query[field.fieldName]) {
                     values[field.fieldName] = router.query[field.fieldName];
                 } else if (router.query[field.fieldName + "-min"] || router.query[field.fieldName + "-max"]) {
@@ -320,6 +321,7 @@ const Sidebar = ({ categories , subcategory , setSubcategory , fields , setField
                 }
             });
             reset(values);
+            setFilters(values);
             queryLoaded.current = true;
         }
     }, [
@@ -417,9 +419,9 @@ const Sidebar = ({ categories , subcategory , setSubcategory , fields , setField
                                                 label: subCat.name,
                                                 children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(components_elements__WEBPACK_IMPORTED_MODULE_3__/* .Checkbox */ .XZ, {
                                                     label: subCat.name,
-                                                    checked: (filters.subcategories || []).includes(subCat.name),
+                                                    checked: filters.category === cat.name && (filters.subcategories || []).includes(subCat.name),
                                                     onChange: (e)=>{
-                                                        if ((filters.subcategories || []).includes(subCat.name)) {
+                                                        if (filters.category === cat.name && (filters.subcategories || []).includes(subCat.name)) {
                                                             setFilters((prev)=>({
                                                                     ...prev,
                                                                     subcategories: prev.subcategories.filter((sc)=>sc !== subCat.name)
@@ -428,7 +430,9 @@ const Sidebar = ({ categories , subcategory , setSubcategory , fields , setField
                                                             setFilters((prev)=>({
                                                                     ...prev,
                                                                     category: cat.name,
-                                                                    subcategories: [
+                                                                    subcategories: prev.category !== cat.name ? [
+                                                                        subCat.name
+                                                                    ] : [
                                                                         ...(prev.subcategories || []).filter((sc)=>(cat.subcategories || []).some((item)=>item.name === sc)),
                                                                         subCat.name
                                                                     ]
