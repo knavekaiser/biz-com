@@ -8,6 +8,7 @@ exports.modules = {
 // Exports
 module.exports = {
 	"productThumb": "productThumbnail_productThumb__QTSPW",
+	"bestSellerTag": "productThumbnail_bestSellerTag__teRxI",
 	"thumbnailWrapper": "productThumbnail_thumbnailWrapper__w1LoF",
 	"thumbnail": "productThumbnail_thumbnail__U__tr",
 	"productDetail": "productThumbnail_productDetail__txvrY",
@@ -75,6 +76,10 @@ const ProductThumb = ({ product , onClick =()=>{}  })=>{
             href: `/item/${product._id}`,
             onClick: onClick,
             children: [
+                product.bestSeller && /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
+                    className: (_styles_productThumbnail_module_scss__WEBPACK_IMPORTED_MODULE_8___default().bestSellerTag),
+                    children: "Best Seller"
+                }),
                 /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
                     className: (_styles_productThumbnail_module_scss__WEBPACK_IMPORTED_MODULE_8___default().thumbnailWrapper),
                     children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_image__WEBPACK_IMPORTED_MODULE_7___default()), {

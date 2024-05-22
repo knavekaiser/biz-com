@@ -12,6 +12,9 @@ export const ProductThumb = ({ product, onClick = () => {} }) => {
   return (
     <div className={`${s.productThumb}`}>
       <Link href={`/item/${product._id}`} onClick={onClick}>
+        {product.bestSeller && (
+          <div className={s.bestSellerTag}>Best Seller</div>
+        )}
         <div className={s.thumbnailWrapper}>
           <Image
             src={product.images[0]}

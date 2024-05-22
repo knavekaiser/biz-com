@@ -6,6 +6,16 @@
   border: 1px solid rgb(238, 238, 238);
   border-radius: 0.4rem;
   // overflow: hidden;
+  .bestSellerTag {
+    position: absolute;
+    top: 0;
+    background: rgb(230, 105, 3);
+    color: white;
+    font-weight: bold;
+    padding: 0.5rem 1rem;
+    padding-right: 1.5rem;
+    clip-path: polygon(0 0, 100% 0, calc(100% - 10px) 100%, 0 100%);
+  }
   .thumbnailWrapper {
     overflow: hidden;
     aspect-ratio: 1;
