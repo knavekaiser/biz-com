@@ -400,13 +400,13 @@ const Sidebar = ({ categories , subcategory , setSubcategory , fields , setField
                                                 setFilters((prev)=>({
                                                         ...prev,
                                                         category: undefined,
-                                                        subcategory: undefined
+                                                        subcategories: []
                                                     }));
                                             } else {
                                                 setFilters((prev)=>({
                                                         ...prev,
                                                         category: cat.name,
-                                                        subcategory: undefined
+                                                        subcategories: (cat.subcategories || []).map((sc)=>sc.name)
                                                     }));
                                             }
                                         }
@@ -417,18 +417,21 @@ const Sidebar = ({ categories , subcategory , setSubcategory , fields , setField
                                                 label: subCat.name,
                                                 children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(components_elements__WEBPACK_IMPORTED_MODULE_3__/* .Checkbox */ .XZ, {
                                                     label: subCat.name,
-                                                    checked: filters.subcategory === subCat.name,
+                                                    checked: (filters.subcategories || []).includes(subCat.name),
                                                     onChange: (e)=>{
-                                                        if (filters.subcategory === subCat.name) {
+                                                        if ((filters.subcategories || []).includes(subCat.name)) {
                                                             setFilters((prev)=>({
                                                                     ...prev,
-                                                                    subcategory: undefined
+                                                                    subcategories: prev.subcategories.filter((sc)=>sc !== subCat.name)
                                                                 }));
                                                         } else {
                                                             setFilters((prev)=>({
                                                                     ...prev,
                                                                     category: cat.name,
-                                                                    subcategory: subCat.name
+                                                                    subcategories: [
+                                                                        ...prev.subcategories || [],
+                                                                        subCat.name
+                                                                    ]
                                                                 }));
                                                         }
                                                         setFields(e.target.checked ? siteConfig?.browsePage?.sidebarFilters.find((item)=>item.category === cat.name && item.subcategory === subCat.name)?.filters : null);

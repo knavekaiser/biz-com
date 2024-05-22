@@ -122,13 +122,15 @@ const Sidebar = ({
                       setFilters((prev) => ({
                         ...prev,
                         category: undefined,
-                        subcategory: undefined,
+                        subcategories: [],
                       }));
                     } else {
                       setFilters((prev) => ({
                         ...prev,
                         category: cat.name,
-                        subcategory: undefined,
+                        subcategories: (cat.subcategories || []).map(
+                          (sc) => sc.name
+                        ),
                       }));
                     }
                   }}
@@ -139,18 +141,29 @@ const Sidebar = ({
                       <li key={subCat.name} label={subCat.name}>
                         <Checkbox
                           label={subCat.name}
-                          checked={filters.subcategory === subCat.name}
+                          checked={(filters.subcategories || []).includes(
+                            subCat.name
+                          )}
                           onChange={(e) => {
-                            if (filters.subcategory === subCat.name) {
+                            if (
+                              (filters.subcategories || []).includes(
+                                subCat.name
+                              )
+                            ) {
                               setFilters((prev) => ({
                                 ...prev,
-                                subcategory: undefined,
+                                subcategories: prev.subcategories.filter(
+                                  (sc) => sc !== subCat.name
+                                ),
                               }));
                             } else {
                               setFilters((prev) => ({
                                 ...prev,
                                 category: cat.name,
-                                subcategory: subCat.name,
+                                subcategories: [
+                                  ...(prev.subcategories || []),
+                                  subCat.name,
+                                ],
                               }));
                             }
                             setFields(
