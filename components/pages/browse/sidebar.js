@@ -122,11 +122,13 @@ const Sidebar = ({
                       setFilters((prev) => ({
                         ...prev,
                         category: undefined,
+                        subcategory: undefined,
                       }));
                     } else {
                       setFilters((prev) => ({
                         ...prev,
                         category: cat.name,
+                        subcategory: undefined,
                       }));
                     }
                   }}

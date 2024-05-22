@@ -399,12 +399,14 @@ const Sidebar = ({ categories , subcategory , setSubcategory , fields , setField
                                             if (filters.category === cat.name) {
                                                 setFilters((prev)=>({
                                                         ...prev,
-                                                        category: undefined
+                                                        category: undefined,
+                                                        subcategory: undefined
                                                     }));
                                             } else {
                                                 setFilters((prev)=>({
                                                         ...prev,
-                                                        category: cat.name
+                                                        category: cat.name,
+                                                        subcategory: undefined
                                                     }));
                                             }
                                         }
