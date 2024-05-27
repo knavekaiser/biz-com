@@ -1,0 +1,1 @@
+{"c":["pages/item/[id]","webpack"],"r":["pages/assets/uploads/[...file]"],"m":["./node_modules/next/dist/build/webpack/loaders/next-client-pages-loader.js?absolutePagePath=F%3A%5CProjects%5Cbiz-com%5Cpages%5Cassets%5Cuploads%5C%5B...file%5D.js&page=%2Fassets%2Fuploads%2F%5B...file%5D!","./pages/assets/uploads/[...file].js"]}
