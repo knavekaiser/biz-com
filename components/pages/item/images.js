@@ -37,7 +37,8 @@ export default function Images({ product, variant }) {
         ))}
       </div>
       <div className={s.mainImgWrapper}>
-        <ImageSlider
+        <ImageSliderWithRef
+          title={product.title}
           images={variant?.images || product.images}
           ref={carouselRef}
           setView={setViewImage}
@@ -63,13 +64,7 @@ export default function Images({ product, variant }) {
   );
 }
 
-const ImageSlider = forwardRef(({ images, setView }, carouselRef) => {
-  const responsive = {
-    desktop: {
-      breakpoint: { max: 3000, min: 0 },
-      items: 1,
-    },
-  };
+const ImageSlider = ({ images, setView, title }, carouselRef) => {
   return (
     <div className={`${s.slider}`}>
       <Carousel
@@ -79,7 +74,12 @@ const ImageSlider = forwardRef(({ images, setView }, carouselRef) => {
         containerClass={s.sliderWrapper}
         itemClass={s.slide}
         ssr
-        responsive={responsive}
+        responsive={{
+          desktop: {
+            breakpoint: { max: 3000, min: 0 },
+            items: 1,
+          },
+        }}
         showDots={false}
         showArrows={false}
         removeArrowOnDeviceType={["tablet", "mobile", "desktop"]}
@@ -88,12 +88,20 @@ const ImageSlider = forwardRef(({ images, setView }, carouselRef) => {
         }}
       >
         {images.map((url) => (
-          <img draggable={false} key={url} src={url} />
+          <Image
+            alt={title}
+            height={400}
+            width={400}
+            draggable={false}
+            key={url}
+            src={url}
+          />
         ))}
       </Carousel>
     </div>
   );
-});
+};
+const ImageSliderWithRef = forwardRef(ImageSlider);
 
 const ZoomImg = ({ src, alt }) => {
   const mainImgRef = useRef();
@@ -166,8 +174,6 @@ const ZoomImg = ({ src, alt }) => {
       onTouchEnd={() => {
         document.body.style.overflow = "unset";
       }}
-      // onMouseMove={moveHandler}
-      // onTouchMove={moveHandler}
     >
       <Image
         ref={imgRef}
