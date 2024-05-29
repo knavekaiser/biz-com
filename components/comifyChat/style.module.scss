@@ -1,11 +1,5 @@
 .chatContainer {
   box-sizing: border-box;
-  & * {
-    // all: unset;
-    box-sizing: border-box;
-    padding: 0;
-    margin: 0;
-  }
   font-family: Verdana, Geneva, Tahoma, Inter, system-ui, Avenir, Helvetica,
     Arial, sans-serif;
   position: fixed;
@@ -145,6 +139,7 @@
       display: flex;
       flex-direction: column-reverse;
       grid-gap: 1px;
+      overflow-x: hidden;
       // padding: 0 0.25rem;
       padding: 0.75rem;
       .placeholder {
@@ -154,7 +149,7 @@
       }
       .msg {
         font-size: 0.95rem;
-        height: min-content;
+        height: auto;
         margin-right: auto;
         display: grid;
         grid-template-columns: 2.5rem 1fr;
@@ -167,6 +162,11 @@
           position: relative;
           padding: 0.5rem 0.8rem;
           line-height: 1.6;
+          width: max-content;
+          overflow: hidden;
+          display: grid;
+          max-width: 100%;
+          // border: 1px dashed red;
           &::before {
             content: "";
             display: block;
@@ -175,9 +175,19 @@
             height: 0;
             width: 0;
           }
-        }
-        .productList {
-          // border: 1px dashed red;
+          .productWrapper {
+            max-width: 100%;
+            margin-bottom: 1rem;
+            display: grid;
+            overflow: auto;
+            .productList {
+              width: max-content;
+              display: flex;
+              & > div {
+                width: 13rem;
+              }
+            }
+          }
         }
         &:not(.user) {
           .content {
@@ -230,7 +240,7 @@
           }
           &.assistant {
             background: transparent;
-            height: 2rem;
+            height: 4rem;
             img {
               position: absolute;
               right: -3.5px;

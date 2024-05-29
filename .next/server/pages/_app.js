@@ -30,6 +30,8 @@ module.exports = {
 	"placeholder": "style_placeholder__r2Mod",
 	"msg": "style_msg__wHupW",
 	"content": "style_content__Lc3pL",
+	"productWrapper": "style_productWrapper__CkVWU",
+	"productList": "style_productList__JO3Y0",
 	"user": "style_user__woDt2",
 	"msgAvatar": "style_msgAvatar__JHwrn",
 	"img": "style_img__iZQFx",
@@ -663,8 +665,8 @@ __webpack_require__.a(module, async (__webpack_handle_async_dependencies__, __we
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(5893);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(6689);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _style_module_scss__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(9891);
-/* harmony import */ var _style_module_scss__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(_style_module_scss__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var _style_module_scss__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(9891);
+/* harmony import */ var _style_module_scss__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(_style_module_scss__WEBPACK_IMPORTED_MODULE_11__);
 /* harmony import */ var hooks__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(7807);
 /* harmony import */ var config__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(1150);
 /* harmony import */ var _context_jsx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(4632);
@@ -672,8 +674,13 @@ __webpack_require__.a(module, async (__webpack_handle_async_dependencies__, __we
 /* harmony import */ var _icons_jsx__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(3380);
 /* harmony import */ var _moment_jsx__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(5781);
 /* harmony import */ var components_ui_productThumbnail__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(4382);
-var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([components_ui_productThumbnail__WEBPACK_IMPORTED_MODULE_8__]);
-components_ui_productThumbnail__WEBPACK_IMPORTED_MODULE_8__ = (__webpack_async_dependencies__.then ? (await __webpack_async_dependencies__)() : __webpack_async_dependencies__)[0];
+/* harmony import */ var react_use_measure__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(7492);
+/* harmony import */ var react_use_measure__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(react_use_measure__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var react_markdown__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(3135);
+var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([components_ui_productThumbnail__WEBPACK_IMPORTED_MODULE_8__, react_markdown__WEBPACK_IMPORTED_MODULE_10__]);
+([components_ui_productThumbnail__WEBPACK_IMPORTED_MODULE_8__, react_markdown__WEBPACK_IMPORTED_MODULE_10__] = __webpack_async_dependencies__.then ? (await __webpack_async_dependencies__)() : __webpack_async_dependencies__);
+
+
 
 
 
@@ -715,11 +722,11 @@ function ComifyChat({ openAtStart  }) {
         };
     }, []);
     return /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
-        className: `infinai_chat_container ${(_style_module_scss__WEBPACK_IMPORTED_MODULE_9___default().chatContainer)} ${standalone ? (_style_module_scss__WEBPACK_IMPORTED_MODULE_9___default().standalone) : ""}`,
+        className: `infinai_chat_container ${(_style_module_scss__WEBPACK_IMPORTED_MODULE_11___default().chatContainer)} ${standalone ? (_style_module_scss__WEBPACK_IMPORTED_MODULE_11___default().standalone) : ""}`,
         children: [
             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
                 id: "infinaiChatTostContainer",
-                className: `infinai_chat_toast_container ${(_style_module_scss__WEBPACK_IMPORTED_MODULE_9___default().toastContainer)}`,
+                className: `infinai_chat_toast_container ${(_style_module_scss__WEBPACK_IMPORTED_MODULE_11___default().toastContainer)}`,
                 children: toasts.map((item)=>/*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_toast_jsx__WEBPACK_IMPORTED_MODULE_5__/* .Toast */ .F, {
                         id: item.id,
                         type: item.type,
@@ -750,7 +757,6 @@ const Chat = ({ setOpen , fullScreen , setFullScreen  })=>{
     const chatRef = (0,react__WEBPACK_IMPORTED_MODULE_1__.useRef)();
     const { chatbotConfig , unmountChat: unmountChat1 , convo , setConvo , messages , msgChannel , setMessages , pushToast , initMessages , setInitMessages , topics , standalone  } = (0,react__WEBPACK_IMPORTED_MODULE_1__.useContext)(_context_jsx__WEBPACK_IMPORTED_MODULE_4__/* .ChatContext */ .p5);
     const [currInput, setCurrInput] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)("");
-    const messagesRef = (0,react__WEBPACK_IMPORTED_MODULE_1__.useRef)();
     const { post: castVote , loading  } = (0,hooks__WEBPACK_IMPORTED_MODULE_2__/* .useFetch */ .ib)(config__WEBPACK_IMPORTED_MODULE_3__/* .endpoints.message */ .Hv.message, {
         headers: {
             "x-chatbot-id": chatbotConfig?._id
@@ -846,17 +852,20 @@ const Chat = ({ setOpen , fullScreen , setFullScreen  })=>{
         convo,
         chatbotConfig
     ]);
+    const [headerRef, { width  }] = react_use_measure__WEBPACK_IMPORTED_MODULE_9___default()();
+    const messagesRef = (0,react__WEBPACK_IMPORTED_MODULE_1__.useRef)();
     return /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
-        className: `infinai_chat ${(_style_module_scss__WEBPACK_IMPORTED_MODULE_9___default().chat)} ${fullScreen ? (_style_module_scss__WEBPACK_IMPORTED_MODULE_9___default().fullScreen) : ""}`,
+        className: `infinai_chat ${(_style_module_scss__WEBPACK_IMPORTED_MODULE_11___default().chat)} ${fullScreen ? (_style_module_scss__WEBPACK_IMPORTED_MODULE_11___default().fullScreen) : ""}`,
         ref: chatRef,
         children: [
             /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
-                className: (_style_module_scss__WEBPACK_IMPORTED_MODULE_9___default().header),
+                className: (_style_module_scss__WEBPACK_IMPORTED_MODULE_11___default().header),
+                ref: headerRef,
                 children: [
                     /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
-                        className: (_style_module_scss__WEBPACK_IMPORTED_MODULE_9___default().left),
+                        className: (_style_module_scss__WEBPACK_IMPORTED_MODULE_11___default().left),
                         children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
-                            className: (_style_module_scss__WEBPACK_IMPORTED_MODULE_9___default().companyDetail),
+                            className: (_style_module_scss__WEBPACK_IMPORTED_MODULE_11___default().companyDetail),
                             children: [
                                 chatbotConfig?.avatar && /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("img", {
                                     src: config__WEBPACK_IMPORTED_MODULE_3__/* .endpoints.baseUrlPublic */ .Hv.baseUrlPublic + chatbotConfig.avatar
@@ -864,13 +873,13 @@ const Chat = ({ setOpen , fullScreen , setFullScreen  })=>{
                                 /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
                                     children: [
                                         /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("p", {
-                                            className: (_style_module_scss__WEBPACK_IMPORTED_MODULE_9___default().ellepsis),
+                                            className: (_style_module_scss__WEBPACK_IMPORTED_MODULE_11___default().ellepsis),
                                             children: convo?.title || chatbotConfig?.display_name || "Infin AI"
                                         }),
                                         convo?.topic && /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
                                             children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("span", {
                                                 title: convo.topic,
-                                                className: `${(_style_module_scss__WEBPACK_IMPORTED_MODULE_9___default().title)} ${(_style_module_scss__WEBPACK_IMPORTED_MODULE_9___default().ellepsis)}`,
+                                                className: `${(_style_module_scss__WEBPACK_IMPORTED_MODULE_11___default().title)} ${(_style_module_scss__WEBPACK_IMPORTED_MODULE_11___default().ellepsis)}`,
                                                 children: convo.topic
                                             })
                                         })
@@ -880,10 +889,10 @@ const Chat = ({ setOpen , fullScreen , setFullScreen  })=>{
                         })
                     }),
                     /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
-                        className: (_style_module_scss__WEBPACK_IMPORTED_MODULE_9___default().right),
+                        className: (_style_module_scss__WEBPACK_IMPORTED_MODULE_11___default().right),
                         children: [
                             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("button", {
-                                className: (_style_module_scss__WEBPACK_IMPORTED_MODULE_9___default().clearBtn),
+                                className: (_style_module_scss__WEBPACK_IMPORTED_MODULE_11___default().clearBtn),
                                 onClick: ()=>{
                                     setConvo((prev)=>{
                                         if (prev?.user?.name && prev?.user?.email) {
@@ -908,14 +917,14 @@ const Chat = ({ setOpen , fullScreen , setFullScreen  })=>{
                                 children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_icons_jsx__WEBPACK_IMPORTED_MODULE_6__/* .Clear */ .UZ, {})
                             }),
                             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("button", {
-                                className: (_style_module_scss__WEBPACK_IMPORTED_MODULE_9___default().home),
+                                className: (_style_module_scss__WEBPACK_IMPORTED_MODULE_11___default().home),
                                 onClick: ()=>{
                                     messagesRef.current.scrollTop = -messagesRef.current.scrollHeight;
                                 },
                                 children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_icons_jsx__WEBPACK_IMPORTED_MODULE_6__/* .Home */ .SK, {})
                             }),
                             window.innerWidth >= 480 && /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("button", {
-                                className: (_style_module_scss__WEBPACK_IMPORTED_MODULE_9___default().closeBtn),
+                                className: (_style_module_scss__WEBPACK_IMPORTED_MODULE_11___default().closeBtn),
                                 onClick: ()=>{
                                     if (fullScreen) {
                                         if (document.exitFullscreen) {
@@ -937,13 +946,13 @@ const Chat = ({ setOpen , fullScreen , setFullScreen  })=>{
                                     setFullScreen(!fullScreen);
                                 },
                                 children: fullScreen ? /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_icons_jsx__WEBPACK_IMPORTED_MODULE_6__/* .Contract */ .CH, {
-                                    className: (_style_module_scss__WEBPACK_IMPORTED_MODULE_9___default().fullScreen)
+                                    className: (_style_module_scss__WEBPACK_IMPORTED_MODULE_11___default().fullScreen)
                                 }) : /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_icons_jsx__WEBPACK_IMPORTED_MODULE_6__/* .Expand */ .M0, {
-                                    className: (_style_module_scss__WEBPACK_IMPORTED_MODULE_9___default().fullScreen)
+                                    className: (_style_module_scss__WEBPACK_IMPORTED_MODULE_11___default().fullScreen)
                                 })
                             }),
                             !standalone && /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("button", {
-                                className: (_style_module_scss__WEBPACK_IMPORTED_MODULE_9___default().closeBtn),
+                                className: (_style_module_scss__WEBPACK_IMPORTED_MODULE_11___default().closeBtn),
                                 onClick: ()=>{
                                     setOpen(false);
                                     if (fullScreen) {
@@ -964,7 +973,7 @@ const Chat = ({ setOpen , fullScreen , setFullScreen  })=>{
                 ]
             }),
             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
-                className: (_style_module_scss__WEBPACK_IMPORTED_MODULE_9___default().messages),
+                className: (_style_module_scss__WEBPACK_IMPORTED_MODULE_11___default().messages),
                 ref: messagesRef,
                 children: (convo?._id ? [
                     ...messages,
@@ -1029,7 +1038,6 @@ const Chat = ({ setOpen , fullScreen , setFullScreen  })=>{
                                                 }));
                                             }
                                             setTimeout(()=>messagesRef.current.scrollTop = 0, 20);
-                                            // if (!convo?._id) {
                                             if (!name || !email) {
                                                 setCurrInput("userDetail");
                                                 return;
@@ -1052,21 +1060,6 @@ const Chat = ({ setOpen , fullScreen , setFullScreen  })=>{
                                                     askQuery: true
                                                 } : {}
                                             }));
-                                        // } else {
-                                        //   setInitMessages(
-                                        //     generateMessages({
-                                        //       topics,
-                                        //       topic: input,
-                                        //       name,
-                                        //       email,
-                                        //       askQuery: true,
-                                        //     })
-                                        //   );
-                                        //   setCurrInput("query");
-                                        //   setMessages([]);
-                                        //   localStorage.removeItem("infinai_chat_id");
-                                        //   messagesRef.current.scrollTop = 0;
-                                        // }
                                         },
                                         style: {
                                             marginBottom: arr[i - 1]?.type === "suggestion" ? 5 : arr[i - 1] && arr[i - 1]?.role !== item.role ? 25 : 0
@@ -1085,7 +1078,6 @@ const Chat = ({ setOpen , fullScreen , setFullScreen  })=>{
                                                 }));
                                             setTimeout(()=>messagesRef.current.scrollTop = 0, 20);
                                             const topic = topics.find((t)=>t.topic === convo.topic);
-                                            // if (!convo?._id) {
                                             setInitMessages((0,_context_jsx__WEBPACK_IMPORTED_MODULE_4__/* .generateMessages */ .kA)({
                                                 topics,
                                                 topic: topic.topic,
@@ -1094,20 +1086,6 @@ const Chat = ({ setOpen , fullScreen , setFullScreen  })=>{
                                                 askQuery: true,
                                                 askSubQuery: true
                                             }));
-                                        // } else {
-                                        //   setInitMessages(
-                                        //     generateMessages({
-                                        //       topics,
-                                        //       topic: convo.topic,
-                                        //       subTopic: input,
-                                        //       askQuery: true,
-                                        //     })
-                                        //   );
-                                        //   setCurrInput("query");
-                                        //   setMessages([]);
-                                        //   localStorage.removeItem("infinai_chat_id");
-                                        //   messagesRef.current.scrollTop = 0;
-                                        // }
                                         },
                                         style: {
                                             marginBottom: arr[i - 1]?.type === "suggestion" ? 5 : arr[i - 1] && arr[i - 1]?.role !== item.role ? 25 : 0
@@ -1135,13 +1113,14 @@ const Chat = ({ setOpen , fullScreen , setFullScreen  })=>{
                                 setOpen: setOpen,
                                 msg: item,
                                 loading: loading,
+                                messageWrapperWidth: width,
                                 style: {
                                     marginBottom: arr[i - 1]?.type === "suggestion" ? 5 : arr[i - 1] && arr[i - 1]?.role !== item.role ? 25 : 0
                                 },
                                 castVote: vote
                             }),
                             new Date(item.createdAt).getDate() !== new Date(arr[i + 1]?.createdAt).getDate() && /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
-                                className: (_style_module_scss__WEBPACK_IMPORTED_MODULE_9___default().msgDate),
+                                className: (_style_module_scss__WEBPACK_IMPORTED_MODULE_11___default().msgDate),
                                 children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_moment_jsx__WEBPACK_IMPORTED_MODULE_7__/* .Moment */ .W, {
                                     format: "DD MMM YYYY",
                                     children: item.createdAt
@@ -1181,7 +1160,7 @@ const Chat = ({ setOpen , fullScreen , setFullScreen  })=>{
                 }
             }),
             /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
-                className: (_style_module_scss__WEBPACK_IMPORTED_MODULE_9___default().footer),
+                className: (_style_module_scss__WEBPACK_IMPORTED_MODULE_11___default().footer),
                 children: [
                     "Powered by:",
                     " ",
@@ -1197,49 +1176,52 @@ const Chat = ({ setOpen , fullScreen , setFullScreen  })=>{
 };
 const Avatar = ({ onClick , src  })=>{
     return /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
-        className: `infinai_chat_avatar ${(_style_module_scss__WEBPACK_IMPORTED_MODULE_9___default().avatar)} ${src ? (_style_module_scss__WEBPACK_IMPORTED_MODULE_9___default().custom) : ""}`,
+        className: `infinai_chat_avatar ${(_style_module_scss__WEBPACK_IMPORTED_MODULE_11___default().avatar)} ${src ? (_style_module_scss__WEBPACK_IMPORTED_MODULE_11___default().custom) : ""}`,
         onClick: onClick,
         children: src ? /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("img", {
             src: config__WEBPACK_IMPORTED_MODULE_3__/* .endpoints.baseUrlPublic */ .Hv.baseUrlPublic + src
         }) : /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
             children: [
                 /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
-                    className: (_style_module_scss__WEBPACK_IMPORTED_MODULE_9___default().circle)
+                    className: (_style_module_scss__WEBPACK_IMPORTED_MODULE_11___default().circle)
                 }),
                 /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("img", {
-                    className: (_style_module_scss__WEBPACK_IMPORTED_MODULE_9___default().hand),
+                    className: (_style_module_scss__WEBPACK_IMPORTED_MODULE_11___default().hand),
                     src: "/assets/img/chat-avatar/hand.webp"
                 }),
                 /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("img", {
                     src: "/assets/img/chat-avatar/body.webp"
                 }),
                 /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("img", {
-                    className: (_style_module_scss__WEBPACK_IMPORTED_MODULE_9___default().head),
+                    className: (_style_module_scss__WEBPACK_IMPORTED_MODULE_11___default().head),
                     src: "/assets/img/chat-avatar/head.webp"
                 })
             ]
         })
     });
 };
-const Message = ({ setOpen , msg , castVote , loading , style  })=>{
+const Message = ({ setOpen , msg , castVote , loading , style , messageWrapperWidth  })=>{
     const { chatbotConfig , convo  } = (0,react__WEBPACK_IMPORTED_MODULE_1__.useContext)(_context_jsx__WEBPACK_IMPORTED_MODULE_4__/* .ChatContext */ .p5);
     let productList = null;
-    if (msg.role === "assistant" && msg.content.startsWith("[") && msg.content.endsWith("]")) {
+    let message = null;
+    if (msg.role === "assistant" && msg.content.includes(`"response_type": "product_list"`)) {
         try {
-            productList = JSON.parse(msg.content);
+            const parsedMsg = JSON.parse(msg.content);
+            productList = parsedMsg.products;
+            message = parsedMsg.message;
         } catch (err) {
         //
         }
     }
     return /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
-        className: `${(_style_module_scss__WEBPACK_IMPORTED_MODULE_9___default().msg)} ${(_style_module_scss__WEBPACK_IMPORTED_MODULE_9___default())[msg.role]}`,
+        className: `${(_style_module_scss__WEBPACK_IMPORTED_MODULE_11___default().msg)} ${(_style_module_scss__WEBPACK_IMPORTED_MODULE_11___default())[msg.role]}`,
         style: style,
         children: [
             msg.role !== "user" && /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
-                className: `${(_style_module_scss__WEBPACK_IMPORTED_MODULE_9___default().msgAvatar)} ${(_style_module_scss__WEBPACK_IMPORTED_MODULE_9___default().assistant)} ${chatbotConfig?.avatar ? (_style_module_scss__WEBPACK_IMPORTED_MODULE_9___default().custom) : ""}`,
+                className: `${(_style_module_scss__WEBPACK_IMPORTED_MODULE_11___default().msgAvatar)} ${(_style_module_scss__WEBPACK_IMPORTED_MODULE_11___default().assistant)} ${chatbotConfig?.avatar ? (_style_module_scss__WEBPACK_IMPORTED_MODULE_11___default().custom) : ""}`,
                 children: [
                     /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("img", {
-                        className: (_style_module_scss__WEBPACK_IMPORTED_MODULE_9___default().hand),
+                        className: (_style_module_scss__WEBPACK_IMPORTED_MODULE_11___default().hand),
                         src: chatbotConfig?.avatar ? config__WEBPACK_IMPORTED_MODULE_3__/* .endpoints.baseUrlPublic */ .Hv.baseUrlPublic + chatbotConfig?.avatar : "/assets/img/chat-avatar/full.webp"
                     }),
                     /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_moment_jsx__WEBPACK_IMPORTED_MODULE_7__/* .Moment */ .W, {
@@ -1249,32 +1231,45 @@ const Message = ({ setOpen , msg , castVote , loading , style  })=>{
                 ]
             }),
             /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
-                className: (_style_module_scss__WEBPACK_IMPORTED_MODULE_9___default().content),
+                className: (_style_module_scss__WEBPACK_IMPORTED_MODULE_11___default().content),
+                style: {
+                    maxWidth: `${messageWrapperWidth - 95}px`
+                },
                 children: [
-                    productList ? /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
-                        className: (_style_module_scss__WEBPACK_IMPORTED_MODULE_9___default().productList),
-                        children: productList.map((product)=>/*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(components_ui_productThumbnail__WEBPACK_IMPORTED_MODULE_8__/* .ProductThumb */ .B, {
-                                onClick: ()=>setOpen(false),
-                                product: product
-                            }, product._id))
-                    }) : /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("p", {
-                        children: msg.content
+                    productList && /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
+                        className: (_style_module_scss__WEBPACK_IMPORTED_MODULE_11___default().productWrapper),
+                        style: {
+                            maxWidth: `${messageWrapperWidth - 95}px`
+                        },
+                        children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
+                            className: (_style_module_scss__WEBPACK_IMPORTED_MODULE_11___default().productList),
+                            children: productList.map((product)=>/*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(components_ui_productThumbnail__WEBPACK_IMPORTED_MODULE_8__/* .ProductThumb */ .B, {
+                                    onClick: ()=>setOpen(false),
+                                    product: product
+                                }, product._id))
+                        })
+                    }),
+                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
+                        className: "markdown",
+                        children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_markdown__WEBPACK_IMPORTED_MODULE_10__["default"], {
+                            children: message || msg.content
+                        })
                     }),
                     msg.role === "assistant" && /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
-                        className: (_style_module_scss__WEBPACK_IMPORTED_MODULE_9___default().actions),
+                        className: (_style_module_scss__WEBPACK_IMPORTED_MODULE_11___default().actions),
                         children: [
                             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(CopyBtn, {
                                 content: msg.content
                             }),
                             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("button", {
-                                className: (_style_module_scss__WEBPACK_IMPORTED_MODULE_9___default().btn),
+                                className: (_style_module_scss__WEBPACK_IMPORTED_MODULE_11___default().btn),
                                 title: "Like",
                                 disabled: loading,
                                 onClick: ()=>castVote(msg._id, msg.like ? null : true),
                                 children: msg.like === true ? /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_icons_jsx__WEBPACK_IMPORTED_MODULE_6__/* .ThumbsUp */ .Vw, {}) : /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_icons_jsx__WEBPACK_IMPORTED_MODULE_6__/* .ThumbsUpOutline */ .DT, {})
                             }),
                             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("button", {
-                                className: (_style_module_scss__WEBPACK_IMPORTED_MODULE_9___default().btn),
+                                className: (_style_module_scss__WEBPACK_IMPORTED_MODULE_11___default().btn),
                                 title: "Dislike",
                                 disabled: loading,
                                 onClick: ()=>castVote(msg._id, msg.like === false ? null : false),
@@ -1285,10 +1280,10 @@ const Message = ({ setOpen , msg , castVote , loading , style  })=>{
                 ]
             }),
             msg.role === "user" && /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
-                className: (_style_module_scss__WEBPACK_IMPORTED_MODULE_9___default().msgAvatar),
+                className: (_style_module_scss__WEBPACK_IMPORTED_MODULE_11___default().msgAvatar),
                 children: [
                     /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
-                        className: (_style_module_scss__WEBPACK_IMPORTED_MODULE_9___default().img),
+                        className: (_style_module_scss__WEBPACK_IMPORTED_MODULE_11___default().img),
                         children: convo?.user?.name?.[0]?.toUpperCase() || "U"
                     }),
                     /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_moment_jsx__WEBPACK_IMPORTED_MODULE_7__/* .Moment */ .W, {
@@ -1304,14 +1299,14 @@ const MessageForm = ({ msg , style , onSubmit  })=>{
     const [values, setValues] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)({});
     const { chatbotConfig  } = (0,react__WEBPACK_IMPORTED_MODULE_1__.useContext)(_context_jsx__WEBPACK_IMPORTED_MODULE_4__/* .ChatContext */ .p5);
     return /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
-        className: `${(_style_module_scss__WEBPACK_IMPORTED_MODULE_9___default().msg)} ${(_style_module_scss__WEBPACK_IMPORTED_MODULE_9___default().form)}`,
+        className: `${(_style_module_scss__WEBPACK_IMPORTED_MODULE_11___default().msg)} ${(_style_module_scss__WEBPACK_IMPORTED_MODULE_11___default().form)}`,
         style: style,
         children: [
             msg.role !== "user" && /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
-                className: `${(_style_module_scss__WEBPACK_IMPORTED_MODULE_9___default().msgAvatar)} ${(_style_module_scss__WEBPACK_IMPORTED_MODULE_9___default().assistant)} ${chatbotConfig?.avatar ? (_style_module_scss__WEBPACK_IMPORTED_MODULE_9___default().custom) : ""}`,
+                className: `${(_style_module_scss__WEBPACK_IMPORTED_MODULE_11___default().msgAvatar)} ${(_style_module_scss__WEBPACK_IMPORTED_MODULE_11___default().assistant)} ${chatbotConfig?.avatar ? (_style_module_scss__WEBPACK_IMPORTED_MODULE_11___default().custom) : ""}`,
                 children: [
                     /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("img", {
-                        className: (_style_module_scss__WEBPACK_IMPORTED_MODULE_9___default().hand),
+                        className: (_style_module_scss__WEBPACK_IMPORTED_MODULE_11___default().hand),
                         src: chatbotConfig?.avatar ? config__WEBPACK_IMPORTED_MODULE_3__/* .endpoints.baseUrlPublic */ .Hv.baseUrlPublic + chatbotConfig?.avatar : "/assets/img/chat-avatar/full.webp"
                     }),
                     /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_moment_jsx__WEBPACK_IMPORTED_MODULE_7__/* .Moment */ .W, {
@@ -1321,7 +1316,7 @@ const MessageForm = ({ msg , style , onSubmit  })=>{
                 ]
             }),
             /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
-                className: (_style_module_scss__WEBPACK_IMPORTED_MODULE_9___default().content),
+                className: (_style_module_scss__WEBPACK_IMPORTED_MODULE_11___default().content),
                 children: [
                     /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("p", {
                         children: msg.content
@@ -1369,7 +1364,7 @@ const MessageForm = ({ msg , style , onSubmit  })=>{
 const Topics = ({ options , active , onChange , style  })=>{
     const { currentPath , topics  } = (0,react__WEBPACK_IMPORTED_MODULE_1__.useContext)(_context_jsx__WEBPACK_IMPORTED_MODULE_4__/* .ChatContext */ .p5);
     return /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
-        className: (_style_module_scss__WEBPACK_IMPORTED_MODULE_9___default().suggestions),
+        className: (_style_module_scss__WEBPACK_IMPORTED_MODULE_11___default().suggestions),
         style: {
             ...style
         },
@@ -1378,7 +1373,7 @@ const Topics = ({ options , active , onChange , style  })=>{
             return !topic?.paths?.length || topic?.paths?.some((path)=>currentPath.match(new RegExp(`${path}$`)));
         }).map((item)=>/*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("button", {
                 disabled: item === active,
-                className: `${(_style_module_scss__WEBPACK_IMPORTED_MODULE_9___default().chip)} ${item === active ? (_style_module_scss__WEBPACK_IMPORTED_MODULE_9___default().active) : ""}`,
+                className: `${(_style_module_scss__WEBPACK_IMPORTED_MODULE_11___default().chip)} ${item === active ? (_style_module_scss__WEBPACK_IMPORTED_MODULE_11___default().active) : ""}`,
                 onClick: ()=>onChange(item),
                 children: item
             }, item))
@@ -1386,13 +1381,13 @@ const Topics = ({ options , active , onChange , style  })=>{
 };
 const Suggestions = ({ options , active , onChange , style  })=>{
     return /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
-        className: (_style_module_scss__WEBPACK_IMPORTED_MODULE_9___default().suggestions),
+        className: (_style_module_scss__WEBPACK_IMPORTED_MODULE_11___default().suggestions),
         style: {
             ...style
         },
         children: options.map((item)=>/*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("button", {
                 disabled: item === active,
-                className: `${(_style_module_scss__WEBPACK_IMPORTED_MODULE_9___default().chip)} ${item === active ? (_style_module_scss__WEBPACK_IMPORTED_MODULE_9___default().active) : ""}`,
+                className: `${(_style_module_scss__WEBPACK_IMPORTED_MODULE_11___default().chip)} ${item === active ? (_style_module_scss__WEBPACK_IMPORTED_MODULE_11___default().active) : ""}`,
                 onClick: ()=>onChange(item),
                 children: item
             }, item))
@@ -1402,7 +1397,7 @@ const CopyBtn = ({ content  })=>{
     const timer = (0,react__WEBPACK_IMPORTED_MODULE_1__.useRef)();
     const [done, setDone] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
     return /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("button", {
-        className: (_style_module_scss__WEBPACK_IMPORTED_MODULE_9___default().btn),
+        className: (_style_module_scss__WEBPACK_IMPORTED_MODULE_11___default().btn),
         title: "Copy",
         onClick: ()=>{
             navigator.clipboard.writeText(content);
@@ -1413,7 +1408,7 @@ const CopyBtn = ({ content  })=>{
             }, 1000);
         },
         children: done ? /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_icons_jsx__WEBPACK_IMPORTED_MODULE_6__/* .Check */ .Jr, {}) : /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_icons_jsx__WEBPACK_IMPORTED_MODULE_6__/* .Clipboard */ .TU, {
-            className: (_style_module_scss__WEBPACK_IMPORTED_MODULE_9___default().clipboard)
+            className: (_style_module_scss__WEBPACK_IMPORTED_MODULE_11___default().clipboard)
         })
     });
 };
@@ -1468,7 +1463,7 @@ const ChatForm = ({ setOpen , inputOptions , scrollDown , onSubmit , loading: de
         msg
     ]);
     return /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("form", {
-        className: (_style_module_scss__WEBPACK_IMPORTED_MODULE_9___default().chatForm),
+        className: (_style_module_scss__WEBPACK_IMPORTED_MODULE_11___default().chatForm),
         onSubmit: onSubmit ? (e)=>{
             e.preventDefault();
             onSubmit({
@@ -1487,21 +1482,21 @@ const ChatForm = ({ setOpen , inputOptions , scrollDown , onSubmit , loading: de
                 placeholder: "Type a message",
                 value: msg,
                 onChange: (e)=>setMsg(e.target.value),
-                className: (_style_module_scss__WEBPACK_IMPORTED_MODULE_9___default().input)
+                className: (_style_module_scss__WEBPACK_IMPORTED_MODULE_11___default().input)
             }),
             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("button", {
-                className: (_style_module_scss__WEBPACK_IMPORTED_MODULE_9___default().sendBtn),
+                className: (_style_module_scss__WEBPACK_IMPORTED_MODULE_11___default().sendBtn),
                 disabled: loading || defaultLoading || !msg.trim(),
                 children: defaultLoading || loading ? /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
                     children: [
                         /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("span", {
-                            className: (_style_module_scss__WEBPACK_IMPORTED_MODULE_9___default().dot)
+                            className: (_style_module_scss__WEBPACK_IMPORTED_MODULE_11___default().dot)
                         }),
                         /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("span", {
-                            className: (_style_module_scss__WEBPACK_IMPORTED_MODULE_9___default().dot)
+                            className: (_style_module_scss__WEBPACK_IMPORTED_MODULE_11___default().dot)
                         }),
                         /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("span", {
-                            className: (_style_module_scss__WEBPACK_IMPORTED_MODULE_9___default().dot)
+                            className: (_style_module_scss__WEBPACK_IMPORTED_MODULE_11___default().dot)
                         })
                     ]
                 }) : /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_icons_jsx__WEBPACK_IMPORTED_MODULE_6__/* .Send */ .vw, {})
@@ -1943,6 +1938,14 @@ module.exports = require("react");
 
 /***/ }),
 
+/***/ 7492:
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("react-use-measure");
+
+/***/ }),
+
 /***/ 1780:
 /***/ ((module) => {
 
@@ -1964,6 +1967,14 @@ module.exports = import("react-icons/im");;
 
 "use strict";
 module.exports = import("react-icons/io");;
+
+/***/ }),
+
+/***/ 3135:
+/***/ ((module) => {
+
+"use strict";
+module.exports = import("react-markdown");;
 
 /***/ })
 

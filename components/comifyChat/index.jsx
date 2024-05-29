@@ -27,6 +27,8 @@ import {
 } from "./icons.jsx";
 import { Moment } from "./moment.jsx";
 import { ProductThumb } from "components/ui/productThumbnail";
+import useMeasure from "react-use-measure";
+import Markdown from "react-markdown";
 
 export function ComifyChat({ openAtStart }) {
   const [fullScreen, setFullScreen] = useState(false);
@@ -121,8 +123,6 @@ const Chat = ({ setOpen, fullScreen, setFullScreen }) => {
   } = useContext(ChatContext);
   const [currInput, setCurrInput] = useState("");
 
-  const messagesRef = useRef();
-
   const { post: castVote, loading } = useFetch(endpoints.message, {
     headers: { "x-chatbot-id": chatbotConfig?._id },
   });
@@ -216,12 +216,14 @@ const Chat = ({ setOpen, fullScreen, setFullScreen }) => {
     [convo, chatbotConfig]
   );
 
+  const [headerRef, { width }] = useMeasure();
+  const messagesRef = useRef();
   return (
     <div
       className={`infinai_chat ${s.chat} ${fullScreen ? s.fullScreen : ""}`}
       ref={chatRef}
     >
-      <div className={s.header}>
+      <div className={s.header} ref={headerRef}>
         <div className={s.left}>
           <div className={s.companyDetail}>
             {chatbotConfig?.avatar && (
@@ -415,7 +417,6 @@ const Chat = ({ setOpen, fullScreen, setFullScreen }) => {
                           20
                         );
 
-                        // if (!convo?._id) {
                         if (!name || !email) {
                           setCurrInput("userDetail");
                           return;
@@ -431,22 +432,6 @@ const Chat = ({ setOpen, fullScreen, setFullScreen }) => {
                             ...(name && email ? { askQuery: true } : {}),
                           })
                         );
-                        // } else {
-                        //   setInitMessages(
-                        //     generateMessages({
-                        //       topics,
-                        //       topic: input,
-                        //       name,
-                        //       email,
-                        //       askQuery: true,
-                        //     })
-                        //   );
-                        //   setCurrInput("query");
-
-                        //   setMessages([]);
-                        //   localStorage.removeItem("infinai_chat_id");
-                        //   messagesRef.current.scrollTop = 0;
-                        // }
                       }}
                       style={{
                         marginBottom:
@@ -479,7 +464,6 @@ const Chat = ({ setOpen, fullScreen, setFullScreen }) => {
                           (t) => t.topic === convo.topic
                         );
 
-                        // if (!convo?._id) {
                         setInitMessages(
                           generateMessages({
                             topics,
@@ -490,21 +474,6 @@ const Chat = ({ setOpen, fullScreen, setFullScreen }) => {
                             askSubQuery: true,
                           })
                         );
-                        // } else {
-                        //   setInitMessages(
-                        //     generateMessages({
-                        //       topics,
-                        //       topic: convo.topic,
-                        //       subTopic: input,
-                        //       askQuery: true,
-                        //     })
-                        //   );
-                        //   setCurrInput("query");
-
-                        //   setMessages([]);
-                        //   localStorage.removeItem("infinai_chat_id");
-                        //   messagesRef.current.scrollTop = 0;
-                        // }
                       }}
                       style={{
                         marginBottom:
@@ -541,6 +510,7 @@ const Chat = ({ setOpen, fullScreen, setFullScreen }) => {
                   setOpen={setOpen}
                   msg={item}
                   loading={loading}
+                  messageWrapperWidth={width}
                   style={{
                     marginBottom:
                       arr[i - 1]?.type === "suggestion"
@@ -548,9 +518,6 @@ const Chat = ({ setOpen, fullScreen, setFullScreen }) => {
                         : arr[i - 1] && arr[i - 1]?.role !== item.role
                         ? 25
                         : 0,
-                    // ...(arr[i - 1]?.type === "suggestion" && {
-                    //   marginBottom: "-.5rem",
-                    // }),
                   }}
                   castVote={vote}
                 />
@@ -633,16 +600,25 @@ const Avatar = ({ onClick, src }) => {
   );
 };
 
-const Message = ({ setOpen, msg, castVote, loading, style }) => {
+const Message = ({
+  setOpen,
+  msg,
+  castVote,
+  loading,
+  style,
+  messageWrapperWidth,
+}) => {
   const { chatbotConfig, convo } = useContext(ChatContext);
   let productList = null;
+  let message = null;
   if (
     msg.role === "assistant" &&
-    msg.content.startsWith("[") &&
-    msg.content.endsWith("]")
+    msg.content.includes(`"response_type": "product_list"`)
   ) {
     try {
-      productList = JSON.parse(msg.content);
+      const parsedMsg = JSON.parse(msg.content);
+      productList = parsedMsg.products;
+      message = parsedMsg.message;
     } catch (err) {
       //
     }
@@ -666,20 +642,29 @@ const Message = ({ setOpen, msg, castVote, loading, style }) => {
           <Moment format="hh:mm">{msg.createdAt}</Moment>
         </div>
       )}
-      <div className={s.content}>
-        {productList ? (
-          <div className={s.productList}>
-            {productList.map((product) => (
-              <ProductThumb
-                key={product._id}
-                onClick={() => setOpen(false)}
-                product={product}
-              />
-            ))}
+      <div
+        className={s.content}
+        style={{ maxWidth: `${messageWrapperWidth - 95}px` }}
+      >
+        {productList && (
+          <div
+            className={s.productWrapper}
+            style={{ maxWidth: `${messageWrapperWidth - 95}px` }}
+          >
+            <div className={s.productList}>
+              {productList.map((product) => (
+                <ProductThumb
+                  key={product._id}
+                  onClick={() => setOpen(false)}
+                  product={product}
+                />
+              ))}
+            </div>
           </div>
-        ) : (
-          <p>{msg.content}</p>
         )}
+        <div className="markdown">
+          <Markdown>{message || msg.content}</Markdown>
+        </div>
         {msg.role === "assistant" && (
           <div className={s.actions}>
             <CopyBtn content={msg.content} />

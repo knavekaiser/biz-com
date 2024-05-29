@@ -1,9 +1,12 @@
 @import "nprogress.scss";
 @import "components/variables";
 
-* {
+:not(.markdown *) {
   box-sizing: border-box;
   padding: 0;
+  margin: 0;
+}
+.markdown p {
   margin: 0;
 }
 

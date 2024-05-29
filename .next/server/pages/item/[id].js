@@ -255,8 +255,8 @@ const ZoomImg = ({ src , alt  })=>{
             ref: imgRef,
             draggable: false,
             src: src,
-            height: 600,
-            width: 600,
+            height: 800,
+            width: 800,
             alt: alt,
             style: imgStyle
         })
