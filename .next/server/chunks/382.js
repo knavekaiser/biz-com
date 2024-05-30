@@ -30,7 +30,8 @@ module.exports = {
 	"bar": "productThumbnail_bar___8F9l",
 	"fill": "productThumbnail_fill__9pT6p",
 	"percent": "productThumbnail_percent__W0g2_",
-	"whatsappBtn": "productThumbnail_whatsappBtn__kJ_Mk"
+	"whatsappBtn": "productThumbnail_whatsappBtn__kJ_Mk",
+	"description": "productThumbnail_description__TDaYH"
 };
 
 

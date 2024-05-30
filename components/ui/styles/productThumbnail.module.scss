@@ -207,6 +207,12 @@
       color: #25d366;
       cursor: pointer;
     }
+    .description {
+      -webkit-line-clamp: 2;
+      display: -webkit-box;
+      overflow: hidden;
+      -webkit-box-orient: vertical;
+    }
   }
 }
 
