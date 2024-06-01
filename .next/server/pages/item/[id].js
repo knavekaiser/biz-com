@@ -104,6 +104,11 @@ function Images({ product , variant  }) {
     const [viewImage, setViewImage] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0);
     const [zoom, setZoom] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
     const carouselRef = (0,react__WEBPACK_IMPORTED_MODULE_1__.useRef)(null);
+    (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(()=>{
+        setViewImage(0);
+    }, [
+        product._id
+    ]);
     return /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
         className: (_styles_products_module_scss__WEBPACK_IMPORTED_MODULE_5___default().images),
         children: [

@@ -17,6 +17,9 @@ export default function Images({ product, variant }) {
   const [viewImage, setViewImage] = useState(0);
   const [zoom, setZoom] = useState(false);
   const carouselRef = useRef(null);
+  useEffect(() => {
+    setViewImage(0);
+  }, [product._id]);
   return (
     <div className={s.images}>
       <div className={s.thumbnails}>
