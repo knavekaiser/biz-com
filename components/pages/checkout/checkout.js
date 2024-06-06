@@ -9,7 +9,7 @@ export default function Checkout({ product }) {
     <div className={`${s.container}`}>
       <Form />
       <Sidebar product={product} />
-      <Products product={product} />
+      {/* <Products product={product} /> */}
     </div>
   );
 }

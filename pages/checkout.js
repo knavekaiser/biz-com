@@ -1,6 +1,7 @@
 import { useEffect, useContext } from "react";
 import { SiteContext } from "SiteContext";
 import Header from "components/ui/Header";
+import { useRouter } from "next/router";
 
 import Footer from "components/ui/Footer";
 
@@ -29,12 +30,18 @@ export async function getServerSideProps(ctx) {
 }
 
 const Page = ({ siteData }) => {
-  const { setSiteConfig, user } = useContext(SiteContext);
+  const router = useRouter();
+  const { setSiteConfig, user, cart } = useContext(SiteContext);
   useEffect(() => {
     if (siteData) {
       setSiteConfig(siteData);
     }
   }, [siteData]);
+  useEffect(() => {
+    if (cart?.length === 0) {
+      router.replace("/");
+    }
+  }, []);
   if (!siteData) {
     return <DomainFallback />;
   }

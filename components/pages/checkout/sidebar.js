@@ -1,8 +1,8 @@
 import { Prompt } from "components/modal";
-import { paths , endpoints} from "config";
+import { paths, endpoints } from "config";
 import { useFetch } from "hooks";
 import { useRouter } from "next/router";
-import {  useContext, useCallback } from "react";
+import { useContext, useCallback } from "react";
 import { SiteContext } from "SiteContext";
 import s from "./styles/checkout.module.scss";
 
@@ -62,22 +62,24 @@ const Sidebar = () => {
         value={siteConfig.siteConfig?.currency + " " + "0"}
       />
 
-      <div className={s.actions}>
-        <button
-          className={`btn secondary fullWidth`}
-          disabled={loading}
-          onClick={() => placeOrder("payNow")}
-        >
-          Pay Now
-        </button>
-        <button
-          className={`btn fullWidth`}
-          disabled={loading}
-          onClick={() => placeOrder("cod")}
-        >
-          Cash On delivery
-        </button>
-      </div>
+      {cart?.length > 0 && (
+        <div className={s.actions}>
+          <button
+            className={`btn secondary fullWidth`}
+            disabled={loading}
+            onClick={() => placeOrder("payNow")}
+          >
+            Pay Now
+          </button>
+          <button
+            className={`btn fullWidth`}
+            disabled={loading}
+            onClick={() => placeOrder("cod")}
+          >
+            Cash On delivery
+          </button>
+        </div>
+      )}
     </div>
   );
 };

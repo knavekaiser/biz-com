@@ -244,13 +244,13 @@ const Sidebar = ({})=>{
                     })
                 ]
             }),
-            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
+            cart?.length > 0 && /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
                 className: (_styles_cart_module_scss__WEBPACK_IMPORTED_MODULE_5___default().actions),
                 children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_link__WEBPACK_IMPORTED_MODULE_1___default()), {
                     href: config__WEBPACK_IMPORTED_MODULE_4__/* .paths.checkout */ .Hb.checkout,
                     children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("button", {
                         className: `btn secondary fullWidth`,
-                        children: "Proceed to Chekcout"
+                        children: "Proceed"
                     })
                 })
             })

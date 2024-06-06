@@ -33,13 +33,13 @@ const Sidebar = ({}) => {
         </strong>
       </p>
 
-      <div className={s.actions}>
-        <Link href={paths.checkout}>
-          <button className={`btn secondary fullWidth`}>
-            Proceed to Chekcout
-          </button>
-        </Link>
-      </div>
+      {cart?.length > 0 && (
+        <div className={s.actions}>
+          <Link href={paths.checkout}>
+            <button className={`btn secondary fullWidth`}>Proceed</button>
+          </Link>
+        </div>
+      )}
     </div>
   );
 };
