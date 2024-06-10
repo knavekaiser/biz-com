@@ -241,7 +241,8 @@ const Sidebar = ()=>{
     const router = (0,next_router__WEBPACK_IMPORTED_MODULE_4__.useRouter)();
     const placeOrder = (0,react__WEBPACK_IMPORTED_MODULE_5__.useCallback)((payment_method)=>{
         post({
-            payment_method
+            payment_method,
+            cart
         }).then(({ data  })=>{
             if (data?.success) {
                 (0,components_modal__WEBPACK_IMPORTED_MODULE_1__/* .Prompt */ .N)({

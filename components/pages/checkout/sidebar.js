@@ -22,6 +22,7 @@ const Sidebar = () => {
   const placeOrder = useCallback((payment_method) => {
     post({
       payment_method,
+      cart,
       // some other address
     })
       .then(({ data }) => {

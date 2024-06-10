@@ -130,6 +130,28 @@ export const Provider = ({ children }) => {
   }, [user, siteConfig]);
 
   useEffect(() => {
+    getCart()
+      .then(({ data }) => {
+        if (data.success) {
+          const serverCart = data.data;
+          const localCart = JSON.parse(localStorage.getItem("cart") || "[]");
+          const newItems = localCart.filter(
+            (localItem) =>
+              !serverCart.some(
+                (serverItem) => localItem.product._id === serverItem.product._id
+              )
+          );
+          const newCart = [...serverCart, ...newItems];
+          if (newCart.length) {
+            setCart(newCart);
+            return updateCart({ products: newCart });
+          }
+        }
+      })
+      .catch((err) => {});
+  }, [user]);
+
+  useEffect(() => {
     const token = localStorage.getItem("access_token");
     if (token) {
       fetch(endpoints.profile, {
