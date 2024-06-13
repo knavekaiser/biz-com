@@ -209,9 +209,9 @@ function myImageLoader({ src , width , quality  }) {
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "v": () => (/* binding */ loadScript),
 /* harmony export */   "z": () => (/* binding */ getSiteData)
 /* harmony export */ });
-/* unused harmony export loadScript */
 /* harmony import */ var config__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1150);
 
 const getSiteData = async (ctx)=>{

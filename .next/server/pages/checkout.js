@@ -208,8 +208,9 @@ __webpack_require__.a(module, async (__webpack_handle_async_dependencies__, __we
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(6689);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var SiteContext__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(9711);
-/* harmony import */ var _styles_checkout_module_scss__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(1314);
-/* harmony import */ var _styles_checkout_module_scss__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_styles_checkout_module_scss__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var _styles_checkout_module_scss__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(1314);
+/* harmony import */ var _styles_checkout_module_scss__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_styles_checkout_module_scss__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var helpers__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(7474);
 var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([components_modal__WEBPACK_IMPORTED_MODULE_1__]);
 components_modal__WEBPACK_IMPORTED_MODULE_1__ = (__webpack_async_dependencies__.then ? (await __webpack_async_dependencies__)() : __webpack_async_dependencies__)[0];
 
@@ -220,39 +221,87 @@ components_modal__WEBPACK_IMPORTED_MODULE_1__ = (__webpack_async_dependencies__.
 
 
 
+
 const Detail = ({ label , value  })=>{
     return /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
-        className: (_styles_checkout_module_scss__WEBPACK_IMPORTED_MODULE_7___default().detail),
+        className: (_styles_checkout_module_scss__WEBPACK_IMPORTED_MODULE_8___default().detail),
         children: [
             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("span", {
-                className: (_styles_checkout_module_scss__WEBPACK_IMPORTED_MODULE_7___default().label),
+                className: (_styles_checkout_module_scss__WEBPACK_IMPORTED_MODULE_8___default().label),
                 children: label
             }),
             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("span", {
-                className: (_styles_checkout_module_scss__WEBPACK_IMPORTED_MODULE_7___default().value),
+                className: (_styles_checkout_module_scss__WEBPACK_IMPORTED_MODULE_8___default().value),
                 children: value
             })
         ]
     });
 };
 const Sidebar = ()=>{
-    const { siteConfig , cart , emptyCart  } = (0,react__WEBPACK_IMPORTED_MODULE_5__.useContext)(SiteContext__WEBPACK_IMPORTED_MODULE_6__/* .SiteContext */ .D);
+    const { user , siteConfig , cart , emptyCart  } = (0,react__WEBPACK_IMPORTED_MODULE_5__.useContext)(SiteContext__WEBPACK_IMPORTED_MODULE_6__/* .SiteContext */ .D);
     const { post , loading  } = (0,hooks__WEBPACK_IMPORTED_MODULE_3__/* .useFetch */ .ib)(config__WEBPACK_IMPORTED_MODULE_2__/* .endpoints.placeOrder */ .Hv.placeOrder);
     const router = (0,next_router__WEBPACK_IMPORTED_MODULE_4__.useRouter)();
-    const placeOrder = (0,react__WEBPACK_IMPORTED_MODULE_5__.useCallback)((payment_method)=>{
+    (0,react__WEBPACK_IMPORTED_MODULE_5__.useEffect)(()=>{
+        (0,helpers__WEBPACK_IMPORTED_MODULE_7__/* .loadScript */ .v)("https://checkout.razorpay.com/v1/checkout.js");
+    }, []);
+    const placeOrder = (0,react__WEBPACK_IMPORTED_MODULE_5__.useCallback)((paymentMethod)=>{
         post({
-            payment_method,
+            paymentMethod,
             cart
         }).then(({ data  })=>{
             if (data?.success) {
-                (0,components_modal__WEBPACK_IMPORTED_MODULE_1__/* .Prompt */ .N)({
-                    type: "success",
-                    message: data.message,
-                    callback: ()=>{
-                        emptyCart();
-                        router.push(config__WEBPACK_IMPORTED_MODULE_2__/* .paths.clientArea.orders */ .Hb.clientArea.orders);
+                if (paymentMethod === "cod") {
+                    (0,components_modal__WEBPACK_IMPORTED_MODULE_1__/* .Prompt */ .N)({
+                        type: "success",
+                        message: "Your order has been placed. Thank you for shopping with us",
+                        callback: ()=>{
+                            emptyCart();
+                            router.push(config__WEBPACK_IMPORTED_MODULE_2__/* .paths.clientArea.orders */ .Hb.clientArea.orders);
+                        }
+                    });
+                } else {
+                    const Razorpay = window.Razorpay;
+                    if (Razorpay) {
+                        const order = data.data;
+                        const rzp1 = new Razorpay({
+                            key: process.env.RAZORPAY_API_KEY,
+                            amount: order.amount,
+                            currency: "INR",
+                            accept_partial: false,
+                            image: siteConfig.logo,
+                            name: siteConfig.name,
+                            description: "Make Payment",
+                            order_id: order.payOrderId,
+                            handler: (res)=>{
+                                emptyCart();
+                                (0,components_modal__WEBPACK_IMPORTED_MODULE_1__/* .Prompt */ .N)({
+                                    type: "success",
+                                    message: "Your order has been placed. Thank you for shopping with us",
+                                    callback: ()=>{
+                                        emptyCart();
+                                        router.push(config__WEBPACK_IMPORTED_MODULE_2__/* .paths.clientArea.orders */ .Hb.clientArea.orders);
+                                    }
+                                });
+                            },
+                            modal: {
+                                ondismiss: ()=>{}
+                            },
+                            theme: {
+                                color: "#336cf9"
+                            },
+                            notify: {
+                                sms: true,
+                                email: true
+                            },
+                            reminder_enable: true
+                        });
+                        rzp1.on("payment.failed", (res)=>{
+                            setAddMoneyFailed(true);
+                            setLoading(false);
+                        });
+                        rzp1.open();
                     }
-                });
+                }
             } else if (data) {
                 (0,components_modal__WEBPACK_IMPORTED_MODULE_1__/* .Prompt */ .N)({
                     type: "error",
@@ -265,7 +314,7 @@ const Sidebar = ()=>{
             }));
     }, []);
     return /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
-        className: (_styles_checkout_module_scss__WEBPACK_IMPORTED_MODULE_7___default().summary),
+        className: (_styles_checkout_module_scss__WEBPACK_IMPORTED_MODULE_8___default().summary),
         children: [
             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("h3", {
                 children: "Summary"
@@ -279,12 +328,12 @@ const Sidebar = ()=>{
                 value: siteConfig.siteConfig?.currency + " " + "0"
             }),
             cart?.length > 0 && /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
-                className: (_styles_checkout_module_scss__WEBPACK_IMPORTED_MODULE_7___default().actions),
+                className: (_styles_checkout_module_scss__WEBPACK_IMPORTED_MODULE_8___default().actions),
                 children: [
                     /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("button", {
                         className: `btn secondary fullWidth`,
                         disabled: loading,
-                        onClick: ()=>placeOrder("payNow"),
+                        onClick: ()=>placeOrder("prepaid"),
                         children: "Pay Now"
                     }),
                     /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("button", {
