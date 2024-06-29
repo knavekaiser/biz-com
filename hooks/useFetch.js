@@ -53,9 +53,24 @@ export const useFetch = (
           signal: controller.current.signal,
         })
           .then(async (res) => {
-            let data = await res.json();
+            if (!res.ok) {
+              setLoading(false);
+              reject(new Error("Network response was not ok"));
+              return;
+            }
+
+            const contentType = res.headers.get("Content-Type");
+            const transferEncoding = res.headers.get("Transfer-Encoding");
+            if (
+              transferEncoding === "chunked" ||
+              contentType === "text/plain"
+            ) {
+              resolve({ res, stream: true });
+            } else {
+              let data = await res.json();
+              resolve({ res, data });
+            }
             setLoading(false);
-            resolve({ res, data });
           })
           .catch((err) => {
             setLoading(false);

@@ -806,42 +806,91 @@ const Chat = ({ setOpen , fullScreen , setFullScreen  })=>{
             params: {
                 ":chat_id": ""
             }
-        }).then(({ data  })=>{
-            if (!data.success) {
-                return pushToast.error(data.message);
-            }
-            localStorage.setItem("infinai_chat_id", data.data._id);
-            localStorage.setItem("infinai_chat_user_name", data.data.user.name);
-            localStorage.setItem("infinai_chat_user_email", data.data.user.email);
-            if (reloadInit) {
-                const topic = topics.find((t)=>t.topic === data.data.topic);
-                const subTopic = topic?.subTopics?.find((t)=>t.topic === data.data.subTopic);
-                setInitMessages((0,_context_jsx__WEBPACK_IMPORTED_MODULE_4__/* .generateMessages */ .kA)({
-                    topics,
-                    // ...(topics.some((t) => t.topic === data.data.topic) && {
-                    //   topic: data.data.topic,
-                    //   askQuery: true,
-                    // }),
-                    ...topic && {
-                        topic: topic.topic,
-                        askQuery: true,
-                        ...subTopic && {
-                            subTopics: topic.subTopics,
-                            subTopic: subTopic.topic,
-                            askSubQuery: true
+        }).then(async ({ res , stream , data  })=>{
+            const handleNewChat = function(data) {
+                localStorage.setItem("infinai_chat_id", data.data._id);
+                localStorage.setItem("infinai_chat_user_name", data.data.user.name);
+                localStorage.setItem("infinai_chat_user_email", data.data.user.email);
+                if (reloadInit) {
+                    const topic = topics.find((t)=>t.topic === data.data.topic);
+                    const subTopic = topic?.subTopics?.find((t)=>t.topic === data.data.subTopic);
+                    setInitMessages((0,_context_jsx__WEBPACK_IMPORTED_MODULE_4__/* .generateMessages */ .kA)({
+                        topics,
+                        // ...(topics.some((t) => t.topic === data.data.topic) && {
+                        //   topic: data.data.topic,
+                        //   askQuery: true,
+                        // }),
+                        ...topic && {
+                            topic: topic.topic,
+                            askQuery: true,
+                            ...subTopic && {
+                                subTopics: topic.subTopics,
+                                subTopic: subTopic.topic,
+                                askSubQuery: true
+                            }
+                        }
+                    }));
+                }
+                setConvo({
+                    ...data.data,
+                    messages: undefined
+                });
+                msgChannel.postMessage({
+                    messages: data.data.messages.reverse()
+                });
+                setMessages(data.data.messages);
+            };
+            if (stream) {
+                const reader = res.body.getReader();
+                const decoder = new TextDecoder();
+                let done = false;
+                let firstBitReceived = false;
+                let buffer = "";
+                while(!done){
+                    const { value , done: streamDone  } = await reader.read();
+                    done = streamDone;
+                    if (value) {
+                        buffer += decoder.decode(value, {
+                            stream: true
+                        });
+                        let boundary = buffer.indexOf("}{");
+                        while(boundary !== -1){
+                            const chunk = buffer.slice(0, boundary + 1);
+                            buffer = buffer.slice(boundary + 1);
+                            try {
+                                if (!firstBitReceived) {
+                                    firstBitReceived = true;
+                                    handleNewChat({
+                                        data: JSON.parse(chunk)
+                                    });
+                                } else {
+                                    const newMessage = JSON.parse(chunk);
+                                    setMessages((prev)=>{
+                                        const messages = prev.map((m)=>m._id === newMessage._id ? {
+                                                ...m,
+                                                content: m.content + newMessage.content
+                                            } : m);
+                                        msgChannel.postMessage({
+                                            messages
+                                        });
+                                        return messages;
+                                    });
+                                }
+                            } catch (err) {
+                                console.error("Error parsing JSON", err);
+                            }
+                            boundary = buffer.indexOf("}{");
                         }
                     }
-                }));
+                }
+            } else {
+                if (!data.success) {
+                    return pushToast.error(data.message);
+                }
+                handleNewChat(data);
             }
-            setConvo({
-                ...data.data,
-                messages: undefined
-            });
-            msgChannel.postMessage({
-                messages: data.data.messages.reverse()
-            });
-            setMessages(data.data.messages);
         }).catch((err)=>{
+            console.log(err);
             pushToast.error(err.message);
             if (err.status === 401) {
                 setOpen(false);
@@ -1429,29 +1478,77 @@ const ChatForm = ({ setOpen , inputOptions , scrollDown , onSubmit , loading: de
             params: {
                 ":chat_id": convo._id
             }
-        }).then(({ data  })=>{
-            if (!data.success) {
-                return pushToast.error(data.message);
-            }
-            setMessages((prev)=>{
-                const messages = [
-                    data.data,
-                    {
-                        _id: Math.random().toString(36).substr(-8),
-                        role: "user",
-                        name: "Guest",
-                        content: msg,
-                        createdAt: new Date()
-                    },
-                    ...prev
-                ];
-                msgChannel.postMessage({
-                    messages
+        }).then(async ({ res , stream , data  })=>{
+            const handleNewMessage = (data)=>{
+                setMessages((prev)=>{
+                    const messages = [
+                        data.data,
+                        {
+                            _id: Math.random().toString(36).substr(-8),
+                            role: "user",
+                            name: "Guest",
+                            content: msg,
+                            createdAt: new Date()
+                        },
+                        ...prev
+                    ];
+                    msgChannel.postMessage({
+                        messages
+                    });
+                    return messages;
                 });
-                return messages;
-            });
-            setMsg("");
-            setTimeout(()=>scrollDown(), 50);
+                setMsg("");
+                setTimeout(()=>scrollDown(), 50);
+            };
+            if (stream) {
+                const reader = res.body.getReader();
+                const decoder = new TextDecoder();
+                let done = false;
+                let firstBitReceived = false;
+                let buffer = "";
+                while(!done){
+                    const { value , done: streamDone  } = await reader.read();
+                    done = streamDone;
+                    if (value) {
+                        buffer += decoder.decode(value, {
+                            stream: true
+                        });
+                        let boundary = buffer.indexOf("}{");
+                        while(boundary !== -1){
+                            const chunk = buffer.slice(0, boundary + 1);
+                            buffer = buffer.slice(boundary + 1);
+                            try {
+                                if (!firstBitReceived) {
+                                    firstBitReceived = true;
+                                    handleNewMessage({
+                                        data: JSON.parse(chunk)
+                                    });
+                                } else {
+                                    const newMessage = JSON.parse(chunk);
+                                    setMessages((prev)=>{
+                                        const messages = prev.map((m)=>m._id === newMessage._id ? {
+                                                ...m,
+                                                content: m.content + newMessage.content
+                                            } : m);
+                                        msgChannel.postMessage({
+                                            messages
+                                        });
+                                        return messages;
+                                    });
+                                }
+                            } catch (err) {
+                                console.error("Error parsing JSON", err);
+                            }
+                            boundary = buffer.indexOf("}{");
+                        }
+                    }
+                }
+            } else {
+                if (!data.success) {
+                    return pushToast.error(data.message);
+                }
+                handleNewMessage(data);
+            }
         }).catch((err)=>{
             pushToast.error(err.message);
             if (err.status === 401) {
