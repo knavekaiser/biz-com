@@ -845,41 +845,48 @@ const Chat = ({ setOpen , fullScreen , setFullScreen  })=>{
                 const decoder = new TextDecoder();
                 let done = false;
                 let firstBitReceived = false;
-                let buffer = "";
                 while(!done){
                     const { value , done: streamDone  } = await reader.read();
                     done = streamDone;
                     if (value) {
-                        buffer += decoder.decode(value, {
+                        let buffer = null;
+                        const raw = decoder.decode(value, {
                             stream: true
                         });
-                        let boundary = buffer.indexOf("}{");
-                        while(boundary !== -1){
-                            const chunk = buffer.slice(0, boundary + 1);
-                            buffer = buffer.slice(boundary + 1);
+                        const parts = raw.split("___msgEnd___").map((item)=>{
                             try {
-                                if (!firstBitReceived) {
-                                    firstBitReceived = true;
-                                    handleNewChat({
-                                        data: JSON.parse(chunk)
-                                    });
-                                } else {
-                                    const newMessage = JSON.parse(chunk);
-                                    setMessages((prev)=>{
-                                        const messages = prev.map((m)=>m._id === newMessage._id ? {
-                                                ...m,
-                                                content: m.content + newMessage.content
-                                            } : m);
-                                        msgChannel.postMessage({
-                                            messages
-                                        });
-                                        return messages;
-                                    });
-                                }
+                                const content = JSON.parse(item);
+                                return content;
                             } catch (err) {
-                                console.error("Error parsing JSON", err);
+                                return null;
                             }
-                            boundary = buffer.indexOf("}{");
+                        }).filter(Boolean);
+                        parts.forEach((part)=>{
+                            if (!buffer) {
+                                buffer = part;
+                            } else if (buffer?.user) {
+                                buffer.messages[buffer.messages.length - 1].content += part.content;
+                            } else {
+                                buffer.content += part.content;
+                            }
+                        });
+                        if (!firstBitReceived) {
+                            handleNewChat({
+                                data: buffer
+                            });
+                            firstBitReceived = true;
+                        } else {
+                            setMessages((prev)=>{
+                                const messages = prev.map((m)=>m._id === buffer._id ? {
+                                        ...m,
+                                        role: "assistant",
+                                        content: m.content + buffer.content
+                                    } : m);
+                                msgChannel.postMessage({
+                                    messages
+                                });
+                                return messages;
+                            });
                         }
                     }
                 }
@@ -1505,41 +1512,46 @@ const ChatForm = ({ setOpen , inputOptions , scrollDown , onSubmit , loading: de
                 const decoder = new TextDecoder();
                 let done = false;
                 let firstBitReceived = false;
-                let buffer = "";
                 while(!done){
                     const { value , done: streamDone  } = await reader.read();
                     done = streamDone;
                     if (value) {
-                        buffer += decoder.decode(value, {
+                        let buffer = null;
+                        const raw = decoder.decode(value, {
                             stream: true
                         });
-                        let boundary = buffer.indexOf("}{");
-                        while(boundary !== -1){
-                            const chunk = buffer.slice(0, boundary + 1);
-                            buffer = buffer.slice(boundary + 1);
+                        const parts = raw.split("___msgEnd___").map((item)=>{
                             try {
-                                if (!firstBitReceived) {
-                                    firstBitReceived = true;
-                                    handleNewMessage({
-                                        data: JSON.parse(chunk)
-                                    });
-                                } else {
-                                    const newMessage = JSON.parse(chunk);
-                                    setMessages((prev)=>{
-                                        const messages = prev.map((m)=>m._id === newMessage._id ? {
-                                                ...m,
-                                                content: m.content + newMessage.content
-                                            } : m);
-                                        msgChannel.postMessage({
-                                            messages
-                                        });
-                                        return messages;
-                                    });
-                                }
+                                const content = JSON.parse(item);
+                                return content;
                             } catch (err) {
-                                console.error("Error parsing JSON", err);
+                                return null;
                             }
-                            boundary = buffer.indexOf("}{");
+                        }).filter(Boolean);
+                        parts.forEach((part)=>{
+                            if (!buffer) {
+                                buffer = part;
+                            } else {
+                                buffer.content += part.content;
+                            }
+                        });
+                        if (!firstBitReceived) {
+                            firstBitReceived = true;
+                            handleNewMessage({
+                                data: buffer
+                            });
+                        } else {
+                            setMessages((prev)=>{
+                                const messages = prev.map((m)=>m._id === buffer._id ? {
+                                        ...m,
+                                        role: "assistant",
+                                        content: m.content + buffer.content
+                                    } : m);
+                                msgChannel.postMessage({
+                                    messages
+                                });
+                                return messages;
+                            });
                         }
                     }
                 }

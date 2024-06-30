@@ -211,40 +211,52 @@ const Chat = ({ setOpen, fullScreen, setFullScreen }) => {
             const decoder = new TextDecoder();
             let done = false;
             let firstBitReceived = false;
-            let buffer = "";
 
             while (!done) {
               const { value, done: streamDone } = await reader.read();
               done = streamDone;
               if (value) {
-                buffer += decoder.decode(value, { stream: true });
-
-                let boundary = buffer.indexOf("}{");
-                while (boundary !== -1) {
-                  const chunk = buffer.slice(0, boundary + 1);
-                  buffer = buffer.slice(boundary + 1);
-
-                  try {
-                    if (!firstBitReceived) {
-                      firstBitReceived = true;
-                      handleNewChat({ data: JSON.parse(chunk) });
-                    } else {
-                      const newMessage = JSON.parse(chunk);
-                      setMessages((prev) => {
-                        const messages = prev.map((m) =>
-                          m._id === newMessage._id
-                            ? { ...m, content: m.content + newMessage.content }
-                            : m
-                        );
-                        msgChannel.postMessage({ messages });
-                        return messages;
-                      });
+                let buffer = null;
+                const raw = decoder.decode(value, { stream: true });
+                const parts = raw
+                  .split("___msgEnd___")
+                  .map((item) => {
+                    try {
+                      const content = JSON.parse(item);
+                      return content;
+                    } catch (err) {
+                      return null;
                     }
-                  } catch (err) {
-                    console.error("Error parsing JSON", err);
+                  })
+                  .filter(Boolean);
+                parts.forEach((part) => {
+                  if (!buffer) {
+                    buffer = part;
+                  } else if (buffer?.user) {
+                    buffer.messages[buffer.messages.length - 1].content +=
+                      part.content;
+                  } else {
+                    buffer.content += part.content;
                   }
+                });
 
-                  boundary = buffer.indexOf("}{");
+                if (!firstBitReceived) {
+                  handleNewChat({ data: buffer });
+                  firstBitReceived = true;
+                } else {
+                  setMessages((prev) => {
+                    const messages = prev.map((m) =>
+                      m._id === buffer._id
+                        ? {
+                            ...m,
+                            role: "assistant",
+                            content: m.content + buffer.content,
+                          }
+                        : m
+                    );
+                    msgChannel.postMessage({ messages });
+                    return messages;
+                  });
                 }
               }
             }
@@ -922,40 +934,49 @@ const ChatForm = ({
             const decoder = new TextDecoder();
             let done = false;
             let firstBitReceived = false;
-            let buffer = "";
 
             while (!done) {
               const { value, done: streamDone } = await reader.read();
               done = streamDone;
               if (value) {
-                buffer += decoder.decode(value, { stream: true });
-
-                let boundary = buffer.indexOf("}{");
-                while (boundary !== -1) {
-                  const chunk = buffer.slice(0, boundary + 1);
-                  buffer = buffer.slice(boundary + 1);
-
-                  try {
-                    if (!firstBitReceived) {
-                      firstBitReceived = true;
-                      handleNewMessage({ data: JSON.parse(chunk) });
-                    } else {
-                      const newMessage = JSON.parse(chunk);
-                      setMessages((prev) => {
-                        const messages = prev.map((m) =>
-                          m._id === newMessage._id
-                            ? { ...m, content: m.content + newMessage.content }
-                            : m
-                        );
-                        msgChannel.postMessage({ messages });
-                        return messages;
-                      });
+                let buffer = null;
+                const raw = decoder.decode(value, { stream: true });
+                const parts = raw
+                  .split("___msgEnd___")
+                  .map((item) => {
+                    try {
+                      const content = JSON.parse(item);
+                      return content;
+                    } catch (err) {
+                      return null;
                     }
-                  } catch (err) {
-                    console.error("Error parsing JSON", err);
+                  })
+                  .filter(Boolean);
+                parts.forEach((part) => {
+                  if (!buffer) {
+                    buffer = part;
+                  } else {
+                    buffer.content += part.content;
                   }
+                });
 
-                  boundary = buffer.indexOf("}{");
+                if (!firstBitReceived) {
+                  firstBitReceived = true;
+                  handleNewMessage({ data: buffer });
+                } else {
+                  setMessages((prev) => {
+                    const messages = prev.map((m) =>
+                      m._id === buffer._id
+                        ? {
+                            ...m,
+                            role: "assistant",
+                            content: m.content + buffer.content,
+                          }
+                        : m
+                    );
+                    msgChannel.postMessage({ messages });
+                    return messages;
+                  });
                 }
               }
             }
