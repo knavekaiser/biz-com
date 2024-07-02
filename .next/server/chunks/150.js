@@ -151,6 +151,7 @@ const endpoints = {
     browse: `${baseApiUrlPublic}/api/browse`,
     relatedItems: `${baseApiUrlPublic}/api/browse/related`,
     elements: `${baseApiUrlPublic}/api/elements`,
+    landingPageCategories: `${baseApiUrlPublic}/api/browse/landing-page-categories`,
     landingPageShelves: `${baseApiUrlPublic}/api/browse/landing-page-shelves`,
     validateAccount: `${baseApiUrlPublic}/api/customers/validate-account`,
     signup: `${baseApiUrlPublic}/api/customers/signup`,

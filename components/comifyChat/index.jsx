@@ -26,9 +26,11 @@ import {
   Send,
 } from "./icons.jsx";
 import { Moment } from "./moment.jsx";
-import { ProductThumb } from "components/ui/productThumbnail";
+import Image from "next/image";
 import useMeasure from "react-use-measure";
 import Markdown from "react-markdown";
+import { SiteContext } from "SiteContext";
+import Link from "next/link";
 
 export function ComifyChat({ openAtStart }) {
   const [fullScreen, setFullScreen] = useState(false);
@@ -239,6 +241,10 @@ const Chat = ({ setOpen, fullScreen, setFullScreen }) => {
                     buffer.content += part.content;
                   }
                 });
+
+                if (buffer?.error) {
+                  return pushToast.error("Error occurred. Please try again.");
+                }
 
                 if (!firstBitReceived) {
                   handleNewChat({ data: buffer });
@@ -716,11 +722,7 @@ const Message = ({
           >
             <div className={s.productList}>
               {productList.map((product) => (
-                <ProductThumb
-                  key={product._id}
-                  onClick={() => setOpen(false)}
-                  product={product}
-                />
+                <ProductCard key={product._id} product={product} />
               ))}
             </div>
           </div>
@@ -760,6 +762,43 @@ const Message = ({
           <Moment format="hh:mm">{msg.createdAt}</Moment>
         </div>
       )}
+    </div>
+  );
+};
+
+const ProductCard = ({ product }) => {
+  const { siteConfig } = useContext(SiteContext);
+  return (
+    <div
+      className={s.product}
+      // onClick={() => setOpen(false)}
+    >
+      <Image
+        src={product.images[0]}
+        height={80}
+        width={80}
+        alt={product.title}
+      />
+      <div>
+        <p>{product.title}</p>
+        <p>
+          {siteConfig?.siteConfig?.currency} {product.price.toLocaleString()}
+        </p>
+        <p>
+          {product.originalPrice > product.price && (
+            <span className={s.originalPrice}>
+              {siteConfig?.siteConfig?.currency}{" "}
+              {product.originalPrice.toLocaleString()}
+            </span>
+          )}
+        </p>
+        <Link
+          style={{ display: "block", marginTop: ".5rem" }}
+          href={`/item/${product._id}`}
+        >
+          <button className="btn primary">View Detail</button>
+        </Link>
+      </div>
     </div>
   );
 };

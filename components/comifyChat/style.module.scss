@@ -182,9 +182,20 @@
             overflow: auto;
             .productList {
               width: max-content;
-              display: flex;
-              & > div {
-                width: 13rem;
+              display: grid;
+              width: 100%;
+              grid-gap: 0.5rem;
+              .product {
+                padding: 0.5rem 1rem;
+                border-radius: 1rem;
+                display: flex;
+                align-items: center;
+                grid-gap: 1rem;
+                background: white;
+                width: 100%;
+                a button {
+                  font-size: 0.8rem;
+                }
               }
             }
           }

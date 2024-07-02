@@ -7,6 +7,7 @@ import Footer from "components/ui/Footer";
 import DomainFallback from "components/ui/domainFallback";
 
 import Hero from "components/pages/index/hero";
+import Categories from "components/pages/index/categories";
 import Shelves from "components/pages/index/shelves";
 import s from "components/pages/index/styles/landingPage.module.scss";
 import { paths } from "config";
@@ -60,6 +61,7 @@ const LandingPage = ({ siteData }) => {
       </Head>
       <Header />
       <Hero />
+      <Categories />
       <Shelves />
       <Footer />
     </main>
