@@ -42,7 +42,6 @@ body {
     main {
       display: grid;
       min-height: calc((var(--vh) * 100));
-      grid-template-rows: max-content 1fr max-content;
     }
   }
 }

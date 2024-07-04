@@ -2430,6 +2430,9 @@ const Footer = ()=>{
     const { siteConfig  } = (0,react__WEBPACK_IMPORTED_MODULE_1__.useContext)(SiteContext__WEBPACK_IMPORTED_MODULE_2__/* .SiteContext */ .D);
     return /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("footer", {
         className: (_styles_footer_module_scss__WEBPACK_IMPORTED_MODULE_5___default().footer),
+        style: {
+            background: siteConfig?.siteConfig?.theme?.footerColor
+        },
         children: [
             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
                 className: (_styles_footer_module_scss__WEBPACK_IMPORTED_MODULE_5___default().wrapper),
@@ -2538,6 +2541,9 @@ const Header = ()=>{
     const router = (0,next_router__WEBPACK_IMPORTED_MODULE_11__.useRouter)();
     return /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("header", {
         className: (_styles_header_module_scss__WEBPACK_IMPORTED_MODULE_15___default().header),
+        style: {
+            background: siteConfig?.siteConfig?.theme?.headerColor
+        },
         children: [
             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("span", {
                 className: (_styles_header_module_scss__WEBPACK_IMPORTED_MODULE_15___default().gred) + ` gred`

@@ -4,7 +4,7 @@ import { useFetch } from "hooks";
 import { endpoints, paths } from "config";
 import { Prompt } from "components/modal";
 import { ImSpinner8 } from "react-icons/im";
-import s from "./styles/landingPage.module.scss";
+import s from "./styles/categories.module.scss";
 import Image from "next/image";
 
 export default function Shelves() {

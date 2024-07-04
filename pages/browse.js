@@ -5,6 +5,7 @@ import Head from "next/head";
 import Header from "components/ui/Header";
 import Footer from "components/ui/Footer";
 import DomainFallback from "components/ui/domainFallback";
+import Categories from "components/ui/categories";
 
 import Products from "components/pages/browse/products";
 import Link from "next/link";
@@ -40,6 +41,7 @@ const Browse = ({ siteData }) => {
         {siteData?.favicon && <link rel="icon" href={siteData.favicon} />}
       </Head>
       <Header />
+      <Categories />
       <Products showPath={siteData?.siteConfig?.landingPage?.viewLandingPage} />
       <Footer />
       {compare?.length > 0 && <Link href={paths.compare}>Compare</Link>}

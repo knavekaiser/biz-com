@@ -7,7 +7,12 @@ import Image from "next/image";
 const Footer = () => {
   const { siteConfig } = useContext(SiteContext);
   return (
-    <footer className={s.footer}>
+    <footer
+      className={s.footer}
+      style={{
+        background: siteConfig?.siteConfig?.theme?.footerColor,
+      }}
+    >
       <div className={s.wrapper}>
         {(siteConfig?.siteConfig?.footer?.sections || []).map((section) => (
           <ul

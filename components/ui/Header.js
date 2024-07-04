@@ -18,7 +18,12 @@ const Header = () => {
   const { siteConfig, cart } = useContext(SiteContext);
   const router = useRouter();
   return (
-    <header className={s.header}>
+    <header
+      className={s.header}
+      style={{
+        background: siteConfig?.siteConfig?.theme?.headerColor,
+      }}
+    >
       <span className={s.gred + ` gred`} />
       <div className={s.content}>
         <div className={s.northSection}>

@@ -2,18 +2,7 @@
 
 .landingPage {
   display: grid;
-  grid-template-rows: min-content 1fr min-content;
-  .categories {
-    padding: 1rem 2rem;
-    display: flex;
-    overflow-x: auto;
-    grid-gap: 2rem;
-    .category {
-      display: grid;
-      grid-gap: 0.5rem;
-      justify-items: center;
-    }
-  }
+  grid-auto-rows: max-content;
   .shelf {
     // margin: auto;
     width: 100%;

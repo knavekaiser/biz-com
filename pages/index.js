@@ -5,9 +5,9 @@ import Head from "next/head";
 import Header from "components/ui/Header";
 import Footer from "components/ui/Footer";
 import DomainFallback from "components/ui/domainFallback";
+import Categories from "components/ui/categories";
 
 import Hero from "components/pages/index/hero";
-import Categories from "components/pages/index/categories";
 import Shelves from "components/pages/index/shelves";
 import s from "components/pages/index/styles/landingPage.module.scss";
 import { paths } from "config";

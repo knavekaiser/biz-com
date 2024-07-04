@@ -5,6 +5,7 @@ import Head from "next/head";
 import Header from "components/ui/Header";
 import Footer from "components/ui/Footer";
 import DomainFallback from "components/ui/domainFallback";
+import Categories from "components/ui/categories";
 
 import Product from "components/pages/item/product";
 import s from "components/pages/item/styles/products.module.scss";
@@ -79,6 +80,7 @@ const Item = ({ product, siteData }) => {
         {siteData?.favicon && <link rel="icon" href={siteData.favicon} />}
       </Head>
       <Header />
+      <Categories />
       <Product
         product={product}
         showHomePath={siteData?.siteConfig?.landingPage?.viewLandingPage}
