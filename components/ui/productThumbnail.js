@@ -17,7 +17,7 @@ export const ProductThumb = ({ product, onClick = () => {} }) => {
         )}
         <div className={s.thumbnailWrapper}>
           <Image
-            src={product.images[0]}
+            src={process.env.NEXT_PUBLIC_R2_URL + product.images[0]}
             height={328}
             width={328}
             alt={product.title}
@@ -72,7 +72,10 @@ export const ProductThumb = ({ product, onClick = () => {} }) => {
               return (
                 <div className={s.productSeller} key={item}>
                   <Image
-                    src={product.seller.logo || product.seller.profileImg}
+                    src={
+                      process.env.NEXT_PUBLIC_R2_URL +
+                      (product.seller.logo || product.seller.profileImg)
+                    }
                     height={20}
                     width={20}
                     alt={product.seller.name}

@@ -27,7 +27,7 @@ export default function Hero() {
           draggable={false}
         >
           {siteConfig.siteConfig?.landingPage?.hero?.slides.map((url) => (
-            <img key={url} src={url} />
+            <img key={url} src={process.env.NEXT_PUBLIC_R2_URL + url} />
           ))}
         </Carousel>
       </div>

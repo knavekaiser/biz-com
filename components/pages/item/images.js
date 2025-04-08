@@ -26,7 +26,7 @@ export default function Images({ product, variant }) {
         {(variant?.images || product.images).map((src, i) => (
           <Image
             key={i}
-            src={src}
+            src={process.env.NEXT_PUBLIC_R2_URL + src}
             height={48}
             width={48}
             alt={product.title}
@@ -97,7 +97,7 @@ const ImageSlider = ({ images, setView, title }, carouselRef) => {
             width={400}
             draggable={false}
             key={url}
-            src={url}
+            src={process.env.NEXT_PUBLIC_R2_URL + url}
           />
         ))}
       </Carousel>
@@ -181,7 +181,7 @@ const ZoomImg = ({ src, alt }) => {
       <Image
         ref={imgRef}
         draggable={false}
-        src={src}
+        src={process.env.NEXT_PUBLIC_R2_URL + src}
         height={800}
         width={800}
         alt={alt}

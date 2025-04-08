@@ -30,7 +30,7 @@ const Header = () => {
           <Link href={paths.home} className={s.logo}>
             {siteConfig.logo && (
               <Image
-                src={siteConfig.logo}
+                src={process.env.NEXT_PUBLIC_R2_URL + siteConfig.logo}
                 height={48}
                 width={48}
                 alt="Site Logo"

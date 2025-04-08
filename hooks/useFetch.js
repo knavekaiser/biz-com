@@ -53,28 +53,39 @@ export const useFetch = (
           signal: controller.current.signal,
         })
           .then(async (res) => {
-            if (!res.ok) {
-              setLoading(false);
-              reject(new Error("Network response was not ok"));
-              return;
+            let data = null;
+            try {
+              data = await res.json();
+            } catch (err) {
+              //
+            }
+            if (res.status === 404) {
+              throw new Error("Failed to fetch");
+            } else if (res.status === 500) {
+              throw new Error("Internal Server Error");
             }
 
-            const contentType = res.headers.get("Content-Type");
-            const transferEncoding = res.headers.get("Transfer-Encoding");
-            if (
-              transferEncoding === "chunked" ||
-              contentType === "text/plain"
-            ) {
-              resolve({ res, stream: true });
-            } else {
-              let data = await res.json();
-              resolve({ res, data });
-            }
             setLoading(false);
+            if (data) {
+              return resolve({ res, data });
+            }
+            throw new Error(
+              "Network error. Make sure you are connected to the internet."
+            );
           })
           .catch((err) => {
             setLoading(false);
-            if (
+            if (["Internal Server Error"].includes(err?.message)) {
+              reject(
+                new Error("Something went wrong. Please try again later.")
+              );
+            } else if (["Failed to fetch"].includes(err?.message)) {
+              reject(
+                new Error(
+                  "Request failed. Make sure you are connected to the internet."
+                )
+              );
+            } else if (
               [
                 "The user aborted a request.",
                 "signal is aborted without reason",

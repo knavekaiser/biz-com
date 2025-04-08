@@ -91,7 +91,12 @@ const Item = ({ content, metadata, siteData }) => {
     return <DomainFallback />;
   }
   return (
-    <main className={`${s.dynamicPage} dynamicPage`}>
+    <main
+      className={`${s.dynamicPage} dynamicPage`}
+      style={{
+        gridTemplateRows: "max-content 1fr max-content",
+      }}
+    >
       <Head>
         <meta charSet="utf-8" />
         <title>{metadata?.title || siteData.siteConfig?.siteTitle}</title>

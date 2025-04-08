@@ -47,7 +47,11 @@ const Page = ({ siteData }) => {
   }
   if (!user) {
     return (
-      <main>
+      <main
+        style={{
+          gridTemplateRows: "max-content 1fr max-content",
+        }}
+      >
         <Header />
         <div className="privateRouteFallback">
           <div className="content">
@@ -62,7 +66,12 @@ const Page = ({ siteData }) => {
     );
   }
   return (
-    <main className={s.checkout}>
+    <main
+      className={s.checkout}
+      style={{
+        gridTemplateRows: "max-content 1fr max-content",
+      }}
+    >
       <Header />
       <Checkout />
       <Footer />

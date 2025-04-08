@@ -20,7 +20,7 @@ const Products = ({ product }) => {
       {product && (
         <div className={s.product}>
           <Image
-            src={product.images[0]}
+            src={process.env.NEXT_PUBLIC_R2_URL + product.images[0]}
             height={120}
             width={120}
             alt={product.title}

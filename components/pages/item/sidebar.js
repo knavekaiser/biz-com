@@ -15,7 +15,7 @@ import { FiChevronDown } from "react-icons/fi";
 import { useRouter } from "next/router";
 import { BsCheckLg } from "react-icons/bs";
 import Image from "next/image";
-import {paths} from "config";
+import { paths } from "config";
 
 const Sidebar = ({ product, variant, setVariant }) => {
   const router = useRouter();
@@ -275,7 +275,7 @@ const Sidebar = ({ product, variant, setVariant }) => {
               return (
                 <div className={s.seller} key={item}>
                   <Image
-                    src={product.seller.logo}
+                    src={process.env.NEXT_PUBLIC_R2_URL + product.seller.logo}
                     height={48}
                     width={48}
                     alt={product.seller.name}

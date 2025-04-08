@@ -38,7 +38,12 @@ const Page = ({ siteData }) => {
     return <DomainFallback />;
   }
   return (
-    <main className={s.checkout}>
+    <main
+      className={s.checkout}
+      style={{
+        gridTemplateRows: "max-content 1fr max-content",
+      }}
+    >
       <Header />
       <Products />
       <Footer />

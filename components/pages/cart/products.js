@@ -75,7 +75,10 @@ const Product = ({ product }) => {
   return (
     <div className={s.product}>
       <Image
-        src={product.variant?.images[0] || product.product.images[0]}
+        src={
+          process.env.NEXT_PUBLIC_R2_URL +
+          (product.variant?.images[0] || product.product.images[0])
+        }
         height={120}
         width={120}
         alt={product.title}

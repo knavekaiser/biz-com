@@ -24,7 +24,11 @@ const Browse = ({ siteData }) => {
     return <DomainFallback />;
   }
   return (
-    <main>
+    <main
+      style={{
+        gridTemplateRows: "max-content max-content 1fr max-content",
+      }}
+    >
       <Head>
         <meta charSet="utf-8" />
         <title>{siteData.siteConfig?.siteTitle}</title>

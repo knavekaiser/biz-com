@@ -132,7 +132,7 @@ const Review = ({ review }) => {
         <div className={s.profilePic}>
           {review.customer?.image ? (
             <Image
-              src={review.customer.image}
+              src={process.env.NEXT_PUBLIC_R2_URL + review.customer.image}
               height={48}
               width={48}
               alt={review.customer.name}

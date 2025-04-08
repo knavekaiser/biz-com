@@ -82,7 +82,7 @@ function Shelves() {
                         /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_image__WEBPACK_IMPORTED_MODULE_7___default()), {
                             height: 70,
                             width: 70,
-                            src: cat.image
+                            src: "https://dev-cdn.9m.wtf/crm/" + cat.image
                         }),
                         /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
                             children: cat.name

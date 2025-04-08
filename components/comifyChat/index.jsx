@@ -774,7 +774,7 @@ const ProductCard = ({ product }) => {
       // onClick={() => setOpen(false)}
     >
       <Image
-        src={product.images[0]}
+        src={process.env.NEXT_PUBLIC_R2_URL + product.images[0]}
         height={80}
         width={80}
         alt={product.title}

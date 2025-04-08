@@ -106,6 +106,9 @@ const Item = ({ content , metadata , siteData  })=>{
     }
     return /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("main", {
         className: `${(components_pages_dynamic_style_module_scss__WEBPACK_IMPORTED_MODULE_10___default().dynamicPage)} dynamicPage`,
+        style: {
+            gridTemplateRows: "max-content 1fr max-content"
+        },
         children: [
             /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)((next_head__WEBPACK_IMPORTED_MODULE_3___default()), {
                 children: [

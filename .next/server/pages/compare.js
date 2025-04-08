@@ -66,6 +66,9 @@ const Page = ({ siteData  })=>{
     }
     return /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("main", {
         className: (components_pages_compare_style_module_scss__WEBPACK_IMPORTED_MODULE_8___default().checkout),
+        style: {
+            gridTemplateRows: "max-content 1fr max-content"
+        },
         children: [
             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(components_ui_Header__WEBPACK_IMPORTED_MODULE_3__/* ["default"] */ .Z, {}),
             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(components_pages_compare_products__WEBPACK_IMPORTED_MODULE_5__/* ["default"] */ .Z, {}),

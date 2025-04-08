@@ -197,7 +197,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 function myImageLoader({ src , width , quality  }) {
     if (src.startsWith("/assets")) {
-        return `${"https://biz.infinai.in"}${src}?w=${width}&q=${quality || 75}`;
+        return `${"http://localhost:8060"}${src}?w=${width}&q=${quality || 75}`;
     }
     return `${src}?w=${width}&q=${quality || 75}`;
 }
@@ -305,29 +305,36 @@ const useFetch = (url, { headers: hookHeaders , defaultHeaders  } = {})=>{
                 },
                 signal: controller.current.signal
             }).then(async (res)=>{
-                if (!res.ok) {
-                    setLoading(false);
-                    reject(new Error("Network response was not ok"));
-                    return;
+                let data = null;
+                try {
+                    data = await res.json();
+                } catch (err) {
+                //
                 }
-                const contentType = res.headers.get("Content-Type");
-                const transferEncoding = res.headers.get("Transfer-Encoding");
-                if (transferEncoding === "chunked" || contentType === "text/plain") {
-                    resolve({
-                        res,
-                        stream: true
-                    });
-                } else {
-                    let data = await res.json();
-                    resolve({
+                if (res.status === 404) {
+                    throw new Error("Failed to fetch");
+                } else if (res.status === 500) {
+                    throw new Error("Internal Server Error");
+                }
+                setLoading(false);
+                if (data) {
+                    return resolve({
                         res,
                         data
                     });
                 }
-                setLoading(false);
+                throw new Error("Network error. Make sure you are connected to the internet.");
             }).catch((err)=>{
                 setLoading(false);
                 if ([
+                    "Internal Server Error"
+                ].includes(err?.message)) {
+                    reject(new Error("Something went wrong. Please try again later."));
+                } else if ([
+                    "Failed to fetch"
+                ].includes(err?.message)) {
+                    reject(new Error("Request failed. Make sure you are connected to the internet."));
+                } else if ([
                     "The user aborted a request.",
                     "signal is aborted without reason"
                 ].includes(err?.message)) {

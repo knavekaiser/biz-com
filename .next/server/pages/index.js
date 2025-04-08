@@ -103,7 +103,7 @@ function Hero() {
                 showDots: true,
                 draggable: false,
                 children: siteConfig.siteConfig?.landingPage?.hero?.slides.map((url)=>/*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("img", {
-                        src: url
+                        src: "https://dev-cdn.9m.wtf/crm/" + url
                     }, url))
             })
         });

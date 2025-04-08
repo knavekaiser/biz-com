@@ -40,7 +40,11 @@ export default function Shelves() {
             }}
           >
             <div key={i} className={s.category}>
-              <Image height={70} width={70} src={cat.image} />
+              <Image
+                height={70}
+                width={70}
+                src={process.env.NEXT_PUBLIC_R2_URL + cat.image}
+              />
               <div>{cat.name}</div>
             </div>
           </Link>
