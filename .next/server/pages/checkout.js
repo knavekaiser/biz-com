@@ -66,7 +66,7 @@ const Products = ({ product  })=>{
             className: s.product,
             children: [
                 /*#__PURE__*/ _jsx(Image, {
-                    src: "https://dev-cdn.9m.wtf/crm/" + product.images[0],
+                    src: "https://crm.digibeat.co.in/" + product.images[0],
                     height: 120,
                     width: 120,
                     alt: product.title
