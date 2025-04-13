@@ -2469,7 +2469,7 @@ const Footer = ()=>{
                 className: (_styles_footer_module_scss__WEBPACK_IMPORTED_MODULE_5___default().branding),
                 children: [
                     siteConfig.logo && /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_image__WEBPACK_IMPORTED_MODULE_4___default()), {
-                        src: "https://dev-cdn.9m.wtf/crm/" + siteConfig.logo,
+                        src: "https://crm.digibeat.co.in/crm/" + siteConfig.logo,
                         height: 48,
                         width: 48,
                         alt: "Site Logo"
@@ -2558,7 +2558,7 @@ const Header = ()=>{
                             className: (_styles_header_module_scss__WEBPACK_IMPORTED_MODULE_15___default().logo),
                             children: [
                                 siteConfig.logo && /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_image__WEBPACK_IMPORTED_MODULE_14___default()), {
-                                    src: "https://dev-cdn.9m.wtf/crm/" + siteConfig.logo,
+                                    src: "https://crm.digibeat.co.in/crm/" + siteConfig.logo,
                                     height: 48,
                                     width: 48,
                                     alt: "Site Logo"

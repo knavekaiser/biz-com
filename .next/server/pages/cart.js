@@ -146,7 +146,7 @@ const Product = ({ product  })=>{
         className: (_styles_cart_module_scss__WEBPACK_IMPORTED_MODULE_7___default().product),
         children: [
             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_image__WEBPACK_IMPORTED_MODULE_6___default()), {
-                src: "https://dev-cdn.9m.wtf/crm/" + (product.variant?.images[0] || product.product.images[0]),
+                src: "https://crm.digibeat.co.in/crm/" + (product.variant?.images[0] || product.product.images[0]),
                 height: 120,
                 width: 120,
                 alt: product.title,

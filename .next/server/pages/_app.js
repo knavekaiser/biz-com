@@ -1366,7 +1366,7 @@ const ProductCard = ({ product  })=>{
         className: (_style_module_scss__WEBPACK_IMPORTED_MODULE_13___default().product),
         children: [
             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_image__WEBPACK_IMPORTED_MODULE_8___default()), {
-                src: "https://dev-cdn.9m.wtf/crm/" + product.images[0],
+                src: "https://crm.digibeat.co.in/crm/" + product.images[0],
                 height: 80,
                 width: 80,
                 alt: product.title

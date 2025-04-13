@@ -136,7 +136,7 @@ Date.prototype.add = function(time) {
 
 ;// CONCATENATED MODULE: ./config/endpoints.js
 const baseApiUrl = process.env.BIZ_APP_BASE_URL;
-const baseApiUrlPublic = "http://localhost:8060";
+const baseApiUrlPublic = "https://biz.infinai.in";
 const endpoints = {
     //------------Backend------------
     server: {
