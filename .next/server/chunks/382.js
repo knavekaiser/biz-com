@@ -84,7 +84,7 @@ const ProductThumb = ({ product , onClick =()=>{}  })=>{
                 /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
                     className: (_styles_productThumbnail_module_scss__WEBPACK_IMPORTED_MODULE_8___default().thumbnailWrapper),
                     children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_image__WEBPACK_IMPORTED_MODULE_7___default()), {
-                        src: "https://crm.digibeat.co.in/crm/" + product.images[0],
+                        src: "https://crm.comify.in/crm/" + product.images[0],
                         height: 328,
                         width: 328,
                         alt: product.title
@@ -137,7 +137,7 @@ const ProductThumb = ({ product , onClick =()=>{}  })=>{
                                     className: (_styles_productThumbnail_module_scss__WEBPACK_IMPORTED_MODULE_8___default().productSeller),
                                     children: [
                                         /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_image__WEBPACK_IMPORTED_MODULE_7___default()), {
-                                            src: "https://crm.digibeat.co.in/crm/" + (product.seller.logo || product.seller.profileImg),
+                                            src: "https://crm.comify.in/crm/" + (product.seller.logo || product.seller.profileImg),
                                             height: 20,
                                             width: 20,
                                             alt: product.seller.name

@@ -115,7 +115,7 @@ function Images({ product , variant  }) {
             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
                 className: (_styles_products_module_scss__WEBPACK_IMPORTED_MODULE_5___default().thumbnails),
                 children: (variant?.images || product.images).map((src, i)=>/*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_image__WEBPACK_IMPORTED_MODULE_2___default()), {
-                        src: "https://crm.digibeat.co.in/crm/" + src,
+                        src: "https://crm.comify.in/crm/" + src,
                         height: 48,
                         width: 48,
                         alt: product.title,
@@ -184,7 +184,7 @@ const ImageSlider = ({ images , setView , title  }, carouselRef)=>{
                     height: 400,
                     width: 400,
                     draggable: false,
-                    src: "https://crm.digibeat.co.in/crm/" + url
+                    src: "https://crm.comify.in/crm/" + url
                 }, url))
         })
     });
@@ -259,7 +259,7 @@ const ZoomImg = ({ src , alt  })=>{
         children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_image__WEBPACK_IMPORTED_MODULE_2___default()), {
             ref: imgRef,
             draggable: false,
-            src: "https://crm.digibeat.co.in/crm/" + src,
+            src: "https://crm.comify.in/crm/" + src,
             height: 800,
             width: 800,
             alt: alt,
@@ -675,7 +675,7 @@ const Review = ({ review  })=>{
                     /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
                         className: (_styles_products_module_scss__WEBPACK_IMPORTED_MODULE_11___default().profilePic),
                         children: review.customer?.image ? /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_image__WEBPACK_IMPORTED_MODULE_10___default()), {
-                            src: "https://crm.digibeat.co.in/crm/" + review.customer.image,
+                            src: "https://crm.comify.in/crm/" + review.customer.image,
                             height: 48,
                             width: 48,
                             alt: review.customer.name
@@ -1035,7 +1035,7 @@ const Sidebar = ({ product , variant , setVariant  })=>{
                                         className: (_styles_products_module_scss__WEBPACK_IMPORTED_MODULE_12___default().seller),
                                         children: [
                                             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_image__WEBPACK_IMPORTED_MODULE_10___default()), {
-                                                src: "https://crm.digibeat.co.in/crm/" + product.seller.logo,
+                                                src: "https://crm.comify.in/crm/" + product.seller.logo,
                                                 height: 48,
                                                 width: 48,
                                                 alt: product.seller.name

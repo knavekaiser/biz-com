@@ -156,7 +156,7 @@ const Product = ({ product  })=>{
             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
                 className: (_styles_clientArea_module_scss__WEBPACK_IMPORTED_MODULE_8___default().thumbnail),
                 children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_image__WEBPACK_IMPORTED_MODULE_7___default()), {
-                    src: "https://crm.digibeat.co.in/crm/" + (product.variant?.images || product.product.images)[0],
+                    src: "https://crm.comify.in/crm/" + (product.variant?.images || product.product.images)[0],
                     height: 120,
                     width: 120,
                     alt: product.title
